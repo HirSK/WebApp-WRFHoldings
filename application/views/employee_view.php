@@ -29,7 +29,9 @@
                     </div>
                     <!-- /.box-header -->
                     <!-- form start -->
-                    <form role="form" action="" method="post">
+
+                    
+                    <form role="form" action="<?php echo base_url();?>employee_controller/register_employee" method="post">
                         <div class="box-body">
                             <div class="form-group">
                                 <label for="fullName">Full name</label>
@@ -50,15 +52,15 @@
 				                  <div class="input-group-addon">
 				                    <i class="fa fa-calendar"></i>
 				                  </div>
-				                  <input type="text" class="form-control pull-right" id="datepicker">
+				                  <input type="text" class="form-control pull-right" id="datepicker" name="dateOfBirth">
 				                </div>
 				                <!-- /.input group -->
 				            </div>
 				            
                             <!-- /.form group -->
                             <div class="form-group">
-                                <label>Select designation</label>
-                                <select class="form-control" name="designation">
+                                <label>Select position</label>
+                                <select class="form-control" name="position">
                                     <option>Outlet Supervisor </option>
                                     <option>Delivery driver</option>
                                     <option>Collection officer</option>
@@ -77,7 +79,7 @@
 				                  <div class="input-group-addon">
 				                    <i class="fa fa-calendar"></i>
 				                  </div>
-				                  <input type="text" class="form-control pull-right" id="datepicker">
+				                  <input type="text" class="form-control pull-right" id="datepicker" name="joinedDate">
 				                </div>
 				                <!-- /.input group -->
 				            </div>
@@ -101,7 +103,7 @@
 
                             <div class="form-group">
                                 <label for="email">Email(If any)</label>
-                                <input type="email" class="form-control" required="required" id="email" name="email" placeholder="Email">
+                                <input type="email" class="form-control"  id="email" name="email" placeholder="Email">
                             </div>
 
                             <div class="box-footer">
@@ -110,6 +112,8 @@
 
                         </div>
                     </form>
+
+
                 </div>
             </div>
 

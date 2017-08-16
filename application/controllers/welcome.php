@@ -35,6 +35,10 @@ class Welcome extends CI_Controller {
 	function employee_registration(){
 		$this->load->view('employee_view');
 	}
+
+	function add_account_summary(){
+		$this->load->view('collection_view');
+	}
 }
 
 /* End of file welcome.php */

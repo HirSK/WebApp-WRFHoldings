@@ -33,7 +33,7 @@ class Employee_controller extends CI_Controller{
 		}
 
 
-	}
+	}*/
 
 	//create new employee
 
@@ -46,16 +46,49 @@ class Employee_controller extends CI_Controller{
 		}
 
 		//validate form input
-		$this->form_validation->set_rules('buyer', $this->lang->line('create_user_validation_fname_label'), 'required');
-		$this->form_validation->set_rules('style', $this->lang->line('create_user_validation_lname_label'), 'required');
-		$this->form_validation->set_rules('description', $this->lang->line('create_user_validation_phone_label'), 'required');
-		$this->form_validation->set_rules('yarn', $this->lang->line('create_user_validation_phone_label'), 'required');
+		$this->form_validation->set_rules('fullName','Full name','required|alpha');
+		$this->form_validation->set_rules('nameWithInitials','Name with initials', 'required|alpha');
+		$this->form_validation->set_rules('nicNumber','National Identity Number', 'required|alpha_numeric');
+		$this->form_validation->set_rules('dateOfBirth','Birth date','required');
+		$this->form_validation->set_rules('position', 'Job position','required|alpha');
+		$this->form_validation->set_rules('joinedDate', 'Joined date','required');
+		$this->form_validation->set_rules('contactNumber','Telephone number', 'required');
+		$this->form_validation->set_rules('address', 'Home address','required');
+		$this->form_validation->set_rules('email','Email address','trim|valide_email|xss_clean');
 
-		$this->form_validation->set_rules('nylon', $this->lang->line('create_user_validation_phone_label'), 'required');
-		$this->form_validation->set_rules('supplier', $this->lang->line('create_user_validation_phone_label'), 'required');
-		$this->form_validation->set_rules('machine', $this->lang->line('create_user_validation_phone_label'), 'required');
-		$this->form_validation->set_rules('gauge', $this->lang->line('create_user_validation_phone_label'), 'required');
-		$this->form_validation->set_rules('weight', $this->lang->line('create_user_validation_phone_label'), 'required');
+
+		if($this->form_validation->run()==false){
+
+
+
+			$this->load->view('welcome_message');
+
+		}else{
+
+			$employee_array = array(
+
+					'employeeId' 			=> NULL;
+					'fullName'				=> $this->input->post('fullName');
+					'nameWithInitials'		=> $this->input->post('nameWithInitials');
+					'nicNumber'				=> $this->input->post('nicNumber');
+					'dateOfBirth'			=> $this->input->post('dateOfBirth');
+					'position'				=> $this->input->post('position');
+					'joinedDate'			=> $this->input->post('joinedDate');
+					'contactNumber'			=> $this->input->post('contactNumber');
+					'address'				=> $this->input->post('address');
+					'email'					=> $this->input->post('email');				
+
+			);
+
+			if ($this->form_validation->run() == true && $this->Employee_model->insert_employee($employee_array)){
+			//check to see if we are creating the user
+			//redirect them back to the admin page
+			$this->session->set_flashdata('message', $this->ion_auth->messages());
+			redirect("auth", 'refresh');
+
+			}
+
+		}
 
 
 

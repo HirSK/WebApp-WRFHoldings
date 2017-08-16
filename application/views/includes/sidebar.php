@@ -17,7 +17,7 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">Account Summary</a></li>
+                        <li><a href="<?php echo site_url('welcome/add_account_summary') ?>">Account Summary</a></li>
                         <li><a href="#">Collection Reports</a></li>
                     </ul>
                 </li>
