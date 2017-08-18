@@ -17,7 +17,7 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo site_url('welcome/add_account_summary') ?>">Account Summary</a></li>
+                        <li><a href="collectionForm_view">Account Summary</a></li>
                         <li><a href="#">Collection Reports</a></li>
                     </ul>
                 </li>
@@ -44,6 +44,38 @@
 
         <!../Petty cash section..>
 
+        <!..Employee section..>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Employee</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="add_employee_view">Add Employee</a></li>
+                        <li><a href="manage_employee_view">Manage employee</a></li>
+                        <li><a href="designation_view">Add designation</a></li>
+                    </ul>
+                </li>
+        <!../Employee section..>
+
+        <!..Vehicle section..>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-link"></i> <span>Delivery Vehicles</span>
+                        <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="#">Add Vehicle</a></li>
+                        <li><a href="#">Manage Vehicles</a></li>
+                        <li><a href="#">Maintain Vehicles</a></li>
+                    </ul>
+                </li>
+        <!../Vehicle section..>
+
+
+
 
         <!..Master Information section..>
                 <li class="treeview">
@@ -52,21 +84,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="<?php echo site_url('welcome/employee_registration') ?>">Employees</a></li>
-
-                        <li class="treeview">
-                            <a href="#"><i class="fa fa-link"></i> <span>Delivery Vehicles</span>
-                                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                  </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="#">Vehicles</a></li>
-                                <li><a href="#">Vehicle maintenance</a></li>
-                                <li><a href="#">Vehicle reports</a></li>
-                            </ul>
-                        </li>
+                    <ul class="treeview-menu">                        
 
                         <li><a href="#">Your Outlet</a></li>
                     </ul>
