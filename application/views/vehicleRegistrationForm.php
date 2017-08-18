@@ -1,6 +1,5 @@
-<?php
-include '../includes/mainHeader.php';
-?>
+<?php include_once('includes/header.php') ?>
+<?php include_once('includes/sidebar.php') ?>
 
 
 <!-- Content Wrapper. Contains page content -->
@@ -23,6 +22,7 @@ include '../includes/mainHeader.php';
 
     <div class="container">
         <div class="row">
+            <div class="col-md-12">
             <section>
                 <div class="wizard">
                     <div class="wizard-inner">
@@ -270,15 +270,13 @@ include '../includes/mainHeader.php';
                     </form>
                 </div>
             </section>
+            </div>
         </div>
     </div>
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<?php
-include '../includes/footer.php';
-?>
-
+<?php include_once('includes/footer.php') ?>
 
 <!-- Add the sidebar's background. This div must be placed
 immediately after the control sidebar -->
@@ -289,17 +287,17 @@ immediately after the control sidebar -->
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
-<script src="../../../css/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="<?php echo base_url() ?>template/bower_components/css/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../../css/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url() ?>template/bower_components/css/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
-<script src="../../../css/dist/js/adminlte.min.js"></script>
+<script src="<?php echo base_url() ?>template/bower_components/css/dist/js/adminlte.min.js"></script>
 <!-- InputMask -->
-<script src="../../../css/plugins/input-mask/jquery.inputmask.js"></script>
-<script src="../../../css/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="../../../css/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<script src="<?php echo base_url() ?>template/bower_components/css/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="<?php echo base_url() ?>template/bower_components/css/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="<?php echo base_url() ?>template/bower_components/css/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <!-- bootstrap datepicker -->
-<script src="../../../css/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="<?php echo base_url() ?>template/bower_components/css/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <script>
     $(function () {
         //Datemask dd/mm/yyyy
