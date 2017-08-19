@@ -57,10 +57,71 @@
                     <!-- /.box-header -->
 
                     <div class="box-body table-responsive">
-                    	<table id='emp_table' class="table table-bordered col-lg-12">
+                    	<table id='emp_table' class="table table-striped table-bordered col-lg-12">
+
+                    	<thead >
+                    		
+                    		<tr>
+                    			<th>#</th>
+                    			<th><a href="#" data-sort="idEmployee"> Employee ID</a></th>
+                    			<th><a href="#" data-sort="EmployeeFullName"> Employee Full Name</a></th>
+                    			<th><a href="#" data-sort="EmployeeNameWithInitials"> Name with Initials</a></th>
+                    			<th><a href="#" data-sort="EmployeeNIC"> NIC Number</a></th>
+                    			<th><a href="#" data-sort="EmployeeBirthdate"> Date of Birth</a></th>
+                    			<th><a href="#" data-sort="EmployeeContactNumber"> Contact Number</a></th>
+                    			<th><a href="#" data-sort="EmployeeAddress"> Address</a></th>
+                    			<th><a href="#" data-sort="Outlet_idOutlet"> Outlet ID</a></th>
+                    			<th><a href="#" data-sort="EmployeePosition"> Position</a></th>
+                    			<th><a href="#" data-sort="EmployeeJoinedDate"> Joined Date</a></th>
+                    			<th><a href="#" data-sort="EmployeeEmail"> Email</a></th>
+                    			<th>&nbsp;</th>
+                    		</tr>
+
+                    		<tr id="w1-filters" class="filters">
+                    			<td>&nbsp;</td>
+                    			<td>
+                    				<input type="text" class="form-control" name="EmpSearch[idEmployee]">
+                    			</td>
+                    			<td>
+                    				<input type="text" class="form-control" name="EmpSearch[EmployeeFullName]">
+                    			</td>
+                    			<td>
+                    				<input type="text" class="form-control" name="EmpSearch[EmployeeNameWithInitials]">
+                    			</td>
+                    			<td>
+                    				<input type="text" class="form-control" name="EmpSearch[EmployeeNIC]">
+                    			</td>
+                    			<td>
+                    				<input type="text" class="form-control" name="EmpSearch[EmployeeBirthdate]">
+                    			</td>
+                    			<td>
+                    				<input type="text" class="form-control" name="EmpSearch[EmployeeContactNumber]">
+                    			</td>
+                    			<td>
+                    				<input type="text" class="form-control" name="EmpSearch[EmployeeAddress]">
+                    			</td>
+                    			<td>
+                    				<select class="form-control" name="EmpSearch[Outlet_idOutlet]"></select> 
+                    			</td>
+                    			<td>
+                    				<select class="form-control" name="EmpSearch[EmployeePosition]"></select> 
+                    			</td>
+                    			<td>
+                    				<input type="text" class="form-control" name="EmpSearch[EmployeeJoinedDate]">
+                    			</td>
+                    			<td>
+                    				<input type="text" class="form-control" name="EmpSearch[EmployeeEmail]">
+                    			</td>
+                    			
+                    			<td>&nbsp;</td>
+                    		</tr>
+
+
+
+                    	</thead>
 
                     
-					<th class="col-lg-2">Employee ID</th>
+					<!-- <th class="col-lg-2">Employee ID</th>
                     <th class="col-lg-4">Employee Full Name</th>
                     <th class="col-lg-4">Name with Initials</th>
                     <th class="col-lg-2">NIC Number</th>
@@ -71,10 +132,12 @@
                     <th class="col-lg-2">Position</th>
                     <th class="col-lg-2">Joined Date</th>
                     <th class="col-lg-2">Email</th>
-                    <th class="col-lg-2"></th>
+                    <th class="col-lg-2"></th> -->
 					<?php
+						$count = 1;
                         foreach ($emp as $employee){
                             echo "<tr>";
+                            echo "<td>" . $count . "</td>";
                             echo "<td>";
                             echo $employee->idEmployee;
                             echo "</td>";
@@ -108,8 +171,13 @@
                             echo "<td>";
                             echo $employee->EmployeeEmail;
                             echo "</td>";
-
+                            echo "<td>";?>
+                            <a href="#" title="Delete" data-confirm="Are you sure you want to delete this record?" data-method="post">
+                            <span class="glyphicon glyphicon-remove"></span>
+                            <?php echo "</td>";
                             echo "</tr>";
+
+                            $count = $count+1;
                         }
                     ?>
 					</table>
