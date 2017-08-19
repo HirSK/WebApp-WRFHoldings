@@ -12,8 +12,8 @@
         </h1>
 
         <ol class="breadcrumb">
-            <li><a href="home_dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>            
-            <li class="active">Employees</li>
+            <li><a href="<?php echo base_url()?>/index.php/welcome"><i class="fa fa-dashboard"></i> Home</a></li>            
+            <li class="active">Add Employee</li>
         </ol>
     </section>
 

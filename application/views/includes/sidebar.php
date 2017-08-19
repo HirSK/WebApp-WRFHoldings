@@ -17,7 +17,7 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="collectionForm_view">Account Summary</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/SalesController">Account Summary</a></li>
                         <li><a href="#">Collection Reports</a></li>
                     </ul>
                 </li>
@@ -52,9 +52,9 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="add_employee_view">Add Employee</a></li>
-                        <li><a href="manage_employee_view">Manage employee</a></li>
-                        <li><a href="designation_view">Add designation</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/EmployeeController">Add Employee</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/EmployeeController/manageEmployee">Manage employee</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/EmployeeController/addNewDesignation">Add designation</a></li>
                     </ul>
                 </li>
         <!../Employee section..>
@@ -67,9 +67,9 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">Add Vehicle</a></li>
-                        <li><a href="#">Manage Vehicles</a></li>
-                        <li><a href="#">Maintain Vehicles</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/VehicleController/registerVehicle">Add Vehicle</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/VehicleController/manageVehicle">Manage Vehicles</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/VehicleController/maintainVehicle">Maintain Vehicles</a></li>
                     </ul>
                 </li>
         <!../Vehicle section..>

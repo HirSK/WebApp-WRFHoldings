@@ -24,7 +24,7 @@ class Login extends CI_Controller{
 	}
 
 	public function index(){
-		$this->load->view('pages/login_view');
+		$this->load->view('login_view');
 	}
 
 	public function loginCheck(){
@@ -48,7 +48,7 @@ class Login extends CI_Controller{
                  </center>
                  </div>
                  ";
-            $this->load->view('pages/login_view');
+            $this->load->view('login_view');
         }
 	}
 
