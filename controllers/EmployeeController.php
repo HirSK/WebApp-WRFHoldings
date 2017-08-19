@@ -13,7 +13,10 @@ class EmployeeController extends CI_Controller{
 	}
 
 	public function manageEmployee(){
-		$this->load->view('manage_employee_view');
+
+		$empDetail['emp'] = $this->gen_model->getData($tablename='Employee');
+		$this->load->view('manage_employee_view',$empDetail);
+		
 	}
 
 	public function addEmployee(){
@@ -36,7 +39,7 @@ class EmployeeController extends CI_Controller{
 
 			$employee_array = array(
 
-					'idEmployee' 			=> $_POST['empId'],
+					
 					'EmployeeFullName'				=> $_POST['fullName'],
 					'EmployeeNameWithInitials'		=> $_POST['nameWithInitials'],
 					'EmployeeNIC'				=> $_POST['nicNumber'],
