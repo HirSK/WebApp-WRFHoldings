@@ -28,6 +28,7 @@
             		
             	</div>
 
+
             <div class="col-lg-4 col-sm-4 col-xs-12" no-padding style="padding-top:20px">
             		
             		<div class="col-xs-4 left-padding">
@@ -39,11 +40,12 @@
             		</div>
 
             </div>
+        </div>
 
             <div class="col-xs-12 col-lg-12" style="padding-top: 10px">
 
                 <!-- general form elements -->
-                <div class="box box-primary" style="padding-top: 0px">
+                <div class="box box-primary" >
                     <div class="box-header with-border">
                         
                         <div class="box-tools pull-right" style="padding-top: 0px">
@@ -51,7 +53,7 @@
                 		</div>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body table-responsive">
+                    <div class="box-body ">
                     	<div class="row">
                     		<div class="col-xs-12 col-sm-4 col-lg-3 form-group">
                     			<label class="control-label" for>Name of the Collection Officer</label>
@@ -87,11 +89,9 @@
 
 	                    	</div>                    			
 
-                    	</div>
-
-                    	<table id='emp_table' class="table table-striped table-bordered col-lg-12">
-                    		<thead >
-                    		
+                    	
+                    	<table id='emp_table' class="table table-striped table-bordered table-hover col-lg-12" id="tab-logic">
+                    		<thead >                    		
 	                    		<tr>
 	                    			<th>#</th>
 	                    			<th> Invoice Number</a></th>
@@ -102,16 +102,67 @@
 	                    			<th> Cash</a></th>
 	                    			<th> Cheque</a></th>
 	                    			<th> Credit</a></th>
-	                    			<th> Pay Value</a></th>
-	                    			<th> Variance</a></th>	                    			
+	                    			
+	                    			<th> Variance</a></th>
+	                    			<th> Sales RTN</a></th>
+	                    			<th> Discount</a></th>
+	                    			<th> MKT RTN</a></th>
+	                    			<th> Remarks</a></th>	                    			
 	                    			<th>&nbsp;</th>
 	                    		</tr>
                     		</thead>
-                    	</table>
+                    		<tbody>
+								<tr id='addr0'>
+								<td>
+								1
+								</td>
+								<td>
+								<input type="text" name='invoiceNo0'   class="form-control"/>
+								</td>
+								<td>
+								<input type="text" name='code0'  class="form-control"/>
+								</td>
+								<td>
+								<input type="text" name='cusName0'  class="form-control"/>
+								</td>
+								<td>
+								<input type="text" name='invoiceValue0'  class="form-control"/>
+								</td>
+								<td>
+								<input type="text" name='netValue0'  class="form-control"/>
+								</td>
+								<td>
+								<input type="text" name='cash0'  class="form-control"/>
+								</td>
+								<td>
+								<input type="text" name='cheque0'  class="form-control"/>
+								</td>
+								<td>
+								<input type="text" name='credit0'  class="form-control"/>
+								</td>
+								<td>
+								<input type="text" name='variance0'  class="form-control"/>
+								</td>
+								<td>
+								<input type="text" name='salesrtn0'  class="form-control"/>
+								</td>
+								<td>
+								<input type="text" name='discount0'  class="form-control"/>
+								</td>
+								<td>
+								<input type="text" name='mktrtn0'  class="form-control"/>
+								</td>
+								<td>
+								<input type="text" name='remarks0'  class="form-control"/>
+								</td>
 
-                    </div>
-                </div>
-
+								</tr>
+		                    	<tr id='addr1'></tr>
+							</tbody>
+                    </table>
+                   </div>
+                  </div>
+                 <a id="add_row" class="btn  btn-primary pull-left" style="padding-top: 5px">Add Row</a><a id='delete_row' class=" btn  btn-primary pull-right" style="padding-top: 5px">Delete Row</a>
 
   </section>
 
@@ -125,6 +176,25 @@
 <?php include "includes/footer.php";?>
 
 <!-- REQUIRED JS SCRIPTS -->
+<script type="text/javascript">
+	$(document).ready(function(){
+      var i=1;
+     $("#add_row").click(function(){
+      $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='invoiceNo"+i+"' type='text'  class='form-control input-md'  /> </td><td><input  name='code"+i+"' type='text'   class='form-control input-md'></td><td><input  name='cusName"+i+"' type='text'   class='form-control input-md'></td><td>"+ (i+1) +"</td><td><input name='invoiceValue"+i+"' type='text'  class='form-control input-md'  /> </td><td>"+ (i+1) +"</td><td><input name='netValue"+i+"' type='text'  class='form-control input-md'  /> </td><td>"+ (i+1) +"</td><td><input name='cash"+i+"' type='text' class='form-control input-md'  /> </td><td>"+ (i+1) +"</td><td><input name='cheque"+i+"' type='text'  class='form-control input-md'  /> </td><td>"+ (i+1) +"</td><td><input name='credit"+i+"' type='text'  class='form-control input-md'  /> </td><td>"+ (i+1) +"</td><td><input name='variance"+i+"' type='text'  class='form-control input-md'  /> </td><td>"+ (i+1) +"</td><td><input name='salesrtn"+i+"' type='text'  class='form-control input-md'  /> </td><td>"+ (i+1) +"</td><td><input name='discount"+i+"' type='text'  class='form-control input-md'  /> </td><td>"+ (i+1) +"</td><td><input name='mktrtn"+i+"' type='text'  class='form-control input-md'  /> </td><td>"+ (i+1) +"</td><td><input name='remarks"+i+"' type='text'  class='form-control input-md'  /> </td>");
+
+      $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+      i++; 
+  });
+     $("#delete_row").click(function(){
+    	 if(i>1){
+		 $("#addr"+(i-1)).html('');
+		 i--;
+		 }
+	 });
+
+});
+</script>
+
 
 <!-- jQuery 3 -->
 <script src="<?php echo base_url()?>template/bower_components/jquery/dist/jquery.min.js"></script>
