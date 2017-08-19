@@ -109,4 +109,14 @@ class gen_model extends CI_Model{
             return $query->result();
         }
     }
+	 function getAllRecords()
+        {
+        
+        $this->db->select("CustomerName,CustomerAddress,CustomerContact,CustomerRegDate");
+        $this->db->from('Customer');
+         $q = $this->db->get();
+
+         return $q->result();
+            
+        }
 }
