@@ -17,7 +17,7 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="collectionForm_view">Account Summary</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/SalesController">Account Summary</a></li>
                         <li><a href="#">Collection Reports</a></li>
                     </ul>
                 </li>
