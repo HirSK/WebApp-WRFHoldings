@@ -12,8 +12,8 @@
         </h1>
 
         <ol class="breadcrumb">
-            <li><a href="home_dashboard.php"><i class="fa fa-dashboard"></i> Home</a></li>            
-            <li class="active">Employees</li>
+            <li><a href="<?php echo base_url()?>/index.php/welcome"><i class="fa fa-dashboard"></i> Home</a></li>            
+            <li class="active">Add Employee</li>
         </ol>
     </section>
 
@@ -36,12 +36,12 @@
 
                         <div class="col-xs-12 col-lg-12 col-sm-12">
 
-                            <div class="col-sm-4 col-xs-12">
+                           <!--  <div class="col-sm-4 col-xs-12">
                             	<div class="form-group">
                                     <label for="empId">Employee ID</label>
                                     <input type="text" class="form-control"  name="empId" placeholder="Employee ID" required>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
@@ -57,16 +57,16 @@
                                 </div>
                             </div>
 
-                        </div>
-
-                        <div class="col-xs-12 col-lg-12 col-sm-12">
-
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     <label for="nic">NIC No</label>
                                     <input type="text" class="form-control"  name ="nicNumber" placeholder="NIC No" required>
                                 </div>
                             </div>
+
+                        </div>
+
+                        <div class="col-xs-12 col-lg-12 col-sm-12">                            
 
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
@@ -96,11 +96,7 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
 
-
-                        <div class="col-xs-12 col-lg-12 col-sm-12">
-				            
                             <div class="col-sm-4 col-xs-12">
                                 <!-- /.form group -->
                                 <div class="form-group">
@@ -117,6 +113,12 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
+
+
+                        <div class="col-xs-12 col-lg-12 col-sm-12">
+				            
+                            
 
                             <div class="col-sm-4 col-xs-12">
 
