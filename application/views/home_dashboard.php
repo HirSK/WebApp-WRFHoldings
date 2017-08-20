@@ -4,6 +4,23 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
+	<section class="content-header">
+            <h1>
+                Welcome to WRF Holdings (pvt) Ltd
+                <br>
+                <small><b><?php echo $this->session->userData('loggerOutletName') ; 
+                			echo "<br>";
+                			echo $this->session->userData('loggerName') ; ?>
+                				
+                			</b></small>
+            </h1>
+
+            <ol class="breadcrumb">                       
+                <li class="active">Home</li>
+            </ol>
+        </section>
+
+  
 
 </div>
 <!-- /.content-wrapper -->
