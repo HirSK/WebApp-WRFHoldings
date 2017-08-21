@@ -31,7 +31,7 @@
                     <!-- form start -->
 
                     
-                    <form role="form">
+                    <form role="form" action="<?php echo base_url()?>index.php/PettycashController/addPettycash" method="POST">
                         <div class="box-body">
 
                             <div class="col-xs-12 col-lg-12 col-sm-12">
