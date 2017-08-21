@@ -32,7 +32,7 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="#">Attendance</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/AttendanceController">Attendance</a></li>
                         <li><a href="#">Run Payroll</a></li>
                         <li><a href="#">Salary Reports</a></li>
                     </ul>
@@ -93,13 +93,12 @@
                     </a>
 
                      <ul class="treeview-menu">
-                        <a href="<?php echo base_url()?>index.php/CustomerController"> Add Customers</a>
-                        </li>
+                        <li><a href="<?php echo base_url()?>index.php/CustomerController">Add customer</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/CustomerController/customerManage">Manage customer</a></li>
 
                         </ul>                   
 
-                        <li><a href="#">Your Outlet</a></li>
-                    </ul>
+                        
                 </li>
         <!../Master Information section..>
 
