@@ -16,5 +16,16 @@ class PettycashController extends CI_Controller{
 		$this->load->view('add_pettycash_expenses');
 	}
 
-	
+	public function addPettycash(){
+		$pettycash_array = array(
+
+			'Petty_CashType' => $_POST['PettyCashType'],
+			'Petty_CashDescription' => $_POST['PettyCashDescription'],
+
+			);
+
+			$res=$this->gen_model->insertData($tablename="petty_cash",$pettycash_array);
+
+			redirect('/PettycashController');
+	}
 }
