@@ -31,7 +31,7 @@ class CustomerController extends CI_Controller{
 
 			$customer_array = array(
 
-					
+					'CustomerCode'					=> $_POST['inputCustomerCode'],
 					'CustomerName'				    => $_POST['inputCustomerName'],
 					'CustomerAddress'				=> $_POST['inputCustomerAddress'],
 					'CustomerContact'				=> $_POST['inputCustomerContact'],
