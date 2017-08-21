@@ -14,13 +14,17 @@ class CustomerController extends CI_Controller{
     	$this->data['records'] = $this->gen_model->getAllRecords();
     	$this->load->view("add_cutomer_view",$this->data);  
 	}
+	
+	public function customerManage(){
 
-	/*public function manageCustomer(){
+		$custDetail['customerRecord'] = $this->gen_model->getData($tablename='Customer');
+		$this->load->view('manage_customer_view',$custDetail);
 
-		$empDetail['emp'] = $this->gen_model->getData($tablename='Employee');
-		$this->load->view('manage_employee_view',$empDetail);
-		
-	}*/
+
+	}
+
+
+	
 
 	public function addCustomer(){
 
