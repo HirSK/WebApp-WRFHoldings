@@ -1,132 +1,137 @@
 <?php include "includes/header.php" ?>
 <?php include "includes/sidebar.php" ?>
 
- <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1>
-                Customer Information
-                <small>#Outlet name here</small>
-            </h1>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
 
-            <ol class="breadcrumb">
-                <li><a href="<?php echo base_url()?>/index.php/welcome"><i class="fa fa-dashboard"></i> Home</a></li>       
-                <li class="active">Customers</li>
-            </ol>
-        </section>
+<!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Customer Information
+            <!--<small><?php echo $outletName ;?></small>-->
+        </h1>
 
-        <section class="content">
-            <div class="row">
-                <!-- left column -->
-                <div class="col-md-6">
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">New Customer Registration</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form role="form" action="<?php echo base_url()?>index.php/CustomerController/addCustomer" method="POST">
-                            <div class="box-body">
-                                    <div class="form-group">
+        <ol class="breadcrumb">
+            <li><a href="<?php echo base_url()?>/index.php/welcome"><i class="fa fa-dashboard"></i> Home</a></li>            
+            <li class="active">Add Customer</li>
+        </ol>
+    </section>
+
+<!-- Main content -->
+<section class="content">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-xs-12 col-lg-12">
+                <!-- general form elements -->
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Register New Customer</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+
+                    
+                    <form role="form" action="<?php echo base_url()?>index.php/CustomerController/addCustomer" method="POST">
+                        <div class="box-body">
+
+                        <div class="col-xs-12 col-lg-12 col-sm-12">
+
+                           <!--  <div class="col-sm-4 col-xs-12">
+                            	<div class="form-group">
+                                    <label for="empId">Employee ID</label>
+                                    <input type="text" class="form-control"  name="empId" placeholder="Employee ID" required>
+                                </div>
+                            </div> -->
+
+                            <div class="col-sm-4 col-xs-12">
+                                 <div class="form-group">
+                                        <label for="inputCustomerCode" >Customer Code</label>
+
+                                        <input type="text" class="form-control" name="inputCustomerCode" placeholder="Customer Code ">
+
+
+
+
+                                    </div>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12">
+                                 <div class="form-group">
                                         <label for="inputCustomerName" >Customer Name</label>
 
-                                        <input type="text" class="form-control" name="inputCustomerName" placeholder="CustomerName">
+                                        <input type="text" class="form-control" name="inputCustomerName" placeholder="Customer Name">
 
                                     </div>
 
-                                   
-
-                                     <div class="form-group">
-                                        <label for="inputCustomerAddress" >Customer Address</label>
-
-                                        <input type="text" class="form-control" name ="inputCustomerAddress" placeholder="CustomerCode">
-                                    </div>
-
-
-                                    <div class="form-group">
-                                        <label for="inputCustomerContact">Contact number</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-phone"></i>
-                                            </div>
-                                            <input type="text" class="form-control" name="inputCustomerContact" data-inputmask='"mask": "(94) 99 9 999999"' data-mask>
-                                        </div>
-                                        <!-- /.input group -->
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="inputCustomerRegDate">Customer Register Date</label>
-
-                                        <div class="input-group">
-                                            <div class="input-group-addon">
-                                                <i class="fa fa-calendar"></i>
-                                            </div>
-                                            <input type="text" class="form-control" name="inputCustomerRegDate" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
-                                        </div>
-                                        <!-- /.input group -->
-                                    </div>
-
-                                    <div class="box-footer">
-                                        <button type="submit" style="color:white;background-color:deepskyblue;" class="btn btn-info margin"><span>Register</span></button>
-                                        <button type="submit" style="color:white;background-color:grey;" class="btn btn-info margin">Update</button>
-                                        <button type="submit" style="color:white;background-color:darkgrey;" class="btn btn-info margin">Delete</button>
-                                        <button type="submit" class="btn btn-default margin">Clear</button>
-
-                                    </div>
                             </div>
 
-                        </form>
-                    </div>
-                </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <label for="inputCustomerAddress" >Customer Address</label>
 
-                <div class="col-md-6">
-                    <div class="col-xs-12  pull-right">
-                        <div class="box box-primary">
-                            <div class="box-header">
-                                <h3 class="box-title">Current Customers</h3>
+                                        <input type="text" class="form-control" name ="inputCustomerAddress" placeholder="Customer Address">
                             </div>
-                            <!-- /.box-header -->
-                            <div class="box-body">
-                                <table id="example2" class="table table-bordered table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>Contact Number</th>
-                                        <th>Reg Date</th>
-                                    </tr>
 
-                                            <?php  
-                                             foreach ($records as $row)  
-                                             {  
-                                                ?><tr>  
-                                                <td><?php echo $row->CustomerName;?></td>  
-                                                <td><?php echo $row->CustomerAddress;?></td> 
-                                                <td><?php echo $row->CustomerContact;?></td>  
-                                                <td><?php echo $row->CustomerRegDate;?></td>  
-                                                </tr>  
-                                             <?php }  
-                                             ?>  
-                                    </thead>
-                                </table>
-                                <div class="box-footer">
-                                    <button type="submit" class="btn btn-default pull-right">Clear</button>
-                                    <button type="submit" class="btn btn-info pull-left">View All Customers</button>
-                                </div>
-                            </div>
                         </div>
-                    </div>
+
+                        <div class="col-xs-12 col-lg-12 col-sm-12">                            
+
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+    				                <label for="inputCustomerRegDate">Customer Reg Date</label>
+
+    				                <div class="input-group date">
+    				                  <div class="input-group-addon">
+    				                    <i class="fa fa-calendar"></i>
+    				                  </div>
+    				                  <input type="text" class="form-control pull-right" id="datepicker" name="inputCustomerRegDate" required>
+    				                </div>
+    				                <!-- /.input group -->
+    				            </div>
+                            </div>
+
+                            <div class="col-sm-4 col-xs-12">
+
+                             <div class="form-group">
+                                    <label>Contact number</label>
+
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-phone"></i>
+                                        </div>
+                                        <input type="text" class="form-control" required="required" name="inputCustomerContact" data-inputmask='"mask": "(94) 99 9 999999"' data-mask>
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+
+    				            <!-- /.form group -->
+                                
+                            </div>
+
+                            
+                        </div>
+
+
+                            <div class="col-xs-2">
+                                <button type="submit" class="btn btn-block btn-success" name="register">Submit</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+
                 </div>
-           </div>
+            </div>
+
+        </div>
+
+    </section>
+    <!-- /.content -->
 
 
-</section>
 
 
-    </div>
-
-
+</div>
+<!-- /.content-wrapper -->
 
 
 
@@ -146,11 +151,13 @@
 <script src="<?php echo base_url()?>template/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
 <script >
-    $(function() {
-        //Date picker
-        $('#datepicker').datepicker({
-          autoclose: true
-        })
-    })
+	$(function() {
+		//Date picker
+	    $('#datepicker').datepicker({
+	      autoclose: true
+	    })
+	})
 
 </script>
+
+
