@@ -38,7 +38,7 @@
 
                                       
                                             <!-- text input -->
-                                            <div class="row">
+                                            <div class="row" style="padding-left: 12px;">
                                                 <div class="col-md-4">
                                                     <label>Month</label>
 
@@ -71,7 +71,7 @@
                                    <form id="myform" method="post">
                                        
                                         
-                                    <div class="col-md-10">
+                                    <div class="col-md-11">
 
 
                                        <table id="mytable" class="table table-bordered table-striped table-hover">
@@ -83,13 +83,9 @@
                                         <th>Employee Full Name</th>
                                         <th>Name with Initials</th>
                                         <th>NIC Number</th>
-                                        <th>Date of Birth</th>
-                                        <th>Contact Number</th>
-                                        <th>Address</th>
-                                        <th>Outlet ID</th>
-                                        <th>Position</th>
-                                        <th>Joined Date</th>
-                                        <th>Email</th>
+                                        <th>Number of Leaves Days</th>
+                                        <th>Number of Attended Days</th>
+                                        
 
 
 
@@ -103,15 +99,16 @@
                                                 <td><?php echo $row->idEmployee;?></td>  
                                                 <td><?php echo $row->EmployeeFullName;?></td> 
                                                 <td><?php echo $row->EmployeeNameWithInitials;?></td>  
-                                                <td><?php echo $row->EmployeeNIC;?></td> 
-                                                <td><?php echo $row->EmployeeBirthdate;?></td> 
-                                                <td><?php echo $row->Outlet_idOutlet;?></td> 
-                                                <td><?php echo $row->EmployeePosition;?></td> 
-                                                <td><?php echo $row->EmployeeJoinedDate;?></td> 
-                                                <td><?php echo $row->EmployeeContactNumber;?></td>
-                                                <td><?php echo $row->EmployeeAddress;?></td>
-                                                <td><?php echo $row->EmployeeEmail;?></td>  
-                                                </tr>  
+                                                <td><?php echo $row->EmployeeNIC;?></td>
+
+                                                <td>
+                                                    <input type="text" class="form-control" name="EmpSearch[idEmployee]">
+                                                </td>
+                                                <td>
+                                                    <input type="text" class="form-control" name="EmpSearch[EmployeeFullName]">
+                                                </td> 
+                                                
+                                                    
                                              <?php }  
                                              ?> 
                                             
