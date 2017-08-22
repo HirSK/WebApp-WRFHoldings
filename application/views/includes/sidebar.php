@@ -33,7 +33,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="<?php echo base_url()?>index.php/AttendanceController">Attendance</a></li>
-                        <li><a href="#">Run Payroll</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/runPayrollController">Run Payroll</a></li>
                         <li><a href="#">Salary Reports</a></li>
                     </ul>
                 </li>
