@@ -1,7 +1,7 @@
 <?php include "includes/header.php" ?>
 <?php include "includes/sidebar.php" ?>
 
-<!-- Content Wrapper. Contains page content -->
+<!-- Content Wrapper.-->
 <div class="content-wrapper">
 
 <!-- Content Header (Page header) -->
