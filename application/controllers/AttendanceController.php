@@ -1,11 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class AttendanceController extends CI_Controller{
+require APPPATH . '/libraries/BaseController.php';
+
+class AttendanceController extends BaseController{
 
 	function __construct(){
 		parent::__construct();
 		$this->load->model('gen_model');
 		$this->load->library("pagination");
+		$this->isLoggedIn();
 	}
 
 	public function index(){
@@ -14,13 +17,16 @@ class AttendanceController extends CI_Controller{
 
 
 
-    	$this->load->view("Attendance_view",$data);  
+    	// $this->load->view('attendance_view',$data); 
+    	// $this->loadViews("add_new_user", $this->global, NULL, NULL);
+    	$this->loadViews('attendance_view',$this->global,$data,NULL);
 	}
 
 	public function manageEmployee(){
 
 		$empDetail['emp'] = $this->gen_model->getData($tablename='Employee');
-		$this->load->view('manage_employee_view',$empDetail);
+		// $this->load->view('manage_employee_view',$empDetail);
+		$this->loadViews('manage_employee_view',$this->global,$empDetail,NULL);
 		
 	}
 	function get_item(){

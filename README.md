@@ -1,7 +1,9 @@
+# CodeIgniter 2
+Open Source PHP Framework (originally from EllisLab)
 
+For more info, please refer to the user-guide at http://www.codeigniter.com/userguide2/  
+(also available within the download package for offline use)
 
-Ongoing project -> web application developing using CodeIgniter 2.2.6 framework
-
-Functionilities:: Store daily sales collection , payroll management of the employees, maintenance details of the delivery vehicles and petty cash management of the outlets of a distributor company.
-
-The technologies using :: BackEnd - php,json(for front end & backend data exchange) FrontEnd - HTML,CSS-Bootstrap
+**WARNING:** *CodeIgniter 2.x is no longer under development and only receives security patches until October 31st, 2015.
+Please update your installation to the latest CodeIgniter 3.x version available
+(upgrade instructions [here](http://www.codeigniter.com/userguide3/installation/upgrade_300.html)).*

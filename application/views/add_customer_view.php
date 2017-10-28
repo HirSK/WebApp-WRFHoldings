@@ -1,5 +1,4 @@
-<?php include "includes/header.php" ?>
-<?php include "includes/sidebar.php" ?>
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -12,7 +11,7 @@
         </h1>
 
         <ol class="breadcrumb">
-            <li><a href="<?php echo base_url()?>/index.php/welcome"><i class="fa fa-dashboard"></i> Home</a></li>            
+            <li><a href="<?php echo base_url()?>index.php/welcome"><i class="fa fa-dashboard"></i> Home</a></li>            
             <li class="active">Add Customer</li>
         </ol>
     </section>
@@ -37,7 +36,7 @@
                         <div class="col-xs-12 col-lg-12 col-sm-12">
 
                            <!--  <div class="col-sm-4 col-xs-12">
-                            	<div class="form-group">
+                                <div class="form-group">
                                     <label for="empId">Employee ID</label>
                                     <input type="text" class="form-control"  name="empId" placeholder="Employee ID" required>
                                 </div>
@@ -47,7 +46,7 @@
                                  <div class="form-group">
                                         <label for="inputCustomerCode" >Customer Code</label>
 
-                                        <input type="text" class="form-control" name="inputCustomerCode" placeholder="Customer Code ">
+                                        <input type="text" class="form-control" name="inputCustomerCode" placeholder="Customer Code " required>
 
 
 
@@ -59,7 +58,7 @@
                                  <div class="form-group">
                                         <label for="inputCustomerName" >Customer Name</label>
 
-                                        <input type="text" class="form-control" name="inputCustomerName" placeholder="Customer Name">
+                                        <input type="text" class="form-control" name="inputCustomerName" placeholder="Customer Name" required>
 
                                     </div>
 
@@ -77,16 +76,16 @@
 
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
-    				                <label for="inputCustomerRegDate">Customer Reg Date</label>
+                                    <label for="inputCustomerRegDate">Customer Reg Date</label>
 
-    				                <div class="input-group date">
-    				                  <div class="input-group-addon">
-    				                    <i class="fa fa-calendar"></i>
-    				                  </div>
-    				                  <input type="text" class="form-control pull-right" id="datepicker" name="inputCustomerRegDate" required>
-    				                </div>
-    				                <!-- /.input group -->
-    				            </div>
+                                    <div class="input-group date">
+                                      <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                      </div>
+                                      <input type="text" class="form-control pull-right" id="datepicker" name="inputCustomerRegDate" >
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
                             </div>
 
                             <div class="col-sm-4 col-xs-12">
@@ -103,7 +102,7 @@
                                     <!-- /.input group -->
                                 </div>
 
-    				            <!-- /.form group -->
+                                <!-- /.form group -->
                                 
                             </div>
 
@@ -135,7 +134,7 @@
 
 
 
-<?php include "includes/footer.php";?>
+
 
 <!-- REQUIRED JS SCRIPTS -->
 
@@ -151,12 +150,12 @@
 <script src="<?php echo base_url()?>template/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
 <script >
-	$(function() {
-		//Date picker
-	    $('#datepicker').datepicker({
-	      autoclose: true
-	    })
-	})
+    $(function() {
+        //Date picker
+        $('#datepicker').datepicker({
+          autoclose: true
+        })
+    })
 
 </script>
 
