@@ -1,5 +1,4 @@
-<?php include "includes/header.php" ?>
-<?php include "includes/sidebar.php" ?>
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -47,7 +46,7 @@
                                  <div class="form-group">
                                         <label for="inputCustomerCode" >Invoice No.</label>
 
-                                        <input type="text" class="form-control" name="inputCustomerCode" placeholder="Customer Code " required>
+                                        <input type="text" class="form-control" name="inputInvoiceNumber" placeholder="Invoice Number " required>
 
 
 
@@ -55,21 +54,23 @@
                                     </div>
                             </div>
 
-                            <div class="col-sm-4 col-xs-12">
+                           <div class="col-sm-4 col-xs-12">
                                  <div class="form-group">
-                                        <label for="inputCustomerName" >Customer Name</label>
+                                        <label for="inputCustomerCode" >Customer Code</label>
 
-                                        <input type="text" class="form-control" name="inputCustomerName" placeholder="Customer Name" required>
+                                        <input type="text" class="form-control" name="inputCustomerCode" placeholder="Customer code " required>
+
+
+
 
                                     </div>
-
                             </div>
 
-                            <div class="col-sm-4 col-xs-12">
+                           <!--  <div class="col-sm-4 col-xs-12">
                                 <label for="inputCustomerAddress" >Customer Address</label>
 
                                         <input type="text" class="form-control" name ="inputCustomerAddress" placeholder="Customer Address">
-                            </div>
+                            </div> -->
 
                         </div>
 

@@ -1,5 +1,5 @@
-<?php include "includes/header.php" ?>
-<?php include "includes/sidebar.php" ?>
+
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -10,7 +10,7 @@
                 <br>
                 <small><b><?php echo $this->session->userData('loggerOutletName') ; 
                 			echo "<br>";
-                			echo $this->session->userData('loggerName') ; ?>
+                			 ?>
                 				
                 			</b></small>
             </h1>
@@ -27,7 +27,6 @@
 
 
 
-<?php include "includes/footer.php" ?>
 
 <!-- REQUIRED JS SCRIPTS -->
 

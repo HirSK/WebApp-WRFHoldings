@@ -38,8 +38,14 @@
 |
 */
 
-$route['default_controller'] = "Login";
+$route['default_controller'] = "LoginTest";
 $route['404_override'] = '';
+
+// User defined routes
+$route['home_dashboard'] = "UserController";
+// $route['loginMe'] = 'LoginTest/loginMe';
+$route['logout'] = 'UserController/logout';
+$route['addNew'] = 'UserController/addNew';
 
 
 /* End of file routes.php */

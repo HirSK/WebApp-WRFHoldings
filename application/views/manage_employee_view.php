@@ -1,5 +1,4 @@
-<?php include "includes/header.php" ?>
-<?php include "includes/sidebar.php" ?>
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -18,29 +17,29 @@
         <div class="row">
             <!-- left column -->
             <div class="col-xs-12" style="padding-top: 20px">
-            	<div class="col-lg-8 col-sm-8 col-xs-12">
-            		
-            	<h3 class="box-title">
-            		<i class="fa fa-th-list"></i>
-            		Manage Employees
-            	</h3>
-            		
-            	</div>
+                <div class="col-lg-8 col-sm-8 col-xs-12">
+                    
+                <h3 class="box-title">
+                    <i class="fa fa-th-list"></i>
+                    Manage Employees
+                </h3>
+                    
+                </div>
 
-            	<div class="col-lg-4 col-sm-4 col-xs-12" no-padding style="padding-top:20px">
-            		<div class="col-xs-4 left-padding">
-            			<a class="btn btn-block btn-success" href="<?php echo base_url()?>index.php/EmployeeController"> ADD</a>
-            		</div>
+                <div class="col-lg-4 col-sm-4 col-xs-12" no-padding style="padding-top:20px">
+                    <div class="col-xs-4 left-padding">
+                        <a class="btn btn-block btn-success" href="<?php echo base_url()?>index.php/EmployeeController"> ADD</a>
+                    </div>
 
-            		<div class="col-xs-4 left-padding">
-            			<a class="btn btn-block btn-warning" href="<?php echo base_url()?>index.php/EmployeeController"> PDF</a>
-            		</div>
+                    <!-- <div class="col-xs-4 left-padding">
+                        <a class="btn btn-block btn-warning" href="<?php echo base_url()?>index.php/EmployeeController"> PDF</a>
+                    </div> -->
 
-            		<div class="col-xs-4 left-padding">
-            			<a class="btn btn-block btn-primary" href="<?php echo base_url()?>index.php/EmployeeController"> PRINT</a>
-            		</div>
+                    <div class="col-xs-4 left-padding">
+                        <a class="btn btn-block btn-primary" href="#"> PRINT</a>
+                    </div>
 
-            	</div>
+                </div>
             </div>
             
 
@@ -51,77 +50,77 @@
                     <div class="box-header with-border">
                         
                         <div class="box-tools pull-right" style="padding-top: 0px">
-                    	<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                		</div>
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        </div>
                     </div>
                     <!-- /.box-header -->
 
                     <div class="box-body table-responsive">
-                    	<table id='emp_table' class="table table-striped table-bordered col-lg-12">
+                        <table id='emp_table' class="table table-striped table-bordered col-lg-12">
 
-                    	<thead >
-                    		
-                    		<tr>
-                    			<th>#</th>
-                    			<th><a href="#" data-sort="idEmployee"> Employee ID</a></th>
-                    			<th><a href="#" data-sort="EmployeeFullName"> Employee Full Name</a></th>
-                    			<th><a href="#" data-sort="EmployeeNameWithInitials"> Name with Initials</a></th>
-                    			<th><a href="#" data-sort="EmployeeNIC"> NIC Number</a></th>
-                    			<th><a href="#" data-sort="EmployeeBirthdate"> Date of Birth</a></th>
-                    			<th><a href="#" data-sort="EmployeeContactNumber"> Contact Number</a></th>
-                    			<th><a href="#" data-sort="EmployeeAddress"> Address</a></th>
-                    			<th><a href="#" data-sort="Outlet_idOutlet"> Outlet ID</a></th>
-                    			<th><a href="#" data-sort="EmployeePosition"> Position</a></th>
-                    			<th><a href="#" data-sort="EmployeeJoinedDate"> Joined Date</a></th>
-                    			<th><a href="#" data-sort="EmployeeEmail"> Email</a></th>
-                    			<th>&nbsp;</th>
-                    		</tr>
+                        <thead >
+                            
+                            <tr>
+                                <th>#</th>
+                                <th> Employee ID</a></th>
+                                <th> Employee Full Name</a></th>
+                                <th> Name with Initials</a></th>
+                                <th> NIC Number</a></th>
+                                <th> Date of Birth</a></th>
+                                <th> Contact Number</a></th>
+                                <th> Address</a></th>
+                                <th> Outlet ID</a></th>
+                                <th> Position</a></th>
+                                <th> Joined Date</a></th>
+                                <th> Email</a></th>
+                                <th>&nbsp;</th>
+                            </tr>
 
-                    		<tr id="w1-filters" class="filters">
-                    			<td>&nbsp;</td>
-                    			<td>
-                    				<input type="text" class="form-control" name="EmpSearch[idEmployee]">
-                    			</td>
-                    			<td>
-                    				<input type="text" class="form-control" name="EmpSearch[EmployeeFullName]">
-                    			</td>
-                    			<td>
-                    				<input type="text" class="form-control" name="EmpSearch[EmployeeNameWithInitials]">
-                    			</td>
-                    			<td>
-                    				<input type="text" class="form-control" name="EmpSearch[EmployeeNIC]">
-                    			</td>
-                    			<td>
-                    				<input type="text" class="form-control" name="EmpSearch[EmployeeBirthdate]">
-                    			</td>
-                    			<td>
-                    				<input type="text" class="form-control" name="EmpSearch[EmployeeContactNumber]">
-                    			</td>
-                    			<td>
-                    				<input type="text" class="form-control" name="EmpSearch[EmployeeAddress]">
-                    			</td>
-                    			<td>
-                    				<select class="form-control" name="EmpSearch[Outlet_idOutlet]"></select> 
-                    			</td>
-                    			<td>
-                    				<select class="form-control" name="EmpSearch[EmployeePosition]"></select> 
-                    			</td>
-                    			<td>
-                    				<input type="text" class="form-control" name="EmpSearch[EmployeeJoinedDate]">
-                    			</td>
-                    			<td>
-                    				<input type="text" class="form-control" name="EmpSearch[EmployeeEmail]">
-                    			</td>
-                    			
-                    			<td>&nbsp;</td>
-                    		</tr>
+                            <!-- <tr id="w1-filters" class="filters">
+                                <td>&nbsp;</td>
+                                <td>
+                                    <input type="text" class="form-control" name="EmpSearch[idEmployee]">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="EmpSearch[EmployeeFullName]">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="EmpSearch[EmployeeNameWithInitials]">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="EmpSearch[EmployeeNIC]">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="EmpSearch[EmployeeBirthdate]">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="EmpSearch[EmployeeContactNumber]">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="EmpSearch[EmployeeAddress]">
+                                </td>
+                                <td>
+                                    <select class="form-control" name="EmpSearch[Outlet_idOutlet]"></select> 
+                                </td>
+                                <td>
+                                    <select class="form-control" name="EmpSearch[EmployeePosition]"></select> 
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="EmpSearch[EmployeeJoinedDate]">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="EmpSearch[EmployeeEmail]">
+                                </td>
+                                
+                                <td>&nbsp;</td>
+                            </tr> -->
 
 
 
-                    	</thead>
+                        </thead>
 
                     
-					<!-- <th class="col-lg-2">Employee ID</th>
+                    <!-- <th class="col-lg-2">Employee ID</th>
                     <th class="col-lg-4">Employee Full Name</th>
                     <th class="col-lg-4">Name with Initials</th>
                     <th class="col-lg-2">NIC Number</th>
@@ -133,8 +132,8 @@
                     <th class="col-lg-2">Joined Date</th>
                     <th class="col-lg-2">Email</th>
                     <th class="col-lg-2"></th> -->
-					<?php
-						$count = 1;
+                    <?php
+                        $count = 1;
                         foreach ($emp as $employee){
                             echo "<tr>";
                             echo "<td>" . $count . "</td>";
@@ -180,9 +179,9 @@
                             $count = $count+1;
                         }
                     ?>
-					</table>
+                    </table>
 
-					 </div>
+                     </div>
             </div>
 
         </div>

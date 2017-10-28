@@ -1,5 +1,4 @@
-<?php include "includes/header.php" ?>
-<?php include "includes/sidebar.php" ?>
+
 
 
     <!-- Content Wrapper. Contains page content -->
@@ -12,7 +11,7 @@
             </h1>
 
             <ol class="breadcrumb">
-                <li><a href="<?php echo base_url()?>/index.php/welcome"><i class="fa fa-dashboard"></i> Home</a></li> 
+                <li><a href="<?php echo base_url()?>index.php/welcome"><i class="fa fa-dashboard"></i> Home</a></li> 
             
                 <li class="active">Attendance</li>
             </ol>

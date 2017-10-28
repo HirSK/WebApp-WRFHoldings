@@ -1,19 +1,23 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-class PettycashController extends CI_Controller{
+require APPPATH . '/libraries/BaseController.php';
+class PettycashController extends BaseController{
 
 	function __construct(){
 		parent::__construct();
 		$this->load->model('gen_model');
 		$this->load->library("pagination");
+		$this->isLoggedIn();
 	}
 
 	public function index(){
-		$this->load->view('add_pettycash_type');
+		// $this->load->view('add_pettycashtype_view');
+		$this->loadViews('add_pettycashtype_view',$this->global,NULL,NULL);
+
 	}
 
-	public function pettycashExpenses(){
-		$this->load->view('add_pettycash_expenses');
+	public function addPettyCashExpenses(){
+		// $this->load->view('add_pettycash_expenses_view');
+		$this->loadViews('add_pettycash_expenses_view',$this->global,NULL,NULL);
 	}
 
 	public function addPettycash(){
@@ -26,6 +30,6 @@ class PettycashController extends CI_Controller{
 
 			$res=$this->gen_model->insertData($tablename="petty_cash",$pettycash_array);
 
-			redirect('/PettycashController');
+			redirect('/PettyCashController');
 	}
 }

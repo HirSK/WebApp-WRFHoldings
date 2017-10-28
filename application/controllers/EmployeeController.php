@@ -1,42 +1,29 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-class EmployeeController extends CI_Controller{
+require APPPATH . '/libraries/BaseController.php';
+class EmployeeController extends BaseController{
 
 	function __construct(){
 		parent::__construct();
 		$this->load->model('gen_model');
 		$this->load->library("pagination");
+		$this->isLoggedIn();
 	}
 
 	public function index(){
-		$this->load->view('add_employee_view');
+		// $this->load->view('add_employee_view');
+		$this->loadViews('add_customer_view',$this->global,NULL,NULL);
 	}
 
 	public function manageEmployee(){
 
 		$empDetail['emp'] = $this->gen_model->getData($tablename='Employee');
-		$this->load->view('manage_employee_view',$empDetail);
-		
+		// $this->load->view('manage_employee_view',$empDetail);
+		$this->loadViews('manage_employee_view',$this->global,$empDetail,NULL);
 	}
 
 	public function addEmployee(){
 
-		//validate form input
-		/*$this->form_validation->set_rules('fullName','Full name','required|alpha');
-		$this->form_validation->set_rules('nameWithInitials','Name with initials', 'required|alpha');
-		$this->form_validation->set_rules('nicNumber','National Identity Number', 'required|alpha_numeric');
-		$this->form_validation->set_rules('dateOfBirth','Birth date','required');
-		$this->form_validation->set_rules('OutletId','Outlet Id','required');
-		$this->form_validation->set_rules('position', 'Job position','required|alpha');
-		$this->form_validation->set_rules('joinedDate', 'Joined date','required');
-		$this->form_validation->set_rules('contactNumber','Telephone number', 'required');
-		$this->form_validation->set_rules('address', 'Home address','required');
-		$this->form_validation->set_rules('email','Email address','trim|valid_email');*/
-
-
-		//if the entered data are valid
-		//if($this->form_validation->run()){
-
+		
 			$employee_array = array(
 
 					

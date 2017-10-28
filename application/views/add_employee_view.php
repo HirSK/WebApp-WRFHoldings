@@ -1,7 +1,6 @@
-<?php include "includes/header.php" ?>
-<?php include "includes/sidebar.php" ?>
 
-<!-- Content Wrapper.-->
+
+<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
 <!-- Content Header (Page header) -->
@@ -76,7 +75,7 @@
     				                  <div class="input-group-addon">
     				                    <i class="fa fa-calendar"></i>
     				                  </div>
-    				                  <input type="text" class="form-control pull-right" id="datepicker" name="dateOfBirth" required>
+    				                  <input type="text" class="form-control pull-right"  placeholder="dd/mm/yyyy" name="dateOfBirth" required>
     				                </div>
     				                <!-- /.input group -->
     				            </div>
@@ -129,7 +128,7 @@
     				                  <div class="input-group-addon">
     				                    <i class="fa fa-calendar"></i>
     				                  </div>
-    				                  <input type="text" class="form-control pull-right" id="datepicker" name="joinedDate">
+    				                  <input type="text" class="form-control pull-right"  placeholder="dd/mm/yyyy" name="joinedDate">
     				                </div>
     				                <!-- /.input group -->
     				            </div>
@@ -173,7 +172,7 @@
                         </div>
 
                             <div class="col-xs-2">
-                                <button type="submit" class="btn btn-block btn-success" name="register">Submit</button>
+                                <button type="submit" class="btn btn-block btn-success" name="register">Register</button>
                             </div>
 
                         </div>

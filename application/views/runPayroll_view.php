@@ -1,5 +1,4 @@
-<?php include_once('includes/header.php') ?>
-<?php include_once('includes/sidebar.php') ?>
+
 
 
 
@@ -13,7 +12,7 @@
             </h1>
 
             <ol class="breadcrumb">
-                <li><a href="<?php echo base_url()?>/index.php/welcome"><i class="fa fa-dashboard"></i> Home</a></li> 
+                <li><a href="<?php echo base_url()?>index.php/welcome"><i class="fa fa-dashboard"></i> Home</a></li> 
             
                 <li class="active">Run Payroll</li>
         </ol>
@@ -65,7 +64,7 @@
                         </ul>
                     </div>
 
-                    <form role="form" action="<?php echo base_url()?>index.php/VehicleController/addVehicle" method="POST">
+                    <form role="form" action="#" method="POST">
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" id="basic">
 
@@ -73,7 +72,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Select Month</label>
-                                            <select class="form-control vehicleType" style="width: 100%;" name="vehicleType" required>
+                                            <select class="form-control vehicleType" style="width: 100%;" name="vehicleType" required='required'>
                                                 <option selected="selected">January</option>
                                                 <option>February</option>
                                                 <option>March</option>
@@ -92,7 +91,7 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label>Select Employee</label>
-                                            <select class="form-control vehicleType" style="width: 100%;" name="vehicleType" required>
+                                            <select class="form-control vehicleType" style="width: 100%;" name="vehicleType" required='required'>
                                             <option value>--Select Employee--</option>
                                         <?php
                                             foreach ($employeeList as  $employee) {                                        
@@ -173,7 +172,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="exampleOwnerName">Basic Salary</label>
-                                            <input type="ownerName" class="form-control" name="exampleOwnerName" placeholder="No. of Working Days">
+                                            <input type="ownerName" class="form-control" name="exampleOwnerName" placeholder="No. of Working Days" required='required'>
                                         </div>
                                     </div>
                                 </div>

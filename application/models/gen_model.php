@@ -2,18 +2,53 @@
 
 class gen_model extends CI_Model{
 
+    // this method Check the given username and password matches with the users table data
+
 	public function userAuth($userInfo){
+
 		$this->db->select("Username,UserPassword");
 		$result = $this->db->get_where("user",$userInfo);
 
+
+       
+        
 		if($result->num_rows == 1){
-			$currentUser = $result->result_array()[0];
-			return true;
+			
+            $columnArray = array('Employee_idEmployee','Employee_Outlet_idOutlet','roleName');
+            $where_arr = array('Username'=>$userInfo['Username']);
+          
+            $data = $this->getData($tablename='user',$columns_arr =$columnArray,$where_arr = $where_arr);
+
+           
+            
+		return  $data;
 		}
 		else{
 			return false;
 		}
 	}
+
+    // This method returns the user list.It can also returns the users filtered by the search text
+
+    function userListing($searchText = '')
+    {
+        $this->db->select('BaseTbl.idUser, BaseTbl.Employee_idEmployee, BaseTbl.Employee_Outlet_idOutlet, BaseTbl.mobile, BaseTbl.roleName');
+        $this->db->from('user as BaseTbl');
+        
+        if(!empty($searchText)) {
+            $likeCriteria = "BaseTbl.roleName  LIKE '%".$searchText."%'
+                            ";
+            $this->db->where($likeCriteria);
+        }
+        // $this->db->where('BaseTbl.isDeleted', 0);
+        // $this->db->where('BaseTbl.roleId !=', 1);
+        // $this->db->limit($page, $segment);
+        $query = $this->db->get();
+        
+        $result = $query->result();        
+        return $result;
+    }
+
 
 	//this method insert data into a given table
 	function insertData($tablename, $data_arr) {
@@ -109,37 +144,4 @@ class gen_model extends CI_Model{
             return $query->result();
         }
     }
-	 function getAllRecords()
-        {
-        
-        $this->db->select("CustomerName,CustomerAddress,CustomerContact,CustomerRegDate");
-        $this->db->from('Customer');
-         $q = $this->db->get();
-
-         return $q->result();
-            
-        }
-	
-	public function updateData($tablename, $data_arr, $where_arr) {
-        try {
-
-
-
-
-            $this->db->update($tablename, $data_arr, $where_arr);
-            $report = array();
-            $report['error'] = $this->db->_error_number();
-            $report['message'] = $this->db->_error_message();
-            return $report;
-        } catch (Exception $err) {
-
-            return $err->getMessage();
-        }
-    }
-
-
-public function deleteData($tblName,$where){
-      return $this->db->delete($tblName,$where);
-}
-
 }
