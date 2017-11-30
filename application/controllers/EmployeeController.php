@@ -11,7 +11,7 @@ class EmployeeController extends BaseController{
 
 	public function index(){
 		// $this->load->view('add_employee_view');
-		$this->loadViews('add_customer_view',$this->global,NULL,NULL);
+		$this->loadViews('add_employee_view',$this->global,NULL,NULL);
 	}
 
 	public function manageEmployee(){

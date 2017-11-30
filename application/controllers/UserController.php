@@ -50,7 +50,7 @@ class UserController extends BaseController{
 
     // this method loads the form to add new users
 
-    function addNew(){
+    function addNew($id=''){
 
     	if($this->isAdmin() == FALSE)
         {
@@ -58,12 +58,19 @@ class UserController extends BaseController{
         }
         else
         {
-            $this->load->model('gen_model');
-            // $data['roles'] = $this->gen_model->getUserRoles();
-            
-            $this->global['pageTitle'] = 'WRF Holdings(pvt) Ltd : Add New User';
+            if($id){                
 
-            $this->loadViews("add_new_user", $this->global, NULL, NULL);
+                $userData = $this->gen_model->userListing($id);
+                $this->loadViews("add_new_user", $this->global, NULL, NULL);
+
+
+            }else{
+                        
+                $this->global['pageTitle'] = 'WRF Holdings(pvt) Ltd : Add New User';
+
+                $this->loadViews("add_new_user", $this->global, NULL, NULL);
+            }
+           
         }
     }
 

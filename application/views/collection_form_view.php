@@ -56,21 +56,6 @@
 	                    <div class="box-body ">
 	                    	<div class="row">
 
-	                    		<!-- <div class="col-xs-12 col-sm-4 col-lg-3 form-group" >
-		                    			<label class="control-label" for>Outlet Name</label>
-		                    			<span style="color:red;">*</span>
-		                    			<select class="form-control" name="vehicleNo">
-		                    				<option value>--Select Outlet--</option>
-		                    				<?php
-		                    					foreach ($outletList as  $outlet) {                   						
-
-		        									echo '<option value="'.$outlet->Outletname.'">'.$outlet->Outletname.'</option>';
-		                    					}
-		                    				?>
-		                    			</select>
-		                    	</div> -->
-
-
 	                    		<div class="col-xs-12 col-sm-4 col-lg-3 form-group">
 	                    			<label class="control-label" for>Date</label>
 	                    			<span style="color:red;">*</span>
@@ -158,8 +143,7 @@
 	                    			<th> Net Value</a></th>
 	                    			<th> Cash</a></th>
 	                    			<th> Cheque</a></th>
-	                    			<th> Credit</a></th>
-	                    			
+	                    			<th> Credit</a></th>	                    			
 	                    			<th> Variance</a></th>
 	                    			<th> Sales RTN</a></th>
 	                    			<th> Discount</a></th>
@@ -169,52 +153,7 @@
 	                    		</tr>
                     		</thead>
                     		<tbody>
-								<!-- <tr id='addr0'>
-								<td>
-								1
-								</td>
-								<td>
-								<input type="text" name='invoiceNo0'   class="form-control"/>
-								</td>
-								<td>
-								<input type="text" name='code0'  class="form-control"/>
-								</td>
-								<td>
-								<input type="text" name='cusName0'  class="form-control"/>
-								</td>
-								<td>
-								<input type="text" name='invoiceValue0'  class="form-control"/>
-								</td>
-								<td>
-								<input type="text" name='netValue0'  class="form-control"/>
-								</td>
-								<td>
-								<input type="text" name='cash0'  class="form-control"/>
-								</td>
-								<td>
-								<input type="text" name='cheque0'  class="form-control"/>
-								</td>
-								<td>
-								<input type="text" name='credit0'  class="form-control"/>
-								</td>
-								<td>
-								<input type="text" name='variance0'  class="form-control"/>
-								</td>
-								<td>
-								<input type="text" name='salesrtn0'  class="form-control"/>
-								</td>
-								<td>
-								<input type="text" name='discount0'  class="form-control"/>
-								</td>
-								<td>
-								<input type="text" name='mktrtn0'  class="form-control"/>
-								</td>
-								<td>
-								<input type="text" name='remarks0'  class="form-control"/>
-								</td>
-
-								</tr>
-		                    	<tr id='addr1'></tr> -->
+								
 							</tbody>
                     </table>
                    </div>
@@ -248,36 +187,7 @@
 				                <input type="text" class="form-control" id="invoiceNo" placeholder="Enter invoice number" name="idInvoice" required>
 				              </div>
 				            </div>
-
-				            <!-- <div class="form-group">
-				              <label for="code" class="col-sm-3 control-label">Customer Code</label>
-				              <div class="col-sm-7">
-				                <input type="text" class="form-control" id="code" placeholder="Enter Customer Code" name="CustomerCode" required>
-				              </div>
-				            </div>
-
-				            <div class="form-group">
-				              <label for="cusName" class="col-sm-3 control-label">Customer Name</label>
-				              <div class="col-sm-7">
-				              	<!-- <?php  echo $customerName?> -->
-				                <!-- <input type="text" class="form-control" id="cusName"  name="CustomerName" required>
-				              </div>
-				            </div>
-
-				            <div class="form-group">
-				              <label for="invoiceValue" class="col-sm-3 control-label">Invoice value</label>
-				              <div class="col-sm-7">
-				                <input type="text" class="form-control" id="invoiceValue" placeholder="Enter invoice value" name="InvoiceValue" required>
-				              </div>
-				            </div> --> 
-
-				            <!-- <div class="form-group">
-				              <label for="netValue" class="col-sm-3 control-label">Net value</label>
-				              <div class="col-sm-7">
-				                <input type="text" class="form-control" id="netValue"  name="InvoiceNetValue" required>
-				              </div>
-				            </div> -->
-
+				            
 				            <div class="form-group">
 				              <label for="cash" class="col-sm-3 control-label">Cash amount</label>
 				              <div class="col-sm-7">
@@ -342,10 +252,7 @@
 				          		<button type="submit" class="btn btn-block btn-success" name="addInvoice">OK</button>
 				        	</div>
 
-				        	<!-- <div class="col-xs-2">
-                                <button type="submit" class="btn btn-block btn-success" name="register">Submit</button>
-                            </div> -->
-
+				        	
 				          </div>				           			            
 
 				       </form>			        
@@ -370,7 +277,7 @@
 
 
 
-<?php include "includes/footer.php";?>
+
 
 <!-- REQUIRED JS SCRIPTS -->
 

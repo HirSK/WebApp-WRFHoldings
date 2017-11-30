@@ -23,13 +23,13 @@ class LoginTest extends CI_Controller{
 
      function isLoggedIn(){
 
-     	$isLoggedIn = $this->session->userdata('isLoggedIn');
+     	 $isLoggedIn = $this->session->userdata('isLoggedIn');
 
      	if(!isset($isLoggedIn) || $isLoggedIn != TRUE){
-     		$this->load->view('loginView');
-     	}else{
+     	 	$this->load->view('loginView');
+     	 }else{
      		redirect('home_dashboard');
-     	}
+     	 }
      }
 
      /**
@@ -48,7 +48,9 @@ class LoginTest extends CI_Controller{
 
 
      		$username = $_POST['username'];
-			$userpass = sha1($_POST['password']);
+            //for testing purposes
+			//$userpass = sha1($_POST['password']);
+            $userpass = $_POST['password'];
 
 			
 		  $userInfo['Username'] = $username;

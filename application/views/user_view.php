@@ -38,6 +38,7 @@
                   <table class="table table-hover">
                     <tr>
                       <th>Id</th>
+                      <th>Name</th>
                       <th>Role</th>                      
                       <th>Mobile</th>
                       <th>Employee ID</th>
@@ -52,12 +53,13 @@
                     ?>
                     <tr>
                       <td><?php echo $record->idUser ?></td>
+                      <td><?php echo $record->EmployeeFullName ?></td>
                       <td><?php echo $record->roleName ?></td>
                       <td><?php echo $record->mobile ?></td>
                       <td><?php echo $record->Employee_idEmployee ?></td>
                       <td><?php echo $record->Employee_Outlet_idOutlet ?></td>
                       <td class="text-center">
-                          <a class="btn btn-sm btn-info" href="#"><i class="fa fa-pencil"></i></a>
+                          <a class="btn btn-sm btn-info" href="<?php echo base_url()?>index.php/UserController/addNew/$record->idUser"><i class="fa fa-pencil"></i></a>
                           <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $record->idUser; ?>"><i class="fa fa-trash"></i></a>
                       </td>
                     </tr>
