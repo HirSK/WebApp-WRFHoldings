@@ -153,7 +153,41 @@
 	                    		</tr>
                     		</thead>
                     		<tbody>
-								
+
+                    			<?php
+		                        $count = 1;
+		                        
+		                            echo "<tr>";
+		                            echo "<td>" . $count . "</td>";?>
+		                            <td>
+                                    <input type="text" class="form-control" name="">
+                                	</td>
+                                	<td>
+                                    <input type="text" class="form-control" name="">
+                                	</td>
+                                	<td>
+                                    <input type="text" class="form-control" name="">
+                                	</td>
+                                	<td>
+                                    <input type="text" class="form-control" name="">
+                                	</td>
+                                	<td>
+                                    <input type="text" class="form-control" name="">
+                                	</td>
+                                	<td>
+                                    <input type="text" class="form-control" name="">
+                                	</td>
+		                            ?>
+		                            
+		                            $count = $count+1;
+		                        }
+                    			?>
+								<td>
+                                    <input type="text" class="form-control" name="">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" name="">
+                                </td>
 							</tbody>
                     </table>
                    </div>

@@ -101,10 +101,10 @@
                                                 <td><?php echo $row->EmployeeNIC;?></td>
 
                                                 <td>
-                                                    <input type="text" class="form-control" name="EmpSearch[idEmployee]">
+                                                    <input type="text" class="form-control" name="">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" name="EmpSearch[EmployeeFullName]">
+                                                    <input type="text" class="form-control" name="">
                                                 </td> 
                                                 
                                                     
