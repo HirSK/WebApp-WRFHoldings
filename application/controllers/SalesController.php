@@ -31,6 +31,8 @@ class SalesController extends BaseController{
 
 	public function addInvoice(){
 
+		//form validation has to be made
+
 
 		
 		$idInvoice				=$_POST['idInvoice'];
@@ -48,45 +50,50 @@ class SalesController extends BaseController{
 		$Remarks				=$_POST['Remarks'];
 
 
-		
-		// $ChequeNumber           =$_POST[''];
-		// $ChequeBankName           =$_POST[''];
-		// $ChequeBankBranch           =$_POST[''];
-		// $ChequeBKdate           =$_POST[''];
-
-
 		$invoice_arry = array(
 
 					
 					'idInvoice'				=> $idInvoice,
-					'Customer_idCustomer'		=> $CustomerCode,					
+					'Customer_idCustomer'	=> $CustomerCode,					
 					'InvoiceValue'			=> $InvoiceValue,
-					'InvoiceNetValue'				=> $InvoiceNetValue,	
-					
+					'InvoiceNetValue'		=> $InvoiceNetValue,
+					'cash' 					=>$CashAmount,
+					'cheque'				=>$ChequeAmount,
+					'credit'				=>$CreditAmount,					
 					'SalesRtn'				=> $SalesRtn,
 					'Variance'				=> $Variance,
-					'Discount'					=> $Discount,
-					'MKTrtn'					=> $MKTrtn,
-					'Remarks'					=> $Remarks,
+					'Discount'				=> $Discount,
+					'MKTrtn'				=> $MKTrtn,
+					'Remarks'				=> $Remarks,
 
 
 			);
 
-		if($CashAmount != ""){
+		$result = $this->gen_model->insertData($tablename="invoice",$invoice_arry);
 
-			$cashArray = array(
+		//if there are pending credits ,they are added to credits table
+		if($CreditAmount != ""){
 
-				'CashAmount' => $CashAmount , 
+			$creditArray = array(
+
+
+				'invoice_credit_id'=>$idInvoice,
+				'customer_id'=>$CustomerCode,
+				'total_credit' => $CreditAmount ,
+				'credit_start_date'=>date('dd/mm/yyyy') ,
+				'credit_topay'=>$CreditAmount,
 
 				);
 
-			$this->gen_model->insertData($tablename="customer",$cashArray);
-			$invoice_arry['Cash_idCash'] = $this->db->insert_id();			
+			$this->gen_model->insertData($tablename="credit",$creditArray);
+						
 
-		}elseif($ChequeAmount != ""){
+		}
+		//if the payments are done by cheque,these details are sent to cheque table
+		if($ChequeAmount != ""){
 
 			$chequeArray = array(
-
+				'cheque_invoice_id'=>$idInvoice,
 				'ChequeAmount' => $ChequeAmount ,
 				'ChequeNumber' => $ChequeNumber , 
 				'ChequeBankName' => $ChequeBankName , 
@@ -96,22 +103,12 @@ class SalesController extends BaseController{
 				);
 
 			$this->gen_model->insertData($tablename="cheque",$chequeArray);
-			$invoice_arry['Cheque_idCheque'] = $this->db->insert_id();
+			
 
-		}elseif ($CreditAmount != "") {
-
-			$creditArray = array(
-
-				'CreditAmount' => $CreditAmount , 
-
-				);
-
-			$this->gen_model->insertData($tablename="credit",$creditArray);
-			$invoice_arry['Credit_idCredit'] = $this->db->insert_id();
 		}
 
 		
-		$this->gen_model->insertData($tablename="invoice",$invoice_arry);
+		
 		redirect('/SalesController');
 	}
 
