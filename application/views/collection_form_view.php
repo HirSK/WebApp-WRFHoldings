@@ -29,9 +29,7 @@
 
             <div class="col-lg-4 col-sm- col-xs-12" no-padding style="padding-top:20px">
             		
-            		<!-- <div class="col-xs-4 left-padding">
-            			<a class="btn btn-block btn-warning" href="<?php echo base_url()?>index.php/EmployeeController"> PDF</a>
-            		</div> -->
+            		
 
             		<div class="col-xs-4 left-padding">
             			<a class="btn btn-block btn-primary" href="#"> PRINT</a>
@@ -125,13 +123,137 @@
                                 	<button type="submit" class="btn btn-block btn-success" name="register">OK</button>
                             	</div>
 		                    </div> 
-		                </form>   
+		                </form>  
+
+		                <!-- panel preview -->
+				        <div class="col-sm-6">
+				            <h5>Add collection:</h5>
+				            <div class="panel panel-default">
+				                <div class="panel-body form-horizontal payment-form">
+
+				                	<div class="col-xs-12 col-lg-12 col-sm-12">
+				                		<div class="col-sm-4 col-xs-12">
+						                    <div class="form-group">
+						                        <label for="id" class="col-sm-4 control-label">Invoice</label>
+						                        <div class="col-sm-8">
+						                            <input type="text" class="form-control" id="id" name="idInvoice">
+						                        </div>
+						                    </div>
+						                </div>
+						                <div class="col-sm-8 col-xs-12">
+						                    <div class="form-group">
+						                        <label for="value" class="col-sm-5 control-label">NetValue</label>
+						                        <div class="col-sm-7">
+						                            <input type="text" class="form-control" id="value" name="InvoiceValue">
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+						            <div class="col-xs-12 col-lg-12 col-sm-12">
+				                		<div class="col-sm-4 col-xs-12">
+						                    <div class="form-group">
+						                        <label for="ccode" class="col-sm-4 control-label">Cus:ID</label>
+						                        <div class="col-sm-8">
+						                            <input type="text" class="form-control" id="ccode" name="CustomerCode">
+						                        </div>
+						                    </div>
+						                </div>
+						                <div class="col-sm-8 col-xs-12">
+						                    <div class="form-group">
+						                        <label for="cname" class="col-sm-4 control-label">Customer Name</label>
+						                        <div class="col-sm-8">
+						                            <input type="text" class="form-control" id="cname" name="CustomerName">
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+				                    <div class="form-group">
+				                        <label for="cash" class="col-sm-3 control-label">Cash Amount</label>
+				                        <div class="col-sm-8">
+				                            <input type="text" class="form-control" id="cash" name="CashAmount">
+				                        </div>
+				                    </div> 
+				                    <div class="form-group">
+				                        <label for="cheque" class="col-sm-3 control-label">Cheque Amount</label>
+				                        <div class="col-sm-8">
+				                            <input type="text" class="form-control" id="cheque" name="ChequeAmount">
+				                        </div>
+				                    </div>
+				                    <div class="form-group">
+				                        <label for="credit" class="col-sm-3 control-label">Credit Amount</label>
+				                        <div class="col-sm-8">
+				                            <input type="text" class="form-control" id="credit" name="CreditAmount">
+				                        </div>
+				                    </div> 
+
+					               <div class="col-xs-12 col-lg-12 col-sm-12">
+					               	  <div class="col-sm-6 col-xs-12">
+					                    <div class="form-group">
+					                        <label for="variance" class="col-sm-5 control-label">Variance</label>
+					                        <div class="col-sm-7">
+					                            <input type="text" class="form-control" id="variance" name="Variance">
+					                        </div>
+					                    </div> 
+					                   </div>
+
+					                  <div class="col-sm-6 col-xs-12">
+					                    <div class="form-group">
+					                        <label for="discount" class="col-sm-5 control-label">Discount</label>
+					                        <div class="col-sm-7">
+					                            <input type="text" class="form-control" id="discount" name="Discount">
+					                        </div>
+					                    </div>
+					                   </div>
+					               </div> 
+
+					               <div class="col-xs-12 col-lg-12 col-sm-12">
+					               		<div class="col-sm-6 col-xs-12">
+				                    		<div class="form-group">
+						                        <label for="salesrtn" class="col-sm-5 control-label">Sales return</label>
+						                        <div class="col-sm-7">
+						                            <input type="text" class="form-control" id="salesrtn" name="SalesRtn">
+					                        	</div>
+				                    		</div> 
+				                		</div>
+				                		<div class="col-sm-6 col-xs-12">
+				                    		<div class="form-group">
+				                        		<label for="mkt" class="col-sm-5 control-label">MKT return</label>
+				                        		<div class="col-sm-7">
+				                            		<input type="text" class="form-control" id="mkt" name="mktrtn">
+				                        		</div>
+				                    		</div> 
+				                		</div>
+				                	</div>
+
+				                    <div class="form-group">
+				                        <label for="remarks" class="col-sm-3 control-label">Remarks</label>
+				                        <div class="col-sm-9">
+				                            <input type="text" class="form-control" id="remarks" name="Remarks">
+				                        </div>
+				                    </div> 
+				                   
+		                      
+				                    <div class="form-group">
+				                        <div class="col-sm-12 text-right">
+				                            <button type="button" class="btn btn-default preview-add-button">
+				                                <span class="glyphicon glyphicon-plus"></span> Add
+				                            </button>
+				                        </div>
+				                    </div>
+				                </div>
+				            </div>            
+				        </div> <!-- / panel preview --> 
 
 		            
-		                   
-	                              			
+                       
+                    
+		            </div>
+		              
 
-                    	
+
+		              <!--      
+	                            			
+                  
                     	<table id='emp_table' class="table table-striped table-bordered table-hover col-lg-12" id="tab-logic">
                     		<thead >                    		
 	                    		<tr>
@@ -157,8 +279,8 @@
                     			<?php
 		                        $count = 1;
 		                        
-		                            echo "<tr>";
-		                            echo "<td>" . $count . "</td>";?>
+		                            // echo "<tr>";
+		                            // echo "<td>" . $count . "</td>";?>
 		                            <td>
                                     <input type="text" class="form-control" name="">
                                 	</td>
@@ -177,40 +299,58 @@
                                 	<td>
                                     <input type="text" class="form-control" name="">
                                 	</td>
-		                            ?>
+                                	<td>
+                                    <input type="text" class="form-control" name="">
+                                	</td>
+                                	<td>
+                                    <input type="text" class="form-control" name="">
+                                	</td>
+                                	<td>
+                                    <input type="text" class="form-control" name="">
+                                	</td>
+                                	<td>
+                                    <input type="text" class="form-control" name="">
+                                	</td>
+                                	<td>
+                                    <input type="text" class="form-control" name="">
+                                	</td>
+                                	<td>
+                                    <input type="text" class="form-control" name="">
+                                	</td>
+                                	<td>
+                                    <input type="text" class="form-control" name="">
+                                	</td>
+                                	<td>
+                                    <input type="text" class="form-control" name="">
+                                	</td>
 		                            
-		                            $count = $count+1;
-		                        }
-                    			?>
-								<td>
-                                    <input type="text" class="form-control" name="">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="">
-                                </td>
+		                            
+		                            <!-- $count = $count+1; -->
+		                        
+                    		<!-- 	
 							</tbody>
                     </table>
                    </div>
                   </div>
                 <!--  <a id="add_row" class="btn  btn-primary pull-left" style="padding-top: 5px">Add Row</a><a id='delete_row' class=" btn  btn-primary pull-right" style="padding-top: 5px">Delete Row</a>
  -->
-                 <button type="button" class="btn  btn-primary pull-left" style="padding-top: 5px" data-toggle="modal" data-target="#addrow">ADD</button>
+                 <!-- <button type="button" class="btn  btn-primary pull-left" style="padding-top: 5px" data-toggle="modal" data-target="#addrow">ADD</button>
 
                   <!-- Modal -->
-				  <div class="modal fade" id="addrow" role="dialog">
+				  <!-- <div class="modal fade" id="addrow" role="dialog">
 				    <div class="modal-dialog">
 				    
 				      <!-- Modal content-->
-				      <div class="modal-content">
+				      <!-- <div class="modal-content">
 
 
 				        <div class="modal-header">
 				          <button type="button" class="close" data-dismiss="modal">&times;</button>
 				          <h4 class="modal-title">Enter collection details</h4>
-				        </div>
+				        </div> -->  
 
-
-				        
+ 
+			<!-- 	        
 				         <form action="<?php echo base_url()?>index.php/SalesController/addInvoice" method="POST">
 
 				          <div class="modal-body">
@@ -299,7 +439,7 @@
 
 				 </div>
 				      
-			</div>
+			</div> -->
 				  
 
   </section>
