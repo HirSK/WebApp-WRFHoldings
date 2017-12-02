@@ -114,8 +114,6 @@
 
 
 
-<?php include "includes/footer.php";?>
-
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
