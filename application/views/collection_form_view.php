@@ -138,7 +138,8 @@
 						                    <div class="form-group">
 						                        <label for="id" class="col-sm-4 control-label">Invoice</label>
 						                        <div class="col-sm-8">
-						                            <input type="text" class="form-control" id="idInvoice" name="idInvoice">
+						                        	
+						                            <input type="text" class="form-control" id="idInvoice" name="idInvoice" onkeypress="Javascript: if (event.keyCode==13) getDetails();">
 						                        </div>
 						                    </div>
 						                </div>
@@ -172,13 +173,13 @@
 				                    <div class="form-group">
 				                        <label for="cash" class="col-sm-3 control-label">Cash Amount</label>
 				                        <div class="col-sm-8">
-				                            <input type="text" class="form-control" id="CashAmount" name="CashAmount">
+				                            <input type="text" class="form-control" id="CashAmount" name="CashAmount" >
 				                        </div>
 				                    </div> 
 				                    <div class="form-group">
 				                        <label for="cheque" class="col-sm-3 control-label">Cheque Amount</label>
 				                        <div class="col-sm-8">
-				                            <input type="text" class="form-control" id="ChequeAmount" name="ChequeAmount">
+				                            <input type="text" class="form-control" id="ChequeAmount" name="ChequeAmount" >
 				                        </div>
 				                    </div>
 				                    <div class="col-xs-12 col-lg-12 col-sm-12">
@@ -220,7 +221,7 @@
 				                    <div class="form-group">
 				                        <label for="credit" class="col-sm-3 control-label">Credit Amount</label>
 				                        <div class="col-sm-8">
-				                            <input type="text" class="form-control" id="CreditAmount" name="CreditAmount">
+				                            <input type="text" class="form-control" id="CreditAmount" name="CreditAmount" >
 				                        </div>
 				                    </div> 
 
@@ -270,14 +271,27 @@
 				                        </div>
 				                    </div> 
 				                   
-		                      
-				                    <div class="form-group">
-				                        <div class="col-sm-12 text-right">
-				                            <button type="button" class="btn btn-default preview-add-button">
-				                                <span class="glyphicon glyphicon-plus"></span> Add
-				                            </button>
-				                        </div>
-				                    </div>
+				                   <div class="col-xs-12 col-lg-12 col-sm-12">
+				                   	  <div class="col-sm-7 col-xs-12">
+				                      		<div class="form-group">
+						                        <div class="col-sm-6 text-right">
+						                            <button type="button" class="btn btn-default preview-apply-button" onclick="applyFunction()">
+						                                <span class="glyphicon glyphicon-ok"></span>Apply
+						                            </button>
+						                        </div>
+						                    </div>
+					                   </div>
+					                   <div class="col-sm-5 col-xs-12">
+						                    <div class="form-group">
+						                        <div class="col-sm-6 text-right">
+						                            <button type="button" class="btn btn-default preview-add-button">
+						                                <span class="glyphicon glyphicon-plus"></span> Add
+						                            </button>
+						                        </div>
+						                    </div>
+					                	</div>
+				                  </div>
+
 				                </div>
 				            </div>            
 				        </div> <!-- / panel preview --> 
@@ -362,6 +376,51 @@
     })
 
 </script>
+
+<script>
+function getDetails()
+{
+	 if($('#idInvoice').val()){
+
+		    $.ajax({
+		        type : "post",
+		        url: "<?php echo base_url().'index.php/SalesController/getInvoiceDetails'?>",
+		        cache: false,
+		        data : {id :  $('#idInvoice').val()},
+		        success : function(json){
+		            var obj=jQuery.parseJSON(json);
+
+		            if(obj[0]){
+		                $('#InvoiceValue').val(obj[0].InvoiceValue);
+		                $('#CustomerCode').val(obj[0].Customer_idCustomer);
+		                $('#CustomerName').val(obj[0].CustomerName);		                
+		            }else{
+		                alert("Failed");
+		            }
+
+		        },
+		    });
+		}else{
+		    alert("ID not found");
+		}  
+   }
+
+  function applyFunction(){
+  	
+  	var vari = 0;
+  	var invoice_value =parseFloat(document.getElementById("InvoiceValue").value) || 0;
+  	var cash = parseFloat(document.getElementById("CashAmount").value) || 0;
+  	var cheque = parseFloat(document.getElementById("ChequeAmount").value) || 0;
+  	var credit = parseFloat(document.getElementById("CreditAmount").value) || 0;
+
+  	 	
+  	var vari= invoice_value-(cash+cheque+credit);  	
+  	document.getElementById("variance").value = vari;
+  }
+
+</script>
+
+
 <script type="text/javascript">
 	function calc_total(){
 	    var sum_cash= 0;
