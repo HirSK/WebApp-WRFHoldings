@@ -56,17 +56,21 @@ class SalesController extends BaseController{
 											'invoice_order_date' => $invoice_order_date
 										);
 
-			$result = $this->sales_model->setInvoiceOrder($invoice_order_array);
+// <<<<<<< HEAD
+// 			$result = $this->sales_model->setInvoiceOrder($invoice_order_array);
 
-			if($result > 0)
-                {
-                    $this->session->set_flashdata('success', 'New invoice order added');
-                }
-                else
-                {
-                    $this->session->set_flashdata('error', 'Failed to insert the invoice');
-                }
-            redirect('addInvoice');
+// 			if($result > 0)
+//                 {
+//                     $this->session->set_flashdata('success', 'New invoice order added');
+//                 }
+//                 else
+//                 {
+//                     $this->session->set_flashdata('error', 'Failed to insert the invoice');
+//                 }
+//             redirect('addInvoice');
+// =======
+// 			$result = $this->sales_model->
+// >>>>>>> 84762e07265de5e5fb6420775d40bc403c14403f
 
 		}
 
