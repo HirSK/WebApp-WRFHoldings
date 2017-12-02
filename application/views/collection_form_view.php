@@ -29,9 +29,7 @@
 
             <div class="col-lg-4 col-sm- col-xs-12" no-padding style="padding-top:20px">
             		
-            		<!-- <div class="col-xs-4 left-padding">
-            			<a class="btn btn-block btn-warning" href="<?php echo base_url()?>index.php/EmployeeController"> PDF</a>
-            		</div> -->
+            		
 
             		<div class="col-xs-4 left-padding">
             			<a class="btn btn-block btn-primary" href="#"> PRINT</a>
@@ -125,182 +123,210 @@
                                 	<button type="submit" class="btn btn-block btn-success" name="register">OK</button>
                             	</div>
 		                    </div> 
-		                </form>   
+		                </form>  
 
-		            
-		                   
-	                              			
+		                <!-- panel preview -->
+		        <div class="row">
+		            <div class="col-sm-12">
+				        <div class="col-sm-6">
+				            <h5>Add collection:</h5>
+				            <div class="panel panel-default">
+				                <div class="panel-body form-horizontal invoice-form">
 
-                    	
-                    	<table id='emp_table' class="table table-striped table-bordered table-hover col-lg-12" id="tab-logic">
-                    		<thead >                    		
-	                    		<tr>
-	                    			<th>#</th>
-	                    			<th> Invoice Number</a></th>
-	                    			<th> Customer code</a></th>
-	                    			<th> Customer Name</a></th>
-	                    			<th> Invoice Value</a></th>
-	                    			<th> Net Value</a></th>
-	                    			<th> Cash</a></th>
-	                    			<th> Cheque</a></th>
-	                    			<th> Credit</a></th>	                    			
-	                    			<th> Variance</a></th>
-	                    			<th> Sales RTN</a></th>
-	                    			<th> Discount</a></th>
-	                    			<th> MKT RTN</a></th>
-	                    			<th> Remarks</a></th>	                    			
-	                    			<th>&nbsp;</th>
-	                    		</tr>
-                    		</thead>
-                    		<tbody>
+				                	<div class="col-xs-12 col-lg-12 col-sm-12">
+				                		<div class="col-sm-4 col-xs-12">
+						                    <div class="form-group">
+						                        <label for="id" class="col-sm-4 control-label">Invoice</label>
+						                        <div class="col-sm-8">
+						                            <input type="text" class="form-control" id="idInvoice" name="idInvoice">
+						                        </div>
+						                    </div>
+						                </div>
+						                <div class="col-sm-8 col-xs-12">
+						                    <div class="form-group">
+						                        <label for="value" class="col-sm-5 control-label">NetValue</label>
+						                        <div class="col-sm-7">
+						                            <input type="text" class="form-control" id="InvoiceValue" name="InvoiceValue">
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+						            <div class="col-xs-12 col-lg-12 col-sm-12">
+				                		<div class="col-sm-4 col-xs-12">
+						                    <div class="form-group">
+						                        <label for="ccode" class="col-sm-4 control-label">Cus:ID</label>
+						                        <div class="col-sm-8">
+						                            <input type="text" class="form-control" id="CustomerCode" name="CustomerCode">
+						                        </div>
+						                    </div>
+						                </div>
+						                <div class="col-sm-8 col-xs-12">
+						                    <div class="form-group">
+						                        <label for="cname" class="col-sm-4 control-label">Customer Name</label>
+						                        <div class="col-sm-8">
+						                            <input type="text" class="form-control" id="CustomerName" name="CustomerName">
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+				                    <div class="form-group">
+				                        <label for="cash" class="col-sm-3 control-label">Cash Amount</label>
+				                        <div class="col-sm-8">
+				                            <input type="text" class="form-control" id="CashAmount" name="CashAmount">
+				                        </div>
+				                    </div> 
+				                    <div class="form-group">
+				                        <label for="cheque" class="col-sm-3 control-label">Cheque Amount</label>
+				                        <div class="col-sm-8">
+				                            <input type="text" class="form-control" id="ChequeAmount" name="ChequeAmount">
+				                        </div>
+				                    </div>
+				                    <div class="col-xs-12 col-lg-12 col-sm-12">
+				                		<div class="col-sm-5 col-xs-12">
+						                    <div class="form-group">
+						                        <label for="ChequeNumber" class="col-sm-4 control-label">Cheque Number</label>
+						                        <div class="col-sm-8">
+						                            <input type="text" class="form-control" id="ChequeNumber" name="ChequeNumber">
+						                        </div>
+						                    </div>
+						                </div>
+						                <div class="col-sm-7 col-xs-12">
+						                    <div class="form-group">
+						                        <label for="ChequeBankName" class="col-sm-5 control-label">Bank</label>
+						                        <div class="col-sm-7">
+						                            <input type="text" class="form-control" id="ChequeBankName" name="ChequeBankName">
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+						            <div class="col-xs-12 col-lg-12 col-sm-12">
+				                		<div class="col-sm-7 col-xs-12">
+						                    <div class="form-group">
+						                        <label for="ChequeBankBranch" class="col-sm-4 control-label">Branch</label>
+						                        <div class="col-sm-8">
+						                            <input type="text" class="form-control" id="ChequeBankBranch" name="ChequeBankBranch">
+						                        </div>
+						                    </div>
+						                </div>
+						                <div class="col-sm-5 col-xs-12">
+						                    <div class="form-group">
+						                        <label for="ChequeBKdate" class="col-sm-4 control-label">BKdate</label>
+						                        <div class="col-sm-8">
+						                            <input type="text" class="form-control" id="ChequeBKdate" name="ChequeBKdate" placeholder="dd/mm/yyyy">
+						                        </div>
+						                    </div>
+						                </div>
+						            </div>
+				                    <div class="form-group">
+				                        <label for="credit" class="col-sm-3 control-label">Credit Amount</label>
+				                        <div class="col-sm-8">
+				                            <input type="text" class="form-control" id="CreditAmount" name="CreditAmount">
+				                        </div>
+				                    </div> 
 
-                    			<?php
-		                        $count = 1;
-		                        
-		                            echo "<tr>";
-		                            echo "<td>" . $count . "</td>";?>
-		                            <td>
-                                    <input type="text" class="form-control" name="">
-                                	</td>
-                                	<td>
-                                    <input type="text" class="form-control" name="">
-                                	</td>
-                                	<td>
-                                    <input type="text" class="form-control" name="">
-                                	</td>
-                                	<td>
-                                    <input type="text" class="form-control" name="">
-                                	</td>
-                                	<td>
-                                    <input type="text" class="form-control" name="">
-                                	</td>
-                                	<td>
-                                    <input type="text" class="form-control" name="">
-                                	</td>
-		                            ?>
-		                            
-		                            $count = $count+1;
-		                        }
-                    			?>
-								<td>
-                                    <input type="text" class="form-control" name="">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" name="">
-                                </td>
-							</tbody>
-                    </table>
-                   </div>
-                  </div>
-                <!--  <a id="add_row" class="btn  btn-primary pull-left" style="padding-top: 5px">Add Row</a><a id='delete_row' class=" btn  btn-primary pull-right" style="padding-top: 5px">Delete Row</a>
- -->
-                 <button type="button" class="btn  btn-primary pull-left" style="padding-top: 5px" data-toggle="modal" data-target="#addrow">ADD</button>
+					               <div class="col-xs-12 col-lg-12 col-sm-12">
+					               	  <div class="col-sm-6 col-xs-12">
+					                    <div class="form-group">
+					                        <label for="variance" class="col-sm-5 control-label">Variance</label>
+					                        <div class="col-sm-7">
+					                            <input type="text" class="form-control" id="variance" name="Variance">
+					                        </div>
+					                    </div> 
+					                   </div>
 
-                  <!-- Modal -->
-				  <div class="modal fade" id="addrow" role="dialog">
-				    <div class="modal-dialog">
-				    
-				      <!-- Modal content-->
-				      <div class="modal-content">
+					                  <div class="col-sm-6 col-xs-12">
+					                    <div class="form-group">
+					                        <label for="discount" class="col-sm-5 control-label">Discount</label>
+					                        <div class="col-sm-7">
+					                            <input type="text" class="form-control" id="discount" name="Discount">
+					                        </div>
+					                    </div>
+					                   </div>
+					               </div> 
 
+					               <div class="col-xs-12 col-lg-12 col-sm-12">
+					               		<div class="col-sm-6 col-xs-12">
+				                    		<div class="form-group">
+						                        <label for="salesrtn" class="col-sm-5 control-label">Sales return</label>
+						                        <div class="col-sm-7">
+						                            <input type="text" class="form-control" id="salesrtn" name="SalesRtn">
+					                        	</div>
+				                    		</div> 
+				                		</div>
+				                		<div class="col-sm-6 col-xs-12">
+				                    		<div class="form-group">
+				                        		<label for="mkt" class="col-sm-5 control-label">MKT return</label>
+				                        		<div class="col-sm-7">
+				                            		<input type="text" class="form-control" id="mkt" name="mktrtn">
+				                        		</div>
+				                    		</div> 
+				                		</div>
+				                	</div>
 
-				        <div class="modal-header">
-				          <button type="button" class="close" data-dismiss="modal">&times;</button>
-				          <h4 class="modal-title">Enter collection details</h4>
+				                    <div class="form-group">
+				                        <label for="remarks" class="col-sm-3 control-label">Remarks</label>
+				                        <div class="col-sm-9">
+				                            <input type="text" class="form-control" id="remarks" name="Remarks">
+				                        </div>
+				                    </div> 
+				                   
+		                      
+				                    <div class="form-group">
+				                        <div class="col-sm-12 text-right">
+				                            <button type="button" class="btn btn-default preview-add-button">
+				                                <span class="glyphicon glyphicon-plus"></span> Add
+				                            </button>
+				                        </div>
+				                    </div>
+				                </div>
+				            </div>            
+				        </div> <!-- / panel preview --> 
+				        <div class="col-sm-6">
+				            <h5>Preview:</h5>
+				            <div class="row">
+				                <div class="col-xs-12">
+				                    <div class="table-responsive">
+				                        <table class="table preview-table">
+				                            <thead>
+				                                <tr>
+				                                    <th>Invoice</th>
+				                                    <th>CusID</th>
+				                                    <th>Amount</th>
+				                                    <th>Cash</th>
+				                                    <th>Cheque</th>
+				                                    <th>Credit</th>
+				                                </tr>
+				                            </thead>
+				                            <tbody></tbody> <!-- preview content goes here-->
+				                        </table>
+				                    </div>                            
+				                </div>
+				            </div>
+				            <div class="row text-right">
+				                <div class="col-xs-12">
+				                    <h5>Total Cash: <strong><span class="preview-cash"></span></strong></h5>
+				                    <h5>Total Cheque: <strong><span class="preview-total"></span></strong></h5>
+				                    <h5>Total Credit: <strong><span class="preview-total"></span></strong></h5>
+				                </div>
+				            </div>
+				            <div class="row">
+				                <div class="col-xs-12">
+				                    <hr style="border:1px dashed #dddddd;">
+				                    <button type="button" class="btn btn-primary btn-block">Submit all and finish</button>
+				                </div>                
+				            </div>
 				        </div>
 
 
-				        
-				         <form action="<?php echo base_url()?>index.php/SalesController/addInvoice" method="POST">
-
-				          <div class="modal-body">
-
-				            <div class="form-group">
-				              <label for="invoiceNo" class="col-sm-3 control-label">Invoice Number</label>
-				              <div class="col-sm-7">
-				                <input type="text" class="form-control" id="invoiceNo" placeholder="Enter invoice number" name="idInvoice" required>
-				              </div>
-				            </div>
-				            
-				            <div class="form-group">
-				              <label for="cash" class="col-sm-3 control-label">Cash amount</label>
-				              <div class="col-sm-7">
-				                <input type="text" class="form-control" id="cash" placeholder="Enter cash amount" name="CashAmount">
-				              </div>
-				            </div>
-
-				            <div class="form-group">
-				              <label for="cheque" class="col-sm-3 control-label">Cheque amount</label>
-				              <div class="col-sm-7">
-				                <input type="text" class="form-control" id="cheque" placeholder="Enter cheque amount" name="ChequeAmount">
-				              </div>
-				            </div>
-
-				           
-
-				            <div class="form-group">
-				              <label for="variance" class="col-sm-3 control-label">Variance</label>
-				              <div class="col-sm-7">
-				                <input type="text" class="form-control" id="variance"  name="Variance">
-				              </div>
-				            </div>
-
-				            <div class="form-group">
-				              <label for="salesrtn" class="col-sm-3 control-label">Sales return</label>
-				              <div class="col-sm-7">
-				                <input type="text" class="form-control" id="salesrtn" placeholder="Enter sales return" name="SalesRtn">
-				              </div>
-				            </div>
-
-				            <div class="form-group">
-				              <label for="discount" class="col-sm-3 control-label">Discount</label>
-				              <div class="col-sm-7">
-				                <input type="text" class="form-control" id="discount" placeholder="Enter discount" name="Discount">
-				              </div>
-				            </div>
-
-
-
-				            <div class="form-group">
-				              <label for="MKT" class="col-sm-3 control-label">MKT return</label>
-				              <div class="col-sm-7">
-				                <input type="text" class="form-control" id="mktrtn" placeholder="Enter MKY return" name="MKTrtn">
-				              </div>
-				            </div>
-
-				            <div class="form-group">
-				              <label for="credit" class="col-sm-3 control-label">Credit amount</label>
-				              <div class="col-sm-7">
-				                <input type="text" class="form-control" id="credit" placeholder="Enter credit amount" name="CreditAmount">
-				              </div>
-				            </div>
-
-				            <div class="form-group">
-				              <label for="remarks" class="col-sm-3 control-label">Remarks</label>
-				              <div class="col-sm-7">
-				                <input type="text" class="form-control" id="remarks" placeholder="Enter remarks" name="Remarks">
-				              </div>
-				            </div>
-
-				            <div class="modal-footer" >
-				          		<button type="submit" class="btn btn-block btn-success" name="addInvoice">OK</button>
-				        	</div>
-
-				        	
-				          </div>				           			            
-
-				       </form>			        
-				        
-
 				    </div>
+				</div>
+		            
+                       
+                    
+		            </div>
+		              
 
-				       
 
-
-				 </div>
-				      
-			</div>
-				  
 
   </section>
 
@@ -335,4 +361,41 @@
         })
     })
 
+</script>
+<script type="text/javascript">
+	function calc_total(){
+	    var sum_cash= 0;
+	    $('.input-CashAmount').each(function(){
+	        sum_cash += parseFloat($(this).text());	        
+	    });
+	    $(".preview-cash").text(sum_cash);    
+	}
+	$(document).on('click', '.input-remove-row', function(){ 
+	    var tr = $(this).closest('tr');
+	    tr.fadeOut(200, function(){
+	    	tr.remove();
+		   	calc_total()
+		});
+	});
+
+	$(function(){
+	    $('.preview-add-button').click(function(){
+	    	calc_total();
+	        var form_data = {};
+	        form_data["idInvoice"] = $('.invoice-form input[name="idInvoice"]').val();
+
+	        form_data["CustomerCode"] = $('.invoice-form input[name="CustomerCode"]').val();
+	        form_data["InvoiceValue"] = parseFloat($('.invoice-form input[name="InvoiceValue"]').val()).toFixed(4);
+	        form_data["CashAmount"] = parseFloat($('.invoice-form input[name="CashAmount"]').val()).toFixed(4);	         
+	        form_data["ChequeAmount"] = parseFloat$($('.invoice-form input[name="ChequeAmount"]').val()).toFixed(4);
+	        form_data["CreditAmount"] = parseFloat$($('.invoice-form input[name="CreditAmount"]').val()).toFixed(4);
+	        // form_data["remove-row"] = '<span class="glyphicon glyphicon-remove"></span>';
+	        var row = $('<tr></tr>');
+	        $.each(form_data, function( type, value ) {
+	            $('<td class="input-'+type+'"></td>').html(value).appendTo(row);
+	        });
+	        $('.preview-table > tbody:last').append(row); 
+	        calc_total();
+	    });  
+});
 </script>
