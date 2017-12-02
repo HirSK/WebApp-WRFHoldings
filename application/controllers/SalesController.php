@@ -29,11 +29,40 @@ class SalesController extends BaseController{
 		$this->loadViews('collection_form_view',$this->global,$data,NULL);
 	}
 
-	public function addInvoice(){
+	//method to add the main invoice details when the order is come
+	function addInvoice(){
 
+		$this->form_validation->set_rules('inputInvoiceNumber','Invoice Number','trim|required|max_length[20]|is_unique[invoice.idInvoice]');
+		$this->form_validation->set_rules('inputCustomerCode','Customer Number','trim|required|max_length[20]|is_unique[customer.idCustomer]');
+		$this->form_validation->set_rules('inputInvoiceDate','Invoice Date','trim|required|max_length[15]');
+		$this->form_validation->set_rules('inputInvoiceValue','Invoice value','trim|required|max_length[20]');
+
+		if($this->form_validation->run()==false){
+
+			 $this->session->set_flashdata('error', 'Check the invoice number or customer code is valid');
+			 $this->createInvoiceList();
+
+		}else{
+
+			$idInvoice				=$_POST['inputInvoiceNumber'];
+			$CustomerCode			=$_POST['inputCustomerCode'];
+			$InvoiceValue			=$_POST['inputInvoiceValue'];
+			$invoice_order_date     =$_POST['inputInvoiceDate'];
+
+			$invoice_order_array = array('idInvoice' => $idInvoice,
+											'Customer_idCustomer' =>$CustomerCode,
+											'InvoiceValue' =>$InvoiceValue,
+											'invoice_order_date' => $invoice_order_date
+										);
+
+			$result = $this->sales_model->
+
+		}
+
+	}
+
+	public function updateInvoice(){
 		//form validation has to be made
-
-
 		
 		$idInvoice				=$_POST['idInvoice'];
 		$CustomerCode			=$_POST['CustomerCode'];
