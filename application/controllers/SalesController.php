@@ -7,6 +7,7 @@ class SalesController extends BaseController{
 	function __construct(){
 		parent::__construct();
 		$this->load->model('gen_model');
+		$this->load->model('sales_model');
 		$this->load->library('pagination');
 		$this->isLoggedIn();
 	}
@@ -30,7 +31,7 @@ class SalesController extends BaseController{
 	}
 
 	//method to add the main invoice details when the order is come
-	function addInvoice(){
+	public function addInvoice(){
 
 		$this->form_validation->set_rules('inputInvoiceNumber','Invoice Number','trim|required|max_length[20]|is_unique[invoice.idInvoice]');
 		$this->form_validation->set_rules('inputCustomerCode','Customer Number','trim|required|max_length[20]|is_unique[customer.idCustomer]');
@@ -55,10 +56,30 @@ class SalesController extends BaseController{
 											'invoice_order_date' => $invoice_order_date
 										);
 
-			$result = $this->sales_model->
 
-		}
+			$result = $this->sales_model->setInvoiceOrder($invoice_order_array);
 
+			if($result > 0)
+                {
+                    $this->session->set_flashdata('success', 'New invoice order added');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'Failed to insert the invoice');
+                }
+            redirect('addInvoice');	
+
+		}		
+
+	}
+
+
+	public function getInvoiceDetails(){
+
+		$id = $this->input->post('id');
+    	$query = $this->sales_model->getInvoiceData($id);
+    	echo json_encode($query); 
+		
 	}
 
 	public function updateInvoice(){
