@@ -83,44 +83,44 @@ class SalesController extends BaseController{
 	}
 
 	public function updateInvoice(){
-		//form validation has to be made
-		
-		$idInvoice				=$_POST['idInvoice'];
-		$CustomerCode			=$_POST['CustomerCode'];
-		$CustomerName			= $_POST['CustomerName'];
-		$InvoiceValue			=$_POST['InvoiceValue'];
-		$InvoiceNetValue		= $_POST['InvoiceNetValue'];
-		$CashAmount				= $_POST['CashAmount'];
-		$ChequeAmount			= $_POST['ChequeAmount'];
-		$CreditAmount			=$_POST['CreditAmount'];
-		$SalesRtn				= $_POST['SalesRtn'];
-		$Variance				= $_POST['Variance'];
-		$Discount				= $_POST['Discount'];
-		$MKTrtn					= $_POST['MKTrtn'];
-		$Remarks				=$_POST['Remarks'];
+
+		$idInvoice = $this->input->post('idInvoice');
+		$CustomerCode = $this->input->post('CustomerCode');
+		$CustomerName = $this->input->post('CustomerName');
+		$InvoiceValue = $this->input->post('InvoiceValue');
+		$CashAmount = $this->input->post('CashAmount');
+		$ChequeAmount = $this->input->post('ChequeAmount');
+		$ChequeNumber = $this->input->post('ChequeNumber');
+		$ChequeBankName = $this->input->post('ChequeBankName');
+		$ChequeBankBranch = $this->input->post('ChequeBankBranch');
+		$ChequeBKdate = $this->input->post('ChequeBKdate');
+		$CreditAmount = $this->input->post('CreditAmount');
+		$Variance = $this->input->post('variance');
+		$Discount = $this->input->post('discount');
+		$SalesRtn = $this->input->post('salesrtn');
+		$MKTrtn = $this->input->post('mkt');
+		$Remarks = $this->input->post('remarks');
 
 
-		$invoice_arry = array(
-
+		$invoice_array = array(
 					
-					'idInvoice'				=> $idInvoice,
+					// 'idInvoice'				=> $idInvoice,
 					'Customer_idCustomer'	=> $CustomerCode,					
 					'InvoiceValue'			=> $InvoiceValue,
-					'InvoiceNetValue'		=> $InvoiceNetValue,
+					'InvoiceNetValue'		=> $InvoiceValue,
 					'cash' 					=>$CashAmount,
 					'cheque'				=>$ChequeAmount,
-					'credit'				=>$CreditAmount,					
+					'credit'				=>$CreditAmount,				
 					'SalesRtn'				=> $SalesRtn,
 					'Variance'				=> $Variance,
 					'Discount'				=> $Discount,
 					'MKTrtn'				=> $MKTrtn,
 					'Remarks'				=> $Remarks,
-
+					'invoice_complete_date' =>date('Y-m-d H:i:s')
 
 			);
 
-		$result = $this->gen_model->insertData($tablename="invoice",$invoice_arry);
-
+		
 		//if there are pending credits ,they are added to credits table
 		if($CreditAmount != ""){
 
@@ -130,16 +130,16 @@ class SalesController extends BaseController{
 				'invoice_credit_id'=>$idInvoice,
 				'customer_id'=>$CustomerCode,
 				'total_credit' => $CreditAmount ,
-				'credit_start_date'=>date('dd/mm/yyyy') ,
+				'credit_start_date'=>date('Y-m-d H:i:s') ,
 				'credit_topay'=>$CreditAmount,
 
 				);
 
-			$this->gen_model->insertData($tablename="credit",$creditArray);
+			$this->sales_model->insertData($tablename="credit",$creditArray);
 						
 
 		}
-		//if the payments are done by cheque,these details are sent to cheque table
+		// //if the payments are done by cheque,these details are sent to cheque table
 		if($ChequeAmount != ""){
 
 			$chequeArray = array(
@@ -157,9 +157,12 @@ class SalesController extends BaseController{
 
 		}
 
+		$query = $this->sales_model->updateInvoiceData($idInvoice,$invoice_array);
+		echo json_encode($query);
+
 		
 		
-		redirect('/SalesController');
+		// redirect('/SalesController');
 	}
 
 	public function addCollectionInfo(){
