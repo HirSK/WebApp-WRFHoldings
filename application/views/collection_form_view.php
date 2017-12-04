@@ -285,7 +285,7 @@
 					                   <div class="col-sm-5 col-xs-12">
 						                    <div class="form-group">
 						                        <div class="col-sm-6 text-right">
-						                            <button type="submit" class="btn btn-default preview-add-button" id="addBtn">
+						                            <button type="button" class="btn btn-default preview-add-button" id="addBtn">
 						                                <span class="glyphicon glyphicon-plus"></span> Add
 						                            </button>
 						                        </div>
@@ -419,25 +419,12 @@ function getDetails()
   </script>
 
 <script type="text/javascript">
-// 	function calc_total(){
-// 	    var sum_cash= 0;
-// 	    $('.input-CashAmount').each(function(){
-// 	        sum_cash += parseFloat($(this).text());	        
-// 	    });
-// 	    $(".preview-cash").text(sum_cash);    
-// 	}
-// 	$(document).on('click', '.input-remove-row', function(){ 
-// 	    var tr = $(this).closest('tr');
-// 	    tr.fadeOut(200, function(){
-// 	    	tr.remove();
-// 		   	calc_total()
-// 		});
-// 	});
+
 
 	$(function(){
 	    $('.preview-add-button').click(function(){
 	    	if($('#idInvoice').val()){
-
+	    		
 		    	var data = {
 			        idInvoice: $('#idInvoice').val(),
 			        InvoiceValue: $('#InvoiceValue').val(),
@@ -460,20 +447,34 @@ function getDetails()
 			        type: "post",
 			        data: data,
 			       
-			       	success: function(response) { alert(response); },
-          			error: function(xhr, ajaxOptions, thrownError) { alert(xhr.responseText); }
-			        // success : function(json){
-			        //     var obj=jQuery.parseJSON(json);
+			       	// success: function(response) { alert(response); },
+          	// 		error: function(xhr, ajaxOptions, thrownError) { alert(xhr.responseText); }
+			        success : function(json){
+			            var obj=jQuery.parseJSON(json);
 
-			        //     if(obj){
-			        //         alert('invoice updated successfully');
+			            if(obj){
+			                alert('invoice updated successfully');
 			                               
-			        //     }else{
-			        //         alert("Failed");
-			        //     }
+			            }else{
+			                alert("Failed");
+			            }
 
-			        // },
+			        },
+
 			    });
+			    	var rows = "";
+		            var idInvoice = document.getElementById("idInvoice").value;
+		            var CustomerCode = document.getElementById("CustomerCode").value;
+		            var InvoiceValue = document.getElementById("InvoiceValue").value;
+		            var CashAmount = document.getElementById("CashAmount").value;
+		            var ChequeAmount = document.getElementById("ChequeAmount").value; 
+		            var CreditAmount = document.getElementById("CreditAmount").value;
+
+		            rows += "<tr><td>" + idInvoice + "</td><td>" + CustomerCode + "</td><td>" + InvoiceValue + "</td><td>" + CashAmount + "</td><td>" + ChequeAmount + "</td><td>" + CreditAmount + "</td></tr>";
+		            $(rows).appendTo("#list tbody");
+		          
+
+			    $('#idInvoice, #InvoiceValue,#CustomerCode,#CustomerName,#CashAmount,#ChequeAmount,#ChequeNumber,#ChequeBankName,#ChequeBankBranch,#CreditAmount,#variance,#discount,#salesrtn,#mkt,#remarks').val('');
 			    
 			}else{
 				alert("Please enter a valid invoice number");
@@ -484,6 +485,24 @@ function getDetails()
 	
 </script>
 <script type="text/javascript">
+
+	// 	function calc_total(){
+// 	    var sum_cash= 0;
+// 	    $('.input-CashAmount').each(function(){
+// 	        sum_cash += parseFloat($(this).text());	        
+// 	    });
+// 	    $(".preview-cash").text(sum_cash);    
+// 	}
+// 	$(document).on('click', '.input-remove-row', function(){ 
+// 	    var tr = $(this).closest('tr');
+// 	    tr.fadeOut(200, function(){
+// 	    	tr.remove();
+// 		   	calc_total()
+// 		});
+// 	});
+
+
+
 	// calc_total();
 	//         var form_data = {};
 	//         form_data["idInvoice"] = $('.invoice-form input[name="idInvoice"]').val();
