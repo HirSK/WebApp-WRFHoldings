@@ -34,6 +34,8 @@ class SalesController extends BaseController{
 		$this->loadViews('collection_form_view',$this->global,$data,NULL);
 	}
 
+
+
 	//method to add the main invoice details when the order is come
 	public function addInvoice(){
 
@@ -53,11 +55,13 @@ class SalesController extends BaseController{
 			$CustomerCode			=$_POST['inputCustomerCode'];
 			$InvoiceValue			=$_POST['inputInvoiceValue'];
 			$invoice_order_date     =$_POST['inputInvoiceDate'];
+			
 
 			$invoice_order_array = array('idInvoice' => $idInvoice,
 											'Customer_idCustomer' =>$CustomerCode,
 											'InvoiceValue' =>$InvoiceValue,
-											'invoice_order_date' => $invoice_order_date
+											'invoice_order_date' => $invoice_order_date,
+											'outletID' => $this->loggerOutletID											
 										);
 
 
@@ -86,6 +90,7 @@ class SalesController extends BaseController{
 		
 	}
 
+
 	public function updateInvoice(){
 
 		$idInvoice = $this->input->post('idInvoice');
@@ -108,7 +113,7 @@ class SalesController extends BaseController{
 
 		$invoice_array = array(
 					
-					// 'idInvoice'				=> $idInvoice,
+					'idInvoice'				=> $idInvoice,
 					'Customer_idCustomer'	=> $CustomerCode,					
 					'InvoiceValue'			=> $InvoiceValue,
 					'InvoiceNetValue'		=> $InvoiceValue,
@@ -124,7 +129,9 @@ class SalesController extends BaseController{
 
 			);
 
-		
+			$query = $this->sales_model->updateInvoiceData($invoice_array);
+			echo json_encode($query);
+
 		//if there are pending credits ,they are added to credits table
 		if($CreditAmount != ""){
 
@@ -139,11 +146,11 @@ class SalesController extends BaseController{
 
 				);
 
-			$this->sales_model->insertData($tablename="credit",$creditArray);
+			$this->gen_model->insertData($tablename="credit",$creditArray);
 						
 
 		}
-		// //if the payments are done by cheque,these details are sent to cheque table
+		// if the payments are done by cheque,these details are sent to cheque table
 		if($ChequeAmount != ""){
 
 			$chequeArray = array(
@@ -160,13 +167,12 @@ class SalesController extends BaseController{
 			
 
 		}
+		
 
-		$query = $this->sales_model->updateInvoiceData($idInvoice,$invoice_array);
-		echo json_encode($query);
+		
 
 		
 		
-		// redirect('/SalesController');
 	}
 
 	public function addCollectionInfo(){

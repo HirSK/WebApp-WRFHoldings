@@ -302,7 +302,7 @@
 				            <div class="row">
 				                <div class="col-xs-12">
 				                    <div class="table-responsive">
-				                        <table class="table preview-table">
+				                        <table class="table preview-table" id="list">
 				                            <thead>
 				                                <tr>
 				                                    <th>Invoice</th>
@@ -437,7 +437,7 @@ function getDetails()
 	$(function(){
 	    $('.preview-add-button').click(function(){
 	    	if($('#idInvoice').val()){
-	    		
+
 		    	var data = {
 			        idInvoice: $('#idInvoice').val(),
 			        InvoiceValue: $('#InvoiceValue').val(),
@@ -460,18 +460,21 @@ function getDetails()
 			        type: "post",
 			        data: data,
 			       
-			        success : function(json){
-			            var obj=jQuery.parseJSON(json);
+			       	success: function(response) { alert(response); },
+          			error: function(xhr, ajaxOptions, thrownError) { alert(xhr.responseText); }
+			        // success : function(json){
+			        //     var obj=jQuery.parseJSON(json);
 
-			            if(obj){
-			                alert('invoice updated successfully');
+			        //     if(obj){
+			        //         alert('invoice updated successfully');
 			                               
-			            }else{
-			                alert("Failed");
-			            }
+			        //     }else{
+			        //         alert("Failed");
+			        //     }
 
-			        },
+			        // },
 			    });
+			    
 			}else{
 				alert("Please enter a valid invoice number");
 			}
@@ -497,4 +500,25 @@ function getDetails()
 	//         });
 	//         $('.preview-table > tbody:last').append(row); 
 	//         calc_total();
+
+
+
+
+	    		// var x = document.getElementById("age").value;
+		     //    var y = document.getElementById("name").value;
+		     //    var letters = '/^[a-zA-Z]+$/'; 
+		     //    if((parseInt(x)!=(x))&&(y==parseInt(y))){
+		     //        alert("Wrong Value Entered");
+		     //    }
+		     //    else{
+		        //     var rows = "";
+		        //     var idInvoice = document.getElementById("idInvoice").value;
+		        //     var CustomerCode = parseFloat(document.getElementById("CustomerCode").value) || 0;
+		        //     var CashAmount = parseFloat(document.getElementById("CashAmount").value) || 0;
+		        //     var ChequeAmount = parseFloat(document.getElementById("ChequeAmount").value) || 0; 
+		        //     var CreditAmount = parseFloat(document.getElementById("CreditAmount").value) || 0;
+
+		        //     rows += "<tr><td>" + idInvoice + "</td><td>" + CustomerCode + "</td><td>" + CashAmount + "</td><td>" + ChequeAmount + "</td><td>" + CreditAmount + "</td></tr>";
+		        //     $(rows).appendTo("#list tbody");
+		        // }   
 </script>
