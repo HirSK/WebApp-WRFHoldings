@@ -409,8 +409,15 @@ function getDetails()
 	  	var credit = parseFloat(document.getElementById("CreditAmount").value) || 0;
 
 	  	 	
-	  	var vari= invoice_value-(cash+cheque+credit);  	
-	  	document.getElementById("variance").value = vari;
+	  	var vari= invoice_value-(cash+cheque+credit);
+
+	  	if(vari<0){
+	  		alert("Variance cannot be negative,Check again the inserted values");
+	  		return false;
+	  	}else{
+	  		document.getElementById("variance").value = vari;
+	  	}	
+	  	
 	  }else{
 	  	alert("You need to enter the invoice id and hit enter");
 	  }
@@ -420,10 +427,19 @@ function getDetails()
 
 <script type="text/javascript">
 
+    function clearTextBoxes(){
+    	$('#idInvoice, #InvoiceValue,#CustomerCode,#CustomerName,#CashAmount,#ChequeAmount,#ChequeNumber,#ChequeBankName,#ChequeBKdate,#ChequeBankBranch,#CreditAmount,#variance,#discount,#salesrtn,#mkt,#remarks').val('');
+    }
 
 	$(function(){
 	    $('.preview-add-button').click(function(){
+
 	    	if($('#idInvoice').val()){
+
+	    		if(applyFunction()==false){	    			
+	    			clearTextBoxes();
+	    			return;
+	    		}else{
 	    		
 		    	var data = {
 			        idInvoice: $('#idInvoice').val(),
@@ -434,6 +450,7 @@ function getDetails()
 			        ChequeAmount: $('#ChequeAmount').val(),
 			        ChequeNumber: $('#ChequeNumber').val(),
 			        ChequeBankName: $('#ChequeBankName').val(),
+			        ChequeBKdate: $('#ChequeBKdate').val(),
 			        ChequeBankBranch: $('#ChequeBankBranch').val(),
 			        CreditAmount: $('#CreditAmount').val(),
 			        variance: $('#variance').val(),
@@ -447,35 +464,41 @@ function getDetails()
 			        type: "post",
 			        data: data,
 			       
-			       	// success: function(response) { alert(response); },
-          	// 		error: function(xhr, ajaxOptions, thrownError) { alert(xhr.responseText); }
+          			error: function(xhr, ajaxOptions, thrownError) { 
+           				alert("You have added the invoice already!!!"); 
+           				clearTextBoxes();
+           			},
+        
 			        success : function(json){
 			            var obj=jQuery.parseJSON(json);
 
 			            if(obj){
 			                alert('invoice updated successfully');
-			                               
+
+			                var rows = "";
+				            var idInvoice = document.getElementById("idInvoice").value;
+				            var CustomerCode = document.getElementById("CustomerCode").value;
+				            var InvoiceValue = document.getElementById("InvoiceValue").value;
+				            var CashAmount = document.getElementById("CashAmount").value;
+				            var ChequeAmount = document.getElementById("ChequeAmount").value; 
+				            var CreditAmount = document.getElementById("CreditAmount").value;
+
+				            rows += "<tr><td>" + idInvoice + "</td><td>" + CustomerCode + "</td><td>" + InvoiceValue + "</td><td>" + CashAmount + "</td><td>" + ChequeAmount + "</td><td>" + CreditAmount + "</td></tr>";
+				            $(rows).appendTo("#list tbody");
+				          
+
+					   		clearTextBoxes();
+		                               
 			            }else{
 			                alert("Failed");
+			                clearTextBoxes();
 			            }
 
 			        },
 
 			    });
-			    	var rows = "";
-		            var idInvoice = document.getElementById("idInvoice").value;
-		            var CustomerCode = document.getElementById("CustomerCode").value;
-		            var InvoiceValue = document.getElementById("InvoiceValue").value;
-		            var CashAmount = document.getElementById("CashAmount").value;
-		            var ChequeAmount = document.getElementById("ChequeAmount").value; 
-		            var CreditAmount = document.getElementById("CreditAmount").value;
-
-		            rows += "<tr><td>" + idInvoice + "</td><td>" + CustomerCode + "</td><td>" + InvoiceValue + "</td><td>" + CashAmount + "</td><td>" + ChequeAmount + "</td><td>" + CreditAmount + "</td></tr>";
-		            $(rows).appendTo("#list tbody");
-		          
-
-			    $('#idInvoice, #InvoiceValue,#CustomerCode,#CustomerName,#CashAmount,#ChequeAmount,#ChequeNumber,#ChequeBankName,#ChequeBankBranch,#CreditAmount,#variance,#discount,#salesrtn,#mkt,#remarks').val('');
-			    
+			   
+			 }   
 			}else{
 				alert("Please enter a valid invoice number");
 			}
