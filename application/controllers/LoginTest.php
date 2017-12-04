@@ -49,8 +49,8 @@ class LoginTest extends CI_Controller{
 
      		$username = $_POST['username'];
             //for testing purposes
-			//$userpass = sha1($_POST['password']);
-            $userpass = $_POST['password'];
+			$userpass = sha1($_POST['password']);
+            // $userpass = $_POST['password'];
 
 			
 		  $userInfo['Username'] = $username;
