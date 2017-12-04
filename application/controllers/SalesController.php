@@ -7,7 +7,11 @@ class SalesController extends BaseController{
 	function __construct(){
 		parent::__construct();
 		$this->load->model('gen_model');
+
 		$this->load->model('sales_model');
+
+	
+
 		$this->load->library('pagination');
 		$this->isLoggedIn();
 	}

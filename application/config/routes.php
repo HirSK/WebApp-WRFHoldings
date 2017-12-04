@@ -46,6 +46,7 @@ $route['home_dashboard'] = "UserController";
 // $route['loginMe'] = 'LoginTest/loginMe';
 $route['logout'] = 'UserController/logout';
 $route['addNew'] = 'UserController/addNew';
+$route['addInvoice'] = 'SalesController/addInvoice';
 
 
 /* End of file routes.php */
