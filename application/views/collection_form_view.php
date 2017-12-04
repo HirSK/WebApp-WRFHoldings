@@ -390,26 +390,34 @@ function getDetails()
 		                $('#CustomerCode').val(obj[0].Customer_idCustomer);
 		                $('#CustomerName').val(obj[0].CustomerName);		                
 		            }else{
-		                alert("Failed");
+		                alert("The invoice id has not been pre ordered,First add it to pre order invoice list");
+		                clearTextBoxes();
 		            }
 
 		        },
 		    });
 		}else{
-		    alert("ID not found");
+		    alert("Please enter the invoice id and hit enter");
+		    clearTextBoxes();
 		}  
    }
 
   function applyFunction(){
   	if($('#idInvoice').val()){
 	  	var vari = 0;
+	  	//var credit =0;
 	  	var invoice_value =parseFloat(document.getElementById("InvoiceValue").value) || 0;
 	  	var cash = parseFloat(document.getElementById("CashAmount").value) || 0;
 	  	var cheque = parseFloat(document.getElementById("ChequeAmount").value) || 0;
 	  	var credit = parseFloat(document.getElementById("CreditAmount").value) || 0;
 
-	  	 	
-	  	var vari= invoice_value-(cash+cheque+credit);
+	  	 	  	
+
+		// if($('#CashAmount').val()=='' && $('#ChequeAmount').val()=='' && $('#CreditAmount').val()==''){
+		// 	credit = invoice_value;
+		// }
+
+		var vari= invoice_value-(cash+cheque+credit);
 
 	  	if(vari<0){
 	  		alert("Variance cannot be negative,Check again the inserted values");
@@ -420,6 +428,7 @@ function getDetails()
 	  	
 	  }else{
 	  	alert("You need to enter the invoice id and hit enter");
+	  	clearTextBoxes();
 	  }
   }
 
@@ -440,7 +449,8 @@ function getDetails()
 	    			clearTextBoxes();
 	    			return;
 	    		}else{
-	    		
+
+	    			
 		    	var data = {
 			        idInvoice: $('#idInvoice').val(),
 			        InvoiceValue: $('#InvoiceValue').val(),
@@ -484,13 +494,12 @@ function getDetails()
 				            var CreditAmount = document.getElementById("CreditAmount").value;
 
 				            rows += "<tr><td>" + idInvoice + "</td><td>" + CustomerCode + "</td><td>" + InvoiceValue + "</td><td>" + CashAmount + "</td><td>" + ChequeAmount + "</td><td>" + CreditAmount + "</td></tr>";
-				            $(rows).appendTo("#list tbody");
-				          
+				            $(rows).appendTo("#list tbody");				          
 
 					   		clearTextBoxes();
 		                               
 			            }else{
-			                alert("Failed");
+			                alert("Failed,Check the internet connection again");
 			                clearTextBoxes();
 			            }
 
@@ -501,6 +510,7 @@ function getDetails()
 			 }   
 			}else{
 				alert("Please enter a valid invoice number");
+				clearTextBoxes();
 			}
 
 	    });  
