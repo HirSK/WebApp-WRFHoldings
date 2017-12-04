@@ -131,6 +131,7 @@
 				        <div class="col-sm-6">
 				            <h5>Add collection:</h5>
 				            <div class="panel panel-default">
+				            
 				                <div class="panel-body form-horizontal invoice-form">
 
 				                	<div class="col-xs-12 col-lg-12 col-sm-12">
@@ -139,7 +140,7 @@
 						                        <label for="id" class="col-sm-4 control-label">Invoice</label>
 						                        <div class="col-sm-8">
 						                        	
-						                            <input type="text" class="form-control" id="idInvoice" name="idInvoice" onkeypress="Javascript: if (event.keyCode==13) getDetails();">
+						                            <input type="text" class="form-control" id="idInvoice" name="idInvoice" onkeypress="Javascript: if (event.keyCode==13) getDetails();" required="">
 						                        </div>
 						                    </div>
 						                </div>
@@ -147,7 +148,7 @@
 						                    <div class="form-group">
 						                        <label for="value" class="col-sm-5 control-label">NetValue</label>
 						                        <div class="col-sm-7">
-						                            <input type="text" class="form-control" id="InvoiceValue" name="InvoiceValue">
+						                            <input type="text" class="form-control" id="InvoiceValue" name="InvoiceValue" required="">
 						                        </div>
 						                    </div>
 						                </div>
@@ -157,7 +158,7 @@
 						                    <div class="form-group">
 						                        <label for="ccode" class="col-sm-4 control-label">Cus:ID</label>
 						                        <div class="col-sm-8">
-						                            <input type="text" class="form-control" id="CustomerCode" name="CustomerCode">
+						                            <input type="text" class="form-control" id="CustomerCode" name="CustomerCode" required="">
 						                        </div>
 						                    </div>
 						                </div>
@@ -165,7 +166,7 @@
 						                    <div class="form-group">
 						                        <label for="cname" class="col-sm-4 control-label">Customer Name</label>
 						                        <div class="col-sm-8">
-						                            <input type="text" class="form-control" id="CustomerName" name="CustomerName">
+						                            <input type="text" class="form-control" id="CustomerName" name="CustomerName" required="">
 						                        </div>
 						                    </div>
 						                </div>
@@ -284,7 +285,7 @@
 					                   <div class="col-sm-5 col-xs-12">
 						                    <div class="form-group">
 						                        <div class="col-sm-6 text-right">
-						                            <button type="button" class="btn btn-default preview-add-button">
+						                            <button type="submit" class="btn btn-default preview-add-button" id="addBtn">
 						                                <span class="glyphicon glyphicon-plus"></span> Add
 						                            </button>
 						                        </div>
@@ -293,6 +294,7 @@
 				                  </div>
 
 				                </div>
+				               
 				            </div>            
 				        </div> <!-- / panel preview --> 
 				        <div class="col-sm-6">
@@ -349,14 +351,7 @@
     </div>
 <!-- /.content-wrapper -->
 
-
-
-
-
 <!-- REQUIRED JS SCRIPTS -->
-
-
-
 <!-- jQuery 3 -->
 <script src="<?php echo base_url()?>template/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
@@ -406,55 +401,100 @@ function getDetails()
    }
 
   function applyFunction(){
-  	
-  	var vari = 0;
-  	var invoice_value =parseFloat(document.getElementById("InvoiceValue").value) || 0;
-  	var cash = parseFloat(document.getElementById("CashAmount").value) || 0;
-  	var cheque = parseFloat(document.getElementById("ChequeAmount").value) || 0;
-  	var credit = parseFloat(document.getElementById("CreditAmount").value) || 0;
+  	if($('#idInvoice').val()){
+	  	var vari = 0;
+	  	var invoice_value =parseFloat(document.getElementById("InvoiceValue").value) || 0;
+	  	var cash = parseFloat(document.getElementById("CashAmount").value) || 0;
+	  	var cheque = parseFloat(document.getElementById("ChequeAmount").value) || 0;
+	  	var credit = parseFloat(document.getElementById("CreditAmount").value) || 0;
 
-  	 	
-  	var vari= invoice_value-(cash+cheque+credit);  	
-  	document.getElementById("variance").value = vari;
+	  	 	
+	  	var vari= invoice_value-(cash+cheque+credit);  	
+	  	document.getElementById("variance").value = vari;
+	  }else{
+	  	alert("You need to enter the invoice id and hit enter");
+	  }
   }
 
-</script>
-
+  </script>
 
 <script type="text/javascript">
-	function calc_total(){
-	    var sum_cash= 0;
-	    $('.input-CashAmount').each(function(){
-	        sum_cash += parseFloat($(this).text());	        
-	    });
-	    $(".preview-cash").text(sum_cash);    
-	}
-	$(document).on('click', '.input-remove-row', function(){ 
-	    var tr = $(this).closest('tr');
-	    tr.fadeOut(200, function(){
-	    	tr.remove();
-		   	calc_total()
-		});
-	});
+// 	function calc_total(){
+// 	    var sum_cash= 0;
+// 	    $('.input-CashAmount').each(function(){
+// 	        sum_cash += parseFloat($(this).text());	        
+// 	    });
+// 	    $(".preview-cash").text(sum_cash);    
+// 	}
+// 	$(document).on('click', '.input-remove-row', function(){ 
+// 	    var tr = $(this).closest('tr');
+// 	    tr.fadeOut(200, function(){
+// 	    	tr.remove();
+// 		   	calc_total()
+// 		});
+// 	});
 
 	$(function(){
 	    $('.preview-add-button').click(function(){
-	    	calc_total();
-	        var form_data = {};
-	        form_data["idInvoice"] = $('.invoice-form input[name="idInvoice"]').val();
+	    	if($('#idInvoice').val()){
+	    		
+		    	var data = {
+			        idInvoice: $('#idInvoice').val(),
+			        InvoiceValue: $('#InvoiceValue').val(),
+			        CustomerCode: $('#CustomerCode').val(),
+			        CustomerName: $('#CustomerName').val(),
+			        CashAmount: $('#CashAmount').val(),
+			        ChequeAmount: $('#ChequeAmount').val(),
+			        ChequeNumber: $('#ChequeNumber').val(),
+			        ChequeBankName: $('#ChequeBankName').val(),
+			        ChequeBankBranch: $('#ChequeBankBranch').val(),
+			        CreditAmount: $('#CreditAmount').val(),
+			        variance: $('#variance').val(),
+			        discount: $('#discount').val(),
+			        salesrtn: $('#salesrtn').val(),
+			        mkt: $('#mkt').val(),
+			        remarks: $('#remarks').val()
+			    };
+			    $.ajax({
+			        url: "<?php echo base_url().'index.php/SalesController/updateInvoice'?>",
+			        type: "post",
+			        data: data,
+			       
+			        success : function(json){
+			            var obj=jQuery.parseJSON(json);
 
-	        form_data["CustomerCode"] = $('.invoice-form input[name="CustomerCode"]').val();
-	        form_data["InvoiceValue"] = parseFloat($('.invoice-form input[name="InvoiceValue"]').val()).toFixed(4);
-	        form_data["CashAmount"] = parseFloat($('.invoice-form input[name="CashAmount"]').val()).toFixed(4);	         
-	        form_data["ChequeAmount"] = parseFloat$($('.invoice-form input[name="ChequeAmount"]').val()).toFixed(4);
-	        form_data["CreditAmount"] = parseFloat$($('.invoice-form input[name="CreditAmount"]').val()).toFixed(4);
-	        // form_data["remove-row"] = '<span class="glyphicon glyphicon-remove"></span>';
-	        var row = $('<tr></tr>');
-	        $.each(form_data, function( type, value ) {
-	            $('<td class="input-'+type+'"></td>').html(value).appendTo(row);
-	        });
-	        $('.preview-table > tbody:last').append(row); 
-	        calc_total();
+			            if(obj){
+			                alert('invoice updated successfully');
+			                               
+			            }else{
+			                alert("Failed");
+			            }
+
+			        },
+			    });
+			}else{
+				alert("Please enter a valid invoice number");
+			}
+
 	    });  
 });
+	
+</script>
+<script type="text/javascript">
+	// calc_total();
+	//         var form_data = {};
+	//         form_data["idInvoice"] = $('.invoice-form input[name="idInvoice"]').val();
+
+	//         form_data["CustomerCode"] = $('.invoice-form input[name="CustomerCode"]').val();
+	//         form_data["InvoiceValue"] = parseFloat($('.invoice-form input[name="InvoiceValue"]').val()).toFixed(4);
+	//         form_data["CashAmount"] = parseFloat($('.invoice-form input[name="CashAmount"]').val()).toFixed(4);	         
+	//         form_data["ChequeAmount"] = parseFloat$($('.invoice-form input[name="ChequeAmount"]').val()).toFixed(4);
+	//         form_data["CreditAmount"] = parseFloat$($('.invoice-form input[name="CreditAmount"]').val()).toFixed(4);
+	//         // form_data["remove-row"] = '<span class="glyphicon glyphicon-remove"></span>';
+	//         var row = $('<tr></tr>');
+	//         $.each(form_data, function( type, value ) {
+	//             $('<td class="input-'+type+'"></td>').html(value).appendTo(row);
+	//         });
+	//         $('.preview-table > tbody:last').append(row); 
+	//         calc_total();
 </script>

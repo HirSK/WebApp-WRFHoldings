@@ -20,4 +20,12 @@ class sales_model extends CI_Model{
 		return $result;
 
 	}
+
+
+	function updateInvoiceData($id,$invoice_array){
+
+		$this->db->where('idInvoice', $id);
+        $ret = $this->db->update('invoice', $invoice_array);
+        return $ret;
+	}
 }
