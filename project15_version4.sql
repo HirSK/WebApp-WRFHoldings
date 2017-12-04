@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2017 at 07:54 AM
--- Server version: 10.1.25-MariaDB
--- PHP Version: 7.1.7
+-- Generation Time: Dec 04, 2017 at 06:15 PM
+-- Server version: 10.1.16-MariaDB
+-- PHP Version: 5.6.24
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -51,28 +49,25 @@ CREATE TABLE `attendance` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cash`
---
-
-CREATE TABLE `cash` (
-  `idCash` int(11) NOT NULL,
-  `CashAmount` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `cheque`
 --
 
 CREATE TABLE `cheque` (
-  `idCheque` int(11) NOT NULL,
+  `cheque_invoice_id` int(11) NOT NULL,
   `ChequeNumber` varchar(200) NOT NULL,
   `ChequeBankName` varchar(200) NOT NULL,
   `ChequeBankBranch` varchar(200) NOT NULL,
   `ChequeBKdate` varchar(45) DEFAULT NULL,
   `ChequeAmount` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `cheque`
+--
+
+INSERT INTO `cheque` (`cheque_invoice_id`, `ChequeNumber`, `ChequeBankName`, `ChequeBankBranch`, `ChequeBKdate`, `ChequeAmount`) VALUES
+(100, '568923', 'BOC', 'Mirigama', '5/5/2018', 2000),
+(500, '5689', 'BOC', 'Gampaha', '0', 1000);
 
 -- --------------------------------------------------------
 
@@ -117,9 +112,21 @@ CREATE TABLE `company_work_period` (
 --
 
 CREATE TABLE `credit` (
-  `idCredit` int(11) NOT NULL,
-  `CreditAmount` double DEFAULT NULL
+  `invoice_credit_id` int(11) NOT NULL,
+  `customer_id` varchar(45) NOT NULL,
+  `total_credit` double DEFAULT NULL,
+  `credit_topay` double NOT NULL DEFAULT '0',
+  `credit_start_date` varchar(25) NOT NULL,
+  `credit_lasttaken_date` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `credit`
+--
+
+INSERT INTO `credit` (`invoice_credit_id`, `customer_id`, `total_credit`, `credit_topay`, `credit_start_date`, `credit_lasttaken_date`) VALUES
+(100, 'DSU02792', 1000, 1000, '2017-12-04 09:29:01', ''),
+(111, 'DSP00498', 4500, 4500, '2017-12-04 14:33:04', '');
 
 -- --------------------------------------------------------
 
@@ -220,7 +227,8 @@ INSERT INTO `employee` (`idEmployee`, `EmployeeFullName`, `EmployeeNameWithIniti
 (4, 'Hirunika Sumuduni karunathilaka', 'H.S.Karunathilaka', '917657984V', '03/12/1991', 'Collection officer', '09/08/2017', '0774567398', '34/2,Kalyani street,Gampaha', 'hiru@gmail.com', 2),
 (5, 'Weerasuriyage Vimal Kalana', 'W.V.Kalana', '856782967V', '11/05/1985', 'Outlet Supervisor', '14/08/2017', '0778467987', '30/4,Kingway road,Malabe', 'vimalkalana@gmail.com', 1),
 (6, 'Chanaka Kulathunga', 'C.kulathunga', '807342820V', '07/11/1980', 'Collection officer', '23/05/2015', '0775679431', 'Smagai mawatha,Negombo', 'chanakak@gmail.com', 1),
-(7, 'Kasun Krishantha', 'K.Krishantha', '94250114V', '06/09/1994', 'Outlet Supervisor', '21/08/2017', '0725674563', 'Batapola,Ambalangoda', 'kasun@gmail.com', 1);
+(7, 'Kasun Krishantha', 'K.Krishantha', '94250114V', '06/09/1994', 'Outlet Supervisor', '21/08/2017', '0725674563', 'Batapola,Ambalangoda', 'kasun@gmail.com', 1),
+(9, 'Dilmi Shanika', 'D.Shanika', '807965213V', '5/12/1980', 'Outlet Supervisor', '05/05/2017', '0715498264', '', '', 4);
 
 -- --------------------------------------------------------
 
@@ -232,18 +240,28 @@ CREATE TABLE `invoice` (
   `idInvoice` int(11) NOT NULL,
   `InvoiceValue` double DEFAULT NULL,
   `InvoiceNetValue` double DEFAULT NULL,
-  `Customer_idCustomer` int(11) NOT NULL,
-  `Cash_idCash` int(11) NOT NULL,
-  `Credit_idCredit` int(11) NOT NULL,
-  `Cheque_idCheque` int(11) NOT NULL,
+  `Customer_idCustomer` varchar(45) NOT NULL,
+  `cash` double NOT NULL,
+  `cheque` double NOT NULL,
+  `credit` double NOT NULL,
   `SalesRtn` double DEFAULT NULL,
   `Variance` double DEFAULT NULL,
   `Discount` double DEFAULT NULL,
   `MKTrtn` double DEFAULT NULL,
   `Remarks` varchar(200) DEFAULT NULL,
   `Collection_idCollection` int(11) NOT NULL,
-  `Collection_Outlet_idOutlet` int(11) NOT NULL
+  `invoice_order_date` varchar(25) NOT NULL,
+  `invoice_complete_date` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `invoice`
+--
+
+INSERT INTO `invoice` (`idInvoice`, `InvoiceValue`, `InvoiceNetValue`, `Customer_idCustomer`, `cash`, `cheque`, `credit`, `SalesRtn`, `Variance`, `Discount`, `MKTrtn`, `Remarks`, `Collection_idCollection`, `invoice_order_date`, `invoice_complete_date`) VALUES
+(100, 5000, 5000, 'DSU02792', 1000, 2000, 1000, 0, 1000, 0, 0, '', 1, '', '2017-12-04 09:29:01'),
+(111, 6000, 6000, 'DSP00498', 5000, 0, 1000, 0, 0, 0, 0, '', 1, '', '2017-12-04 18:11:26'),
+(500, 2000, 2000, 'DSP00498', 1000, 1000, 0, 0, 0, 0, 0, '', 1, '', '2017-12-04 17:00:08');
 
 -- --------------------------------------------------------
 
@@ -263,7 +281,9 @@ CREATE TABLE `outlet` (
 
 INSERT INTO `outlet` (`idOutlet`, `Outletname`, `OutletLocation`) VALUES
 (1, 'Cargills product distributer', 'Negombo'),
-(2, 'Hayles product distributer', 'Gampaha');
+(2, 'Hayles product distributer', 'Gampaha'),
+(3, 'Outlet3', 'Colombo'),
+(4, 'Outlet4', 'Negambo');
 
 -- --------------------------------------------------------
 
@@ -299,6 +319,29 @@ INSERT INTO `petty_cash` (`idPetty_Cash`, `Petty_CashType`, `Petty_CashDescripti
 (1, 'Stationary', ''),
 (2, 'Painting', ''),
 (3, 'Cleaning Equipment', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `preorder_invoice`
+--
+
+CREATE TABLE `preorder_invoice` (
+  `idInvoice` int(50) NOT NULL,
+  `Customer_idCustomer` varchar(45) NOT NULL,
+  `InvoiceValue` double NOT NULL,
+  `invoice_order_date` varchar(20) NOT NULL,
+  `outletID` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `preorder_invoice`
+--
+
+INSERT INTO `preorder_invoice` (`idInvoice`, `Customer_idCustomer`, `InvoiceValue`, `invoice_order_date`, `outletID`) VALUES
+(100, 'DSU02792', 5000, '12/19/2017', 4),
+(111, 'DSP00498', 6000, '11/27/2017', 4),
+(500, 'DSP00498', 2000, '12/19/2017', 4);
 
 -- --------------------------------------------------------
 
@@ -366,8 +409,9 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`idUser`, `Username`, `UserPassword`, `Employee_idEmployee`, `Employee_Outlet_idOutlet`, `roleName`, `mobile`, `createdBy`, `createdDtm`) VALUES
-(1, 'S/01/05', 'vimal', 5, 1, 'Outlet Supervisor', '0775678431', 0, ''),
-(3, 'S/01/07', '3daa2c246564baf6d1909404d0c52ca53c9e7917', 7, 1, 'Outlet Supervisor', '0775678543', 5, '2017-10-28');
+(3, 'S/01/07', '3daa2c246564baf6d1909404d0c52ca53c9e7917', 7, 1, 'Outlet Supervisor', '0775678543', 5, '2017-10-28'),
+(4, 'S/04/09', '5738afb080edbb735fc0b7521fdd1ab73eaaf572', 9, 4, 'Outlet Supervisor', '0715498264', 5, '2017-12-04'),
+(5, 'S/01/05', 'f54ff9355c7e4573353657e8a7b077e386a500a9', 5, 1, 'Admin', '0775678431', 5, '2017-12-04');
 
 --
 -- Indexes for dumped tables
@@ -388,16 +432,10 @@ ALTER TABLE `attendance`
   ADD KEY `fk_Employee_has_Company_Work_Period_Employee1_idx` (`Employee_idEmployee`,`Employee_Outlet_idOutlet`);
 
 --
--- Indexes for table `cash`
---
-ALTER TABLE `cash`
-  ADD PRIMARY KEY (`idCash`);
-
---
 -- Indexes for table `cheque`
 --
 ALTER TABLE `cheque`
-  ADD PRIMARY KEY (`idCheque`);
+  ADD PRIMARY KEY (`cheque_invoice_id`);
 
 --
 -- Indexes for table `collection`
@@ -416,13 +454,13 @@ ALTER TABLE `company_work_period`
 -- Indexes for table `credit`
 --
 ALTER TABLE `credit`
-  ADD PRIMARY KEY (`idCredit`);
+  ADD PRIMARY KEY (`invoice_credit_id`);
 
 --
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
-  ADD PRIMARY KEY (`idCustomer`);
+  ADD PRIMARY KEY (`CustomerCode`);
 
 --
 -- Indexes for table `deduction`
@@ -448,12 +486,9 @@ ALTER TABLE `employee`
 -- Indexes for table `invoice`
 --
 ALTER TABLE `invoice`
-  ADD PRIMARY KEY (`idInvoice`,`Customer_idCustomer`,`Collection_idCollection`,`Collection_Outlet_idOutlet`),
+  ADD PRIMARY KEY (`idInvoice`,`Customer_idCustomer`,`Collection_idCollection`),
   ADD KEY `fk_Invoice_Customer1_idx` (`Customer_idCustomer`),
-  ADD KEY `fk_Invoice_Cash1_idx` (`Cash_idCash`),
-  ADD KEY `fk_Invoice_Credit1_idx` (`Credit_idCredit`),
-  ADD KEY `fk_Invoice_Cheque1_idx` (`Cheque_idCheque`),
-  ADD KEY `fk_Invoice_Collection1_idx` (`Collection_idCollection`,`Collection_Outlet_idOutlet`);
+  ADD KEY `fk_Invoice_Collection1_idx` (`Collection_idCollection`);
 
 --
 -- Indexes for table `outlet`
@@ -475,6 +510,13 @@ ALTER TABLE `outlet_expends_petty_cash`
 --
 ALTER TABLE `petty_cash`
   ADD PRIMARY KEY (`idPetty_Cash`);
+
+--
+-- Indexes for table `preorder_invoice`
+--
+ALTER TABLE `preorder_invoice`
+  ADD PRIMARY KEY (`idInvoice`),
+  ADD KEY `outletID` (`outletID`);
 
 --
 -- Indexes for table `salary`
@@ -522,11 +564,6 @@ ALTER TABLE `allowance`
 ALTER TABLE `collection`
   MODIFY `idCollection` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
--- AUTO_INCREMENT for table `customer`
---
-ALTER TABLE `customer`
-  MODIFY `idCustomer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
 -- AUTO_INCREMENT for table `deduction`
 --
 ALTER TABLE `deduction`
@@ -540,12 +577,12 @@ ALTER TABLE `delivery_vehicle`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `idEmployee` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idEmployee` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `outlet`
 --
 ALTER TABLE `outlet`
-  MODIFY `idOutlet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idOutlet` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `petty_cash`
 --
@@ -560,7 +597,7 @@ ALTER TABLE `salary`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --
@@ -571,6 +608,12 @@ ALTER TABLE `user`
 ALTER TABLE `attendance`
   ADD CONSTRAINT `fk_Employee_has_Company_Work_Period_Company_Work_Period1` FOREIGN KEY (`Company_Work_Period_Company_Work_Period_fromDate`,`Company_Work_Period_Company_Work_Period_toDate`) REFERENCES `company_work_period` (`Company_Work_Period_fromDate`, `Company_Work_Period_toDate`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Employee_has_Company_Work_Period_Employee1` FOREIGN KEY (`Employee_idEmployee`,`Employee_Outlet_idOutlet`) REFERENCES `employee` (`idEmployee`, `Outlet_idOutlet`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `cheque`
+--
+ALTER TABLE `cheque`
+  ADD CONSTRAINT `fk_cheque_id` FOREIGN KEY (`cheque_invoice_id`) REFERENCES `invoice` (`idInvoice`);
 
 --
 -- Constraints for table `collection`
@@ -594,11 +637,8 @@ ALTER TABLE `employee`
 -- Constraints for table `invoice`
 --
 ALTER TABLE `invoice`
-  ADD CONSTRAINT `fk_Invoice_Cash1` FOREIGN KEY (`Cash_idCash`) REFERENCES `cash` (`idCash`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Invoice_Cheque1` FOREIGN KEY (`Cheque_idCheque`) REFERENCES `cheque` (`idCheque`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Invoice_Collection1` FOREIGN KEY (`Collection_idCollection`,`Collection_Outlet_idOutlet`) REFERENCES `collection` (`idCollection`, `Outlet_idOutlet`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Invoice_Credit1` FOREIGN KEY (`Credit_idCredit`) REFERENCES `credit` (`idCredit`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Invoice_Customer1` FOREIGN KEY (`Customer_idCustomer`) REFERENCES `customer` (`idCustomer`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Invoice_Collection1` FOREIGN KEY (`Collection_idCollection`) REFERENCES `collection` (`idCollection`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_invoice_customer` FOREIGN KEY (`Customer_idCustomer`) REFERENCES `customer` (`CustomerCode`);
 
 --
 -- Constraints for table `outlet_expends_petty_cash`
@@ -607,6 +647,12 @@ ALTER TABLE `outlet_expends_petty_cash`
   ADD CONSTRAINT `fk_Outlet_expends_Petty_Cash_Company_Work_Period1` FOREIGN KEY (`Company_Work_Period_Company_Work_Period_fromDate`,`Company_Work_Period_Company_Work_Period_toDate`) REFERENCES `company_work_period` (`Company_Work_Period_fromDate`, `Company_Work_Period_toDate`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Outlet_has_Petty_Cash_Outlet1` FOREIGN KEY (`Outlet_idOutlet`) REFERENCES `outlet` (`idOutlet`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_Outlet_has_Petty_Cash_Petty_Cash1` FOREIGN KEY (`Petty_Cash_idPetty_Cash`) REFERENCES `petty_cash` (`idPetty_Cash`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `preorder_invoice`
+--
+ALTER TABLE `preorder_invoice`
+  ADD CONSTRAINT `fk_outletid` FOREIGN KEY (`outletID`) REFERENCES `outlet` (`idOutlet`);
 
 --
 -- Constraints for table `salary`
@@ -634,7 +680,6 @@ ALTER TABLE `salary_has_deduction`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `fk_User_Employee1` FOREIGN KEY (`Employee_idEmployee`,`Employee_Outlet_idOutlet`) REFERENCES `employee` (`idEmployee`, `Outlet_idOutlet`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
