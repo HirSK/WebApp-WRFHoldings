@@ -139,7 +139,7 @@ class SalesController extends BaseController{
 
 				);
 
-			$this->sales_model->insertData($tablename="credit",$creditArray);
+			$this->gen_model->insertData($tablename="credit",$creditArray);
 						
 
 		}
