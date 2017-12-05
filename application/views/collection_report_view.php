@@ -22,10 +22,10 @@
 
         <div class="container">
     <div class="row">
-        <section>
-        <div class="wizard">
+        <section class="content">
+        <div class="wizard" style="height: relative;">
             
-            <form role="form">
+            <form role="form" action="<?php echo base_url()?>index.php/SalesController/viewCollection" method="POST">
                 
 
 
@@ -51,7 +51,7 @@
                                                       <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                       </div>
-                                                      <input type="text" class="form-control pull-right" id="datepicker" name="getCollectionFrom" required>
+                                                      <input type="text" class="form-control pull-right"  name="getCollectionFrom" id="datepicker" required>
                                                     </div>
                                     <!-- /.input group -->
                                             </div>
@@ -69,7 +69,7 @@
                                                       <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                       </div>
-                                                      <input type="text" class="form-control pull-right" id="datepicker" name="getCollectionTo" required>
+                                                      <input type="text" class="form-control pull-right"  name="getCollectionTo" id="datepicker1" >
                                                     </div>
                                     <!-- /.input group -->
                                                     </div>
@@ -94,7 +94,9 @@
 
                                                 <div class="row" style="padding-top: 22px;">
                                                 <div class="col-md-2">
-                                                <a class="btn btn-info" href="<?php echo base_url()?>index.php/EmployeeController">Go</a>
+
+                                                <button type="submit" class="btn btn-default preview-add-button"> GO</button>
+                                                
                                                 </div>
 
                                                 </div>
@@ -103,15 +105,73 @@
                     
 
                                     
-                                                             
+           <?php 
+           
+             if( $collection != NULL){
+             ?>             
+
+             <div class="box-body table-responsive col-md-4">
+                        <table id='customer_table' class="table table-striped table-bordered col-lg-12">
+
+                        <thead >
+                            
+                            <tr>
+                                <th>Collection ID</th>
+                                
+                                <th><a href="#" data-sort="CustomerContact">Collection Date</a></th>
+                               
+                                
+                                
+                            </tr>
+
+                        
+
+                        </thead>
+
+                    
+                    
+                     <?php
+
+
+                       
+                        foreach ($collection as $row){
+                            echo "<tr>";
+                           
+                            echo "<td>";
+                            echo $row->idCollection;
+                            echo "</td>";
+                            echo "<td>";
+                            echo $row->CollectionDate;
+                            echo "</td>";
+                            echo "</tr>";
+
+                           
+                        }
+                    ?>
+                    </table>
+
+                    <?php 
+                     }
+
+                     ?>
+
+
+
+
+
+                     </div>
+
+
+
                             </section>
 
 
                     
                     
-                    <div class="clearfix"></div>
-               
+                   
             </form>
+
+     
         </div>
     </section>
 
@@ -136,9 +196,29 @@
 
 <!-- AdminLTE App -->
 <!-- InputMask -->
-<script src="<?php echo base_url() ?>template/bower_components/inputmask/dist/inputmask/jquery.inputmask.js"></script>
-<script src="<?php echo base_url() ?>template/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="<?php echo base_url() ?>template/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+
+<script >
+    $(function() {
+        //Date picker
+        $('#datepicker').datepicker({
+          autoclose: true
+        })
+    })
+
+</script>
+
+<script >
+    $(function() {
+        //Date picker
+        $('#datepicker1').datepicker({
+          autoclose: true
+        })
+    })
+
+</script>
+
+
+
 
 
 <!-- REQUIRED JS SCRIPTS -->
@@ -154,30 +234,12 @@
 <!-- bootstrap datepicker -->
 <script src="<?php echo base_url()?>template/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
-<script>
-    $(function () {
-        //Datemask dd/mm/yyyy
-        $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-    }
-</script>
-<script src="<?php echo base_url()?>template/bower_components/newCss/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url()?>template/bower_components/newCss/js/dataTables.bootstrap.min.js"></script>
-<script src="<?php echo base_url()?>template/bower_components/newCss/js/dataTables.checkboxes.min.js"></script>
 
 
-<script>
 
-jQuery('#master').on('click', function(e) {
- if($(this).is(':checked',true))  
- {
- $(".case").prop('checked', true);  
- }  
- else  
- {  
- $(".case").prop('checked',false);  
- }  
-});
-</script>
+
+
+
 
 <!-- bootstrap datepicker -->
 

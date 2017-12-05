@@ -9,6 +9,7 @@ class SalesController extends BaseController{
 		$this->load->model('gen_model');
 
 		$this->load->model('sales_model');
+		$this->load->model('view_sales_model');
 
 	
 
@@ -199,13 +200,60 @@ class SalesController extends BaseController{
 	public function displayCollectionReport(){
 		// $this->load->view('collection_report_view');
 		
-		$this->loadViews("collection_report_view",$this->global,NULL,NULL);
+		$data['collection'] = NULL;
+		
+		$this->loadViews("collection_report_view",$this->global,$data,NULL);
 		
 	}
 
 	public function createInvoiceList(){
 		// $this->load->view('add_invoice_view');
 		$this->loadViews('add_invoice_view',$this->global,NULL,NULL);
+	}
+
+
+
+	public function viewCollection(){
+
+		$collectionfromDate = $_POST['getCollectionFrom'];
+		$collectiontoDate = $_POST['getCollectionTo'];
+
+
+		if($collectiontoDate !=Null){
+
+		$date=date_create_from_format("m/d/Y", $collectionfromDate);
+
+		$from=date_format($date,"Y-m-d");
+
+
+		$date1=date_create_from_format("m/d/Y", $collectiontoDate);
+
+		$to=date_format($date1,"Y-m-d");
+
+
+		$data['collection'] = $this->view_sales_model->viewCollection($from,$to);
+
+
+		
+
+	    //echo '<script>console.log("'.$data[0]->idCollection.'")</script>';
+		$this->loadViews("collection_report_view",$this->global,$data,NULL);
+
+
+	}else{
+
+
+		$date=date_create_from_format("m/d/Y", $collectionfromDate);
+
+		$from=date_format($date,"Y-m-d");
+
+		$data['collection'] =  $this->view_sales_model->viewCollection($from,date('Y-m-d'));;
+		
+		$this->loadViews("collection_report_view",$this->global,$data,NULL);
+	}
+
+
+
 	}
 
 
