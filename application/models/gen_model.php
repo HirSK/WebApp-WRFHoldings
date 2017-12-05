@@ -56,7 +56,8 @@ class gen_model extends CI_Model{
         } catch (Exception $err) {
             return $err->getMessage();
         }
-    }
+    }    
+
 
      //makes this to work with columns and without where,limit and offset
     function getData($tablename = '', $columns_arr = array(), $where_arr = array(), $limit = 0, $offset = 0, $orderby = array()) {
@@ -140,4 +141,23 @@ class gen_model extends CI_Model{
             return $query->result();
         }
     }
+
+
+    public function petty($userInfo){
+
+
+        $this->db->select("idPetty_Cash as petty");
+        $this->db->from("petty_cash");
+
+        $this->db->where_in("Petty_CashType",$userInfo);
+
+       
+
+        $res = $this->db->get();
+
+        return $res->row()->petty;
+
+
+    }
+
 }

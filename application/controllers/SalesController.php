@@ -7,6 +7,11 @@ class SalesController extends BaseController{
 	function __construct(){
 		parent::__construct();
 		$this->load->model('gen_model');
+
+		$this->load->model('sales_model');
+
+	
+
 		$this->load->library('pagination');
 		$this->isLoggedIn();
 	}
@@ -29,91 +34,145 @@ class SalesController extends BaseController{
 		$this->loadViews('collection_form_view',$this->global,$data,NULL);
 	}
 
+
+
+	//method to add the main invoice details when the order is come
 	public function addInvoice(){
 
+		$this->form_validation->set_rules('inputInvoiceNumber','Invoice Number','trim|required|max_length[20]|is_unique[invoice.idInvoice]');
+		$this->form_validation->set_rules('inputCustomerCode','Customer Number','trim|required|max_length[20]|is_unique[customer.idCustomer]');
+		$this->form_validation->set_rules('inputInvoiceDate','Invoice Date','trim|required|max_length[15]');
+		$this->form_validation->set_rules('inputInvoiceValue','Invoice value','trim|required|max_length[20]');
 
-		
-		$idInvoice				=$_POST['idInvoice'];
-		$CustomerCode			=$_POST['CustomerCode'];
-		$CustomerName			= $_POST['CustomerName'];
-		$InvoiceValue			=$_POST['InvoiceValue'];
-		$InvoiceNetValue		= $_POST['InvoiceNetValue'];
-		$CashAmount				= $_POST['CashAmount'];
-		$ChequeAmount			= $_POST['ChequeAmount'];
-		$CreditAmount			=$_POST['CreditAmount'];
-		$SalesRtn				= $_POST['SalesRtn'];
-		$Variance				= $_POST['Variance'];
-		$Discount				= $_POST['Discount'];
-		$MKTrtn					= $_POST['MKTrtn'];
-		$Remarks				=$_POST['Remarks'];
+		if($this->form_validation->run()==false){
 
+			 $this->session->set_flashdata('error', 'Check the invoice number or customer code is valid');
+			 $this->createInvoiceList();
 
-		
-		// $ChequeNumber           =$_POST[''];
-		// $ChequeBankName           =$_POST[''];
-		// $ChequeBankBranch           =$_POST[''];
-		// $ChequeBKdate           =$_POST[''];
+		}else{
 
+			$idInvoice				=$_POST['inputInvoiceNumber'];
+			$CustomerCode			=$_POST['inputCustomerCode'];
+			$InvoiceValue			=$_POST['inputInvoiceValue'];
+			$invoice_order_date     =$_POST['inputInvoiceDate'];
+			
 
-		$invoice_arry = array(
-
-					
-					'idInvoice'				=> $idInvoice,
-					'Customer_idCustomer'		=> $CustomerCode,					
-					'InvoiceValue'			=> $InvoiceValue,
-					'InvoiceNetValue'				=> $InvoiceNetValue,	
-					
-					'SalesRtn'				=> $SalesRtn,
-					'Variance'				=> $Variance,
-					'Discount'					=> $Discount,
-					'MKTrtn'					=> $MKTrtn,
-					'Remarks'					=> $Remarks,
+			$invoice_order_array = array('idInvoice' => $idInvoice,
+											'Customer_idCustomer' =>$CustomerCode,
+											'InvoiceValue' =>$InvoiceValue,
+											'invoice_order_date' => $invoice_order_date,
+											'outletID' => $this->loggerOutletID											
+										);
 
 
-			);
+			$result = $this->sales_model->setInvoiceOrder($invoice_order_array);
 
-		if($CashAmount != ""){
+			if($result > 0)
+                {
+                    $this->session->set_flashdata('success', 'New invoice order added');
+                }
+                else
+                {
+                    $this->session->set_flashdata('error', 'Failed to insert the invoice');
+                }
+            redirect('addInvoice');	
 
-			$cashArray = array(
+		}		
 
-				'CashAmount' => $CashAmount , 
-
-				);
-
-			$this->gen_model->insertData($tablename="customer",$cashArray);
-			$invoice_arry['Cash_idCash'] = $this->db->insert_id();			
-
-		}elseif($ChequeAmount != ""){
-
-			$chequeArray = array(
-
-				'ChequeAmount' => $ChequeAmount ,
-				'ChequeNumber' => $ChequeNumber , 
-				'ChequeBankName' => $ChequeBankName , 
-				'ChequeBankBranch' => $ChequeBankBranch ,
-				'ChequeBKdate' => $ChequeBKdate ,  
-
-				);
-
-			$this->gen_model->insertData($tablename="cheque",$chequeArray);
-			$invoice_arry['Cheque_idCheque'] = $this->db->insert_id();
-
-		}elseif ($CreditAmount != "") {
-
-			$creditArray = array(
-
-				'CreditAmount' => $CreditAmount , 
-
-				);
-
-			$this->gen_model->insertData($tablename="credit",$creditArray);
-			$invoice_arry['Credit_idCredit'] = $this->db->insert_id();
-		}
-
-		
-		$this->gen_model->insertData($tablename="invoice",$invoice_arry);
-		redirect('/SalesController');
 	}
+
+
+	public function getInvoiceDetails(){
+
+		$id = $this->input->post('id');
+    	$query = $this->sales_model->getInvoiceData($id);
+    	echo json_encode($query); 
+		
+	}
+
+
+	public function updateInvoice(){
+
+			$idInvoice = $this->input->post('idInvoice');
+			$CustomerCode = $this->input->post('CustomerCode');
+			$CustomerName = $this->input->post('CustomerName');
+			$InvoiceValue = $this->input->post('InvoiceValue');
+			$CashAmount = $this->input->post('CashAmount');
+			$ChequeAmount = $this->input->post('ChequeAmount');
+			$ChequeNumber = $this->input->post('ChequeNumber');
+			$ChequeBankName = $this->input->post('ChequeBankName');
+			$ChequeBankBranch = $this->input->post('ChequeBankBranch');
+			$ChequeBKdate = $this->input->post('ChequeBKdate');
+			$CreditAmount = $this->input->post('CreditAmount');
+			$Variance = $this->input->post('variance');
+			$Discount = $this->input->post('discount');
+			$SalesRtn = $this->input->post('salesrtn');
+			$MKTrtn = $this->input->post('mkt');
+			$Remarks = $this->input->post('remarks');
+
+
+			$invoice_array = array(
+						
+						'idInvoice'				=> $idInvoice,
+						'Customer_idCustomer'	=> $CustomerCode,					
+						'InvoiceValue'			=> $InvoiceValue,
+						'InvoiceNetValue'		=> $InvoiceValue,
+						'cash' 					=>$CashAmount,
+						'cheque'				=>$ChequeAmount,
+						'credit'				=>$CreditAmount,				
+						'SalesRtn'				=> $SalesRtn,
+						'Variance'				=> $Variance,
+						'Discount'				=> $Discount,
+						'MKTrtn'				=> $MKTrtn,
+						'Remarks'				=> $Remarks,
+						'invoice_complete_date' =>date('Y-m-d H:i:s')
+
+				);
+
+				$query = $this->sales_model->updateInvoiceData($invoice_array);
+				echo json_encode($query);
+
+			//if there are pending credits ,they are added to credits table
+			if($CreditAmount != ""){
+
+				$creditArray = array(
+
+
+					'invoice_credit_id'=>$idInvoice,
+					'customer_id'=>$CustomerCode,
+					'total_credit' => $CreditAmount ,
+					'credit_start_date'=>date('Y-m-d H:i:s') ,
+					'credit_topay'=>$CreditAmount,
+
+					);
+
+				$this->gen_model->insertData($tablename="credit",$creditArray);
+							
+
+			}
+			// if the payments are done by cheque,these details are sent to cheque table
+			if($ChequeAmount != ""){
+
+				$chequeArray = array(
+					'cheque_invoice_id'=>$idInvoice,
+					'ChequeAmount' => $ChequeAmount ,
+					'ChequeNumber' => $ChequeNumber , 
+					'ChequeBankName' => $ChequeBankName , 
+					'ChequeBankBranch' => $ChequeBankBranch ,
+					'ChequeBKdate' => $ChequeBKdate ,  
+
+					);
+
+				$this->gen_model->insertData($tablename="cheque",$chequeArray);
+				
+
+			}
+		
+				
+	}
+
+
+
 
 	public function addCollectionInfo(){
 

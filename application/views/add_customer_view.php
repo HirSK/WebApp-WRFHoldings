@@ -20,7 +20,7 @@
 <section class="content">
         <div class="row">
             <!-- left column -->
-            <div class="col-xs-12 col-lg-12">
+            <div class="col-xs-12 col-lg-10">
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
@@ -47,8 +47,6 @@
                                         <label for="inputCustomerCode" >Customer Code</label>
 
                                         <input type="text" class="form-control" name="inputCustomerCode" placeholder="Customer Code " required>
-
-
 
 
                                     </div>

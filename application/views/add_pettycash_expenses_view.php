@@ -19,7 +19,7 @@
 <section class="content">
         <div class="row">
             <!-- left column -->
-            <div class="col-xs-12 col-lg-12">
+            <div class="col-xs-12 col-lg-12" style="padding-top: 20px">
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
@@ -29,7 +29,7 @@
                     <!-- form start -->
 
                     
-                    <form role="form" action="<?php echo base_url()?>index.php/PettyCashController/addPettycash" method="POST">
+                    <form role="form" action="<?php echo base_url()?>index.php/PettyCashController/managePettyCashExpences" method="POST">
                         <div class="box-body">
 
                         <div class="col-xs-12 col-lg-12 col-sm-12">                            
@@ -61,47 +61,75 @@
                                 </div>
                             </div>
 
+                            <!-- <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label>Outlet ID</label>
+                                      <input type="text" class="form-control pull-right" name="outletID" required>
+                                </div>
+                            </div> -->
+
                         </div>
 
+                        <div class="box-body table-responsive">
+                        <table id='emp_table' class="table table-striped table-bordered col-lg-12">
 
-                        <div class="col-xs-12 col-lg-12 col-sm-12">
-
-                            <div class="col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                    <label>Petty Cash Type</label>
-                                    <select class="form-control" name="pettyCashType" required>
-                                        <option>Stationary</option>
-                                        <option>Painting</option>
-                                        <option>Cleaning Equipment</option>
-                                        
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                    <label for="amount">Amount</label>
-                                    <input type="text" class="form-control"  name="amount" placeholder="Amount">
-                                </div>
-                            </div>
+                        <thead >
                             
+                            <tr>
+                                <th>#</th>
+                                <th> Type</a></th>
+                                <th> Amount</a></th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <th>
+                                <!-- <label for="selectType">Select Type</label> -->
+
+                               
+                                <select class="form-control" name="pettyCashTypeID" required>
+                                 <?php foreach ($pcash as $type) {
+                                    # code...
+                                ?>
+                                        <option><?php echo $type->Petty_CashType ?></option>
+
+                                <?php
+
+                                } ?>
+                                       
+                                
+                                </select>
+
+                                
+                                </th>
+                                <th><input type="text" class="form-control"  name="amount" placeholder="Amount"></th>
+                                <th>
+                                    <div class="col-xs-4 left-padding">
+                                        <button type="submit" class="btn btn-block btn-success" name="ADD">ADD</button>
+                                    </div>
+                                </th>
+                            </tr>
+                        </tbody>
+                        </table>
                         </div>
 
-                        <div class="col-xs-12 col-lg-12 col-sm-12">
-
-                            <div class="col-sm-4 col-xs-12">
+                            <!-- <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     <label for="totalAmount">Total Amount</label>
                                     <input type="text" class="form-control"  name="totalAmount" placeholder="Total amount" required>
                                 </div>
-                            </div>
-                            
-                        </div>
 
-                            <div class="col-xs-2">
+                                <div class="col-xs-4">
                                 <button type="submit" class="btn btn-block btn-success" name="register">Submit</button>
                             </div>
+                            </div> -->
+
+                            
 
                         </div>
+                        
                     </form>
 
 

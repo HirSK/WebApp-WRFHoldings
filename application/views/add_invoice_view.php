@@ -20,7 +20,7 @@
 <section class="content">
         <div class="row">
             <!-- left column -->
-            <div class="col-xs-12 col-lg-12">
+            <div class="col-xs-12 col-lg-10">
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
@@ -30,26 +30,17 @@
                     <!-- form start -->
 
                     
-                    <form role="form" action="#" method="POST">
+                    <form role="form" action="<?php echo base_url()?>index.php/SalesController/addInvoice" method="POST">
                         <div class="box-body">
 
                         <div class="col-xs-12 col-lg-12 col-sm-12">
 
-                           <!--  <div class="col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                    <label for="empId">Employee ID</label>
-                                    <input type="text" class="form-control"  name="empId" placeholder="Employee ID" required>
-                                </div>
-                            </div> -->
-
+                         
                             <div class="col-sm-4 col-xs-12">
                                  <div class="form-group">
-                                        <label for="inputCustomerCode" >Invoice No.</label>
+                                        <label for="inputInvoiceNumber" >Invoice No.</label>
 
                                         <input type="text" class="form-control" name="inputInvoiceNumber" placeholder="Invoice Number " required>
-
-
-
 
                                     </div>
                             </div>
@@ -60,17 +51,8 @@
 
                                         <input type="text" class="form-control" name="inputCustomerCode" placeholder="Customer code " required>
 
-
-
-
                                     </div>
                             </div>
-
-                           <!--  <div class="col-sm-4 col-xs-12">
-                                <label for="inputCustomerAddress" >Customer Address</label>
-
-                                        <input type="text" class="form-control" name ="inputCustomerAddress" placeholder="Customer Address">
-                            </div> -->
 
                         </div>
 
@@ -78,28 +60,25 @@
 
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
-                                    <label for="inputCustomerRegDate">Invoice Date</label>
+                                    <label for="inputInvoiceDate">Invoice Date</label>
 
                                     <div class="input-group date">
                                       <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                       </div>
-                                      <input type="text" class="form-control pull-right" id="datepicker" name="inputCustomerRegDate" >
+                                      <input type="text" class="form-control " id="datepicker" name="inputInvoiceDate" placeholder="mm/dd/yyyy">
                                     </div>
                                     <!-- /.input group -->
                                 </div>
                             </div>
 
                             <div class="col-sm-4 col-xs-12">
-
                              <div class="form-group">
                                     <label>Invoice Amount</label>
 
                                     <div class="input-group">
-                                        <!-- <div class="input-group-addon">
-                                            <i class="fa fa-phone"></i>
-                                        </div> -->
-                                        <input type="text" class="form-control" required="required" name="inputCustomerContact" >
+                                        
+                                        <input type="text" class="form-control" required="required" name="inputInvoiceValue" >
                                     </div>
                                     <!-- /.input group -->
                                 </div>
@@ -107,7 +86,6 @@
                                 <!-- /.form group -->
                                 
                             </div>
-
                             
                         </div>
 
@@ -135,8 +113,6 @@
 <!-- /.content-wrapper -->
 
 
-
-<?php include "includes/footer.php";?>
 
 <!-- REQUIRED JS SCRIPTS -->
 

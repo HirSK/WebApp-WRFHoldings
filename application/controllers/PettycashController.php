@@ -10,14 +10,25 @@ class PettycashController extends BaseController{
 	}
 
 	public function index(){
-		// $this->load->view('add_pettycashtype_view');
-		$this->loadViews('add_pettycashtype_view',$this->global,NULL,NULL);
 
+		$data['pcash'] = $this->gen_model->getData($tablename='petty_cash');
+		// $this->load->view('add_pettycashtype_view');
+		$this->loadViews('add_pettycashtype_view',$this->global,$data,NULL);
+
+	}
+
+	public function managePettyCash(){
+
+		$pcashDetail['pcash'] = $this->gen_model->getData($tablename='petty_cash');
+		
+		$this->loadViews('add_pettycashtype_view',$this->global,$pcashDetail,NULL);
+		
 	}
 
 	public function addPettyCashExpenses(){
 		// $this->load->view('add_pettycash_expenses_view');
-		$this->loadViews('add_pettycash_expenses_view',$this->global,NULL,NULL);
+		$data['pcash'] = $this->gen_model->getData($tablename='petty_cash');
+		$this->loadViews('add_pettycash_expenses_view',$this->global,$data,NULL);
 	}
 
 	public function addPettycash(){
@@ -32,4 +43,31 @@ class PettycashController extends BaseController{
 
 			redirect('/PettyCashController');
 	}
+
+	public function managePettyCashExpences(){
+
+
+
+
+		$pcashid=$this->gen_model->petty($this->input->post('pettyCashTypeID'));
+
+		//$ps = $pcashid[0]->idPetty_Cash;
+		
+
+		
+
+		$pettycashexpences_array = array(
+
+			'Outlet_idOutlet'	=> 1,
+			'Petty_Cash_idPetty_Cash'	=>	(int)$pcashid,
+			'Outlet_expends_Petty_Cash_Amount'	=> $this->input->post('amount'),
+			'Company_Work_Period_Company_Work_Period_fromDate'	=> $this->input->post('dateFrom'),
+			'Company_Work_Period_Company_Work_Period_toDate'	=>	$this->input->post('dateTo'),
+			);
+
+			$res=$this->gen_model->insertData($tablename="outlet_expends_petty_cash",$pettycashexpences_array);
+
+			redirect('/PettycashController');
+	}
+
 }
