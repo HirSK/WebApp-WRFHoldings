@@ -62,7 +62,7 @@
 	                                            <div class="input-group-addon">
 	                                                <i class="fa fa-calendar"></i>
 	                                            </div>
-	                                            <input type="text" class="form-control" name="collectionDate" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask  required>
+	                                            <input type="text" class="form-control" name="collectionDate" data-inputmask="'alias': 'dd/mm/yyyy'" >
 	                                </div>
 	                    			
 	                    		</div>
@@ -411,11 +411,14 @@ function getDetails()
 	  	var cheque = parseFloat(document.getElementById("ChequeAmount").value) || 0;
 	  	var credit = parseFloat(document.getElementById("CreditAmount").value) || 0;
 
-	  	 	  	
-
-		// if($('#CashAmount').val()=='' && $('#ChequeAmount').val()=='' && $('#CreditAmount').val()==''){
-		// 	credit = invoice_value;
-		// }
+	  	
+		if(cash==0 && cheque==0 && credit==0){
+			credit=invoice_value;
+		}else if(cash==0 && cheque!=0){
+			credit=invoice_value-cheque;
+		}else if(cheque==0 && cash!=0){
+			credit=invoice_value-cash;
+		}
 
 		var vari= invoice_value-(cash+cheque+credit);
 
@@ -424,6 +427,8 @@ function getDetails()
 	  		return false;
 	  	}else{
 	  		document.getElementById("variance").value = vari;
+	  		document.getElementById("CreditAmount").value = credit;
+	  		
 	  	}	
 	  	
 	  }else{
@@ -449,7 +454,19 @@ function getDetails()
 	    			clearTextBoxes();
 	    			return;
 	    		}else{
+	    			var invoice_value =parseFloat(document.getElementById("InvoiceValue").value) || 0;
+				  	var cash = parseFloat(document.getElementById("CashAmount").value) || 0;
+				  	var cheque = parseFloat(document.getElementById("ChequeAmount").value) || 0;
+				  	var credit = parseFloat(document.getElementById("CreditAmount").value) || 0;
 
+
+				  	if(cash==0 && cheque==0 && credit==0){
+						credit=invoice_value;
+					}else if(cash==0 && cheque!=0){
+						credit=invoice_value-cheque;
+					}else if(cheque==0 && cash!=0){
+						credit=invoice_value-cash;
+					}
 	    			
 		    	var data = {
 			        idInvoice: $('#idInvoice').val(),
@@ -463,6 +480,7 @@ function getDetails()
 			        ChequeBKdate: $('#ChequeBKdate').val(),
 			        ChequeBankBranch: $('#ChequeBankBranch').val(),
 			        CreditAmount: $('#CreditAmount').val(),
+			        CreditAmount: credit,
 			        variance: $('#variance').val(),
 			        discount: $('#discount').val(),
 			        salesrtn: $('#salesrtn').val(),
