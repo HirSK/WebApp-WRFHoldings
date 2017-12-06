@@ -50,7 +50,7 @@
                     </div>
                     <!-- /.box-header -->
                     
-                    <form role="form" action="<?php echo base_url()?>index.php/SalesController/addCollectionInfo" method="POST">
+                    <!-- <form role="form" action="<?php echo base_url()?>index.php/SalesController/addCollectionInfo" method="POST"> -->
 	                    <div class="box-body ">
 	                    	<div class="row">
 
@@ -62,7 +62,8 @@
 	                                            <div class="input-group-addon">
 	                                                <i class="fa fa-calendar"></i>
 	                                            </div>
-	                                            <input type="text" class="form-control" name="collectionDate" data-inputmask="'alias': 'dd/mm/yyyy'" >
+	                                           
+	                                            <input type="text" class="form-control pull-right" id="datepicker" name="dateFrom" required>
 	                                </div>
 	                    			
 	                    		</div>
@@ -72,7 +73,7 @@
 	                    		<div class="col-xs-12 col-sm-4 col-lg-3 form-group">
 	                    			<label class="control-label" for>Name of the Collection Officer</label>
 	                    			<span style="color:red;">*</span>
-	                    			<select class="form-control" name="collectionOfficer" required>
+	                    			<select class="form-control" name="collectionOfficer" id="collectionOfficer" required="">
 	                    				<option value>--Select Collection Officer--</option>
 	                    				<?php
 	                    					foreach ($collectionOfficerList as  $COfficer) {                   						
@@ -87,7 +88,7 @@
 	                    		<div class="col-xs-12 col-sm-4 col-lg-3 form-group" >
 		                    			<label class="control-label" for>Name of the vehicle driver</label>
 		                    			<span style="color:red;">*</span>
-		                    			<select class="form-control" name="collectionDriver" required>
+		                    			<select class="form-control" name="collectionDriver" id="collectionDriver" required>
 		                    				<option value>--Select Driver--</option>
 		                    				<?php
 		                    					foreach ($driverList as  $driver) {                   						
@@ -101,7 +102,7 @@
 		                    	<div class="col-xs-12 col-sm-4 col-lg-3 form-group" >
 		                    			<label class="control-label" for>Vehicle Number</label>
 		                    			<span style="color:red;">*</span>
-		                    			<select class="form-control" name="vehicleNo" required>
+		                    			<select class="form-control" name="vehicleNo" id="vehicleNo" required>
 		                    				<option value>--Select Vehicle--</option>
 		                    				<?php
 		                    					foreach ($vehicleList as  $vehicle) {                   						
@@ -115,15 +116,18 @@
 		                    	<div class="col-xs-12 col-sm-4 col-lg-3 form-group" style="padding-top: 20px">
 		                    		<label class="control-label" for>Area</label>
 		                    		<span style="color:red;">*</span>
-		                    		<input type="text" name="collectionArea" placeholder="Enter the area covered" required>
+		                    		<input type="text" name="collectionArea" id="collectionArea" placeholder="Enter the area covered" required>
 
 		                    	</div> 
 
 		                    	<div class="col-xs-2">
-                                	<button type="submit" class="btn btn-block btn-success" name="register">OK</button>
+                                	<!-- <button type="submit" class="btn btn-block btn-success" name="register">OK</button> -->
+                                	<button type="button" class="btn btn-success collection-button" onclick="setCollection()">
+						                <span class="glyphicon glyphicon-ok"></span>Proceed
+						             </button>
                             	</div>
 		                    </div> 
-		                </form>  
+		                <!-- </form>   -->
 
 		                <!-- panel preview -->
 		        <div class="row">
@@ -140,7 +144,7 @@
 						                        <label for="id" class="col-sm-4 control-label">Invoice</label>
 						                        <div class="col-sm-8">
 						                        	
-						                            <input type="text" class="form-control" id="idInvoice" name="idInvoice" onkeypress="Javascript: if (event.keyCode==13) getDetails();" required="">
+						                            <input type="text"  class="form-control" disabled="" id="idInvoice" name="idInvoice" onkeypress="Javascript: if (event.keyCode==13) getDetails();" required="">
 						                        </div>
 						                    </div>
 						                </div>
@@ -148,7 +152,7 @@
 						                    <div class="form-group">
 						                        <label for="value" class="col-sm-5 control-label">NetValue</label>
 						                        <div class="col-sm-7">
-						                            <input type="text" class="form-control" id="InvoiceValue" name="InvoiceValue" required="">
+						                            <input type="text" class="form-control" disabled=""  id="InvoiceValue" name="InvoiceValue" required="">
 						                        </div>
 						                    </div>
 						                </div>
@@ -158,7 +162,7 @@
 						                    <div class="form-group">
 						                        <label for="ccode" class="col-sm-4 control-label">Cus:ID</label>
 						                        <div class="col-sm-8">
-						                            <input type="text" class="form-control" id="CustomerCode" name="CustomerCode" required="">
+						                            <input type="text" class="form-control" disabled="" id="CustomerCode" name="CustomerCode" required="">
 						                        </div>
 						                    </div>
 						                </div>
@@ -166,7 +170,7 @@
 						                    <div class="form-group">
 						                        <label for="cname" class="col-sm-4 control-label">Customer Name</label>
 						                        <div class="col-sm-8">
-						                            <input type="text" class="form-control" id="CustomerName" name="CustomerName" required="">
+						                            <input type="text" class="form-control" disabled="" id="CustomerName" name="CustomerName" required="">
 						                        </div>
 						                    </div>
 						                </div>
@@ -174,13 +178,13 @@
 				                    <div class="form-group">
 				                        <label for="cash" class="col-sm-3 control-label">Cash Amount</label>
 				                        <div class="col-sm-8">
-				                            <input type="text" class="form-control" id="CashAmount" name="CashAmount" >
+				                            <input type="text" class="form-control" disabled="" id="CashAmount" name="CashAmount" >
 				                        </div>
 				                    </div> 
 				                    <div class="form-group">
 				                        <label for="cheque" class="col-sm-3 control-label">Cheque Amount</label>
 				                        <div class="col-sm-8">
-				                            <input type="text" class="form-control" id="ChequeAmount" name="ChequeAmount" >
+				                            <input type="text" class="form-control" disabled="" id="ChequeAmount" name="ChequeAmount" >
 				                        </div>
 				                    </div>
 				                    <div class="col-xs-12 col-lg-12 col-sm-12">
@@ -188,7 +192,7 @@
 						                    <div class="form-group">
 						                        <label for="ChequeNumber" class="col-sm-4 control-label">Cheque Number</label>
 						                        <div class="col-sm-8">
-						                            <input type="text" class="form-control" id="ChequeNumber" name="ChequeNumber">
+						                            <input type="text" class="form-control" disabled="" id="ChequeNumber" name="ChequeNumber">
 						                        </div>
 						                    </div>
 						                </div>
@@ -196,7 +200,7 @@
 						                    <div class="form-group">
 						                        <label for="ChequeBankName" class="col-sm-5 control-label">Bank</label>
 						                        <div class="col-sm-7">
-						                            <input type="text" class="form-control" id="ChequeBankName" name="ChequeBankName">
+						                            <input type="text" class="form-control" disabled="" id="ChequeBankName" name="ChequeBankName">
 						                        </div>
 						                    </div>
 						                </div>
@@ -206,7 +210,7 @@
 						                    <div class="form-group">
 						                        <label for="ChequeBankBranch" class="col-sm-4 control-label">Branch</label>
 						                        <div class="col-sm-8">
-						                            <input type="text" class="form-control" id="ChequeBankBranch" name="ChequeBankBranch">
+						                            <input type="text" class="form-control" disabled="" id="ChequeBankBranch" name="ChequeBankBranch">
 						                        </div>
 						                    </div>
 						                </div>
@@ -214,7 +218,7 @@
 						                    <div class="form-group">
 						                        <label for="ChequeBKdate" class="col-sm-4 control-label">BKdate</label>
 						                        <div class="col-sm-8">
-						                            <input type="text" class="form-control" id="ChequeBKdate" name="ChequeBKdate" placeholder="dd/mm/yyyy">
+						                            <input type="text" class="form-control" disabled="" id="ChequeBKdate" name="ChequeBKdate" placeholder="dd/mm/yyyy">
 						                        </div>
 						                    </div>
 						                </div>
@@ -222,7 +226,7 @@
 				                    <div class="form-group">
 				                        <label for="credit" class="col-sm-3 control-label">Credit Amount</label>
 				                        <div class="col-sm-8">
-				                            <input type="text" class="form-control" id="CreditAmount" name="CreditAmount" >
+				                            <input type="text" class="form-control" disabled="" id="CreditAmount" name="CreditAmount" >
 				                        </div>
 				                    </div> 
 
@@ -231,7 +235,7 @@
 					                    <div class="form-group">
 					                        <label for="variance" class="col-sm-5 control-label">Variance</label>
 					                        <div class="col-sm-7">
-					                            <input type="text" class="form-control" id="variance" name="Variance">
+					                            <input type="text" class="form-control" disabled="" id="variance" name="Variance">
 					                        </div>
 					                    </div> 
 					                   </div>
@@ -240,7 +244,7 @@
 					                    <div class="form-group">
 					                        <label for="discount" class="col-sm-5 control-label">Discount</label>
 					                        <div class="col-sm-7">
-					                            <input type="text" class="form-control" id="discount" name="Discount">
+					                            <input type="text" class="form-control" disabled="" id="discount" name="Discount">
 					                        </div>
 					                    </div>
 					                   </div>
@@ -251,7 +255,7 @@
 				                    		<div class="form-group">
 						                        <label for="salesrtn" class="col-sm-5 control-label">Sales return</label>
 						                        <div class="col-sm-7">
-						                            <input type="text" class="form-control" id="salesrtn" name="SalesRtn">
+						                            <input type="text" class="form-control" disabled="" id="salesrtn" name="SalesRtn">
 					                        	</div>
 				                    		</div> 
 				                		</div>
@@ -259,7 +263,7 @@
 				                    		<div class="form-group">
 				                        		<label for="mkt" class="col-sm-5 control-label">MKT return</label>
 				                        		<div class="col-sm-7">
-				                            		<input type="text" class="form-control" id="mkt" name="mktrtn">
+				                            		<input type="text" class="form-control" disabled="" id="mkt" name="mktrtn">
 				                        		</div>
 				                    		</div> 
 				                		</div>
@@ -268,7 +272,7 @@
 				                    <div class="form-group">
 				                        <label for="remarks" class="col-sm-3 control-label">Remarks</label>
 				                        <div class="col-sm-9">
-				                            <input type="text" class="form-control" id="remarks" name="Remarks">
+				                            <input type="text" class="form-control" disabled="" id="remarks" name="Remarks">
 				                        </div>
 				                    </div> 
 				                   
@@ -373,6 +377,86 @@
 </script>
 
 <script>
+
+
+
+
+  </script>
+
+<script type="text/javascript">
+
+	
+	function setCollection(){
+		var data = {
+			        date: $('#datepicker').val(),
+			        vehicleNo: $('#vehicleNo').val(),
+			        collectionOfficer: $('#collectionOfficer').val(),
+			        collectionDriver: $('#collectionDriver').val(),
+			        vehicleNo: $('#vehicleNo').val(),
+			    };
+
+		$.ajax({
+			        url: "<?php echo base_url().'index.php/SalesController/addCollectionInfo'?>",
+			        type: "post",
+			        data: data,
+			       
+          			// error: function(xhr, ajaxOptions, thrownError) { 
+           		// 		alert("You have added the invoice already!!!"); 
+           		// 		clearTextBoxes();
+           		// 	},
+        
+			        success : function(json){
+			            var obj=jQuery.parseJSON(json);
+
+			            if(obj){
+			                alert('Collection Details added successfully');
+			                $("#datepicker").attr('disabled','disabled');
+			                $("#vehicleNo").attr('disabled','disabled');
+			                $("#collectionOfficer").attr('disabled','disabled');
+			                $("#collectionDriver").attr('disabled','disabled');
+			                $("#collectionArea").attr('disabled','disabled');
+
+			                	
+			                enableInvoiceTextBoxes();
+			                	                
+			                			                
+			            }else{
+			                alert("Failed,Check the internet connection again");
+			                clearTextBoxes();
+			            }
+
+			        },
+
+			    });
+
+	}
+	</script>
+	<script type="text/javascript">
+
+	function enableInvoiceTextBoxes(){
+
+		document.getElementById('idInvoice').disabled = false;
+		document.getElementById('InvoiceValue').disabled = false;
+		document.getElementById('CustomerCode').disabled = false;
+		document.getElementById('CustomerName').disabled = false;
+		document.getElementById('CashAmount').disabled = false;
+		document.getElementById('ChequeAmount').disabled = false;
+		document.getElementById('ChequeNumber').disabled = false;
+		document.getElementById('ChequeBankName').disabled = false;
+		document.getElementById('ChequeBKdate').disabled = false;
+		document.getElementById('ChequeBankBranch').disabled = false;
+		document.getElementById('CreditAmount').disabled = false;
+		document.getElementById('variance').disabled = false;
+		document.getElementById('discount').disabled = false;
+		document.getElementById('salesrtn').disabled = false;
+		document.getElementById('mkt').disabled = false;
+		document.getElementById('remarks').disabled = false;
+
+
+}
+</script>
+<script type="text/javascript">
+
 function getDetails()
 {
 	 if($('#idInvoice').val()){
@@ -402,7 +486,12 @@ function getDetails()
 		}  
    }
 
+</script>
+<script >
+
   function applyFunction(){
+
+  	
   	if($('#idInvoice').val()){
 	  	var vari = 0;
 	  	//var credit =0;
@@ -411,6 +500,17 @@ function getDetails()
 	  	var cheque = parseFloat(document.getElementById("ChequeAmount").value) || 0;
 	  	var credit = parseFloat(document.getElementById("CreditAmount").value) || 0;
 
+	  	if(cheque!=0){
+	  		var ChequeNumber = document.getElementById("ChequeNumber").value;
+			var ChequeBankName = document.getElementById("ChequeBankName").value; 
+			var ChequeBankBranch = document.getElementById("ChequeBankBranch").value;
+			var ChequeBKdate = document.getElementById("ChequeBKdate").value;
+
+			if(ChequeNumber.length<1 || ChequeBankName.length<1  || ChequeBankBranch.length<1  ||  ChequeBKdate.length<1 ){
+				alert("Please enter the cheque details to proceed");
+				return false;
+			}
+	  	}
 	  	
 		if(cash==0 && cheque==0 && credit==0){
 			credit=invoice_value;
@@ -436,19 +536,17 @@ function getDetails()
 	  	clearTextBoxes();
 	  }
   }
-
-  </script>
+</script>
 
 <script type="text/javascript">
 
-    function clearTextBoxes(){
-    	$('#idInvoice, #InvoiceValue,#CustomerCode,#CustomerName,#CashAmount,#ChequeAmount,#ChequeNumber,#ChequeBankName,#ChequeBKdate,#ChequeBankBranch,#CreditAmount,#variance,#discount,#salesrtn,#mkt,#remarks').val('');
-    }
 
 	$(function(){
-	    $('.preview-add-button').click(function(){
+	    $('.preview-add-button').click(function(){	
 
+	    
 	    	if($('#idInvoice').val()){
+	    		
 
 	    		if(applyFunction()==false){	    			
 	    			clearTextBoxes();
@@ -479,7 +577,7 @@ function getDetails()
 			        ChequeBankName: $('#ChequeBankName').val(),
 			        ChequeBKdate: $('#ChequeBKdate').val(),
 			        ChequeBankBranch: $('#ChequeBankBranch').val(),
-			        CreditAmount: $('#CreditAmount').val(),
+			        // CreditAmount: $('#CreditAmount').val(),
 			        CreditAmount: credit,
 			        variance: $('#variance').val(),
 			        discount: $('#discount').val(),
@@ -533,7 +631,30 @@ function getDetails()
 
 	    });  
 });
+
+
+
 	
+</script>
+
+
+
+<script >
+
+
+    function clearTextBoxes(){
+    	$('#idInvoice, #InvoiceValue,#CustomerCode,#CustomerName,#CashAmount,#ChequeAmount,#ChequeNumber,#ChequeBankName,#ChequeBKdate,#ChequeBankBranch,#CreditAmount,#variance,#discount,#salesrtn,#mkt,#remarks').val('');
+    }
+ </script>
+
+<script >
+
+$(function() {
+        //Date picker
+        $('#datepicker').datepicker({
+          autoclose: true
+        })
+    })
 </script>
 <script type="text/javascript">
 
@@ -573,22 +694,4 @@ function getDetails()
 
 
 
-
-	    		// var x = document.getElementById("age").value;
-		     //    var y = document.getElementById("name").value;
-		     //    var letters = '/^[a-zA-Z]+$/'; 
-		     //    if((parseInt(x)!=(x))&&(y==parseInt(y))){
-		     //        alert("Wrong Value Entered");
-		     //    }
-		     //    else{
-		        //     var rows = "";
-		        //     var idInvoice = document.getElementById("idInvoice").value;
-		        //     var CustomerCode = parseFloat(document.getElementById("CustomerCode").value) || 0;
-		        //     var CashAmount = parseFloat(document.getElementById("CashAmount").value) || 0;
-		        //     var ChequeAmount = parseFloat(document.getElementById("ChequeAmount").value) || 0; 
-		        //     var CreditAmount = parseFloat(document.getElementById("CreditAmount").value) || 0;
-
-		        //     rows += "<tr><td>" + idInvoice + "</td><td>" + CustomerCode + "</td><td>" + CashAmount + "</td><td>" + ChequeAmount + "</td><td>" + CreditAmount + "</td></tr>";
-		        //     $(rows).appendTo("#list tbody");
-		        // }   
 </script>
