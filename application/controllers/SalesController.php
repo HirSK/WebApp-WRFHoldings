@@ -177,11 +177,17 @@ class SalesController extends BaseController{
 
 	public function addCollectionInfo(){
 
-		$collectionDate = $_POST['collectionDate'];
-		$collectionOfficer = $_POST['collectionOfficer'];
-		$collectionDriver = $_POST['collectionDriver'];
-		$vehicleNo = $_POST['vehicleNo'];
-		$collectionArea = $_POST['collectionArea'];
+		$collectionDate = $this->input->post('date');
+		$collectionOfficer = $this->input->post('collectionOfficer');
+		$collectionDriver = $this->input->post('collectionDriver');
+		$vehicleNo = $this->input->post('vehicleNo');
+		$collectionArea = $this->input->post('collectionArea');
+
+		// $collectionDate = $_POST['collectionDate'];
+		// $collectionOfficer = $_POST['collectionOfficer'];
+		// $collectionDriver = $_POST['collectionDriver'];
+		// $vehicleNo = $_POST['vehicleNo'];
+		// $collectionArea = $_POST['collectionArea'];
 
 		$collectionArray = array(
 
@@ -193,8 +199,9 @@ class SalesController extends BaseController{
 				'Outlet_idOutlet'		=>	$this->session->userData('loggerOutletID'),
 			);
 
-		$this->gen_model->insertData($tablename='collection',$collectionArray);
-		redirect('/SalesController');
+		$query = $this->gen_model->insertData($tablename='collection',$collectionArray);
+		echo json_encode($query);
+		// redirect('/SalesController');
 	}
 
 	public function displayCollectionReport(){
