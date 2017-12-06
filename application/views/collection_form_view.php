@@ -58,7 +58,7 @@
 	                    			<label class="control-label" for>Date</label>
 	                    			<span style="color:red;">*</span>
 
-	                    			<div class="input-group">
+	                    			<div class="input-group date">
 	                                            <div class="input-group-addon">
 	                                                <i class="fa fa-calendar"></i>
 	                                            </div>
@@ -424,11 +424,15 @@
 		// }
 
 		// $date=date_create_from_format("m/d/Y", $day);
-		$day= $('#datepicker').val();
-		$CollectionDate=date_format(date_create_from_format("m/d/Y", $day),"Y-m-d");
+		// $day= $('#datepicker').val();
+		// // $CollectionDate=date_format(date_create_from_format("m/d/Y", $day),"Y-m-d");
+
+		// $date=date_create_from_format("m/d/Y", $day);
+
+		// $CollectionDate=date_format($date,"Y-m-d");
 
 		var data = {
-			        // date: $('#datepicker').val(),
+			         date: $('#datepicker').val(),
 			        date:$CollectionDate,
 			        vehicleNo: $('#vehicleNo').val(),
 			        collectionOfficer: $('#collectionOfficer').val(),
