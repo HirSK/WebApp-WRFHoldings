@@ -28,7 +28,7 @@ class sales_model extends CI_Model{
 	function updateInvoiceData($invoice_array){
 		try {
 			
-			$invoice_array['Collection_idCollection'] = $this->getMaxCollectionID();		
+			// $invoice_array['Collection_idCollection'] = $this->getMaxCollectionID();		
 
 
             $ret = $this->db->insert('invoice', $invoice_array);
