@@ -88,46 +88,10 @@
                                                             </select>
 
                                                             <br>
-
-                                                   
                                                             
                                                         <label>Select Outlet</label>
-
-                                                         <?php
-                                                       if($loggerRole == ROLE_ADMIN)
-                                                        {
-                                                        ?>
-                                                        <select class="form-control" name="outletId" required>
-                                                          <?php foreach ($outlet as $id) {
-                                                                # code...
-                                                                ?>
-                                                                    <option><?php echo $id->idOutlet ?></option>
-
-                                                                <?php
-
-                                                           } 
-
-                                                           ?>
-                                                                   
-                                                            
-                                                        </select>
-
-
-                                                        <?php
-
-
-                                                            }if( $loggerRole == ROLE_SUPERVISOR){
-
-                                                            ?>
-
-                                                            <input class="form-control" name="outletId" value="<?php echo (int)($this->session->userdata('loggerOutletID')); ?>"  readonly required>
-
-
-
-                                                       <?php
-                                                        }
-
-                                                        ?>
+                                                        
+                                                        <input type="text" name="outletId" value="<?php echo $this->session->userdata('loggerOutletID'); ?>" disabled="" required>
 
                                                     </div>
                                                 </div>

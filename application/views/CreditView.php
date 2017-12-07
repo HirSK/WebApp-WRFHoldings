@@ -88,12 +88,9 @@
                                                             </select>
 
                                                             <br>
-
-                                                   
                                                             
                                                         <label>Select Outlet</label>
-
-                                                         <?php
+                                                        <?php
                                                        if($loggerRole == ROLE_ADMIN)
                                                         {
                                                         ?>
@@ -161,7 +158,7 @@
                                  
            <?php 
            
-             if( $collection != NULL){
+             if( $collection1 != NULL){
              ?>
 
 
@@ -172,9 +169,12 @@
                         <thead >
                             
                             <tr>
-                                <th>Collection ID</th>
+                                <th>Customer ID</th>
                                 
-                                <th>Collection Date</th>
+                                <th>Total Credit</th>
+                                <th>Credit topay</th>
+                                <th>Credit Start Date</th>
+                                <th>Last Credit Taken Date</th>
                                
                                 
                                 
@@ -191,15 +191,25 @@
 
 
                     <?php
+
+
+
                         
-                        foreach ($collection as $row){
+                        foreach ($collection1 as $row){
+
+
+                            echo '<script>console.log($row->ChequeNumber)</script>';
 
 
                             
 
-                            ?><tr data-id=<?php echo $row->idCollection;?>>
-                            <td><?php echo $row->idCollection;?></td>
-                            <td><?php echo $row->CollectionDate;?></td>  
+                            ?><tr>
+                            <td><?php echo $row['customer_id'];?></td>
+                            <td><?php echo $row['total_credit'];?></td>
+                            <td><?php echo $row['credit_topay'];?></td>
+                            <td><?php echo $row['credit_start_date'];?></td>
+                            <td><?php echo $row['credit_lasttaken_date'];?></td>
+
                               
                             </tr>
 

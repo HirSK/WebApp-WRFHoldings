@@ -30,15 +30,115 @@ class view_sales_model extends CI_Model{
 	}
 
 
-	public function viewCollection($first_date,$second_date){
+	public function viewCollection($first_date,$second_date,$outlet){
 
-		$query = $this->db->query("SELECT * FROM `collection` WHERE CollectionDate BETWEEN '$first_date' AND '$second_date'");
+		$query = $this->db->query("SELECT * FROM `collection` WHERE CollectionDate BETWEEN '$first_date' AND '$second_date' AND Outlet_idOutlet= $outlet");
 
 		$result = $query->result();
 
 		return $result;
 		
 	}
+
+
+
+	public function viewInvoices($collectID){
+
+
+		$query = $this->db->query("SELECT * FROM `invoice` WHERE Collection_idCollection='$collectID'");
+
+		$result = $query->result_array();
+
+		return $result;
+
+
+
+	}
+
+
+	public function viewCheque($first_date,$second_date,$outlet){
+
+		$query = $this->db->query("select * from collection,invoice,cheque
+								where
+								collection.idCollection = invoice.Collection_idCollection
+								AND
+								invoice.idInvoice = cheque.cheque_invoice_id
+								AND
+								collection.CollectionDate BETWEEN '$first_date' AND '$second_date'
+								AND
+								collection.Outlet_idOutlet =$outlet ");
+
+		$result = $query->result_array();
+
+		return $result;
+	}
+
+
+
+	public function viewCredit($first_date,$second_date,$outlet){
+
+		$query = $this->db->query("select * from collection,invoice,credit
+								where
+								collection.idCollection = invoice.Collection_idCollection
+								AND
+								invoice.idInvoice = credit.invoice_credit_id
+								AND
+								collection.CollectionDate BETWEEN '$first_date' AND '$second_date'
+								AND
+								collection.Outlet_idOutlet =$outlet");
+
+		$result = $query->result_array();
+
+		return $result;
+	}
+
+
+	public function viewCash($first_date,$second_date,$outlet){
+
+		$query = $this->db->query("select * from collection,invoice
+								where
+								collection.idCollection = invoice.Collection_idCollection
+								AND
+								collection.CollectionDate BETWEEN '$first_date' AND '$second_date'
+								AND
+								collection.Outlet_idOutlet =$outlet
+								AND
+								invoice.cash !=' '");
+
+
+		$result = $query->result_array();
+
+		return $result;
+
+
+	}
+
+
+	public function returnCredit($first_date,$second_date,$outlet){
+
+
+
+	$query = $this->db->query("select * from collection,invoice,credit
+								where
+								collection.idCollection = invoice.Collection_idCollection
+								AND
+								invoice.idInvoice = credit.invoice_credit_id
+								AND
+								credit.credit_lasttaken_date BETWEEN '$first_date' AND '$second_date'
+								AND
+								collection.Outlet_idOutlet =$outlet");
+
+		$result = $query->result_array();
+
+		return $result;
+	}
+
+
+
+
+
+
+ 
 
 
 }
