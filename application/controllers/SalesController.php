@@ -110,6 +110,7 @@ class SalesController extends BaseController{
 			$SalesRtn = $this->input->post('salesrtn');
 			$MKTrtn = $this->input->post('mkt');
 			$Remarks = $this->input->post('remarks');
+			$collectionID = $this->input->post('collectionID');
 
 
 			$invoice_array = array(
@@ -126,6 +127,7 @@ class SalesController extends BaseController{
 						'Discount'				=> $Discount,
 						'MKTrtn'				=> $MKTrtn,
 						'Remarks'				=> $Remarks,
+						'Collection_idCollection'=>$collectionID,
 						'invoice_complete_date' =>date('Y-m-d H:i:s')
 
 				);
@@ -177,11 +179,16 @@ class SalesController extends BaseController{
 
 	public function addCollectionInfo(){
 
-		$collectionDate = $this->input->post('date');
+		$CollectionDate = $this->input->post('date');
 		$collectionOfficer = $this->input->post('collectionOfficer');
 		$collectionDriver = $this->input->post('collectionDriver');
 		$vehicleNo = $this->input->post('vehicleNo');
 		$collectionArea = $this->input->post('collectionArea');
+
+
+		// $date=date_create_from_format("m/d/Y", $day);
+
+		// $CollectionDate=date_format($date,"Y-m-d");
 
 		// $collectionDate = $_POST['collectionDate'];
 		// $collectionOfficer = $_POST['collectionOfficer'];

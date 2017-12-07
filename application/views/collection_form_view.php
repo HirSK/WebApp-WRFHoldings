@@ -58,7 +58,7 @@
 	                    			<label class="control-label" for>Date</label>
 	                    			<span style="color:red;">*</span>
 
-	                    			<div class="input-group">
+	                    			<div class="input-group date">
 	                                            <div class="input-group-addon">
 	                                                <i class="fa fa-calendar"></i>
 	                                            </div>
@@ -83,6 +83,14 @@
 	                    				?>
 	                    			</select>
 	                    		</div>
+
+	                    		<div class="col-xs-12 col-sm-4 col-lg-3 form-group">
+	                    			<label class="control-label" for><b>The Collection ID : </b></label>
+	                    			<input type="text" name="collectionID" id="collectionID" readonly="">
+	                    			
+	                    		</div>
+
+
 	                    	</div>
 	                    	<div class="row">
 	                    		<div class="col-xs-12 col-sm-4 col-lg-3 form-group" >
@@ -387,12 +395,50 @@
 
 	
 	function setCollection(){
+
+		var datepicker = document.getElementById("datepicker").value;
+		var vehicleNo = document.getElementById("vehicleNo").value; 
+		var collectionOfficer = document.getElementById("collectionOfficer").value;
+		var collectionDriver = document.getElementById("collectionDriver").value;
+		var collectionArea = document.getElementById("collectionArea").value;
+
+		// if(datepicker.length<1 && vehicleNo.length<1 && collectionOfficer.length<1 && collectionDriver.length<1 && collectionArea.length<1 ){
+
+		// 	alert("Please enter values to proceed");
+		// 	return;
+		// }else if(datepicker.length<1){
+		// 	alert("Please select the date");
+		// 	return;
+		// }else if(vehicleNo.length<1){
+		// 	alert("Please select the vehicle no");
+		// 	return;
+		// }else if(collectionOfficer.length<1){
+		// 	alert("Please select the collection officer");
+		// 	return;
+		// }else if(collectionDriver.length<1){
+		// 	alert("Please select the collection driver");
+		// 	return;
+		// }else if(collectionArea.length<1){
+		// 	alert("Please enter the relevant collection area");
+		// 	return;
+		// }
+
+		// $date=date_create_from_format("m/d/Y", $day);
+		// $day= $('#datepicker').val();
+		// // $CollectionDate=date_format(date_create_from_format("m/d/Y", $day),"Y-m-d");
+
+		// $date=date_create_from_format("m/d/Y", $day);
+
+		// $CollectionDate=date_format($date,"Y-m-d");
+
 		var data = {
-			        date: $('#datepicker').val(),
+			         date: $('#datepicker').val(),
+			        date:$CollectionDate,
 			        vehicleNo: $('#vehicleNo').val(),
 			        collectionOfficer: $('#collectionOfficer').val(),
 			        collectionDriver: $('#collectionDriver').val(),
-			        vehicleNo: $('#vehicleNo').val(),
+			        collectionArea: $('#collectionArea').val()
+			        
 			    };
 
 		$.ajax({
@@ -409,7 +455,8 @@
 			            var obj=jQuery.parseJSON(json);
 
 			            if(obj){
-			                alert('Collection Details added successfully');
+
+			                alert('Collection Details added successfully, Collection ID is '+ obj);
 			                $("#datepicker").attr('disabled','disabled');
 			                $("#vehicleNo").attr('disabled','disabled');
 			                $("#collectionOfficer").attr('disabled','disabled');
@@ -418,6 +465,7 @@
 
 			                	
 			                enableInvoiceTextBoxes();
+			                $('#collectionID').val(obj);
 			                	                
 			                			                
 			            }else{
@@ -578,6 +626,7 @@ function getDetails()
 			        ChequeBKdate: $('#ChequeBKdate').val(),
 			        ChequeBankBranch: $('#ChequeBankBranch').val(),
 			        // CreditAmount: $('#CreditAmount').val(),
+			        collectionID:$('#collectionID').val(),
 			        CreditAmount: credit,
 			        variance: $('#variance').val(),
 			        discount: $('#discount').val(),
