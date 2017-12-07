@@ -43,6 +43,15 @@
     });
 </script>
 
+<!-- <script type="text/javascript">
+function confirmUser(){
+    var ask=confirm("Do you want to open an existing collection?");
+    if(ask){
+      window.location.href="<?php echo base_url()?>index.php/CustomerController";
+     }
+}
+</script> -->
+
 
 <style>
   
@@ -132,13 +141,23 @@
                        if($loggerRole == ROLE_SUPERVISOR)
                         {
                         ?>
+
                         <li><a href="<?php echo base_url()?>index.php/SalesController/createInvoiceList">Invoice</a></li>
+<<<<<<< HEAD
 <<<<<<< HEAD
                        <li><a href="<?php echo base_url()?>index.php/SalesController">Account Summary</a></li> 
 =======
                        <li><a href="<?php echo base_url()?>index.php/SalesController">Account Summary</a></li>
                        <li><a href="<?php echo base_url()?>index.php/SalesController/loadRepayCredits">Repay Credits</a></li>
 >>>>>>> f90848af439bbd82f8cbafe1dd1fc64c8fc1af91
+=======
+
+                       <li><a href="<?php echo base_url()?>index.php/SalesController" >Account Summary</a></li>
+                      
+                       <li><a href="<?php echo base_url()?>index.php/SalesController/loadRepayCredits">Repay Credits</a></li>
+
+
+>>>>>>> 1adebc2f7493509f994b6cfe9d352a2e8777f23a
                          <?php
                        }
                        if( $loggerRole == ROLE_ADMIN || $loggerRole == ROLE_SUPERVISOR )
