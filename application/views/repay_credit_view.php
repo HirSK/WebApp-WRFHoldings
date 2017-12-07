@@ -217,10 +217,10 @@
         
                     success : function(json){
                         
-                        var obj = json;
-                        alert(obj);
+                        // var obj = json;
+                        // alert(obj);
 
-                        if(obj){
+                        if(json){
                             
                             alert('Credit details updated successfully');                                                 
 
@@ -233,6 +233,7 @@
 
                     },
 
+                    
 
                 });
                
