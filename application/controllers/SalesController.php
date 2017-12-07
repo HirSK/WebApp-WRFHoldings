@@ -295,8 +295,9 @@ class SalesController extends BaseController{
 		$query = $this->sales_model->repayCredits($invoice_credit_id,$credit_lasttaken_date,$credit_topay,$completed);
 
 
-		
-		echo json_encode($query);
+		$json = array('boolean' => $query);
+		echo json_encode($json);
+		// echo json_encode($query);
 
 		
 	}
