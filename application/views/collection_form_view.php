@@ -27,15 +27,6 @@
             	</div>
 
 
-            <div class="col-lg-4 col-sm- col-xs-12" no-padding style="padding-top:20px">
-            		
-            		
-
-            		<div class="col-xs-4 left-padding">
-            			<a class="btn btn-block btn-primary" href="#"> PRINT</a>
-            		</div>
-
-            </div>
         </div>
 
             <div class="col-xs-12 col-lg-12" style="padding-top: 10px">
@@ -402,38 +393,31 @@
 		var collectionDriver = document.getElementById("collectionDriver").value;
 		var collectionArea = document.getElementById("collectionArea").value;
 
-		// if(datepicker.length<1 && vehicleNo.length<1 && collectionOfficer.length<1 && collectionDriver.length<1 && collectionArea.length<1 ){
+		if(datepicker.length<1 && vehicleNo.length<1 && collectionOfficer.length<1 && collectionDriver.length<1 && collectionArea.length<1 ){
 
-		// 	alert("Please enter values to proceed");
-		// 	return;
-		// }else if(datepicker.length<1){
-		// 	alert("Please select the date");
-		// 	return;
-		// }else if(vehicleNo.length<1){
-		// 	alert("Please select the vehicle no");
-		// 	return;
-		// }else if(collectionOfficer.length<1){
-		// 	alert("Please select the collection officer");
-		// 	return;
-		// }else if(collectionDriver.length<1){
-		// 	alert("Please select the collection driver");
-		// 	return;
-		// }else if(collectionArea.length<1){
-		// 	alert("Please enter the relevant collection area");
-		// 	return;
-		// }
+			alert("Please enter values to proceed");
+			return;
+		}else if(datepicker.length<1){
+			alert("Please select the date");
+			return;
+		}else if(vehicleNo.length<1){
+			alert("Please select the vehicle no");
+			return;
+		}else if(collectionOfficer.length<1){
+			alert("Please select the collection officer");
+			return;
+		}else if(collectionDriver.length<1){
+			alert("Please select the collection driver");
+			return;
+		}else if(collectionArea.length<1){
+			alert("Please enter the relevant collection area");
+			return;
+		}
 
-		// $date=date_create_from_format("m/d/Y", $day);
-		// $day= $('#datepicker').val();
-		// // $CollectionDate=date_format(date_create_from_format("m/d/Y", $day),"Y-m-d");
-
-		// $date=date_create_from_format("m/d/Y", $day);
-
-		// $CollectionDate=date_format($date,"Y-m-d");
-
+		
 		var data = {
-			         date: $('#datepicker').val(),
-			        date:$CollectionDate,
+			        date: datepicker,
+			        // date:$CollectionDate,
 			        vehicleNo: $('#vehicleNo').val(),
 			        collectionOfficer: $('#collectionOfficer').val(),
 			        collectionDriver: $('#collectionDriver').val(),
@@ -597,7 +581,7 @@ function getDetails()
 	    		
 
 	    		if(applyFunction()==false){	    			
-	    			clearTextBoxes();
+	    			// clearTextBoxes();
 	    			return;
 	    		}else{
 	    			var invoice_value =parseFloat(document.getElementById("InvoiceValue").value) || 0;
