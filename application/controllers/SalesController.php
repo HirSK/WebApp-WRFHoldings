@@ -267,4 +267,41 @@ class SalesController extends BaseController{
 	}
 
 
+	function getCreditDetails(){
+		$id = $this->input->post('id');
+		$query = $this->sales_model->getCreditData($id);
+    	echo json_encode($query); 
+
+	}
+
+	function loadRepayCredits(){
+		$this->loadViews("repay_credit_view",$this->global,NULL,NULL);
+
+	}
+
+	function repayCredits(){
+
+		$invoice_credit_id = $this->input->post('invoiceID');
+		$credit_lasttaken_date = $this->input->post('credit_lasttaken_date');
+		$credit_topay = $this->input->post('credit_topay');
+		$completed = $this->input->post('completed');
+
+		$date=date_create_from_format("m/d/Y", $credit_lasttaken_date);
+
+		$credit_lasttaken_date=date_format($date,"Y-m-d");
+
+
+
+		$query = $this->sales_model->repayCredits($invoice_credit_id,$credit_lasttaken_date,$credit_topay,$completed);
+
+
+		$json = array('boolean' => $query);
+		echo json_encode($json);
+		// echo json_encode($query);
+
+		
+	}
+
+
+
 }
