@@ -52,7 +52,7 @@ class sales_model extends CI_Model{
 		return $maxid;
 	}
 
-<<<<<<< HEAD
+
 
 	function insertCollectionData($tablename, $data_arr) {
         try {
@@ -90,7 +90,7 @@ class sales_model extends CI_Model{
 		// }
         
   //   }
-=======
+
 	function getCreditData($id){
 		$query = $this->db->query("select * from credit where invoice_credit_id=$id");
 		$result = $query->result();
@@ -103,5 +103,5 @@ class sales_model extends CI_Model{
 		$result=$query->result();
 		return $result;
 	}
->>>>>>> 588a6804e18505519561e55727b8badc10d035ff
+
 }
