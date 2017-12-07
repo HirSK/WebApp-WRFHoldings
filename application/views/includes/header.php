@@ -134,7 +134,12 @@ function confirmUser(){
                         {
                         ?>
                         <li><a href="<?php echo base_url()?>index.php/SalesController/createInvoiceList">Invoice</a></li>
+<<<<<<< HEAD
                        <li><a href="<?php echo base_url()?>index.php/SalesController" >Account Summary</a></li>
+=======
+                       <li><a href="<?php echo base_url()?>index.php/SalesController">Account Summary</a></li>
+                       <li><a href="<?php echo base_url()?>index.php/SalesController/loadRepayCredits">Repay Credits</a></li>
+>>>>>>> 588a6804e18505519561e55727b8badc10d035ff
                          <?php
                        }
                        if($loggerRole == ROLE_SUPERVISOR || $loggerRole == ROLE_ADMIN)
