@@ -249,7 +249,7 @@
                        if($loggerRole == ROLE_ADMIN)
                         {
                         ?>
-                        <li><a href="<?php echo base_url();?>index.php/UserController/listOutlets">Outlets</a></li>
+                        <li><a href="<?php echo base_url();?>index.php/OutletController">Outlets</a></li>
                         <li><a href="<?php echo base_url();?>index.php/UserController/listUsers">Users</a></li>
 
                         <li class="treeview">
