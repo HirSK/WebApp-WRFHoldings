@@ -30,7 +30,7 @@
                     <!-- form start -->
 
                     
-                    <form role="form" action="<?php echo base_url()?>index.php/SalesController/repayCredits" method="POST">
+                    <!-- <form role="form" action="<?php echo base_url()?>index.php/SalesController/repayCredits" method="POST"> -->
                         <div class="box-body">
 
                         <div class="col-xs-12 col-lg-12 col-sm-12">
@@ -40,7 +40,7 @@
                                  <div class="form-group">
                                         <label for="inputCustomerCode" >Invoice Number</label>
 
-                                        <input type="text" class="form-control" name="invoiceID" id="invoiceID" placeholder="Enter invoice number " required>
+                                        <input type="text" class="form-control" name="invoiceID" id="invoiceID" placeholder="Enter invoice number " onkeypress="Javascript: if (event.keyCode==13) getDetails();" required>
 
 
                                     </div>
@@ -50,7 +50,7 @@
                                  <div class="form-group">
                                         <label for="customerID" >Customer ID</label>
 
-                                        <input type="text" class="form-control" name="customerID" id="customerID"  required>
+                                        <input type="text" class="form-control" name="customerID" id="customerID"  required readonly="">
 
                                     </div>
 
@@ -59,18 +59,18 @@
                             <div class="col-sm-4 col-xs-12">
                                 <label for="invoiceDate" >Invoice created Date</label>
 
-                                        <input type="text" class="form-control" name ="invoiceDate" id="invoiceDate">
+                                        <input type="text" class="form-control" name ="invoiceDate" id="invoiceDate" readonly="">
                             </div>
                         </div>
                         
 
                         <div class="col-xs-12 col-lg-12 col-sm-12">
 
-
+                           
                             <div class="col-sm-4 col-xs-12">
                                 <label for="credit" >Credit To Pay</label>
 
-                                        <input type="text" class="form-control" name ="credit" id="credit">
+                                        <input type="text" class="form-control" name ="creditToPay" id="creditToPay" readonly="">
                             </div>  
 
                             <div class="col-sm-4 col-xs-12">
@@ -100,12 +100,12 @@
                         </div>
 
 
-                            <div class="col-xs-2">
-                                <button type="submit" class="btn btn-block btn-success" name="register">Submit</button>
+                            <div class="col-xs-1">
+                        </div>
+                                <button type="submit" class="btn btn-primary preview-submit-button" name="register">Submit</button>
                             </div>
 
-                        </div>
-                    </form>
+                    <!-- </form> -->
 
 
                 </div>
@@ -146,6 +146,105 @@
           autoclose: true
         })
     })
+
+
+    function getDetails()
+{
+     if($('#invoiceID').val()){
+
+            $.ajax({
+                type : "post",
+                url: "<?php echo base_url().'index.php/SalesController/getCreditDetails'?>",
+                cache: false,
+                data : {id :  $('#invoiceID').val()},
+                success : function(json){
+                    var obj=jQuery.parseJSON(json);
+
+                    if(obj[0]){
+                        $('#customerID').val(obj[0].customer_id);
+                        $('#invoiceDate').val(obj[0].credit_start_date);                         
+                        $('#creditToPay').val(obj[0].credit_topay);                        
+                    }else{
+                        alert("You have no credits to repay");
+                        // clearTextBoxes();
+                    }
+
+                },
+            });
+        }else{
+            alert("Please enter the invoice id and hit enter");
+            // clearTextBoxes();
+        }  
+   }
+
+
+   $(function(){
+        $('.preview-submit-button').click(function(){  
+
+        
+            if($('#invoiceID').val() && $('#datepicker').val() && $('#creditPay').val()){               
+
+               
+                    var credit_pay =parseFloat(document.getElementById("creditPay").value) || 0;
+                    var credit_topay = parseFloat(document.getElementById("creditToPay").value) || 0;
+                    
+                  var completed =0;
+
+                  if(credit_pay>credit_topay){
+                    alert("Check the credit amount again");
+                    return;
+                  }else if(credit_topay==credit_pay){
+                    credit_topay = 0;
+                    var completed =1;
+                  }else if(credit_topay>credit_pay){
+                    credit_topay = credit_topay-credit_pay;
+                  }
+
+                    
+                var data = {
+                    invoiceID: $('#invoiceID').val(),
+                    credit_lasttaken_date: $('#datepicker').val(),
+                    credit_topay:credit_topay ,
+                    completed:completed
+                   
+                };
+                $.ajax({
+                    url: "<?php echo base_url().'index.php/SalesController/repayCredits'?>",
+                    type: "post",
+                    data: data,
+                   
+                   
+        
+                    success : function(json){
+                        
+                        var obj = json;
+                        alert(obj);
+
+                        if(obj){
+                            
+                            alert('Credit details updated successfully');                                                 
+
+                            // clearTextBoxes();
+                                       
+                        }else{
+                            alert("Failed,Check the internet connection again");
+                            // clearTextBoxes();
+                        }
+
+                    },
+
+
+                });
+               
+                
+            }else{
+                alert("Please fill the values");
+                // clearTextBoxes();
+            }
+
+        });  
+});
+
 
 </script>
 
