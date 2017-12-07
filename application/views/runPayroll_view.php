@@ -293,7 +293,7 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<?php include_once('includes/footer.php') ?>
+
 
 <!-- Add the sidebar's background. This div must be placed
 immediately after the control sidebar -->

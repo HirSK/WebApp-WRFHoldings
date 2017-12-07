@@ -51,4 +51,42 @@ class sales_model extends CI_Model{
 		}
 		return $maxid;
 	}
+
+
+	function insertCollectionData($tablename, $data_arr) {
+        try {
+        	// $id = checkForExistingCollection($tablename,$data_arr);
+        	// if($id){
+        	// 	return $id;
+        	// }else{
+        		$this->db->insert($tablename, $data_arr);
+
+            	$ret = $this->db->insert_id() + 0;
+            	return $ret;
+        	
+            
+        } catch (Exception $err) {
+            return $err->getMessage();
+        }
+    }
+
+
+  //   function checkForExistingCollection($tablename,$data_arr){
+  // //   	$sql = 'SELECT idCollection FROM $tablename WHERE field IN ( ' . implode( ',', $data_arr ) . ' );';
+		// // $result = $db->query( $sql );
+		// // return $result;
+
+		// $this->db->select('idCollection');
+		// $this->db->from($tablename);
+		// $this->db->where($where_arr);
+
+		// $query = $this->db->get();
+		// $res = $query->result();
+		// if(count($res)==1){
+		// 	return $res;
+		// }else{
+		// 	return;
+		// }
+        
+  //   }
 }
