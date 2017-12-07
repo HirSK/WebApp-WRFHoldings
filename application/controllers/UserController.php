@@ -104,8 +104,14 @@ class UserController extends BaseController{
                 $empID = $this->input->post('empID');
                 $mobile = $this->input->post('mobile');
                 
-                $userInfo = array('Username'=>$username, 'UserPassword'=>$password, 'Employee_idEmployee'=>$empID, 'Employee_Outlet_idOutlet'=>$OutletID,'roleName'=> $role,'mobile'=>$mobile,
-                                    'createdBy'=>$this->loggerID, 'createdDtm'=>date('Y-m-d H:i:s'));
+                $userInfo = array(  'Username'=>$username, 
+                                    'UserPassword'=>$password, 
+                                    'Employee_idEmployee'=>$empID, 
+                                    'Employee_Outlet_idOutlet'=>$OutletID,
+                                    'roleName'=> $role,
+                                    'mobile'=>$mobile,
+                                    'createdBy'=>$this->loggerID, 
+                                    'createdDtm'=>date('Y-m-d H:i:s'));
                 
                 $this->load->model('gen_model');
                 $result = $this->gen_model->insertData($tablename='user',$userInfo);
