@@ -247,11 +247,11 @@ jQuery('#master').on('click', function(e) {
                 success : function(json){
                     var obj=jQuery.parseJSON(json);
                     // var obj=json;
-                    alert(obj[0]);
+                    alert(obj[0].workingDays);
 
                     if(obj){
-                        $('#working_days').val(obj[7]);
-                        $('#holidays').val(obj[1]);
+                        $('#working_days').val();
+                        $('#holidays').val();
                                                
                     }else{
                         alert("something wrong");
