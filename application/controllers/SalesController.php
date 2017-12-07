@@ -186,22 +186,18 @@ class SalesController extends BaseController{
 		$collectionArea = $this->input->post('collectionArea');
 
 
-		// $date=date_create_from_format("m/d/Y", $day);
+		$date=date_create_from_format("m/d/Y", $CollectionDate);
 
-		// $CollectionDate=date_format($date,"Y-m-d");
+		$CollectionDate=date_format($date,"Y-m-d");
 
-		// $collectionDate = $_POST['collectionDate'];
-		// $collectionOfficer = $_POST['collectionOfficer'];
-		// $collectionDriver = $_POST['collectionDriver'];
-		// $vehicleNo = $_POST['vehicleNo'];
-		// $collectionArea = $_POST['collectionArea'];
+		
 
 		$collectionArray = array(
 
 				'CollectionDriver'  	=> $collectionDriver,
 				'CollectionVehicle' 	=>	$vehicleNo,
 				'CollectionArea'		=>	$collectionArea,
-				'CollectionDate'		=>	$collectionDate,
+				'CollectionDate'		=>	$CollectionDate,
 				'CollectionOfficerName'	=>	$collectionOfficer,
 				'Outlet_idOutlet'		=>	$this->session->userData('loggerOutletID'),
 			);
