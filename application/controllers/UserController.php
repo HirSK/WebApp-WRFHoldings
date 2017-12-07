@@ -136,5 +136,10 @@ class UserController extends BaseController{
         $this->load->view('loginView');
     }
 
+    function listOutlets(){
+        $this->loadViews('add_outlet_view');
+    }
+
+
     
 }
