@@ -53,6 +53,14 @@ function confirmUser(){
 </script> -->
 
 
+<style>
+  
+  #collectionTable tr:hover {
+    background-color:#C5CBC7;
+}
+</style>
+
+
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -133,23 +141,26 @@ function confirmUser(){
                        if($loggerRole == ROLE_SUPERVISOR)
                         {
                         ?>
+
                         <li><a href="<?php echo base_url()?>index.php/SalesController/createInvoiceList">Invoice</a></li>
-<<<<<<< HEAD
+
                        <li><a href="<?php echo base_url()?>index.php/SalesController" >Account Summary</a></li>
-=======
-                       <li><a href="<?php echo base_url()?>index.php/SalesController">Account Summary</a></li>
+                      
                        <li><a href="<?php echo base_url()?>index.php/SalesController/loadRepayCredits">Repay Credits</a></li>
->>>>>>> 588a6804e18505519561e55727b8badc10d035ff
+
+
                          <?php
                        }
-                       if($loggerRole == ROLE_SUPERVISOR || $loggerRole == ROLE_ADMIN)
+                       if( $loggerRole == ROLE_ADMIN || $loggerRole == ROLE_SUPERVISOR )
                         {
                         ?>
                         <li><a href="<?php echo base_url()?>index.php/SalesController/displayCollectionReport">Collection Reports</a></li>
 
-                        <?php
-                          }
-                        ?>
+                       <?php 
+
+                     }
+
+                       ?>
                     </ul>
                 </li>
 

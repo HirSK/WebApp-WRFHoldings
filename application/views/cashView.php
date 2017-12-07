@@ -88,11 +88,8 @@
                                                             </select>
 
                                                             <br>
-
-                                                   
                                                             
                                                         <label>Select Outlet</label>
-
                                                          <?php
                                                        if($loggerRole == ROLE_ADMIN)
                                                         {
@@ -151,20 +148,36 @@
          </div> 
 
 
-         <div class="wizard" style="margin-right: 40px;">     
+         <div class="wizard" style="margin-right: 40px;">  
+
+
+          <div class="col-lg-4 col-sm-4 col-xs-12" no-padding style="padding-top:20px">
+                    <div class="col-xs-4 left-padding">
+                        <a class="btn btn-block btn-success" href="<?php echo base_url()?>index.php/CustomerController"> PRINT</a>
+                    </div>
+
+                </div>   
                 
                     
          <div class="col-xs-12 col-lg-12" style="padding-top: 10px">
+
+
+
 
                 <!-- general form elements -->
             <div class="box box-primary" style="padding-top: 0px">
                                  
            <?php 
            
-             if( $collection != NULL){
+             if( $collection1 != NULL){
              ?>
 
-
+              <div class="box-header with-border">
+                        
+                        <div class="box-tools pull-right" style="padding-top: 0px">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        </div>
+            </div>
 
              <div class="box-body table-responsive">
                         <table id='collectionTable' class="table table-striped table-bordered col-lg-12">
@@ -172,9 +185,11 @@
                         <thead >
                             
                             <tr>
-                                <th>Collection ID</th>
+                                <th>Customer ID</th> 
+                                <th>Invoice Number</th>
+                               
+                                <th>Cash</th>
                                 
-                                <th>Collection Date</th>
                                
                                 
                                 
@@ -191,20 +206,98 @@
 
 
                     <?php
+
+
+
                         
-                        foreach ($collection as $row){
+                        foreach ($collection1 as $row){
+
+
+                            echo '<script>console.log($row->ChequeNumber)</script>';
 
 
                             
 
-                            ?><tr data-id=<?php echo $row->idCollection;?>>
-                            <td><?php echo $row->idCollection;?></td>
-                            <td><?php echo $row->CollectionDate;?></td>  
-                              
+                            ?><tr>
+                            <td><?php echo $row['Customer_idCustomer'];?></td>
+                            <td><?php echo $row['idInvoice'];?></td>
+                            
+                            <td><?php echo $row['cash'];?></td>  
                             </tr>
 
                             
                          <?php 
+                            
+                         
+                        }
+                    ?>
+                    </table>
+
+                    
+
+
+
+                    </div>
+
+
+
+                    <div class="box-header with-border">
+                        
+                        <div class="box-tools pull-right" style="padding-top: 0px">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+                        </div>
+            </div>
+
+             <div class="box-body table-responsive">
+                        <table id='collectionTable' class="table table-striped table-bordered col-lg-12">
+
+                        <thead >
+                            
+                            <tr>
+                                <th>Customer ID</th> 
+                                <th>Invoice Number</th>
+                               
+                                <th>Return Credit</th>
+                                
+                               
+                                
+                                
+                            </tr>
+
+                        
+
+                        </thead>
+
+                    
+                    
+                    
+
+
+
+                    <?php
+
+
+
+                        
+                        foreach ($collection2 as $row){
+
+
+                            echo '<script>console.log($row->ChequeNumber)</script>';
+
+                            if(((int)$row['total_credit']-(int)$row['credit_topay']) != '0'){
+                            
+
+                            ?><tr>
+                            <td><?php echo $row['invoice_credit_id'];?></td>
+                            <td><?php echo $row['customer_id'];?></td>
+                            
+                            <td><?php echo ((int)$row['total_credit']-(int)$row['credit_topay']);?></td>  
+                            </tr>
+
+                            
+                         <?php
+
+                         } 
                             
                          
                         }
