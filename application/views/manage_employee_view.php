@@ -195,7 +195,7 @@
 
 
 
-<?php include "includes/footer.php";?>
+<?php //include "includes/footer.php";?>
 
 <!-- REQUIRED JS SCRIPTS -->
 

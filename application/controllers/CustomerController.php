@@ -6,6 +6,7 @@ class CustomerController extends BaseController{
 	function __construct(){
 		parent::__construct();
 		$this->load->model('gen_model');
+		$this->load->model('customer_model');
 		$this->load->library("pagination");
 		$this->isLoggedIn();
 	}
@@ -51,4 +52,39 @@ class CustomerController extends BaseController{
 		
 
 	}
+
+
+	public function deleteCustomer(){
+		foreach($_POST['checkbox'] as $id){
+			$where_arr = array('CustomerCode'=> $id);
+			$this->customer_model->deleteData('customer',$where_arr);	
+		}
+		$custDetail['customerRecord'] = $this->gen_model->getData($tablename='Customer');
+
+		$this->loadViews('manage_customer_view',$this->global,$custDetail,NULL);
+		
+	}
+
+
+
+
+	public function updateCustomer(){
+
+			$where_arr = array('CustomerCode'=>$this->input->post('CustomCode'));
+
+			$data = array(
+			
+			'CustomerName' => $this->input->post('CustomName'),
+			'CustomerAddress' => $this->input->post('CustomAddress'),
+			'CustomerContact' => $this->input->post('CustomContact'),
+			'CustomerRegDate' => $this->input->post('CustomRegDate')
+			);
+			$this->customer_model->updateData('customer',$data, $where_arr);
+
+			$data['customerRecord'] = $this->gen_model->getData($tablename='customer');
+
+			$this->loadViews('manage_customer_view',$this->global,$data,NULL);
+    		//$this->load-("manage_customer_view",$data);
+	}
+
 }

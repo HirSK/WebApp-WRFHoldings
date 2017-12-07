@@ -110,6 +110,7 @@ class SalesController extends BaseController{
 			$SalesRtn = $this->input->post('salesrtn');
 			$MKTrtn = $this->input->post('mkt');
 			$Remarks = $this->input->post('remarks');
+			$collectionID = $this->input->post('collectionID');
 
 
 			$invoice_array = array(
@@ -126,6 +127,7 @@ class SalesController extends BaseController{
 						'Discount'				=> $Discount,
 						'MKTrtn'				=> $MKTrtn,
 						'Remarks'				=> $Remarks,
+						'Collection_idCollection'=>$collectionID,
 						'invoice_complete_date' =>date('Y-m-d H:i:s')
 
 				);
@@ -177,24 +179,32 @@ class SalesController extends BaseController{
 
 	public function addCollectionInfo(){
 
-		$collectionDate = $_POST['collectionDate'];
-		$collectionOfficer = $_POST['collectionOfficer'];
-		$collectionDriver = $_POST['collectionDriver'];
-		$vehicleNo = $_POST['vehicleNo'];
-		$collectionArea = $_POST['collectionArea'];
+		$CollectionDate = $this->input->post('date');
+		$collectionOfficer = $this->input->post('collectionOfficer');
+		$collectionDriver = $this->input->post('collectionDriver');
+		$vehicleNo = $this->input->post('vehicleNo');
+		$collectionArea = $this->input->post('collectionArea');
+
+
+		$date=date_create_from_format("m/d/Y", $CollectionDate);
+
+		$CollectionDate=date_format($date,"Y-m-d");
+
+		
 
 		$collectionArray = array(
 
 				'CollectionDriver'  	=> $collectionDriver,
 				'CollectionVehicle' 	=>	$vehicleNo,
 				'CollectionArea'		=>	$collectionArea,
-				'CollectionDate'		=>	$collectionDate,
+				'CollectionDate'		=>	$CollectionDate,
 				'CollectionOfficerName'	=>	$collectionOfficer,
 				'Outlet_idOutlet'		=>	$this->session->userData('loggerOutletID'),
 			);
 
-		$this->gen_model->insertData($tablename='collection',$collectionArray);
-		redirect('/SalesController');
+		$query = $this->gen_model->insertData($tablename='collection',$collectionArray);
+		echo json_encode($query);
+		// redirect('/SalesController');
 	}
 
 	public function displayCollectionReport(){
@@ -389,6 +399,43 @@ class SalesController extends BaseController{
 
 
 	}
+
+
+	function getCreditDetails(){
+		$id = $this->input->post('id');
+		$query = $this->sales_model->getCreditData($id);
+    	echo json_encode($query); 
+
+	}
+
+	function loadRepayCredits(){
+		$this->loadViews("repay_credit_view",$this->global,NULL,NULL);
+
+	}
+
+	function repayCredits(){
+
+		$invoice_credit_id = $this->input->post('invoiceID');
+		$credit_lasttaken_date = $this->input->post('credit_lasttaken_date');
+		$credit_topay = $this->input->post('credit_topay');
+		$completed = $this->input->post('completed');
+
+		$date=date_create_from_format("m/d/Y", $credit_lasttaken_date);
+
+		$credit_lasttaken_date=date_format($date,"Y-m-d");
+
+
+
+		$query = $this->sales_model->repayCredits($invoice_credit_id,$credit_lasttaken_date,$credit_topay,$completed);
+
+
+		$json = array('boolean' => $query);
+		echo json_encode($json);
+		// echo json_encode($query);
+
+		
+	}
+
 
 
 }

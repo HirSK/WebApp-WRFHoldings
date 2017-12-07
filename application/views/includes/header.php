@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="<?php echo base_url()?>template/dist/css/AdminLTE.min.css">
   
   <link rel="stylesheet" href="<?php echo base_url()?>template/dist/css/skins/_all-skins.min.css">
+  <!-- Morris charts -->
+  <link rel="stylesheet" href="<?php echo base_url()?>template/bower_components/morris.js/morris.css">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -131,7 +133,12 @@
                         {
                         ?>
                         <li><a href="<?php echo base_url()?>index.php/SalesController/createInvoiceList">Invoice</a></li>
+<<<<<<< HEAD
                        <li><a href="<?php echo base_url()?>index.php/SalesController">Account Summary</a></li> 
+=======
+                       <li><a href="<?php echo base_url()?>index.php/SalesController">Account Summary</a></li>
+                       <li><a href="<?php echo base_url()?>index.php/SalesController/loadRepayCredits">Repay Credits</a></li>
+>>>>>>> f90848af439bbd82f8cbafe1dd1fc64c8fc1af91
                          <?php
                        }
                        if( $loggerRole == ROLE_ADMIN || $loggerRole == ROLE_SUPERVISOR )
