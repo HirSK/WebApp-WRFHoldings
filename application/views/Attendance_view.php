@@ -6,7 +6,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Attendance Submission
+                Attendance View
                 
             </h1>
 
@@ -124,6 +124,8 @@
                                             <thead>
                                                 <tr>
                                                     <th>Emp:ID</th>
+                                                    <th>FullName</th>
+                                                    <th>Role</th>
                                                     <th>Full</th>
                                                     <th>Half</th>
                                                     <th>Leave</th>
@@ -304,11 +306,13 @@ jQuery('#master').on('click', function(e) {
                             var workingDays = parseInt($('#working_days').val());
                             var rows = "";
                             var id = parseInt(obj[i].Employee_idEmployee);
+                            var name = obj[i].EmployeeFullName;
+                             var role = obj[i].EmployeePosition;
                             var full = parseInt(obj[i].full);
                              var half = parseInt(obj[i].half);
                              var leave = workingDays-(full+half);
 
-                            rows += "<tr><td>" + id + "</td><td>" + full + "</td><td>" + half + "</td><td>" + leave + "</td></tr>";
+                            rows += "<tr><td>" + id + "</td><td>" + name + "</td><td>" + role + "</td><td>" + full + "</td><td>" + half + "</td><td>" + leave + "</td></tr>";
                             $(rows).appendTo("#list tbody");
                             
                         }
