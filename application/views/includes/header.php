@@ -217,9 +217,14 @@
               </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo base_url()?>index.php/VehicleController">Add Vehicle</a></li>
-                        <li><a href="#">Manage Vehicles</a></li>
-                        <li><a href="#">Maintain Vehicles</a></li>
+                      <?php
+                        if($loggerRole == ROLE_SUPERVISOR || $loggerRole == ROLE_ADMIN){
+                          ?>
+                            <li><a href="<?php echo base_url()?>index.php/VehicleController">Add Vehicle</a></li>
+                            <li><a href="<?php echo base_url()?>index.php/VehicleController/manageVehicle">Manage Vehicles</a></li>
+                            <li><a href="<?php echo base_url()?>index.php/VehicleController/maintainVehicle">Maintain Vehicles</a></li>
+                          <?php
+                        } ?>
                     </ul>
                 </li>
         <!../Vehicle section..>
