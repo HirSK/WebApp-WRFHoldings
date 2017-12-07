@@ -41,7 +41,7 @@
                                                 <div class="col-md-4">
                                                     <label>Month</label>
 
-                                                    <input type="text" class="form-control" placeholder="Enter..">
+                                                    <input type="text" class="form-control" id="month" placeholder="Enter month name" onkeypress="Javascript: if (event.keyCode==13) getDetails();">
                                                     <br>
                                                 </div>
 
@@ -50,7 +50,7 @@
                                                 <div class="col-md-4">
                                                    <label>Number of working Days </label>
 
-                                                    <input type="text" class="form-control" placeholder="Enter ..." disabled>
+                                                    <input type="text" class="form-control" placeholder="Enter ..." readonly="" id="working_days">
                                                      <br> 
                                                 </div>
                                             
@@ -59,7 +59,7 @@
                                                 <div class="col-md-3">
                                                     <label>No of weekly Holidays</label>
 
-                                                    <input type="text" class="form-control" placeholder="Enter ..." disabled>  <br>
+                                                    <input type="text" class="form-control" placeholder="Enter ..." readonly="" id="holidays">  <br>
                                                 </div>
                                             
                                                 </div>
@@ -142,7 +142,7 @@
 
     </div>
 
-    <?php include "includes/footer.php";?>
+    
 
 
 
@@ -157,11 +157,11 @@
 
 <!-- AdminLTE App -->
 <!-- InputMask -->
-<script src="<?php echo base_url() ?>template/bower_components/inputmask/dist/inputmask/jquery.inputmask.js"></script>
-<script src="<?php echo base_url() ?>template/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="<?php echo base_url() ?>template/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<!-- <script src="<?php echo base_url() ?>template/bower_components/inputmask/dist/inputmask/jquery.inputmask.js"></script> -->
+<!-- <script src="<?php echo base_url() ?>template/plugins/input-mask/jquery.inputmask.date.extensions.js"></script> -->
+<!-- <script src="<?php echo base_url() ?>template/plugins/input-mask/jquery.inputmask.extensions.js"></script> -->
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function () {
         //Initialize tooltips
         $('.nav-tabs > li a[title]').tooltip();
@@ -189,7 +189,7 @@
         $(elem).prev().find('a[data-toggle="tab"]').click();
     }
 </script>
-
+ -->
 
 <!-- REQUIRED JS SCRIPTS -->
 
@@ -214,9 +214,9 @@
 
 </script>
 
-<script src="<?php echo base_url()?>template/bower_components/newCss/js/jquery.dataTables.min.js"></script>
+<!-- <script src="<?php echo base_url()?>template/bower_components/newCss/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo base_url()?>template/bower_components/newCss/js/dataTables.bootstrap.min.js"></script>
-<script src="<?php echo base_url()?>template/bower_components/newCss/js/dataTables.checkboxes.min.js"></script>
+<script src="<?php echo base_url()?>template/bower_components/newCss/js/dataTables.checkboxes.min.js"></script> -->
 
 
 <script>
@@ -233,11 +233,36 @@ jQuery('#master').on('click', function(e) {
 });
 </script>
 
-<!-- bootstrap datepicker -->
+<script type="text/javascript">
 
+    function getDetails()
+{
+     if($('#month').val()){
+        
+            $.ajax({
+                type : "post",
+                url: "<?php echo base_url().'index.php/runPayrollController/getDays'?>",
+                cache: false,
+                data : {month :  $('#month').val()},
+                success : function(json){
+                    var obj=jQuery.parseJSON(json);
+                    // var obj=json;
+                    alert(obj[0].workingDays);
 
+                    if(obj){
+                        $('#working_days').val();
+                        $('#holidays').val();
+                                               
+                    }else{
+                        alert("something wrong");
+                        // clearTextBoxes();
+                    }
 
-
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
+                },
+            });
+        }else{
+            alert("Please enter the month name and hit enter");
+            // clearTextBoxes();
+        }  
+   }
+</script>

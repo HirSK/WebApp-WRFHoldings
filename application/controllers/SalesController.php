@@ -202,7 +202,7 @@ class SalesController extends BaseController{
 				'Outlet_idOutlet'		=>	$this->session->userData('loggerOutletID'),
 			);
 
-		$query = $this->gen_model->insertData($tablename='collection',$collectionArray);
+		$query = $this->sales_model->insertCollectionData($tablename='collection',$collectionArray);
 		echo json_encode($query);
 		// redirect('/SalesController');
 	}
