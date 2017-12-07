@@ -51,4 +51,17 @@ class sales_model extends CI_Model{
 		}
 		return $maxid;
 	}
+
+	function getCreditData($id){
+		$query = $this->db->query("select * from credit where invoice_credit_id=$id");
+		$result = $query->result();
+		return $result;
+
+	}
+
+	function repayCredits($invoice_credit_id,$credit_lasttaken_date,$credit_topay,$completed){
+		$query = $this->db->query("update credit set credit.credit_lasttaken_date=credit_lasttaken_date and credit.credit_topay=credit_topay and credit.completed=completed where credit.invoice_credit_id=invoice_credit_id");
+		$result=$query->result();
+		return $result;
+	}
 }
