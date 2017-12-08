@@ -30,12 +30,7 @@ class UserController extends BaseController{
             $searchText = $this->input->post('searchText');
             $data['searchText'] = $searchText;
             
-            // $this->load->library('pagination');
-            
-   //          $count = $this->gen_model->userListingCount($searchText);
-
-			// $returns = $this->paginationCompress ( "userListing/", $count, 5 );
-            
+                      
             $data['userRecords'] = $this->gen_model->userListing($searchText);
 
             
