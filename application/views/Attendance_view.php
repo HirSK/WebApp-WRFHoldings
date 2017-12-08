@@ -6,7 +6,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Attendance Submission
+                Attendance View
                 
             </h1>
 
@@ -62,68 +62,18 @@
                                                 </div>
                                         
 
-
-
-                                    <!-- <form id="myform" method="post">
-                                       
-                                        
-                                    <div class="col-md-11">
-
-
-                                       <table id="mytable" class="table table-bordered table-striped table-hover">
-                                            <thead>
-
-                                            <tr>
-                                        <th><input name="checkbox[]" id="master" type="checkbox" /></th>
-                                        <th>Employee ID</th>
-                                        <th>Employee Full Name</th>
-                                        <th>Name with Initials</th>
-                                        <th>NIC Number</th>
-                                        <th>Number of Half Days</th>
-                                        <th>Number of full Days</th>
-                                        <th>Number of leaves</th>
-                                        
-
-                                    </tr>
-
-                                            <?php  
-                                             foreach ($emp as $row)  
-                                             {  
-                                                ?><tr>
-                                                <td><input name="checkbox[]" class="case" type="checkbox" /></td>  
-                                                <td id="id"><?php echo $row->idEmployee;?></td>  
-                                                <td><?php echo $row->EmployeeFullName;?></td> 
-                                                <td><?php echo $row->EmployeeNameWithInitials;?></td>  
-                                                <td><?php echo $row->EmployeeNIC;?></td>
-
-                                                <td>
-                                                    <input type="text" class="form-control" name="half" id="half" readonly="">
-                                                </td>
-                                                <td>
-                                                    <input type="text" class="form-control" name="full" id="full" readonly="">
-                                                </td>
-                                                 <td>
-                                                    <input type="text" class="form-control" name="leave" id="leave" readonly="">
-                                                </td>  
-                                                
-                                                    
-                                             <?php }  
-                                             ?> 
-                                            
-                                            </thead>
-                                           
-                                        </table>
-                                         </div>
-                                    </form>  -->
                         <div class="col-sm-12">
                             <h5>Preview:</h5>
                             <div class="row">
                                 <div class="col-xs-12">
                                     <div class="table-responsive">
-                                        <table class="table preview-table" id="list">
+                                        <table class="table preview-table table-hover" id="list">
                                             <thead>
                                                 <tr>
+                                                    <th>Select</th>
                                                     <th>Emp:ID</th>
+                                                    <th>FullName</th>
+                                                    <th>Role</th>
                                                     <th>Full</th>
                                                     <th>Half</th>
                                                     <th>Leave</th>
@@ -144,7 +94,7 @@
 
                         <div class="col-md-12">
                         <ul class="list-inline ">
-                            <li><button type="submit" class="btn btn-primary next-step">Save </button></li>
+                            <li><button type="submit" class="btn btn-primary next-step proceed" id="proceed" >Proceed for salary calculation </button></li>
                         </ul>
                         </div>
 
@@ -169,46 +119,6 @@
     immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
 
-<!-- ./wrapper -->
-
-<!-- REQUIRED JS SCRIPTS -->
-
-
-<!-- AdminLTE App -->
-<!-- InputMask -->
-<!-- <script src="<?php echo base_url() ?>template/bower_components/inputmask/dist/inputmask/jquery.inputmask.js"></script> -->
-<!-- <script src="<?php echo base_url() ?>template/plugins/input-mask/jquery.inputmask.date.extensions.js"></script> -->
-<!-- <script src="<?php echo base_url() ?>template/plugins/input-mask/jquery.inputmask.extensions.js"></script> -->
-
-<!-- <script type="text/javascript">
-    $(document).ready(function () {
-        //Initialize tooltips
-        $('.nav-tabs > li a[title]').tooltip();
-        //Wizard
-        $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-            var $target = $(e.target);
-            if ($target.parent().hasClass('disabled')) {
-                return false;
-            }
-        });
-        $(".next-step").click(function (e) {
-            var $active = $('.wizard .nav-tabs li.active');
-            $active.next().removeClass('disabled');
-            nextTab($active);
-        });
-        $(".prev-step").click(function (e) {
-            var $active = $('.wizard .nav-tabs li.active');
-            prevTab($active);
-        });
-    });
-    function nextTab(elem) {
-        $(elem).next().find('a[data-toggle="tab"]').click();
-    }
-    function prevTab(elem) {
-        $(elem).prev().find('a[data-toggle="tab"]').click();
-    }
-</script>
- -->
 
 <!-- REQUIRED JS SCRIPTS -->
 
@@ -223,6 +133,7 @@
 <!-- bootstrap datepicker -->
 <script src="<?php echo base_url()?>template/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script >
     $(function() {
         //Date picker
@@ -232,11 +143,6 @@
     })
 
 </script>
-
-<!-- <script src="<?php echo base_url()?>template/bower_components/newCss/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url()?>template/bower_components/newCss/js/dataTables.bootstrap.min.js"></script>
-<script src="<?php echo base_url()?>template/bower_components/newCss/js/dataTables.checkboxes.min.js"></script> -->
-
 
 <script>
 
@@ -265,17 +171,14 @@ jQuery('#master').on('click', function(e) {
                 data : {month :  $('#month').val()},
                 success : function(json){
                     var obj=jQuery.parseJSON(json);
-                    // alert(obj);
-                    // var obj=json;
-                    // alert(obj[0].workingDays);
-
+                   
                     if(obj){
                         $('#working_days').val(obj[0].workingDays);
                         $('#holidays').val(obj[0].holidays);
                                                
                     }else{
                         alert("something wrong");
-                        // clearTextBoxes();
+                        
                     }
 
                 },
@@ -287,46 +190,30 @@ jQuery('#master').on('click', function(e) {
                 data : {month :  $('#month').val()},
                 success : function(json){
                     var obj=jQuery.parseJSON(json);
-                    
-
-                          // alert(obj[1].full);
-                    // console.log(json);
-
+                                       
                     if(obj){
-                        // $('#working_days').val(obj[0].full);
-                        // $('#holidays').val(obj[0].half);
-                        // alert(obj[0].full);
-                         // alert(obj[0].half);
-
-                         // var workingDays = parseInt($('#working_days').val());
+                        
 
                         for (var i=0;i<obj.length;i++) {
                             var workingDays = parseInt($('#working_days').val());
                             var rows = "";
                             var id = parseInt(obj[i].Employee_idEmployee);
+                            var name = obj[i].EmployeeFullName;
+                             var role = obj[i].EmployeePosition;
                             var full = parseInt(obj[i].full);
                              var half = parseInt(obj[i].half);
                              var leave = workingDays-(full+half);
+                             var check = '<input type="checkbox" id="select" class="chk" >';
 
-                            rows += "<tr><td>" + id + "</td><td>" + full + "</td><td>" + half + "</td><td>" + leave + "</td></tr>";
+                            rows += "<tr><td>" + check + "</td><td>" + id + "</td><td>" + name + "</td><td>" + role + "</td><td>" + full + "</td><td>" + half + "</td><td>" + leave + "</td></tr>";
                             $(rows).appendTo("#list tbody");
                             
                         }
 
-
-                        // for (i=0; i < obj.length; i++) {
-                        //     $('#full').append("<td>"+obj[i].full+"</td>");
-                        //     $('#half').append("<td>"+obj[i].half+"</td>");
-                        // }
-
-                        // for (i=0; i < obj.length; i++) {
-                        //     $('#full').html(obj[i].full);
-                        //     $('#half').html(obj[i].half);
-                        // }
-                                               
+           
                     }else{
                         alert("something wrong");
-                        // clearTextBoxes();
+                        
                     }
 
                 },
@@ -336,7 +223,27 @@ jQuery('#master').on('click', function(e) {
 
         }else{
             alert("Please enter the month name and hit enter");
-            // clearTextBoxes();
+            
         }  
    }
+
+
+$("#proceed").click(function(event){
+    
+    // event.preventDefault();
+   
+    $IDs = $("#list input:checkbox:checked").map(function () {
+    return $(this).attr("id");
+    }).get();
+    console.log($IDs);
+
+
+    // var res = $('#list input:checked').map(function(){
+    // return $(this).val();
+    // }).get();
+
+    // console.log(res);
+});
+
+
 </script>
