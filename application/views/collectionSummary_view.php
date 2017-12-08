@@ -88,32 +88,10 @@
 
     var listvalues1 = localStorage.getItem('data1');
     var listvalues2 = localStorage.getItem('data2');
-
-    //var listvalues2 = localStorage.getItem('data2');
-
-
-   
-
-    // //pase the value 
     var finalvalue1 = JSON.parse(listvalues1);
     var finalvalue2 = JSON.parse(listvalues2);
 
-
-
     document.getElementById('coldate').innerHTML = finalvalue2;
-
-
-    
-
-    
-   console.log(finalvalue2);
-
-
-
-
-
-    
-
 
     for (i = 0, len = finalvalue1.length, text = ""; i < len; i++) { 
 
