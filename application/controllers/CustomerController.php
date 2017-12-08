@@ -84,7 +84,7 @@ class CustomerController extends BaseController{
 			$data['customerRecord'] = $this->gen_model->getData($tablename='customer');
 
 			$this->loadViews('manage_customer_view',$this->global,$data,NULL);
-    		//$this->load-("manage_customer_view",$data);
+    		//$this->load-("manage_customer_view",$data)
 	}
 
 }
