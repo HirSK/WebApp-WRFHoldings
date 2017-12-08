@@ -104,62 +104,6 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <!-- <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputVehicleName">Vehicle Name</label>
-                                            <input type="text" class="form-control" name="exampleVehicleName" placeholder="Vehicle Name">
-                                        </div>
-                                    </div>
- -->
-                                    <!-- <div class="col-sm-4 col-xs-12">                                        
-                                         <div class="form-group">
-                                            <label>Select Outlet</label>
-                                            <select class="form-control" name="outletName" required>
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                        
-                                            </select>
-                                        </div> 
-                                    </div>
- -->
-                                    <!-- <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputEngineNo">Engine No</label>
-                                            <input type="engineNo" class="form-control" name="exampleEngineNo" placeholder="Engine No">
-                                        </div>
-                                    </div> -->
-
-                             <!--    </div>
-
-                                <div class="row">
-                                    
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label for="exampleInputChassisNo">Chassis No</label>
-                                            <input type="chassisNo" class="form-control" name="exampleChassisNo" placeholder="Chassis No">
-                                        </div>
-                                    </div> -->
-
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <!-- <label>Registration Date</label>
-
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <i class="fa fa-calendar"></i>
-                                                </div>
-                                                <input type="registrationDate" class="form-control" name="registrationDate" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
-                                            </div> -->
-                                            <!-- /.input group -->
-                                        </div>
-                                    </div>
-
-                                </div>                                
-
                                 <ul class="list-inline pull-right">
                                     <li><button type="button" class="btn btn-primary next-step">Save and Continue</button></li>
                                 </ul>
@@ -303,12 +247,6 @@ immediately after the control sidebar -->
 
 <!-- REQUIRED JS SCRIPTS -->
 
-<script>
-    $(function () {
-        //Datemask dd/mm/yyyy
-        $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-    }
-</script>
 <script type="text/javascript">
     $(document).ready(function () {
         //Initialize tooltips

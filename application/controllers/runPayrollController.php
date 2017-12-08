@@ -16,13 +16,7 @@ class RunPayrollController extends BaseController{
 
     }
 
-    public function getDays(){
-        $month = $this->input->post('month');
-        $outlet = $this->session->userData('loggerOutletID');
-        $query = $this->payroll_model->getDays($month,$outlet);
-        echo json_encode($query); 
-    }
-
+    
     
     
 }

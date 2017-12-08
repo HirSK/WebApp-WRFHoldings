@@ -30,12 +30,7 @@ class UserController extends BaseController{
             $searchText = $this->input->post('searchText');
             $data['searchText'] = $searchText;
             
-            // $this->load->library('pagination');
-            
-   //          $count = $this->gen_model->userListingCount($searchText);
-
-			// $returns = $this->paginationCompress ( "userListing/", $count, 5 );
-            
+                      
             $data['userRecords'] = $this->gen_model->userListing($searchText);
 
             
@@ -141,6 +136,11 @@ class UserController extends BaseController{
         $this->session->sess_destroy();
         $this->load->view('loginView');
     }
+
+    function listOutlets(){
+        $this->loadViews('add_outlet_view');
+    }
+
 
     
 }

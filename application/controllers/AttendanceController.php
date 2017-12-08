@@ -7,18 +7,17 @@ class AttendanceController extends BaseController{
 	function __construct(){
 		parent::__construct();
 		$this->load->model('gen_model');
+		$this->load->model('payroll_model');
 		$this->load->library("pagination");
 		$this->isLoggedIn();
 	}
 
 	public function index(){
+	
 
-		$data['emp'] = $this->gen_model->getData($tablename='employee');
+		// $data['emp'] = $this->gen_model->getData($tablename='employee');
+		$data['emp'] = $this->payroll_model->getEmployees($this->loggerOutletID);
 
-
-
-    	// $this->load->view('attendance_view',$data); 
-    	// $this->loadViews("add_new_user", $this->global, NULL, NULL);
     	$this->loadViews('attendance_view',$this->global,$data,NULL);
 	}
 
@@ -84,4 +83,21 @@ class AttendanceController extends BaseController{
 		//}
 
 	}
+
+	public function getDays(){
+        $month = $this->input->post('month');
+        list($year, $month) = explode("-", "$month", 2);
+        $outlet = $this->session->userData('loggerOutletID');
+        $query = $this->payroll_model->getDays($year,$month,$outlet);
+        echo json_encode($query); 
+    }
+
+    public function getEmployeeAttendance(){
+    	$month = $this->input->post('month');
+    	list($year, $month) = explode("-", "$month", 2);
+    	$outlet = $this->session->userData('loggerOutletID');
+    	$query2 = $this->payroll_model->getEmployeeAttendance($year,$month,$outlet);
+    	echo json_encode($query2); 
+    }
+
 }
