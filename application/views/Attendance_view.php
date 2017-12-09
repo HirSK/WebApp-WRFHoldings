@@ -134,7 +134,7 @@
 <script src="<?php echo base_url()?>template/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script >
+<!-- <script >
     $(function() {
         //Date picker
         $('#datepicker').datepicker({
@@ -142,7 +142,7 @@
         })
     })
 
-</script>
+</script> -->
 
 <script>
 
@@ -189,13 +189,14 @@ jQuery('#master').on('click', function(e) {
                 cache: false,
                 data : {month :  $('#month').val()},
                 success : function(json){
+
+                    var workingDays = parseInt($('#working_days').val());
                     var obj=jQuery.parseJSON(json);
                                        
-                    if(obj){
-                        
+                    if(obj){                       
 
                         for (var i=0;i<obj.length;i++) {
-                            var workingDays = parseInt($('#working_days').val());
+                            
                             var rows = "";
                             var id = parseInt(obj[i].Employee_idEmployee);
                             var name = obj[i].EmployeeFullName;
@@ -203,7 +204,7 @@ jQuery('#master').on('click', function(e) {
                             var full = parseInt(obj[i].full);
                              var half = parseInt(obj[i].half);
                              var leave = workingDays-(full+half);
-                             var check = '<input type="checkbox" id="select" class="chk" >';
+                             var check = '<input type="checkbox" id="master" class="chk" >';
 
                             rows += "<tr><td>" + check + "</td><td>" + id + "</td><td>" + name + "</td><td>" + role + "</td><td>" + full + "</td><td>" + half + "</td><td>" + leave + "</td></tr>";
                             $(rows).appendTo("#list tbody");
@@ -231,18 +232,27 @@ jQuery('#master').on('click', function(e) {
 $("#proceed").click(function(event){
     
     // event.preventDefault();
+
+    var rowCount = 0;
+    var array;
    
-    $IDs = $("#list input:checkbox:checked").map(function () {
-    return $(this).attr("id");
+    $IDs = $("#list input:checkbox:checked").each(function() {
+        rowCount ++;
+        array = $(this).parent().siblings().map(function() {
+        return $(this).text().trim();
     }).get();
-    console.log($IDs);
 
 
-    // var res = $('#list input:checked').map(function(){
-    // return $(this).val();
-    // }).get();
+  });
 
-    // console.log(res);
+
+     if(rowCount >=1){
+   
+            alert(array);
+  }else{
+
+    alert("Error, Select only one row");
+  }
 });
 
 
