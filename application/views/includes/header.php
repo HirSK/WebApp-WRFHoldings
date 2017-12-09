@@ -184,7 +184,10 @@ function confirmUser(){
                        if($loggerRole == ROLE_SUPERVISOR)
                         {
                         ?>
-                        <li><a href="<?php echo base_url()?>index.php/AttendanceController">Attendance</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/CalendarController">Add Calendar Entries</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/CalendarController/viewCalendar">Manage Calendar</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/AddAttendanceController">Add Attendance </a></li>
+                        
                         <li><a href="<?php echo base_url()?>index.php/RunPayrollController">Run Payroll</a></li>
 
                          <?php
@@ -192,6 +195,7 @@ function confirmUser(){
                        if($loggerRole == ROLE_SUPERVISOR || $loggerRole == ROLE_ADMIN)
                         {
                         ?>
+                        <li><a href="<?php echo base_url()?>index.php/AttendanceController">View Attendance </a></li>
                         <li><a href="#">Salary Reports</a></li>
 
                         <?php
