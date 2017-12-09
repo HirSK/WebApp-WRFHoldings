@@ -42,10 +42,10 @@ class ChartController extends BaseController{
 		$data1['out'] = $this->home_model->getnumoutlet();
 
 
-		$data1['collection1'] = $this->view_sales_model->viewCheque('2017/12/13',date('Y-m-d'),1);
-		$data1['collection2'] = $this->view_sales_model->viewCredit('2017/12/13',date('Y-m-d'),1);
-		$data1['collection3'] = $this->view_sales_model->viewCash('2017/12/13',date('Y-m-d'),1);
-		$data1['collection4'] = $this->view_sales_model->returnCredit('2017/12/13',date('Y-m-d'),1);
+		$data1['collection1'] = $this->view_sales_model->viewCheque('2017/11/01',date('Y-m-d'),1);
+		$data1['collection2'] = $this->view_sales_model->viewCredit('2017/11/01',date('Y-m-d'),1);
+		$data1['collection3'] = $this->view_sales_model->viewCash('2017/11/01',date('Y-m-d'),1);
+		$data1['collection4'] = $this->view_sales_model->returnCredit('2017/11/01',date('Y-m-d'),1);
 
 
 
