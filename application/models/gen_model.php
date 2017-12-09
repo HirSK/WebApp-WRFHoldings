@@ -156,4 +156,45 @@ class gen_model extends CI_Model{
 
     }
 
+    function pettyCashExpenses($invoice_array){
+        try {
+            
+            // $invoice_array['Collection_idCollection'] = $this->getMaxCollectionID();        
+
+
+            $ret = $this->db->insert('outlet_expends_petty_cash', $pettycashexpences_array);
+
+            // $ret = $this->db->insert_id() + 0;
+            return $ret;
+
+        } catch (Exception $err) {
+            return $err->getMessage();
+        }
+
+        
+    }
+
+    public function updateData($tablename, $data_arr, $where_arr) {
+        try {
+
+            $this->db->update($tablename, $data_arr, $where_arr);
+            $report = array();
+            $report['error'] = $this->db->_error_number();
+            $report['message'] = $this->db->_error_message();
+            return $report;
+        } catch (Exception $err) {
+
+            return $err->getMessage();
+        }
+    }
+
+    public function deleteData($tblName,$where){
+
+      return $this->db->delete($tblName,$where);
+    }
+
+    public function deleteRecord($id){
+
+    return $this->db->delete('Customer',['idCustomer'=>$id]);
+}
 }
