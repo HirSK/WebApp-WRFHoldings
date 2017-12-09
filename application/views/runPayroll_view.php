@@ -64,98 +64,93 @@
                         </ul>
                     </div>
 
-                    <form role="form" action="#" method="POST">
+                    <!-- <form role="form" action="#" method="POST"> -->
                         <div class="tab-content">
                             <div class="tab-pane active" role="tabpanel" id="basic">
 
-                                <div class="row">
+                               
+                                <div class="row" style="padding-left: 12px;">
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Select Month</label>
-                                            <select class="form-control vehicleType" style="width: 100%;" name="vehicleType" required='required'>
-                                                <option selected="selected">January</option>
-                                                <option>February</option>
-                                                <option>March</option>
-                                                <option>April</option>
-                                                <option>May</option>
-                                                <option>June</option>
-                                                <option>July</option>
-                                                <option>August</option>
-                                                <option>September</option>
-                                                <option>October</option>
-                                                <option>November</option>
-                                                <option>December</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label>Select Employee</label>
-                                            <select class="form-control vehicleType" style="width: 100%;" name="vehicleType" required='required'>
-                                            <option value>--Select Employee--</option>
-                                        <?php
-                                            foreach ($employeeList as  $employee) {                                        
+                                        <label>Enter year and month</label>
 
-                                                echo '<option value="'.$employee->EmployeeNameWithInitials.'">'.$employee->EmployeeNameWithInitials.'</option>';
-                                            }
-                                            ?>
-                                            </select>
-                                        </div>
+                                        <input type="text" class="form-control" id="month" placeholder="EX: 2017-12" onkeypress="Javascript: if (event.keyCode==13) getDetails();">
+                                        <br>
                                     </div>
+
+                              
+                                
+                                    <div class="col-md-4">
+                                       <label>Number of working Days </label>
+
+                                        <input type="text" class="form-control" placeholder="Enter ..." readonly="" id="working_days">
+                                         <br> 
+                                    </div>
+                                
+
+                                
+                                    <div class="col-md-3">
+                                        <label>No of weekly Holidays</label>
+
+                                        <input type="text" class="form-control" placeholder="Enter ..." readonly="" id="holidays">  <br>
+                                    </div>
+                                
+                                    </div>
+                                     <div class="col-sm-12">
+                            <h5>Preview:</h5>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table preview-table table-hover" id="list">
+                                            <thead>
+                                                <tr>
+                                                    <th>Select</th>
+                                                    <th>Emp:ID</th>
+                                                    <th>FullName</th>
+                                                    <th>Role</th>
+                                                    <th>Full</th>
+                                                    <th>Half</th>
+                                                    <th>Leave</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody> <!-- preview content goes here-->
+                                        </table>
+                                    </div>                            
                                 </div>
+                            </div>
+                           
+                        </div>
+
 
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-primary next-step">Save and Continue</button></li>
+                                    <li><button type="button" class="btn btn-primary next-step" id="proceed">Proceed for salary calculation</button></li>
                                 </ul>
 
                             </div>
 
                             <div class="tab-pane" role="tabpanel" id="owner">
 
+                               
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="exampleOwnerName">Basic Salary</label>
-                                            <input type="ownerName" class="form-control" name="exampleOwnerName" placeholder="No. of Working Days" required='required'>
-                                        </div>
-                                    </div>
+                                <div class="col-xs-12">
+                                    <div class="table-responsive">
+                                        <table class="table preview-table table-hover" id="salary_table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Select</th>
+                                                    <th>Emp:ID</th>
+                                                    <th>FullName</th>
+                                                    <th>Basic Salary</th>
+                                                    <th>SalaryPerDay</th>
+                                                    <th>Gross Salary</th>
+                                                                                                        
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody> <!-- preview content goes here-->
+                                        </table>
+                                    </div>                            
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="exampleOwnerAddress">Sales Commission</label>
-                                            <input type="ownerAddress" class="form-control" name="exampleOwnerAddress" placeholder="Enter Value">
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="exampleOwnerTelephoneNo">Meal Allowance</label>
-                                            <input type="ownerTelephoneNo" class="form-control" name="exampleOwnerTelephoneNo" placeholder="No. of Working days">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="exampleOwnerTelephoneNo">Special Incentive</label>
-                                            <input type="ownerTelephoneNo" class="form-control" name="exampleOwnerTelephoneNo" placeholder="Enter amount">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="exampleOwnerTelephoneNo">Weekly Holiday Payment</label>
-                                            <input type="ownerTelephoneNo" class="form-control" name="exampleOwnerTelephoneNo" placeholder="Enter amount">
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>
 
                                 <ul class="list-inline pull-right">
                                     <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
@@ -301,6 +296,157 @@ immediately after the control sidebar -->
           autoclose: true
         })
     })
+
+</script>
+<script type="text/javascript">
+
+ function getDetails()
+{
+     if($('#month').val()){
+        
+            $.ajax({
+                type : "post",
+                url: "<?php echo base_url().'index.php/AttendanceController/getDays'?>",
+                cache: false,
+                data : {month :  $('#month').val()},
+                success : function(json){
+                    var obj=jQuery.parseJSON(json);
+                   
+                    if(obj){
+                        $('#working_days').val(obj[0].workingDays);
+                        $('#holidays').val(obj[0].holidays);
+                                               
+                    }else{
+                        alert("something wrong");
+                        
+                    }
+
+                },
+            });
+            $.ajax({
+                type : "post",
+                url: "<?php echo base_url().'index.php/AttendanceController/getEmployeeAttendance'?>",
+                cache: false,
+                data : {month :  $('#month').val()},
+                success : function(json){
+                    var obj=jQuery.parseJSON(json);
+                                       
+                    var workingDays = parseInt($('#working_days').val());
+
+                    if(obj){
+                        
+
+                        for (var i=0;i<obj.length;i++) {
+                            var rows = "";
+                            var id = parseInt(obj[i].Employee_idEmployee);
+                            var name = obj[i].EmployeeFullName;
+                             var role = obj[i].EmployeePosition;
+                            var full = parseInt(obj[i].full);
+                             var half = parseInt(obj[i].half);
+                             var leave = workingDays-(full+half);
+                             var check = '<input type="checkbox" id="select" class="chk" >';
+
+                            rows += "<tr><td>" + check + "</td><td>" + id + "</td><td>" + name + "</td><td>" + role + "</td><td>" + full + "</td><td>" + half + "</td><td>" + leave + "</td></tr>";
+                            $(rows).appendTo("#list tbody");
+                            
+                        }
+
+           
+                    }else{
+                        alert("something wrong");
+                        
+                    }
+
+                },
+            });
+
+
+
+        }else{
+            alert("Please enter the month name and hit enter");
+            
+        }  
+   }
+
+
+
+
+   $("#proceed").click(function(event){
+    
+    // event.preventDefault();
+
+    var tbody = $("#salary_table tbody");
+
+    if (tbody.children().length > 0) {
+        
+    }else{
+
+        var rowCount = 0;
+        var attendance_array;
+       
+        $IDs = $("#list input:checkbox:checked").each(function() {
+            rowCount ++;
+            attendance_array = $(this).parent().siblings().map(function() {
+            return $(this).text().trim();
+        }).get();
+
+
+      });
+
+
+     if(rowCount >=1){   
+            // alert(attendance_array[0]);
+
+            var data = {
+                    empID: attendance_array[0],
+                    empName:attendance_array[1],
+                    full: attendance_array[3],
+                    half: attendance_array[4],
+                    working: $('#working_days').val()
+                                        
+                };
+            $.ajax({
+                type : "post",
+                url: "<?php echo base_url().'index.php/runPayrollController/getSalaryDetails'?>",
+                cache: false,
+                data :data ,
+                success : function(json){
+                    var obj=jQuery.parseJSON(json);
+                    // obj=json;
+                    // alert(obj);
+                   
+                    if(obj){
+                        
+                        // for (var i=0;i<obj.length;i++) {
+                            var rows = "";
+                            var id = obj.id;                            
+                            var empName = obj.empName;
+                            var basic_salary = obj.basic_salary;
+                            var salary_per_day = obj.salary_per_day;
+                            var emp_gross_salary = obj.emp_gross_salary;
+                            
+                            var check = '<input type="checkbox" id="select" class="chk" >';
+
+                            rows += "<tr><td>" + check + "</td><td>" + id + "</td><td>" + empName + "</td><td>" + basic_salary + "</td><td>" + salary_per_day + "</td><td>" + emp_gross_salary + "</td></tr>";
+                            $(rows).appendTo("#salary_table tbody");
+                            
+                        // }
+
+                    }else{
+                        alert("something wrong");
+                        
+                    }
+
+                },
+            });
+
+          }else{
+
+            alert("Error, Select a row");
+            return;
+          }
+    }
+});
 
 </script>
 

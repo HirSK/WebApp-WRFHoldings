@@ -56,10 +56,7 @@ class sales_model extends CI_Model{
 
 	function insertCollectionData($tablename, $data_arr) {
         try {
-        	// $id = checkForExistingCollection($tablename,$data_arr);
-        	// if($id){
-        	// 	return $id;
-        	// }else{
+        	
         		$this->db->insert($tablename, $data_arr);
 
             	$ret = $this->db->insert_id() + 0;
@@ -99,9 +96,13 @@ class sales_model extends CI_Model{
 	}
 
 	function repayCredits($invoice_credit_id,$credit_lasttaken_date,$credit_topay,$completed){
-		$query = $this->db->query("update credit set credit.credit_lasttaken_date=credit_lasttaken_date and credit.credit_topay=credit_topay and credit.completed=completed where credit.invoice_credit_id=invoice_credit_id");
-		$result=$query->result();
-		return $result;
+		$query = $this->db->query("update credit set credit_lasttaken_date='$credit_lasttaken_date' , credit_topay=$credit_topay , completed=$completed where invoice_credit_id=$invoice_credit_id");
+		//$result=$query->result_array();
+		if($query){
+
+			return true;
+		}
+
 	}
 
 }

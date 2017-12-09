@@ -83,13 +83,13 @@
 
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
-                                    <label for="inputCustomerRegDate">Credit Repay Date</label>
+                                    <label for="credit_repay_date">Credit Repay Date</label>
 
                                     <div class="input-group date">
                                       <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                       </div>
-                                      <input type="text" class="form-control pull-right" id="datepicker" name="inputCustomerRegDate" >
+                                      <input type="text" class="form-control pull-right" id="datepicker" name="credit_repay_date" >
                                     </div>
                                     <!-- /.input group -->
                                 </div>
@@ -177,6 +177,10 @@
         }  
    }
 
+   function clearTextBoxes(){
+        $('#invoiceID, #datepicker,#creditPay,#customerID,#invoiceDate,#creditToPay').val('');
+    }
+
 
    $(function(){
         $('.preview-submit-button').click(function(){  
@@ -212,23 +216,21 @@
                     url: "<?php echo base_url().'index.php/SalesController/repayCredits'?>",
                     type: "post",
                     data: data,
-                   
-                   
+                                    
         
                     success : function(json){
-                        
+                        // alert(json.data.res.length);
                         // var obj = json;
-                        // alert(obj);
-
+                         
                         if(json){
                             
-                            alert('Credit details updated successfully');                                                 
+                            alert('Credit details updated successfully');                                               
 
-                            // clearTextBoxes();
+                            clearTextBoxes();
                                        
                         }else{
                             alert("Failed,Check the internet connection again");
-                            // clearTextBoxes();
+                            clearTextBoxes();
                         }
 
                     },
