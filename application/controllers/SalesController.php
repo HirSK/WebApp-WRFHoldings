@@ -56,6 +56,11 @@ class SalesController extends BaseController{
 			$CustomerCode			=$_POST['inputCustomerCode'];
 			$InvoiceValue			=$_POST['inputInvoiceValue'];
 			$invoice_order_date     =$_POST['inputInvoiceDate'];
+
+
+			$date=date_create_from_format("m/d/Y", $invoice_order_date);
+
+			$invoice_order_date=date_format($date,"Y-m-d");
 			
 
 			$invoice_order_array = array('idInvoice' => $idInvoice,
@@ -86,8 +91,37 @@ class SalesController extends BaseController{
 	public function getInvoiceDetails(){
 
 		$id = $this->input->post('id');
-    	$query = $this->sales_model->getInvoiceData($id);
-    	echo json_encode($query); 
+		$outletID = $this->session->userData('loggerOutletID');
+
+	    $query = $this->sales_model->getInvoiceData($id,$outletID);
+	    echo json_encode($query);
+
+		
+	}
+
+
+	public function getInvoiceDetails_update(){
+
+		$id = $this->input->post('id');
+		$id = $this->input->post('id');
+		$outletID = $this->session->userData('loggerOutletID');
+
+		$this->db->where('idInvoice',$id);
+		$this->db->where('Collection_idCollection',$collectionID);
+		$q = $this->db->get('invoice');
+
+		if($q){
+
+	    	$query = $this->sales_model->getInvoiceOtherData($id,$outletID);
+	    	echo json_encode($query);
+
+		}else{			
+
+	    	$query = $this->sales_model->getInvoiceData($id,$outletID);
+	    	echo json_encode($query); 
+
+		}	
+
 		
 	}
 
@@ -348,11 +382,6 @@ class SalesController extends BaseController{
 		}
 
 
-
-
-
-
-
 	}
 		
 
@@ -437,6 +466,64 @@ class SalesController extends BaseController{
 		
 	}
 
+
+	function editCollection(){
+
+		$loggerOutletID = $this->session->userData('loggerOutletID');
+		$whereArray = array('EmployeePosition' =>'Collection officer','Outlet_idOutlet'=>$loggerOutletID);
+		$columnsArray = array('EmployeeNameWithInitials' );
+		$whereArray2 = array('EmployeePosition' =>'Delivery driver','Outlet_idOutlet'=>$loggerOutletID);
+		$whereArray3 = array('Outlet_idOutlet'=>$loggerOutletID);
+		$columnsArray3 = array('Delivery_VehiclePlateNumber' );
+
+		$data['collectionOfficerList'] = $this->gen_model->getData($tablename='Employee',$columns_arr = $columnsArray,$where_arr = $whereArray);
+		$data['driverList'] = $this->gen_model->getData($tablename='Employee',$columns_arr = $columnsArray,$where_arr = $whereArray2);
+
+		$data['vehicleList'] = $this->gen_model->getData($tablename='delivery_vehicle',$columns_arr = $columnsArray3,$where_arr = $whereArray3);
+
+		// $this->load->view('collection_form_view',$data);
+		$this->loadViews('existing_collection_form_view',$this->global,$data,NULL);
+
+		
+	}
+
+	function getCollectionDetails(){
+
+		$collection_id = $this->input->post('collection_id');
+    	$query = $this->sales_model->getCollectionDetails($collection_id);
+    	echo json_encode($query);
+	}
+
+	function UpdateCollectionInfo(){
+
+
+		$CollectionDate = $this->input->post('date');
+		$idCollection = $this->input->post('collectionID');
+		$CollectionOfficerName = $this->input->post('collectionOfficer');
+		$CollectionDriver = $this->input->post('collectionDriver');
+		$CollectionVehicle = $this->input->post('vehicleNo');
+		$CollectionArea = $this->input->post('collectionArea');
+
+		
+		$date=date_create_from_format("m/d/Y", $CollectionDate);
+
+		$CollectionDate=date_format($date,"Y-m-d");
+
+
+		$collectionArray = array(
+
+				'CollectionDriver'  	=> $CollectionDriver,
+				'CollectionVehicle' 	=>	$CollectionVehicle,
+				'CollectionArea'		=>	$CollectionArea,
+				'CollectionDate'		=>	$CollectionDate,
+				'CollectionOfficerName'	=>	$CollectionOfficerName,
+				'Outlet_idOutlet'		=>	$this->session->userData('loggerOutletID'),
+			);
+
+		
+		$query = $this->sales_model->updateCollectionData($idCollection,$collectionArray);
+		echo json_encode($query);
+	}
 
 
 }
