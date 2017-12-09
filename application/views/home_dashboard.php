@@ -164,6 +164,19 @@
 
                       </div>
 
+<<<<<<< HEAD
+=======
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  
+<script type="text/javascript">
+      // Load the Visualization API and the line package.
+      google.charts.load('current', {'packages':['bar']});
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+  
+    function drawChart() {
+>>>>>>> d86d435cbe62ecaf445fc31293fb3450f3968458
 
                     </div>
 
@@ -433,6 +446,7 @@
                             No Recent Collections
                         </span>
 
+<<<<<<< HEAD
                     </div>
 
                     <div class="col-md-3">
@@ -926,6 +940,14 @@
 
 
 <?php if($loggerRole == ROLE_ADMIN){ ?>
+=======
+
+<!-- Morris.js charts -->
+
+
+
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+>>>>>>> d86d435cbe62ecaf445fc31293fb3450f3968458
   
 <script type="text/javascript">
       // Load the Visualization API and the line package.
@@ -1004,6 +1026,7 @@
           document.getElementById('empl').innerHTML = response.data.emp[0]['emp'];
 
 
+<<<<<<< HEAD
          
           
           
@@ -1049,6 +1072,8 @@
 
           }
 
+=======
+>>>>>>> d86d435cbe62ecaf445fc31293fb3450f3968458
 
 
 
@@ -1116,7 +1141,10 @@
 
 
         var totalCash = parseInt(cash)+parseInt(returnCredit);
+<<<<<<< HEAD
 
+=======
+>>>>>>> d86d435cbe62ecaf445fc31293fb3450f3968458
   
 
         var data = google.visualization.arrayToDataTable([
@@ -1143,6 +1171,7 @@
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -1827,6 +1856,8 @@
     }
 
   ?>
+=======
+>>>>>>> d86d435cbe62ecaf445fc31293fb3450f3968458
 <!-- Morris.js charts -->
 
 

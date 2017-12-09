@@ -233,13 +233,10 @@ class SalesController extends BaseController{
 
 		$collectionfromDate = $_POST['getCollectionFrom'];
 		$collectiontoDate = $_POST['getCollectionTo'];
-
 		$outlet = $_POST['outletId'];
 		$position = $_POST['position'];
 
 	if($position=="Cheque Register"){
-
-
 
 		if($collectiontoDate !=Null){
 
@@ -247,6 +244,9 @@ class SalesController extends BaseController{
 			$from=date_format($date,"Y-m-d");
 			$date1=date_create_from_format("m/d/Y", $collectiontoDate);
 			$to=date_format($date1,"Y-m-d");
+
+			
+
 			$data1['collection1'] = $this->view_sales_model->viewCheque($from,$to,$outlet);
 			$data1['outlet']=$this->gen_model->getData('outlet');
 			$this->loadViews("chequeView",$this->global,$data1,NULL);
@@ -257,6 +257,7 @@ class SalesController extends BaseController{
 
 			$date=date_create_from_format("m/d/Y", $collectionfromDate);
 			$from=date_format($date,"Y-m-d");
+
 			$data1['collection1'] =  $this->view_sales_model->viewCheque($from,date('Y-m-d'),$outlet);
 			$data1['outlet']=$this->gen_model->getData('outlet');
 			$this->loadViews("chequeView",$this->global,$data1,NULL);
@@ -313,6 +314,7 @@ class SalesController extends BaseController{
 
 			$date=date_create_from_format("m/d/Y", $collectionfromDate);
 			$from=date_format($date,"Y-m-d");
+
 			$data1['collection1'] =  $this->view_sales_model->viewCash($from,date('Y-m-d'),$outlet);
 			$data1['collection2'] = $this->view_sales_model->returnCredit($from,date('Y-m-d'),$outlet);
 			$data1['outlet']=$this->gen_model->getData('outlet');
@@ -417,21 +419,20 @@ class SalesController extends BaseController{
 
 		$invoice_credit_id = $this->input->post('invoiceID');
 		$credit_lasttaken_date = $this->input->post('credit_lasttaken_date');
+
 		$credit_topay = $this->input->post('credit_topay');
 		$completed = $this->input->post('completed');
 
 		$date=date_create_from_format("m/d/Y", $credit_lasttaken_date);
 
-		$credit_lasttaken_date=date_format($date,"Y-m-d");
+		$credit_lasttaken_datenew=date_format($date,"Y-m-d");
 
 
 
-		$query = $this->sales_model->repayCredits($invoice_credit_id,$credit_lasttaken_date,$credit_topay,$completed);
-
-
-		$json = array('boolean' => $query);
-		echo json_encode($json);
-		// echo json_encode($query);
+		$query = $this->sales_model->repayCredits($invoice_credit_id,$credit_lasttaken_datenew,$credit_topay,$completed);
+		
+		
+		echo json_encode($query);
 
 		
 	}

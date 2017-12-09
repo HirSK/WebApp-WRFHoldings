@@ -36,15 +36,19 @@ class ChartController extends BaseController{
 
 		//$data1['collection'] = $this->view_sales_model->viewCollection(,date('Y-m-d'),$outlet);
 
+<<<<<<< HEAD
 
 		
 
+=======
+>>>>>>> d86d435cbe62ecaf445fc31293fb3450f3968458
 		$data1['emp'] = $this->home_model->getnumEmployee();
 		$data1['cust'] = $this->home_model->getnumCustomer();
 		$data1['vehi'] = $this->home_model->getnumvehicle();
 		$data1['out'] = $this->home_model->getnumoutlet();
 
 
+<<<<<<< HEAD
 		$data1['recentInvoices'] = $this->home_model->getRecentInvoice(date('Y-m-d'));
 
 
@@ -151,6 +155,12 @@ class ChartController extends BaseController{
 		$data1['collection2'] = $this->view_sales_model->viewCredit('2017/08/01',date('Y-m-d'),(int)$outlet);
 		$data1['collection3'] = $this->view_sales_model->viewCash('2017/08/01',date('Y-m-d'),(int)$outlet);
 		$data1['collection4'] = $this->view_sales_model->returnCredit('2017/08/01',date('Y-m-d'),(int)$outlet);
+=======
+		$data1['collection1'] = $this->view_sales_model->viewCheque('2017/11/01',date('Y-m-d'),1);
+		$data1['collection2'] = $this->view_sales_model->viewCredit('2017/11/01',date('Y-m-d'),1);
+		$data1['collection3'] = $this->view_sales_model->viewCash('2017/11/01',date('Y-m-d'),1);
+		$data1['collection4'] = $this->view_sales_model->returnCredit('2017/11/01',date('Y-m-d'),1);
+>>>>>>> d86d435cbe62ecaf445fc31293fb3450f3968458
 
 
 
@@ -163,9 +173,12 @@ class ChartController extends BaseController{
 
 
 
+<<<<<<< HEAD
 
 
 
 
 
+=======
+>>>>>>> d86d435cbe62ecaf445fc31293fb3450f3968458
 }
