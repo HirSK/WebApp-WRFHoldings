@@ -56,14 +56,11 @@ class CalendarController extends BaseController{
 
 	}
 
-	public function viewCalendar()
-    {
-        if($this->isAdmin() == True)
-        {
+	public function viewCalendar(){
+        if($this->isAdmin() == True){
             $this->loadThis();
         }
-        else
-        {
+        else{
             $this->load->model('calendar_model');
         
             $searchText = $this->input->post('searchText');
@@ -76,13 +73,10 @@ class CalendarController extends BaseController{
             $this->global['pageTitle'] = 'WRF Holdings(pvt) Ltd : Calendar Entry Listing';
             
             $this->loadViews("calendar_view", $this->global, $data, NULL);
-            
-
-            
-        }
+		}
     }
 	
-	}
+	
 
 	// 	---------------------------------------------------------------------------
 
