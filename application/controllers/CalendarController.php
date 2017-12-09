@@ -66,6 +66,7 @@ class CalendarController extends BaseController{
             $searchText = $this->input->post('searchText');
             $data['searchText'] = $searchText;
             
+			
                       
             $data['calendarRecords'] = $this->calendar_model->calendarEntryListing($searchText);
 
