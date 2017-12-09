@@ -30,18 +30,14 @@ class gen_model extends CI_Model{
 
     // This method returns the user list.It can also returns the users filtered by the search text
 
-    function userListing($searchText = '',$id='')
+    function userListing($searchText = '')
     {
-        if($id){
-            $query = $this->db->query("select * from user");
-            $result = $query->result();
-            return $result;
+        
+            $query = $this->db->query("select Outletname,idUser,Employee_idEmployee,Employee_Outlet_idOutlet,mobile,roleName,EmployeeFullName from user,employee,outlet where user.Employee_idEmployee=employee.idEmployee and employee.Outlet_idOutlet=outlet.idOutlet");
 
-        }else{
-            $query = $this->db->query("select idUser,Employee_idEmployee,Outletname,Employee_Outlet_idOutlet,mobile,roleName,EmployeeFullName from user,employee,outlet where user.Employee_idEmployee=employee.idEmployee ");
             $result=$query->result();
             return $result;
-        }
+        
         
     }
 
