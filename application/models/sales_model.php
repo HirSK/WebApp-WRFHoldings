@@ -28,7 +28,7 @@ class sales_model extends CI_Model{
 	function updateInvoiceData($invoice_array){
 		try {
 			
-			$invoice_array['Collection_idCollection'] = $this->getMaxCollectionID();		
+			// $invoice_array['Collection_idCollection'] = $this->getMaxCollectionID();		
 
 
             $ret = $this->db->insert('invoice', $invoice_array);
@@ -51,4 +51,58 @@ class sales_model extends CI_Model{
 		}
 		return $maxid;
 	}
+
+
+
+	function insertCollectionData($tablename, $data_arr) {
+        try {
+        	
+        		$this->db->insert($tablename, $data_arr);
+
+            	$ret = $this->db->insert_id() + 0;
+            	return $ret;
+        	
+            
+        } catch (Exception $err) {
+            return $err->getMessage();
+        }
+    }
+
+
+  //   function checkForExistingCollection($tablename,$data_arr){
+  // //   	$sql = 'SELECT idCollection FROM $tablename WHERE field IN ( ' . implode( ',', $data_arr ) . ' );';
+		// // $result = $db->query( $sql );
+		// // return $result;
+
+		// $this->db->select('idCollection');
+		// $this->db->from($tablename);
+		// $this->db->where($where_arr);
+
+		// $query = $this->db->get();
+		// $res = $query->result();
+		// if(count($res)==1){
+		// 	return $res;
+		// }else{
+		// 	return;
+		// }
+        
+  //   }
+
+	function getCreditData($id){
+		$query = $this->db->query("select * from credit where invoice_credit_id=$id");
+		$result = $query->result();
+		return $result;
+
+	}
+
+	function repayCredits($invoice_credit_id,$credit_lasttaken_date,$credit_topay,$completed){
+		$query = $this->db->query("update credit set credit_lasttaken_date='$credit_lasttaken_date' , credit_topay=$credit_topay , completed=$completed where invoice_credit_id=$invoice_credit_id");
+		//$result=$query->result_array();
+		if($query){
+
+			return true;
+		}
+
+	}
+
 }

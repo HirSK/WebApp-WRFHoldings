@@ -28,6 +28,12 @@ class C_report extends CI_Controller{
 		$this->load->view('v_report_cus', $data);
 	}
 
+	public function empList(){
+
+		$data['emp'] = $this->gen_model->getData('employee');
+		$this->load->view('v_report_emp', $data);
+	}
+
 	public function colSum(){
 
 		$data['col'] = $this->gen_model->getData('collection');

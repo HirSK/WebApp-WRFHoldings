@@ -30,12 +30,7 @@ class UserController extends BaseController{
             $searchText = $this->input->post('searchText');
             $data['searchText'] = $searchText;
             
-            // $this->load->library('pagination');
-            
-   //          $count = $this->gen_model->userListingCount($searchText);
-
-			// $returns = $this->paginationCompress ( "userListing/", $count, 5 );
-            
+                      
             $data['userRecords'] = $this->gen_model->userListing($searchText);
 
             
@@ -104,8 +99,14 @@ class UserController extends BaseController{
                 $empID = $this->input->post('empID');
                 $mobile = $this->input->post('mobile');
                 
-                $userInfo = array('Username'=>$username, 'UserPassword'=>$password, 'Employee_idEmployee'=>$empID, 'Employee_Outlet_idOutlet'=>$OutletID,'roleName'=> $role,'mobile'=>$mobile,
-                                    'createdBy'=>$this->loggerID, 'createdDtm'=>date('Y-m-d H:i:s'));
+                $userInfo = array(  'Username'=>$username, 
+                                    'UserPassword'=>$password, 
+                                    'Employee_idEmployee'=>$empID, 
+                                    'Employee_Outlet_idOutlet'=>$OutletID,
+                                    'roleName'=> $role,
+                                    'mobile'=>$mobile,
+                                    'createdBy'=>$this->loggerID, 
+                                    'createdDtm'=>date('Y-m-d H:i:s'));
                 
                 $this->load->model('gen_model');
                 $result = $this->gen_model->insertData($tablename='user',$userInfo);
@@ -135,6 +136,11 @@ class UserController extends BaseController{
         $this->session->sess_destroy();
         $this->load->view('loginView');
     }
+
+    function listOutlets(){
+        $this->loadViews('add_outlet_view');
+    }
+
 
     
 }

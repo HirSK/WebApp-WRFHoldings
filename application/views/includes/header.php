@@ -16,6 +16,8 @@
   <link rel="stylesheet" href="<?php echo base_url()?>template/dist/css/AdminLTE.min.css">
   
   <link rel="stylesheet" href="<?php echo base_url()?>template/dist/css/skins/_all-skins.min.css">
+  <!-- Morris charts -->
+  <link rel="stylesheet" href="<?php echo base_url()?>template/bower_components/morris.js/morris.css">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -40,6 +42,23 @@
         $('.dropdown-toggle').dropdown();
     });
 </script>
+
+<!-- <script type="text/javascript">
+function confirmUser(){
+    var ask=confirm("Do you want to open an existing collection?");
+    if(ask){
+      window.location.href="<?php echo base_url()?>index.php/CustomerController";
+     }
+}
+</script> -->
+
+
+<style>
+  
+  #collectionTable tr:hover {
+    background-color:#C5CBC7;
+}
+</style>
 
 
 </head>
@@ -104,9 +123,9 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
+        
 
-
-       
+        
         <!..Daily sales section..> 
             
             
@@ -122,18 +141,26 @@
                        if($loggerRole == ROLE_SUPERVISOR)
                         {
                         ?>
+
                         <li><a href="<?php echo base_url()?>index.php/SalesController/createInvoiceList">Invoice</a></li>
+
                        <li><a href="<?php echo base_url()?>index.php/SalesController">Account Summary</a></li>
+                       <li><a href="<?php echo base_url()?>index.php/SalesController/loadRepayCredits">Repay Credits</a></li>
+
+
+                      
                          <?php
                        }
-                       if($loggerRole == ROLE_SUPERVISOR || $loggerRole == ROLE_ADMIN)
+                       if( $loggerRole == ROLE_ADMIN || $loggerRole == ROLE_SUPERVISOR )
                         {
                         ?>
                         <li><a href="<?php echo base_url()?>index.php/SalesController/displayCollectionReport">Collection Reports</a></li>
 
-                        <?php
-                          }
-                        ?>
+                       <?php 
+
+                     }
+
+                       ?>
                     </ul>
                 </li>
 
@@ -154,7 +181,10 @@
                        if($loggerRole == ROLE_SUPERVISOR)
                         {
                         ?>
-                        <li><a href="<?php echo base_url()?>index.php/AttendanceController">Attendance</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/CalendarController">Add Calendar Entries</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/CalendarController/viewCalendar">Manage Calendar</a></li>
+                        <li><a href="<?php echo base_url()?>index.php/AddAttendanceController">Add Attendance </a></li>
+                        
                         <li><a href="<?php echo base_url()?>index.php/RunPayrollController">Run Payroll</a></li>
 
                          <?php
@@ -162,6 +192,7 @@
                        if($loggerRole == ROLE_SUPERVISOR || $loggerRole == ROLE_ADMIN)
                         {
                         ?>
+                        <li><a href="<?php echo base_url()?>index.php/AttendanceController">View Attendance </a></li>
                         <li><a href="#">Salary Reports</a></li>
 
                         <?php
@@ -247,7 +278,7 @@
                        if($loggerRole == ROLE_ADMIN)
                         {
                         ?>
-                        <li><a href="<?php echo base_url();?>index.php/UserController/listOutlets">Outlets</a></li>
+                        <li><a href="<?php echo base_url();?>index.php/OutletController">Outlets</a></li>
                         <li><a href="<?php echo base_url();?>index.php/UserController/listUsers">Users</a></li>
 
                         <li class="treeview">

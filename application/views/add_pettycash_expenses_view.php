@@ -55,7 +55,7 @@
                                       <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                       </div>
-                                      <input type="text" class="form-control pull-right" id="datepicker" name="dateTo" required>
+                                      <input type="text" class="form-control pull-right" id="datepicker1" name="dateTo" required>
                                     </div>
                                     <!-- /.input group -->
                                 </div>
@@ -106,7 +106,7 @@
                                 </th>
                                 <th><input type="text" class="form-control"  name="amount" placeholder="Amount"></th>
                                 <th>
-                                    <div class="col-xs-4 left-padding">
+                                    <div class="col-xs-7 left-padding">
                                         <button type="submit" class="btn btn-block btn-success" name="ADD">ADD</button>
                                     </div>
                                 </th>
@@ -149,8 +149,6 @@
 
 
 
-<?php include "includes/footer.php";?>
-
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
@@ -168,6 +166,12 @@
     $(function() {
         //Date picker
         $('#datepicker').datepicker({
+          autoclose: true
+        })
+    })
+    $(function() {
+        //Date picker
+        $('#datepicker1').datepicker({
           autoclose: true
         })
     })

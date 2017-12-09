@@ -9,6 +9,7 @@ class SalesController extends BaseController{
 		$this->load->model('gen_model');
 
 		$this->load->model('sales_model');
+		$this->load->model('view_sales_model');
 
 	
 
@@ -109,6 +110,7 @@ class SalesController extends BaseController{
 			$SalesRtn = $this->input->post('salesrtn');
 			$MKTrtn = $this->input->post('mkt');
 			$Remarks = $this->input->post('remarks');
+			$collectionID = $this->input->post('collectionID');
 
 
 			$invoice_array = array(
@@ -125,6 +127,7 @@ class SalesController extends BaseController{
 						'Discount'				=> $Discount,
 						'MKTrtn'				=> $MKTrtn,
 						'Remarks'				=> $Remarks,
+						'Collection_idCollection'=>$collectionID,
 						'invoice_complete_date' =>date('Y-m-d H:i:s')
 
 				);
@@ -176,37 +179,264 @@ class SalesController extends BaseController{
 
 	public function addCollectionInfo(){
 
-		$collectionDate = $_POST['collectionDate'];
-		$collectionOfficer = $_POST['collectionOfficer'];
-		$collectionDriver = $_POST['collectionDriver'];
-		$vehicleNo = $_POST['vehicleNo'];
-		$collectionArea = $_POST['collectionArea'];
+		$CollectionDate = $this->input->post('date');
+		$collectionOfficer = $this->input->post('collectionOfficer');
+		$collectionDriver = $this->input->post('collectionDriver');
+		$vehicleNo = $this->input->post('vehicleNo');
+		$collectionArea = $this->input->post('collectionArea');
+
+
+		$date=date_create_from_format("m/d/Y", $CollectionDate);
+
+		$CollectionDate=date_format($date,"Y-m-d");
+
+		
 
 		$collectionArray = array(
 
 				'CollectionDriver'  	=> $collectionDriver,
 				'CollectionVehicle' 	=>	$vehicleNo,
 				'CollectionArea'		=>	$collectionArea,
-				'CollectionDate'		=>	$collectionDate,
+				'CollectionDate'		=>	$CollectionDate,
 				'CollectionOfficerName'	=>	$collectionOfficer,
 				'Outlet_idOutlet'		=>	$this->session->userData('loggerOutletID'),
 			);
 
-		$this->gen_model->insertData($tablename='collection',$collectionArray);
-		redirect('/SalesController');
+		$query = $this->sales_model->insertCollectionData($tablename='collection',$collectionArray);
+		echo json_encode($query);
+		// redirect('/SalesController');
 	}
 
 	public function displayCollectionReport(){
-		// $this->load->view('collection_report_view');
+		// $this->load->view('collection_report_view');3
+
+
+		$data['outlet']=$this->gen_model->getData('outlet');
 		
-		$this->loadViews("collection_report_view",$this->global,NULL,NULL);
+		$data['collection'] = NULL;
+		
+		$this->loadViews("collection_report_view",$this->global,$data,NULL);
 		
 	}
+
+
+	
 
 	public function createInvoiceList(){
 		// $this->load->view('add_invoice_view');
 		$this->loadViews('add_invoice_view',$this->global,NULL,NULL);
 	}
+
+
+
+	public function viewCollection(){
+
+		$collectionfromDate = $_POST['getCollectionFrom'];
+		$collectiontoDate = $_POST['getCollectionTo'];
+		$outlet = $_POST['outletId'];
+		$position = $_POST['position'];
+
+	if($position=="Cheque Register"){
+
+		if($collectiontoDate !=Null){
+
+			$date=date_create_from_format("m/d/Y", $collectionfromDate);
+			$from=date_format($date,"Y-m-d");
+			$date1=date_create_from_format("m/d/Y", $collectiontoDate);
+			$to=date_format($date1,"Y-m-d");
+
+			
+
+			$data1['collection1'] = $this->view_sales_model->viewCheque($from,$to,$outlet);
+			$data1['outlet']=$this->gen_model->getData('outlet');
+			$this->loadViews("chequeView",$this->global,$data1,NULL);
+
+
+		}else{
+
+
+			$date=date_create_from_format("m/d/Y", $collectionfromDate);
+			$from=date_format($date,"Y-m-d");
+
+			$data1['collection1'] =  $this->view_sales_model->viewCheque($from,date('Y-m-d'),$outlet);
+			$data1['outlet']=$this->gen_model->getData('outlet');
+			$this->loadViews("chequeView",$this->global,$data1,NULL);
+		}
+
+	}elseif($position=="Credit Register"){
+
+
+
+
+		if($collectiontoDate !=Null){
+
+			$date=date_create_from_format("m/d/Y", $collectionfromDate);
+			$from=date_format($date,"Y-m-d");
+			$date1=date_create_from_format("m/d/Y", $collectiontoDate);
+			$to=date_format($date1,"Y-m-d");
+			$data1['collection1'] = $this->view_sales_model->viewCredit($from,$to,$outlet);
+			$data1['outlet']=$this->gen_model->getData('outlet');
+			$this->loadViews("CreditView",$this->global,$data1,NULL);
+
+
+		}else{
+
+
+			$date=date_create_from_format("m/d/Y", $collectionfromDate);
+			$from=date_format($date,"Y-m-d");
+			$data1['collection1'] =  $this->view_sales_model->viewCredit($from,date('Y-m-d'),$outlet);
+			$data1['outlet']=$this->gen_model->getData('outlet');
+			$this->loadViews("CreditView",$this->global,$data1,NULL);
+		}
+
+
+
+
+
+	}elseif ($position=="Cash Register") {
+
+
+
+		if($collectiontoDate !=Null){
+
+			$date=date_create_from_format("m/d/Y", $collectionfromDate);
+			$from=date_format($date,"Y-m-d");
+			$date1=date_create_from_format("m/d/Y", $collectiontoDate);
+			$to=date_format($date1,"Y-m-d");
+			$data1['collection1'] = $this->view_sales_model->viewCash($from,$to,$outlet);
+			$data1['collection2'] = $this->view_sales_model->returnCredit($from,$to,$outlet);
+			$data1['outlet']=$this->gen_model->getData('outlet');
+			$this->loadViews("cashView",$this->global,$data1,NULL);
+
+
+		}else{
+
+
+			$date=date_create_from_format("m/d/Y", $collectionfromDate);
+			$from=date_format($date,"Y-m-d");
+
+			$data1['collection1'] =  $this->view_sales_model->viewCash($from,date('Y-m-d'),$outlet);
+			$data1['collection2'] = $this->view_sales_model->returnCredit($from,date('Y-m-d'),$outlet);
+			$data1['outlet']=$this->gen_model->getData('outlet');
+			$this->loadViews("cashView",$this->global,$data1,NULL);
+		}
+		
+	}
+
+
+	elseif($position=="Daily collection summary"){
+
+
+		if($collectiontoDate !=Null){
+			$date=date_create_from_format("m/d/Y", $collectionfromDate);
+			$from=date_format($date,"Y-m-d");
+			$date1=date_create_from_format("m/d/Y", $collectiontoDate);
+			$to=date_format($date1,"Y-m-d");
+			$data['collection'] = $this->view_sales_model->viewCollection($from,$to,$outlet);
+			$data['outlet']=$this->gen_model->getData('outlet');
+			$this->loadViews("collection_report_view",$this->global,$data,NULL);
+
+
+		}else{
+
+
+			$date=date_create_from_format("m/d/Y", $collectionfromDate);
+			$from=date_format($date,"Y-m-d");
+			$data['collection'] =  $this->view_sales_model->viewCollection($from,date('Y-m-d'),$outlet);
+			$data['outlet']=$this->gen_model->getData('outlet');
+			$this->loadViews("collection_report_view",$this->global,$data,NULL);
+		}
+
+
+
+
+
+
+
+	}
+		
+
+	}
+
+
+	public function viewInoviceDetail(){
+
+
+
+
+		$user = $_GET['strUser'];
+
+		$position = $_GET['position'];
+
+
+		if($position == "Daily collection summary"){
+
+
+
+		    $data['UserDetailsone']=$this->view_sales_model->viewInvoices($user);
+
+			echo json_encode(array("data"=>$data));
+
+		}elseif($position == "Cash Register"){
+
+
+
+		    $data['UserDetailsone']=$this->view_sales_model->viewInvoices($user);
+
+			echo json_encode(array("data"=>$data));
+
+		}
+
+
+
+
+
+	}
+
+
+	public function new1(){
+
+
+		$this->loadViews("collectionSummary_view",$this->global,NULL,NULL);
+
+
+	}
+
+
+	function getCreditDetails(){
+		$id = $this->input->post('id');
+		$query = $this->sales_model->getCreditData($id);
+    	echo json_encode($query); 
+
+	}
+
+	function loadRepayCredits(){
+		$this->loadViews("repay_credit_view",$this->global,NULL,NULL);
+
+	}
+
+	function repayCredits(){
+
+		$invoice_credit_id = $this->input->post('invoiceID');
+		$credit_lasttaken_date = $this->input->post('credit_lasttaken_date');
+
+		$credit_topay = $this->input->post('credit_topay');
+		$completed = $this->input->post('completed');
+
+		$date=date_create_from_format("m/d/Y", $credit_lasttaken_date);
+
+		$credit_lasttaken_datenew=date_format($date,"Y-m-d");
+
+
+
+		$query = $this->sales_model->repayCredits($invoice_credit_id,$credit_lasttaken_datenew,$credit_topay,$completed);
+		
+		
+		echo json_encode($query);
+
+		
+	}
+
 
 
 }

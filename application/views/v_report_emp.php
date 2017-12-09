@@ -33,7 +33,7 @@ $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8',
 // set document information
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Group 15');
-$pdf->SetTitle('CHEQUE REGISTER');
+$pdf->SetTitle('EMPLOYEE LIST');
 $pdf->SetSubject('');
 $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
 
@@ -74,7 +74,7 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 $pdf->SetFont('times', '', 10);
 
 // add a page
-$pdf->AddPage();
+$pdf->AddPage('L','A4');
 
 // set cell padding
 $pdf->setCellPaddings(1, 1, 1, 1);
@@ -96,42 +96,43 @@ $pdf->SetFillColor(255, 255, 127);
 
 
 
-
 $pdf->Ln(5);
 
 $title1 = <<<EOT
-<h3>CHEQUE REGISTER</h3>
+<h3>EMPLOYEE INFORMATION</h3>
 EOT;
 $pdf->WriteHTMLCell(0,0,'','',$title1,0,1,0,true,'C',true);
 
-$table1 = '<table style="border:1px solid #000; padding:6px;">';
+$table1 = '<table style="border:1px solid #000; padding:4px; width: 100%;">';
 $table1 .='<tr>
              <th bgcolor="#B2BEB5" style="border:1px solid #000;">#</th>
-             <th bgcolor="#B2BEB5" style="border:1px solid #000;">INV NO</th>
-             <th bgcolor="#B2BEB5" style="border:1px solid #000;">COLL. DATE</th>
-             <th bgcolor="#B2BEB5" style="border:1px solid #000;">CUST.</th>
-             <th bgcolor="#B2BEB5" style="border:1px solid #000;">CHQ.NO</th>
-             <th bgcolor="#B2BEB5" style="border:1px solid #000;">BANK</th>
-             <th bgcolor="#B2BEB5" style="border:1px solid #000;">BRANCH</th>
-             <th bgcolor="#B2BEB5" style="border:1px solid #000;">BANKING DATE</th>
-             <th bgcolor="#B2BEB5" style="border:1px solid #000;">AMOUNT</th>
-            
-             
-              </tr>';
+             <th bgcolor="#B2BEB5" style="border:1px solid #000;">Employee ID</th>
+             <th bgcolor="#B2BEB5" style="border:1px solid #000;">Name with Initials</th>
+             <th bgcolor="#B2BEB5" style="border:1px solid #000;">NIC</th>
+             <th bgcolor="#B2BEB5" style="border:1px solid #000;">DOB</th>
+             <th bgcolor="#B2BEB5" style="border:1px solid #000;">Contact No</th>
+             <th bgcolor="#B2BEB5" style="border:1px solid #000;">Address</th>
+             <th bgcolor="#B2BEB5" style="border:1px solid #000;">Outlet ID</th>
+             <th bgcolor="#B2BEB5" style="border:1px solid #000;">Position</th>
+             <th bgcolor="#B2BEB5" style="border:1px solid #000;">Joined Date</th>
+             <th bgcolor="#B2BEB5" style="border:1px solid #000;">Email</th>
 
-$no = 1;              
-foreach ($ch as $row) {
+                          
+              </tr>';
+$no=1;
+foreach ($emp as $row) {
 $table1 .='<tr>
             <td style="border:1px solid #000;">'.$no++.'</td>
-            <td style="border:1px solid #000;">'.$row->cheque_invoice_id.'</td>
-            <td style="border:1px solid #000;">-</td>
-            <td style="border:1px solid #000;">-</td>
-            <td style="border:1px solid #000;">'.$row->ChequeNumber.'</td>
-            <td style="border:1px solid #000;">'.$row->ChequeBankName.'</td>
-            <td style="border:1px solid #000;">'.$row->ChequeBankBranch.'</td>
-            <td bgcolor="#F8FF7E" style="border:1px solid #000;">'.$row->ChequeBKdate.'</td>
-            <td style="border:1px solid #000;">'.$row->ChequeAmount.'</td>
-
+            <td style="border:1px solid #000;">'.$row->idEmployee.'</td>
+            <td style="border:1px solid #000;">'.$row->EmployeeNameWithInitials.'</td>
+            <td style="border:1px solid #000;">'.$row->EmployeeNIC.'</td>
+            <td style="border:1px solid #000;">'.$row->EmployeeBirthdate.'</td>
+            <td style="border:1px solid #000;">'.$row->EmployeeContactNumber.'</td>
+            <td style="border:1px solid #000;">'.$row->EmployeeAddress.'</td>
+            <td style="border:1px solid #000;">'.$row->Outlet_idOutlet.'</td>
+            <td style="border:1px solid #000;">'.$row->EmployeePosition.'</td>
+            <td style="border:1px solid #000;">'.$row->EmployeeJoinedDate.'</td>
+            <td style="border:1px solid #000;">'.$row->EmployeeEmail.'</td>
 
           </tr>';
       }      
@@ -139,7 +140,6 @@ $table1 .='<tr>
 $table1 .='</table>';
 
 $pdf->WriteHTMLCell(0,0,'','',$table1,0,1,0,true,'C',true);
-
 
 $pdf->Ln(5);
 
@@ -151,16 +151,6 @@ EOT;
 
 
 $pdf->WriteHTMLCell(0,0,'','',$gen,0,1,0,true,'L',true);
-
-
-
-
-
-
-
-
-
-
 
 // move pointer to last page
 $pdf->lastPage();

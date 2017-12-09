@@ -37,13 +37,9 @@
 
                   <table class="table table-hover">
                     <tr>
-                      <th>Id</th>
-                      <th>Name</th>
-                      <th>Role</th>                      
-                      <th>Mobile</th>
-                      <th>Employee ID</th>
                       <th>Outlet ID</th>
                       <th>Outlet Name</th>
+                      <th>Outlet Location</th>                      
                       <th class="text-center">Actions</th>
                     </tr>
                     <?php
@@ -55,10 +51,10 @@
                     <tr>
                       <td><?php echo $record->idUser ?></td>
                       <td><?php echo $record->EmployeeFullName ?></td>
-                      <td><?php echo $record->roleName ?></td>
-                      <td><?php echo $record->mobile ?></td>
-                      <td><?php echo $record->Employee_idEmployee ?></td>
-                      <td><?php echo $record->Employee_Outlet_idOutlet ?></td>
+                      <td><?php echo $record->EmployeePosition ?></td>
+                      <td><?php echo $record->EmployeeContactNumber ?></td>
+                      <td><?php echo $record->idEmployee ?></td>
+                      <td><?php echo $record->Outlet_idOutlet ?></td>
                       <td><?php echo $record->Outletname ?></td>
                       <td class="text-center">
                           <a class="btn btn-sm btn-info" href="<?php echo base_url()?>index.php/UserController/addNew/$record->idUser"><i class="fa fa-pencil"></i></a>
