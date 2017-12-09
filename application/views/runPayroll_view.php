@@ -30,7 +30,7 @@
                         <ul class="nav nav-tabs" role="tablist">
 
                             <li role="presentation" class="active">
-                                <a href="#basic" data-toggle="tab" aria-controls="basic" role="tab" title="Select Month & Employee">
+                                <a href="#basic" data-toggle="tab" aria-controls="basic" role="tab" title="Select Month & Year">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-user"></i>
                             </span>
@@ -38,7 +38,7 @@
                             </li>
 
                             <li role="presentation" class="disabled">
-                                <a href="#owner" data-toggle="tab" aria-controls="owner" role="tab" title="Basic & Allowances">
+                                <a href="#owner" data-toggle="tab" aria-controls="owner" role="tab" title="Basic & Deductions">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </span>
@@ -46,7 +46,7 @@
                             </li>
 
                             <li role="presentation" class="disabled">
-                                <a href="#insurance" data-toggle="tab" aria-controls="insurance" role="tab" title="Deductions">
+                                <a href="#insurance" data-toggle="tab" aria-controls="insurance" role="tab" title="Allowances">
                             <span class="round-tab">
                                 <i class="glyphicon glyphicon-pencil"></i>
                             </span>
@@ -137,12 +137,13 @@
                                         <table class="table preview-table table-hover" id="salary_table">
                                             <thead>
                                                 <tr>
-                                                    <th>Select</th>
+                                                   <!--  <th>Select</th> -->
                                                     <th>Emp:ID</th>
                                                     <th>FullName</th>
                                                     <th>Basic Salary</th>
                                                     <th>SalaryPerDay</th>
                                                     <th>Gross Salary</th>
+                                                    <th>ETF deduction</th>
                                                                                                         
                                                 </tr>
                                             </thead>
@@ -153,76 +154,84 @@
                             </div>
 
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                    <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                                    <li><button type="button" class="btn btn-default prev-step" >Previous</button></li>
+
+                                    <li><button type="button" class="btn btn-primary next-step" id="salary_btn">Next</button></li>
 
                                 </ul>
                             </div>
 
                             <div class="tab-pane" role="tabpanel" id="insurance">
 
+                                 
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="exampleLicenNo">Salary Advances</label>
-                                            <input type="licenNo" class="form-control" name="exampleLicenNo" placeholder="Enter amount">
-                                        </div>
-                                    </div>
+                                <div class="col-xs-12">
+                                    <div class="table-responsive">
+                                    <h5><b>Add Allowances</b></h5>
+                                        <table class="table preview-table table-hover" id="addition_tbl">
+                                            <thead>
+                                                <tr>
+                                                    <th>Select</th>
+                                                    <th>Emp:ID</th>
+                                                    <th>FullName</th>
+                                                    <th>Gross Salary</th>
+                                                    <th>Food Allowance</th>
+                                                    <th>HolidayAllowance</th>
+                                                    <th>Deductions</th>
+                                                    
+                                                                                                        
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody> <!-- preview content goes here-->
+                                        </table>
+                                    </div>                            
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="exampleLicenNo">No Pay</label>
-                                            <input type="licenNo" class="form-control" name="exampleLicenNo" placeholder="Enter amount">
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="exampleInsurancePolicyNo">EPF Contribution</label>
-                                            <input type="insurancePolicyNo" class="form-control" name="exampleInsurancePolicyNo" placeholder="Enter Employee contribution %">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="exampleInsuranceSerielNo">Over Payments</label>
-                                            <input type="insuranceSerielNo" class="form-control" name="exampleInsuranceSerielNoNo" placeholder="Enter amount">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label for="exampleInsuranceSerielNo">Fines/Shortages</label>
-                                            <input type="insuranceSerielNo" class="form-control" name="exampleInsuranceSerielNoNo" placeholder="Enter amount">
-                                        </div>
-                                    </div>
-                                </div>
-
-
+                            </div>
+                                
                                 
 
                                 <ul class="list-inline pull-right">
-                                    <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                                    <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
+                                    <li><button type="button" class="btn btn-default prev-step" >Previous</button></li>
+                                    <li><button type="button" class="btn btn-primary next-step" id="allowance_btn">Next</button></li>
                                 </ul>
                             </div>
 
                             <div class="tab-pane" role="tabpanel" id="complete">
-                                <h4>Click Finalize button to submit and finalize payslips!</h4>
-                                <!-- <p>You have successfully completed all steps.</p> -->
-                                <input type="submit" class="btn btn-primary next-step" name="submit" value="Finalize">
+
+
+                             <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="table-responsive">
+                                    <h5><b>Final Pay Details</b></h5>
+                                        <table class="table preview-table table-hover" id="final_tbl">
+                                            <thead>
+                                                <tr>                                                    
+                                                    <th>Emp:ID</th>
+                                                    <th>FullName</th>
+                                                    <th>SalaryID</th>
+                                                    <th>Gross Salary</th>
+                                                    <th>Total Allowances</th>
+                                                    <th> Total Deductions</th>
+                                                    <th>Net Salary</th>
+                                                    
+                                                                                                        
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody> <!-- preview content goes here-->
+                                        </table>
+                                    </div>                            
+                                </div>
+                            </div>
+
+
+                                <!-- <h4>Click Finalize button to submit and finalize payslips!</h4> -->
+                                
+                                <input type="submit" class="btn btn-primary next-step id='final" name="submit" value="Finalize">
                             </div>
                             <div class="clearfix"></div>
 
                         </div>
-                        <!--<input type="submit" name="submit" value="Next">-->
+                       
                     </form>
                 </div>
             </section>
@@ -234,11 +243,9 @@
 <!-- /.content-wrapper -->
 
 
-<!-- Add the sidebar's background. This div must be placed
-immediately after the control sidebar -->
 <div class="control-sidebar-bg"></div>
 </div>
-<!-- ./wrapper -->
+
 
 <!-- REQUIRED JS SCRIPTS -->
 
@@ -423,12 +430,230 @@ immediately after the control sidebar -->
                             var empName = obj.empName;
                             var basic_salary = obj.basic_salary;
                             var salary_per_day = obj.salary_per_day;
-                            var emp_gross_salary = obj.emp_gross_salary;
+                            var emp_gross_salary = obj.emp_gross_salary; 
                             
-                            var check = '<input type="checkbox" id="select" class="chk" >';
+                            var deduct =obj.etf;                          
+                            // var check = '<input type="checkbox" id="select" class="chk" >';
 
-                            rows += "<tr><td>" + check + "</td><td>" + id + "</td><td>" + empName + "</td><td>" + basic_salary + "</td><td>" + salary_per_day + "</td><td>" + emp_gross_salary + "</td></tr>";
-                            $(rows).appendTo("#salary_table tbody");
+                            rows += "<tr><td>" + id + "</td><td>" + empName + "</td><td>" + basic_salary + "</td><td>" + salary_per_day + "</td><td>" + emp_gross_salary + "</td><td>" + deduct + "</td></tr>";
+                            $(rows).appendTo("#salary_table tbody");                            
+                            
+                        // }
+
+                    }else{
+                        alert("something wrong");
+                        
+                    }
+
+                },
+            });
+
+          }else{
+
+            alert("Error, Select a row");
+            return;
+          }
+    }
+});
+
+
+   $("#salary_btn").click(function(event){
+    
+   
+
+    var tbody = $("#addition_tbl tbody");
+
+    if (tbody.children().length > 0) {
+        
+    }else{
+           
+            var rowCount = 0;
+            var attendance_array;
+           
+            $IDs = $("#list input:checkbox:checked").each(function() {
+                rowCount ++;
+                attendance_array = $(this).parent().siblings().map(function() {
+                return $(this).text().trim();
+            }).get();
+
+
+          });
+
+
+         if(rowCount >=1){   
+                
+
+                var data = {
+                        empID: attendance_array[0],
+                        empName:attendance_array[1],
+                        full: attendance_array[3],
+                        half: attendance_array[4],
+                        working: $('#working_days').val()
+                                            
+                    };
+     
+            $.ajax({
+                type : "post",
+                url: "<?php echo base_url().'index.php/runPayrollController/getSalaryDetails'?>",
+                cache: false,
+                data :data ,
+                success : function(json){
+                    var obj=jQuery.parseJSON(json);
+                    
+                   
+                    if(obj){
+                        
+                        // for (var i=0;i<obj.length;i++) {
+                            var rows = "";
+                            var id = obj.id;                                                                              
+                            var empName = obj.empName;                        
+                           
+                            var emp_gross_salary = obj.emp_gross_salary; 
+                            var food ='<input type="textbox" id="food" class="food">';
+                            var holiday ='<input type="textbox" id="holiday" class="holiday">';
+                            var deduct ='<input type="textbox" id="deduct" class="deduct">';                          
+                            var check = '<input type="checkbox" id="select" class="chk" >';                            
+
+                            rows += "<tr><td>" + check + "</td><td>" + id + "</td><td>" + empName + "</td><td>" + emp_gross_salary + "</td><td>" + food + "</td><td>" + holiday + "</td><td>" + deduct + "</td></tr>";
+                            $(rows).appendTo("#addition_tbl tbody");                            
+                            
+                        // }
+
+                    }else{
+                        alert("something wrong");
+                        
+                    }
+
+                },
+            });
+
+          }else{
+
+            alert("Error, Select a row");
+            return;
+          }
+    }
+});
+
+
+
+$("#allowance_btn").click(function(event){
+    
+   
+
+    var tbody = $("#final_tbl tbody");
+
+    if (tbody.children().length > 0) {
+        
+    }else{
+
+        var A=[];
+           
+        var rowCount1 = 0;
+        var rowCount = 0;
+
+            var attendance_array;
+           
+            $IDs = $("#addition_tbl input:checkbox:checked").each(function() {
+                rowCount1 ++;
+                attendance_array = $(this).parent().siblings().map(function() {
+                return $(this).text().trim();
+            }).get();
+
+
+          });
+            // alert(attendance_array);
+            A[0]=attendance_array[0];
+            A[1]=attendance_array[1];
+            A[2]=attendance_array[2];
+
+            alert(A);
+
+          
+          
+          var allowance_array=[];
+            $('.chk').each(function() {
+                if ($(this).is(':checked')) {// check the checked property with .is
+                     
+                       allowance_array=    
+                                     
+                        $(this).parents("tr").find(".food").val() + "," +
+                        $(this).parents("tr").find(".holiday").val()+ "," +
+                        $(this).parents("tr").find(".deduct").val();
+
+                       rowCount++;
+                }
+                
+            });
+
+
+
+            var B=[];
+            alert(allowance_array[0]);
+            // alert(allowance_array[0]);
+            // alert(allowance_array[1]);
+            // alert(allowance_array[2]);
+            // B[3]= allowance_array[3];
+            // B[4]=allowance_array[4];
+            // B[5]=allowance_array[5];
+
+            // alert(B);
+
+            // var result_array = A.concat(B.slice(3));
+            // alert(result_array);
+            
+
+
+         if(rowCount >=1){   
+                                
+                var data = {
+                        empID: attendance_array[0],
+                        empName:attendance_array[1],
+                        // gross: allowance_array[2],
+                        food: allowance_array[3],
+                        holiday: allowance_array[4],
+                        deduct: allowance_array[5]
+                        // working: $('#working_days').val()
+                                            
+                    };
+                
+     
+            // var table = document.getElementById('addition_tbl'),rIndex;
+            // console.log(table.rows.length);
+
+            // for(var i=0;i<table.rows.length;i++){
+            //     table.rows[i].onclick=function(){
+            //         rIndex=this.rowIndex;
+            //         console.log(rIndex);
+            //     }
+            // }
+
+
+            $.ajax({
+                type : "post",
+                url: "<?php echo base_url().'index.php/runPayrollController/SetSalary'?>",
+                cache: false,
+                data :data ,
+                success : function(json){
+                    // var obj=jQuery.parseJSON(json);
+                    var obj=json;
+                    // alert(obj);
+                   
+                    if(obj){
+                        
+                        // for (var i=0;i<obj.length;i++) {
+                            // var rows = "";
+                            // var id = obj.id;                            
+                            // var empName = obj.empName;                           
+                           
+                            // var emp_gross_salary = obj.emp_gross_salary; 
+                            // var food ='<input type="textbox" id="food">';
+                            // var holiday ='<input type="textbox" id="holiday">';
+                            // var deduct ='<input type="textbox" id="holiday">';                          
+                            // var check = '<input type="checkbox" id="select" class="chk" >';                            
+
+                            // rows += "<tr><td>" + check + "</td><td>" + id + "</td><td>" + empName + "</td><td>" + emp_gross_salary + "</td><td>" + food + "</td><td>" + holiday + "</td><td>" + deduct + "</td></tr>";
+                            // $(rows).appendTo("#addition_tbl tbody");                            
                             
                         // }
 
