@@ -5,10 +5,10 @@
 
 <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h1>Manage Outlet Calendar</h1>
+        <h1>Add Calendar Entries</h1>
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url()?>index.php/welcome"><i class="fa fa-dashboard"></i> Home</a></li>            
-            <li class="active">Manage Outlet Calendar</li>
+            <li class="active">Add Calendar Entries</li>
         </ol>
     </section>
 
@@ -26,12 +26,12 @@
                     <!-- form start -->
 
                     
-                <form role="form" action="<?php echo base_url()?>index.php/CalendarController/addCalendarStatus" method="POST">
+                <form role="form" action="<?php echo base_url()?>index.php/CalendarController/addCalendarEntry" method="POST">
                     <div class="box-body">
                     	<div class="col-xs-12 col-lg-12 col-sm-12">                            
                         	<div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
-                                    <label for="inputCalenderDate">Date</label>
+                                    <label for="inputCalendarDate">Date</label>
                                     <div class="input-group date">
                                     	<div class="input-group-addon">
                                         	<i class="fa fa-calendar"></i>
