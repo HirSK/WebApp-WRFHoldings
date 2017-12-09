@@ -248,6 +248,20 @@
                         </div>
             </div>
 
+            <br>
+            <br>
+
+            <section class="content-header">
+            <h4>
+                Sales Return
+                
+            </h4>
+
+        
+            </section>
+
+
+
              <div class="box-body table-responsive">
                         <table id='collectionTable' class="table table-striped table-bordered col-lg-12">
 
