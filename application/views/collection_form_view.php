@@ -31,8 +31,10 @@
             		
             		
 
-            		<div class="col-xs-4 left-padding">
-            			<a class="btn btn-block btn-primary" href="#"> PRINT</a>
+            		<div class="col-xs-8 left-padding">
+            			<a class="btn btn-block btn-primary" target = '_blank' href="<?php echo base_url() ?>index.php/C_report/chqReg"> CHQ</a>
+            			<a class="btn btn-block btn-primary" target = '_blank' href="<?php echo base_url() ?>index.php/C_report/creditReg"> CREDIT</a>
+            			<a class="btn btn-block btn-primary" target = '_blank' href="<?php echo base_url() ?>index.php/C_report/colSum"> COLLECTION SUMMARY</a>
             		</div>
 
             </div>
