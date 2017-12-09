@@ -8,7 +8,7 @@
         
         <ol class="breadcrumb">
             <li><a href="<?php echo base_url()?>/index.php/welcome"><i class="fa fa-dashboard"></i> Home</a></li>            
-            <li class="active">Daily Collection</li>
+            <li class="active">Update Existing Collection</li>
         </ol>
     </section> 
 
@@ -21,11 +21,10 @@
             		
             	<h3 class="box-title">
             		<i class="fa fa-th-list"></i>
-            		Daily Collection
+            		Update Existing Collection
             	</h3>
             		
             	</div>
-
 
 
         </div>
@@ -55,7 +54,7 @@
 	                                                <i class="fa fa-calendar"></i>
 	                                            </div>
 	                                           
-	                                            <input type="text" class="form-control pull-right" id="datepicker" name="dateFrom" required>
+	                                            <input type="text" class="form-control pull-right" id="datepicker" name="dateFrom" disabled="" required>
 	                                </div>
 	                    			
 	                    		</div>
@@ -65,7 +64,7 @@
 	                    		<div class="col-xs-12 col-sm-4 col-lg-3 form-group">
 	                    			<label class="control-label" for>Name of the Collection Officer</label>
 	                    			<span style="color:red;">*</span>
-	                    			<select class="form-control" name="collectionOfficer" id="collectionOfficer" required="">
+	                    			<select class="form-control" name="collectionOfficer" disabled="" id="collectionOfficer" required="">
 	                    				<option value>--Select Collection Officer--</option>
 	                    				<?php
 	                    					foreach ($collectionOfficerList as  $COfficer) {                   						
@@ -77,8 +76,8 @@
 	                    		</div>
 
 	                    		<div class="col-xs-12 col-sm-4 col-lg-3 form-group">
-	                    			<label class="control-label" for><b>The Collection ID : </b></label>
-	                    			<input type="text" name="collectionID" id="collectionID" readonly="">
+	                    			<label class="control-label" for><b>Enter Collection ID : </b></label>
+	                    			<input type="text"  name="collectionID" id="collectionID" onkeypress="Javascript: if (event.keyCode==13) getCollectionDetails();" >
 	                    			
 	                    		</div>
 
@@ -88,7 +87,7 @@
 	                    		<div class="col-xs-12 col-sm-4 col-lg-3 form-group" >
 		                    			<label class="control-label" for>Name of the vehicle driver</label>
 		                    			<span style="color:red;">*</span>
-		                    			<select class="form-control" name="collectionDriver" id="collectionDriver" required>
+		                    			<select class="form-control" disabled="" name="collectionDriver" id="collectionDriver" required>
 		                    				<option value>--Select Driver--</option>
 		                    				<?php
 		                    					foreach ($driverList as  $driver) {                   						
@@ -102,7 +101,7 @@
 		                    	<div class="col-xs-12 col-sm-4 col-lg-3 form-group" >
 		                    			<label class="control-label" for>Vehicle Number</label>
 		                    			<span style="color:red;">*</span>
-		                    			<select class="form-control" name="vehicleNo" id="vehicleNo" required>
+		                    			<select class="form-control" disabled="" name="vehicleNo" id="vehicleNo" required>
 		                    				<option value>--Select Vehicle--</option>
 		                    				<?php
 		                    					foreach ($vehicleList as  $vehicle) {                   						
@@ -116,14 +115,14 @@
 		                    	<div class="col-xs-12 col-sm-4 col-lg-3 form-group" style="padding-top: 20px">
 		                    		<label class="control-label" for>Area</label>
 		                    		<span style="color:red;">*</span>
-		                    		<input type="text" name="collectionArea" id="collectionArea" placeholder="Enter the area covered" required>
+		                    		<input type="text" name="collectionArea" disabled="" id="collectionArea" placeholder="Enter the area covered" required>
 
 		                    	</div> 
 
 		                    	<div class="col-xs-2">
                                 	<!-- <button type="submit" class="btn btn-block btn-success" name="register">OK</button> -->
-                                	<button type="button" class="btn btn-success collection-button" onclick="setCollection()">
-						                <span class="glyphicon glyphicon-ok"></span>Proceed
+                                	<button type="button" class="btn btn-success collection-button" onclick="UpdateCollection()">
+						                <span class="glyphicon glyphicon-ok"></span>Update
 						             </button>
                             	</div>
 		                    </div> 
@@ -387,8 +386,75 @@
 
 <script type="text/javascript">
 
+	function getCollectionDetails(){
+
+		if($('#collectionID').val()){
+
+			$("#collectionID").attr('disabled','disabled');
+
+		    $.ajax({
+		        type : "post",
+		        url: "<?php echo base_url().'index.php/SalesController/getCollectionDetails'?>",
+		        cache: false,
+		        data : {collection_id :  $('#collectionID').val()},
+		        success : function(json){
+		        	
+		            var obj=jQuery.parseJSON(json);
+		            
+
+		            if(obj[0]){		            	
+		            	
+		                $('#datepicker').val(obj[0].CollectionDate);
+		                $('#vehicleNo').val(obj[0].CollectionVehicle);
+		                $('#collectionOfficer').val(obj[0].CollectionOfficerName);
+		                $('#collectionDriver').val(obj[0].CollectionDriver);
+		                $('#collectionArea').val(obj[0].CollectionArea);
+
+
+		                enableInvoiceTextBoxes();
+		                enableCollectionTextBoxes();		                
+		            }else{
+		                alert("The collection id is not found!!!");
+		                clearTextBoxes();
+		            }
+
+		        },
+		    });
+		}else{
+		    alert("Please enter the collection and hit enter");
+		    clearTextBoxes();
+		}  
+
+	}
+
+
+
+	function enableCollectionTextBoxes(){
+		document.getElementById('datepicker').removeAttribute('disabled');
+		document.getElementById('vehicleNo').removeAttribute('disabled');
+		document.getElementById('collectionOfficer').removeAttribute('disabled');
+		document.getElementById('collectionDriver').removeAttribute('disabled');
+		document.getElementById('collectionArea').removeAttribute('disabled');
+		// document.getElementById('collectionID').removeAttribute('disabled');
+
+	}
+
+
 	
-	function setCollection(){
+	function disableCollectiontextBoxes(){
+
+            $("#datepicker").attr('disabled','disabled');
+            $("#vehicleNo").attr('disabled','disabled');
+            $("#collectionOfficer").attr('disabled','disabled');
+            $("#collectionDriver").attr('disabled','disabled');
+            $("#collectionArea").attr('disabled','disabled');
+            $("#collectionID").attr('disabled','disabled');
+			                
+
+	}
+
+
+	function UpdateCollection(){
 
 		var datepicker = document.getElementById("datepicker").value;
 		var vehicleNo = document.getElementById("vehicleNo").value; 
@@ -396,31 +462,11 @@
 		var collectionDriver = document.getElementById("collectionDriver").value;
 		var collectionArea = document.getElementById("collectionArea").value;
 
-		if(datepicker.length<1 && vehicleNo.length<1 && collectionOfficer.length<1 && collectionDriver.length<1 && collectionArea.length<1 ){
-
-			alert("Please enter values to proceed");
-			return;
-		}else if(datepicker.length<1){
-			alert("Please select the date");
-			return;
-		}else if(vehicleNo.length<1){
-			alert("Please select the vehicle no");
-			return;
-		}else if(collectionOfficer.length<1){
-			alert("Please select the collection officer");
-			return;
-		}else if(collectionDriver.length<1){
-			alert("Please select the collection driver");
-			return;
-		}else if(collectionArea.length<1){
-			alert("Please enter the relevant collection area");
-			return;
-		}
-
+		
 		
 		var data = {
 			        date: datepicker,
-			        // date:$CollectionDate,
+			        collectionID : $('#collectionID').val(),
 			        vehicleNo: $('#vehicleNo').val(),
 			        collectionOfficer: $('#collectionOfficer').val(),
 			        collectionDriver: $('#collectionDriver').val(),
@@ -429,31 +475,21 @@
 			    };
 
 		$.ajax({
-			        url: "<?php echo base_url().'index.php/SalesController/addCollectionInfo'?>",
+			        url: "<?php echo base_url().'index.php/SalesController/UpdateCollectionInfo'?>",
 			        type: "post",
 			        data: data,
 			       
-          			// error: function(xhr, ajaxOptions, thrownError) { 
-           		// 		alert("You have added the invoice already!!!"); 
-           		// 		clearTextBoxes();
-           		// 	},
+          			
         
 			        success : function(json){
-			            var obj=jQuery.parseJSON(json);
+			            // var obj=jQuery.parseJSON(json);
 
-			            if(obj){
+			            if(json){
 
-			                alert('Collection Details added successfully, Collection ID is '+ obj);
-			                $("#datepicker").attr('disabled','disabled');
-			                $("#vehicleNo").attr('disabled','disabled');
-			                $("#collectionOfficer").attr('disabled','disabled');
-			                $("#collectionDriver").attr('disabled','disabled');
-			                $("#collectionArea").attr('disabled','disabled');
+			                alert('Collection Details updated successfully');
 
-			                	
-			                enableInvoiceTextBoxes();
-			                $('#collectionID').val(obj);
-			                	                
+			                disableCollectiontextBoxes();
+
 			                			                
 			            }else{
 			                alert("Failed,Check the internet connection again");
@@ -498,17 +534,21 @@ function getDetails()
 
 		    $.ajax({
 		        type : "post",
-		        url: "<?php echo base_url().'index.php/SalesController/getInvoiceDetails'?>",
+		        url: "<?php echo base_url().'index.php/SalesController/getInvoiceDetails_update'?>",
 		        cache: false,
-		        data : {id :  $('#idInvoice').val()},
+		        data : {id :  $('#idInvoice').val(),
+		        		collectionID : $('#collectionID').val()
+		    			},
 		        success : function(json){
 		            var obj=jQuery.parseJSON(json);
 
 		            if(obj[0]){
+
 		                $('#InvoiceValue').val(obj[0].InvoiceValue);
 		                $('#CustomerCode').val(obj[0].Customer_idCustomer);
 		                $('#CustomerName').val(obj[0].CustomerName);		                
 		            }else{
+
 		                alert("The invoice id has not been pre ordered,First add it to pre order invoice list");
 		                clearTextBoxes();
 		            }

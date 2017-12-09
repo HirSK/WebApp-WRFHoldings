@@ -47,7 +47,7 @@ class payroll_model extends CI_Model{
 
 
 	function getBasicSalary($empID){
-		$query = $this->db->query("select SalaryBasic from employee where idEmployee=$empID");
+		$query = $this->db->query("select SalaryBasic,Salary_ETF_Amount from employee where idEmployee=$empID");
 		$res = $query->result();
 		return $res;
 	}
