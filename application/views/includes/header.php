@@ -145,6 +145,9 @@ function confirmUser(){
                         <li><a href="<?php echo base_url()?>index.php/SalesController/createInvoiceList">Invoice</a></li>
 
                        <li><a href="<?php echo base_url()?>index.php/SalesController">Account Summary</a></li>
+
+                       <li><a href="<?php echo base_url()?>index.php/SalesController/editCollection">Edit Collection</a></li>
+                       
                        <li><a href="<?php echo base_url()?>index.php/SalesController/loadRepayCredits">Repay Credits</a></li>
 
 
