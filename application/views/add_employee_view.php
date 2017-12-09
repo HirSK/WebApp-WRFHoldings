@@ -41,6 +41,17 @@
                                     <input type="text" class="form-control"  name="empId" placeholder="Employee ID" required>
                                 </div>
                             </div> -->
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label for="employeeID">Employee ID</label>
+                                    <select class="form-control employeeID" style="width: 100%;" name="employeeID" required>
+                                        
+                                        <option selected="selected"><?php 
+                                        echo $maxid+1;?></option>
+                                        
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
@@ -56,12 +67,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                    <label for="nic">NIC No</label>
-                                    <input type="text" class="form-control"  name ="nicNumber" placeholder="NIC No" required>
-                                </div>
-                            </div>
 
                         </div>
 
@@ -148,6 +153,14 @@
                                     <!-- /.input group -->
                                 </div>
                             </div>
+
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label for="nic">NIC No</label>
+                                    <input type="text" class="form-control"  name ="nicNumber" placeholder="NIC No" required>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="col-xs-12 col-lg-12 col-sm-12">
@@ -168,6 +181,43 @@
                                     <input type="email" class="form-control"   name="email" placeholder="Email">
                                 </div>
                             </div>
+
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label for="basicSalary">Basic Salary</label>
+                                    <input type="text" class="form-control"  name ="basicSalary" placeholder="Basic Salary" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-12 col-sm-12">
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label for="salaryETF">Salary ETF</label>
+                                    <input type="text" class="form-control"  name ="salaryETF" placeholder="Salary ETF" required>
+                                </div>
+                            </div>
+                            
+
+
+                            <div class="col-sm-4 col-xs-12">
+
+                                <div class="form-group">
+                                    <label for="address">QR Code</label>
+                                    <textarea onkeyup="generate_qrcode(this.value)" cols="42" rows="2" placeholder="Enter the Employee ID to continue"></textarea>
+
+                                
+                                </div>
+
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+
+                                
+
+                                <div id="result" ></div>
+                                
+
+                            </div>
+                           
 
                         </div>
 
@@ -196,10 +246,26 @@
 
 
 <?php include "includes/footer.php";?>
-
+<!-- <script >window.onload = function () { alert("It's loaded!") }</script> -->
 <!-- REQUIRED JS SCRIPTS -->
 
+<!-- Ajax script to generate QR Code -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- <script>generate_qrcode($maxid);</script> -->
+<script>
+ function generate_qrcode(sample){
+     $.ajax({
+         type: 'post',
+         url: '<?php echo base_url()?>index.php/EmployeeController/generateQR',
+         data : {sample:sample},
+         success: function(code){
+         $('#result').html(code);
+         }
+     });
+ }
+</script>
 <!-- jQuery 3 -->
+
 <script src="<?php echo base_url()?>template/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url()?>template/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
