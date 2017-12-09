@@ -153,7 +153,7 @@
 
           <div class="col-lg-4 col-sm-4 col-xs-12" no-padding style="padding-top:20px">
                     <div class="col-xs-4 left-padding">
-                        <a class="btn btn-block btn-success" href="<?php echo base_url()?>index.php/CustomerController"> PRINT</a>
+                        <a class="btn btn-block btn-success" target="_blank" href="<?php echo base_url()?>index.php/C_report/chqReg"> PRINT</a>
                     </div>
 
                 </div>   
