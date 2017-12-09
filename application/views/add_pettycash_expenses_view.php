@@ -85,6 +85,7 @@
                                          ?>
                                         <option><?php echo $type->Petty_CashType ?></option>
 
+
                                         <?php
 
                                          } ?>
@@ -98,6 +99,14 @@
                                     <label>Amount</label>
 
                                     <input type="text" class="form-control" id="amount" name="amount" placeholder="Amount">
+
+<!--                                     <div class="input-group date">
+                                      <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                      </div>
+                                      <input type="text" class="form-control pull-right" id="datepicker1" name="dateTo" required>
+                                    </div> -->
+
                                     <!-- /.input group -->
                                 </div>
                             </div>
@@ -143,6 +152,18 @@
                         <tbody>
                             
                             
+
+
+
+                                
+                                </th>
+                                <th><input type="text" class="form-control"  name="amount" placeholder="Amount"></th>
+                                <th>
+                                    <div class="col-xs-7 left-padding">
+                                        <button type="submit" class="btn btn-block btn-success" name="ADD">ADD</button>
+                                    </div>
+                                </th>
+                            </tr>
 
                         </tbody>
                         </table>
@@ -217,6 +238,9 @@
 
 
 
+
+
+
 <!-- REQUIRED JS SCRIPTS -->
 
 <!-- jQuery 3 -->
@@ -231,6 +255,12 @@
 <script src="<?php echo base_url()?>template/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
 <script >
+    $(function() {
+        //Date picker
+        $('#datepicker1').datepicker({
+          autoclose: true
+        })
+    })
     $(function() {
         //Date picker
         $('#datepicker1').datepicker({

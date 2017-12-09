@@ -43,6 +43,7 @@
                       <th>Mobile</th>
                       <th>Employee ID</th>
                       <th>Outlet ID</th>
+                      <th>Outlet Name</th>
                       <th class="text-center">Actions</th>
                     </tr>
                     <?php
@@ -58,6 +59,7 @@
                       <td><?php echo $record->mobile ?></td>
                       <td><?php echo $record->Employee_idEmployee ?></td>
                       <td><?php echo $record->Employee_Outlet_idOutlet ?></td>
+                      <td><?php echo $record->Outletname ?></td>
                       <td class="text-center">
                           <a class="btn btn-sm btn-info" href="<?php echo base_url()?>index.php/UserController/addNew/$record->idUser"><i class="fa fa-pencil"></i></a>
                           <a class="btn btn-sm btn-danger deleteUser" href="#" data-userid="<?php echo $record->idUser; ?>"><i class="fa fa-trash"></i></a>

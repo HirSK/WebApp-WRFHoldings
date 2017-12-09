@@ -2,21 +2,128 @@
 
 <div class="content-wrapper">
 
-<div class="container" style='height:auto;width:30%;' >
-    <form class="form-signin" method="POST">
-        <h2 class="form-signin-heading">Add Outlet Here</h2>
-        <label for="outletName" class="">Outlet Name</label>
-            <input type="text" name="outletName" id="firstName" class="form-control" placeholder="Outlet Name" required>
-        <label for="outletLocation" class="">Location</label>
-            <input type="text" name="outletLocation" id="outletLocation" class="form-control" placeholder="Outlet Location" required>
-        <button class="btn btn-lg btn-primary" type="submit" name="submit" >Add Outlet
-        </button>
-    </form>
+<!-- Content Header (Page header) -->
+
+    <section class="content-header">
+        <h1>
+            Outlets
+<!--             <small><?php echo $this->session->userData('loggerOutletName') ; ?></small>
+ -->        </h1>
+
+        <ol class="breadcrumb">
+            <li><a href="<?php echo base_url()?>/index.php/welcome"><i class="fa fa-dashboard"></i> Home</a></li>            
+            <li class="active">Outlets</li>
+        </ol>
+    </section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+            <!-- left column -->
+            <div class="wizard-inner">
+            <div class="col-xs-8 col-xs-6" style="padding-top: 20px">
+                <!-- general form elements -->
+                <div class="box box-primary" style="height: 500px; width: 800px">
+                    <div class="box-header with-border" style="height: 50px">
+                        <h3 class="box-title">Register New Outlet</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <!-- form start -->
+
+                    
+                    <form role="form" action="<?php echo base_url()?>index.php/OutletController/addOutlets" method="POST">
+                        <div class="box-body">
+
+                            <div class="col-md-8">
+                            
+                              <div class="col-md-8 col-xs-12">
+                                <div class="form-group">
+                                    <label for="OutletName">Outlet Name</label>
+                                    <input type="text" class="form-control"  name="OutletName" placeholder="Outlet name" required>
+                                </div>
+                                </div>
+                                
+                             <div class="col-sm-8 col-xs-12">
+                                <div class="form-group">
+                                    <label for="OutletLocation">Outlet Location</label>
+                                    <textarea type="textarea" class="form-control" name="OutletLocation" placeholder="Enter The Location"></textarea>
+                                </div>
+                             </div>
+
+                             <div class="col-sm-4 col-xs-4">
+                                <div class="form-group">
+                                    
+                                </div>
+                             </div>
+
+                            </div>
+
+                            <div class="col-xs-12 col-lg-12 col-sm-12">
+
+                            </div>
+
+                            <div class="col-xs-2">
+                                <button type="submit" class="btn btn-block btn-success" name="register">Submit</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+
+            <div class="col-xs-6 col-xs-6" style="padding-top: 20px">
+                <!-- general form elements -->
+                <div class="box box-primary" style="height: 500px; width: 600px">
+                    <div class="box-header with-border" style="height: 50px">
+                        <h3 class="box-title">Outlets </h3>
+                    </div>
+
+		<div>
+
+			 <table class="table table-hover">
+                    <tr>
+                      <th>Outlet Id</th>
+                      <th>Outlet Name</th>
+                      <th>Outlet Location</th>                      
+
+                    </tr>
+
+                     <?php
+                    if(!empty($outlett))
+                    {
+                        foreach($outlett as $record)
+                        {
+                    ?>	
+                    
+                    <tr>
+                      <td><?php echo $record->idOutlet ?></td>
+                      <td><?php echo $record->Outletname ?></td>
+                      <td><?php echo $record->OutletLocation ?></td>
+                          
+                    </tr>
+                     <?php
+                        }
+                    }
+                    ?>
+                    
+                  </table>                  
+               
+		</div>
+            	
+        </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+
 
 </div>
-</div>
+<!-- /.content-wrapper -->
 
-<?php include "includes/footer.php";?>
+
+
 
 <!-- REQUIRED JS SCRIPTS -->
 
@@ -30,8 +137,4 @@
 <script src="<?php echo base_url()?>template/dist/js/adminlte.min.js"></script>
 <!-- bootstrap datepicker -->
 <script src="<?php echo base_url()?>template/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-
-</body>
-</html>
-
 

@@ -1,7 +1,4 @@
 
-
-
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -21,11 +18,11 @@
         <!-- Main content -->
 
         <div class="container">
-    <div class="row">
-        <section>
-        <div class="wizard">
             
-            <form role="form">
+        <section class="content" style="margin-bottom: auto;">
+        <div class="wizard" style="margin-right: 40px;">
+            
+            <form role="form" action="<?php echo base_url()?>index.php/SalesController/viewCollection" method="POST">
                 
 
 
@@ -51,7 +48,7 @@
                                                       <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                       </div>
-                                                      <input type="text" class="form-control pull-right" id="datepicker" name="getCollectionFrom" required>
+                                                      <input type="text" class="form-control pull-right"  name="getCollectionFrom" id="datepicker" required>
                                                     </div>
                                     <!-- /.input group -->
                                             </div>
@@ -69,7 +66,7 @@
                                                       <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                       </div>
-                                                      <input type="text" class="form-control pull-right" id="datepicker" name="getCollectionTo" required>
+                                                      <input type="text" class="form-control pull-right"  name="getCollectionTo" id="datepicker1" >
                                                     </div>
                                     <!-- /.input group -->
                                                     </div>
@@ -78,48 +75,183 @@
                                             
                                                 </div>
 
-
                                                 <div class="col-md-2">
                                                     <div class="form-group">
+                                               
                                                         <label>Select Register</label>
-                                                            <select class="form-control" name="position" required>
-                                                                    <option>Cash Register </option>
-                                                                    <option>Cheque Register</option>
-                                                                    <option>Credit Register</option>
-                                                                    <option>Daily collection summary</option>
+                                                            <select class="form-control" id="position" name="position" required>
+                                                                    <option value="Cash Register">Cash Register </option>
+                                                                    <option value="Cheque Register">Cheque Register</option>
+                                                                    <option value="Credit Register">Credit Register</option>
+                                                                    <option value="Daily collection summary">Daily collection summary</option>
                                                                     
                                                             </select>
+
+                                                            <br>
+
+                                                   
+                                                            
+                                                        <label>Select Outlet</label>
+
+                                                         <?php
+                                                       if($loggerRole == ROLE_ADMIN)
+                                                        {
+                                                        ?>
+                                                        <select class="form-control" name="outletId" required>
+                                                          <?php foreach ($outlet as $id) {
+                                                                # code...
+                                                                ?>
+                                                                    <option><?php echo $id->idOutlet ?></option>
+
+                                                                <?php
+
+                                                           } 
+
+                                                           ?>
+                                                                   
+                                                            
+                                                        </select>
+
+
+                                                        <?php
+
+
+                                                            }if( $loggerRole == ROLE_SUPERVISOR){
+
+                                                            ?>
+
+                                                            <input class="form-control" name="outletId" value="<?php echo (int)($this->session->userdata('loggerOutletID')); ?>"  readonly required>
+
+
+
+                                                       <?php
+                                                        }
+
+                                                        ?>
+
                                                     </div>
                                                 </div>
 
+
                                                 <div class="row" style="padding-top: 22px;">
                                                 <div class="col-md-2">
-                                                <a class="btn btn-info" href="<?php echo base_url()?>index.php/EmployeeController">Go</a>
+
+                                                <button type="submit" class="btn btn-default preview-add-button"> GO</button>
+                                                
                                                 </div>
 
                                                 </div>
-                                        </div>        
+                                        </div> 
+
+
+                 </form> 
+
+
+
+         </div> 
+
+
+         <div class="wizard" style="margin-right: 40px;">     
                 
                     
+         <div class="col-xs-12 col-lg-12" style="padding-top: 10px">
 
-                                    
-                                                             
-                            </section>
+                <!-- general form elements -->
+            <div class="box box-primary" style="padding-top: 0px">
+                                 
+           <?php 
+           
+             if( $collection != NULL){
+             ?>
 
+
+
+             <div class="box-body table-responsive">
+                        <table id='collectionTable' class="table table-striped table-bordered col-lg-12">
+
+                        <thead >
+                            
+                            <tr>
+                                <th>Collection ID</th>
+                                
+                                <th>Collection Date</th>
+                               
+                                
+                                
+                            </tr>
+
+                        
+
+                        </thead>
 
                     
                     
-                    <div class="clearfix"></div>
-               
-            </form>
-        </div>
-    </section>
+                    
+
+
+
+                    <?php
+                        
+                        foreach ($collection as $row){
+
+
+                            
+
+                            ?><tr data-id=<?php echo $row->idCollection;?>>
+                            <td><?php echo $row->idCollection;?></td>
+                            <td><?php echo $row->CollectionDate;?></td>  
+                              
+                            </tr>
+
+                            
+                         <?php 
+                            
+                         
+                        }
+                    ?>
+                    </table>
+
+                    <?php 
+                     }
+
+                     ?>
+
+
+
+
+                    </div>
+                </div>
+
+
+                     
+
+                      </div>
+
+
+
+        </section>
+
+
 
 </div>
-        <!-- /.content -->
-    </div>
 
-    </div>
+</div>
+
+
+           
+
+
+                    
+                    
+                   
+           
+
+     
+      
+
+
+
+   
 
   
 
@@ -127,7 +259,7 @@
 
     <!-- Add the sidebar's background. This div must be placed
     immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
+   
 
 <!-- ./wrapper -->
 
@@ -136,9 +268,115 @@
 
 <!-- AdminLTE App -->
 <!-- InputMask -->
-<script src="<?php echo base_url() ?>template/bower_components/inputmask/dist/inputmask/jquery.inputmask.js"></script>
-<script src="<?php echo base_url() ?>template/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="<?php echo base_url() ?>template/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+
+<script >
+    $(function() {
+        //Date picker
+        $('#datepicker').datepicker({
+          autoclose: true
+        })
+    })
+
+</script>
+
+<script >
+    $(function() {
+        //Date picker
+        $('#datepicker1').datepicker({
+          autoclose: true
+        })
+    })
+
+</script>
+
+<script>
+    $('#collectionTable tr').hover(function() {
+    $(this).addClass('hover');
+        }, function() {
+            $(this).removeClass('hover');
+        });
+
+</script>
+
+
+<script>
+    $(document).ready(function() {
+
+    $('table tbody tr').click(function(){
+
+
+        //document.getElementById("myModal").style.display = "block";
+
+
+       // var value_of_dropdown  = $(this).find('select[name="position"]').val();
+
+        var e = document.getElementById("position");
+        var str = e.options[e.selectedIndex].text;
+
+        var getIdFromRow = $(event.target).closest('tr').data('id');
+
+        console.log(getIdFromRow);
+
+        var data = Array();
+
+        $("table tr").each(function(i, v){
+            data[i] = Array();
+            $(this).children('td').each(function(ii, vv){
+            data[i][ii] = $(this).text();
+            }); 
+        })
+
+        var date = data[getIdFromRow]['1'];
+
+        console.log(str);
+
+
+
+        $.ajax({
+        type: "GET",
+        url: "http://localhost/WebApp-WRFHoldings/index.php/SalesController/viewInoviceDetail" ,
+        data: {"strUser": getIdFromRow,"position":str}, 
+        dataType:'JSON', 
+        success: function(response){
+
+        var dic=[];
+
+
+        //var d2 = response.data.Coldate.CollectionDate;
+         
+
+        for (i = 0, len =response.data.UserDetailsone.length, text = ""; i < len; i++) { 
+            
+
+            var d1 =response.data.UserDetailsone[i];
+            
+
+            dic[i]=d1;
+
+        }
+
+
+        console.log(dic);
+        
+        localStorage.setItem('data1', JSON.stringify(dic));
+        localStorage.setItem('data2', JSON.stringify(date));
+        
+
+        window.location.href = "http://localhost/WebApp-WRFHoldings/index.php/SalesController/new1";
+    
+
+        
+        
+    }
+    });
+
+    });
+});
+
+</script>
+
+
+
 
 
 <!-- REQUIRED JS SCRIPTS -->
@@ -154,30 +392,12 @@
 <!-- bootstrap datepicker -->
 <script src="<?php echo base_url()?>template/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
-<script>
-    $(function () {
-        //Datemask dd/mm/yyyy
-        $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
-    }
-</script>
-<script src="<?php echo base_url()?>template/bower_components/newCss/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url()?>template/bower_components/newCss/js/dataTables.bootstrap.min.js"></script>
-<script src="<?php echo base_url()?>template/bower_components/newCss/js/dataTables.checkboxes.min.js"></script>
 
 
-<script>
 
-jQuery('#master').on('click', function(e) {
- if($(this).is(':checked',true))  
- {
- $(".case").prop('checked', true);  
- }  
- else  
- {  
- $(".case").prop('checked',false);  
- }  
-});
-</script>
+
+
+
 
 <!-- bootstrap datepicker -->
 
