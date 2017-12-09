@@ -36,7 +36,7 @@
                     </div> -->
 
                     <div class="col-xs-4 left-padding">
-                        <a class="btn btn-block btn-primary" href="#"> PRINT</a>
+                        <a class="btn btn-block btn-primary" target="_blank" href="<?php echo base_url()?>index.php/C_report/empList"> PRINT</a>
                     </div>
 
                 </div>

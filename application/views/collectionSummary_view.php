@@ -21,10 +21,13 @@
                     <i class="fa fa-th-list"></i>
                     Daily Sales of <label id="coldate">text</label>
                 </b> </h3>
-                    
-                </div>
-
+                
             
+            </div>
+
+
+            <div class="col-md-12 ">
+                        <a class="btn btn-primary pull-right " target="_blank" href="<?php echo base_url()?>index.php/C_report/colSum"> PRINT</a>
             </div>
             
 

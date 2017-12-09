@@ -198,7 +198,7 @@
                         foreach ($collection1 as $row){
 
 
-                            echo '<script>console.log($row->ChequeNumber)</script>';
+                            //echo '<script>console.log($row->ChequeNumber)</script>';
 
 
                             

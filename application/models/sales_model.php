@@ -17,12 +17,20 @@ class sales_model extends CI_Model{
         }
 	}
 
-	function getInvoiceData($id){
-		$query = $this->db->query("select InvoiceValue,Customer_idCustomer,CustomerName from preorder_invoice,customer where preorder_invoice.idInvoice=$id and customer.CustomerCode=preorder_invoice.Customer_idCustomer");
+	function getInvoiceData($id,$outletID){
+		$query = $this->db->query("select InvoiceValue,Customer_idCustomer,CustomerName from preorder_invoice,customer where preorder_invoice.idInvoice=$id and customer.CustomerCode=preorder_invoice.Customer_idCustomer and preorder_invoice.outletID=$outletID");
 		$result = $query->result();
 		return $result;
 
 	}
+
+	function getCollectionDetails($collection_id){
+		$query = $this->db->query("select CollectionDate,CollectionDriver,CollectionVehicle,CollectionArea,CollectionOfficerName from collection where idCollection=$collection_id");
+		$result = $query->result();
+		return $result;
+
+	}
+
 
 
 	function updateInvoiceData($invoice_array){
@@ -43,6 +51,23 @@ class sales_model extends CI_Model{
 		
 	}
 
+	function updateCollectionDataupdateCollectionData($idCollection,$collectionArray){
+
+		// $query = $this->db->query("update collection set CollectionDate='$CollectionDate' , CollectionOfficerName='$CollectionOfficerName' , CollectionDriver='$CollectionDriver',CollectionVehicle='$CollectionVehicle',CollectionArea='$CollectionArea' where idCollection=$idCollection");
+		$this->db->where('idCollection', $idCollection);
+ 		$query = $this->db->update('collection',$collectionArray);
+
+
+		if($query){
+
+			return true;
+		}
+
+
+		
+	}
+
+
 	function getMaxCollectionID(){
 		$maxid = 0;
 		$row = $this->db->query('SELECT MAX(idCollection) AS `maxid` FROM `collection`')->row();
@@ -50,6 +75,18 @@ class sales_model extends CI_Model{
     		$maxid = $row->maxid; 
 		}
 		return $maxid;
+	}
+
+	function getInvoiceOtherData($id,$outletID){
+
+		// $query1 = $this->db->query("select Customer_idCustomer,InvoiceValue from preorder_invoice where idInvoice=$id and outletID=$outletID");
+
+  //       $query2 = $this->db->query("select ");
+
+  //       $result1 = $query1->result();
+  //       $result2 = $query2->result();
+
+  //       return array_merge($result1, $result2);
 	}
 
 

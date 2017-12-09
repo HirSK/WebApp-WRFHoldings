@@ -27,6 +27,7 @@
             	</div>
 
 
+
         </div>
 
             <div class="col-xs-12 col-lg-12" style="padding-top: 10px">
@@ -314,6 +315,8 @@
 				                                    <th>Cash</th>
 				                                    <th>Cheque</th>
 				                                    <th>Credit</th>
+				                                    <th>Action</th>
+
 				                                </tr>
 				                            </thead>
 				                            <tbody></tbody> <!-- preview content goes here-->
@@ -321,7 +324,7 @@
 				                    </div>                            
 				                </div>
 				            </div>
-				            <div class="row text-right">
+				            <!-- <div class="row text-right">
 				                <div class="col-xs-12">
 				                    <h5>Total Cash: <strong><span class="preview-cash"></span></strong></h5>
 				                    <h5>Total Cheque: <strong><span class="preview-total"></span></strong></h5>
@@ -333,7 +336,7 @@
 				                    <hr style="border:1px dashed #dddddd;">
 				                    <button type="button" class="btn btn-primary btn-block">Submit all and finish</button>
 				                </div>                
-				            </div>
+				            </div> -->
 				        </div>
 
 
