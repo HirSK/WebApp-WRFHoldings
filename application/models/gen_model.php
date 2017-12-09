@@ -38,7 +38,7 @@ class gen_model extends CI_Model{
             return $result;
 
         }else{
-            $query = $this->db->query("select idUser,Employee_idEmployee,Employee_Outlet_idOutlet,mobile,roleName,EmployeeFullName from user,employee where user.Employee_idEmployee=employee.idEmployee");
+            $query = $this->db->query("select idUser,Employee_idEmployee,Outletname,Employee_Outlet_idOutlet,mobile,roleName,EmployeeFullName from user,employee,outlet where user.Employee_idEmployee=employee.idEmployee ");
             $result=$query->result();
             return $result;
         }
