@@ -93,9 +93,9 @@
 
 
                         <div class="col-md-12">
-                        <ul class="list-inline ">
+                        <!-- <ul class="list-inline ">
                             <li><button type="submit" class="btn btn-primary next-step proceed" id="proceed" >Proceed for salary calculation </button></li>
-                        </ul>
+                        </ul> -->
                         </div>
 
                     
