@@ -33,7 +33,7 @@ class gen_model extends CI_Model{
     function userListing($searchText = '')
     {
         
-            $query = $this->db->query("select Outletname,idUser,Employee_idEmployee,Employee_Outlet_idOutlet,mobile,roleName,EmployeeFullName from user,employee,outlet where user.Employee_idEmployee=employee.idEmployee and employee.Outlet_idOutlet=outlet.idOutlet");
+            $query = $this->db->query("select Outletname,idUser,Employee_idEmployee,idEmployee,Employee_Outlet_idOutlet,mobile,roleName,EmployeeFullName from user,employee,outlet where user.Employee_idEmployee=employee.idEmployee and employee.Outlet_idOutlet=outlet.idOutlet");
 
             $result=$query->result();
             return $result;

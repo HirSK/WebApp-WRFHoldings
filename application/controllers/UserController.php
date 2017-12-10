@@ -32,7 +32,7 @@ class UserController extends BaseController{
             
                       
             $data['userRecords'] = $this->gen_model->userListing($searchText);
-
+            
             
             $this->global['pageTitle'] = 'WRF Holdings(pvt) Ltd : User Listing';
             

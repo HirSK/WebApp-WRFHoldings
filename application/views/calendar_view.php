@@ -151,7 +151,7 @@
                     
                           <?php
                             $count = 1;
-                            foreach ($calendarRecord as $row){
+                            foreach ($calendarRecords as $row){
                            
 
                             ?><tr>

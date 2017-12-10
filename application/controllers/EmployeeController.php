@@ -11,7 +11,16 @@ class EmployeeController extends BaseController{
 
 	public function index(){
 		// $this->load->view('add_employee_view');
-		$this->loadViews('add_employee_view',$this->global,NULL,NULL);
+		$data['maxid'] = 0;
+		$row = $this->db->query('SELECT MAX(idEmployee) AS `maxid` FROM `employee`')->row();
+		if ($row) {
+		    $data['maxid'] = $row->maxid;
+
+		    $this->loadViews('add_employee_view',$this->global,$data,NULL);
+		}
+
+
+		
 	}
 
 	public function manageEmployee(){
@@ -26,7 +35,7 @@ class EmployeeController extends BaseController{
 		
 			$employee_array = array(
 
-					
+					'idEmployee'				=> $_POST['employeeID'],
 					'EmployeeFullName'				=> $_POST['fullName'],
 					'EmployeeNameWithInitials'		=> $_POST['nameWithInitials'],
 					'EmployeeNIC'				=> $_POST['nicNumber'],
@@ -36,7 +45,9 @@ class EmployeeController extends BaseController{
 					'EmployeeJoinedDate'			=> $_POST['joinedDate'],
 					'EmployeeContactNumber'			=> $_POST['contactNumber'],
 					'EmployeeAddress'				=> $_POST['address'],
-					'EmployeeEmail'					=> $_POST['email'],				
+					'EmployeeEmail'					=> $_POST['email'],
+					'SalaryBasic'					=> $_POST['basicSalary'],
+					'Salary_ETF_Amount'				=> $_POST['salaryETF'],
 
 			);
 
@@ -46,4 +57,11 @@ class EmployeeController extends BaseController{
 		//}
 
 	}
+
+	public function generateQR(){
+
+		$code = '<center><img src="https://chart.googleapis.com/chart?chs=200x200&cht=qr&chl='.$_REQUEST['sample'].'" title="Link to Google.com"></center>';
+		echo $code;
+	}
+	
 }
