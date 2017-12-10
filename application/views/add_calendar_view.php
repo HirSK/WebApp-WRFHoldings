@@ -25,7 +25,7 @@
                     <!-- /.box-header -->
                     <!-- form start -->
 
-                    
+                 <?php require APPPATH . '/views/includes/flashDisplay.php';   ?>
                 <form role="form" action="<?php echo base_url()?>index.php/CalendarController/addCalendarEntry" method="POST">
                     <div class="box-body">
                     	<div class="col-xs-12 col-lg-12 col-sm-12">                            
@@ -36,7 +36,8 @@
                                     	<div class="input-group-addon">
                                         	<i class="fa fa-calendar"></i>
                                       	</div>
-                                      	<input type="text" class="form-control pull-right" id="datepicker" name="inputCalendarDate" >
+                                      	<input type="text" class="form-control pull-right" id="datepicker" value="20<?php 
+                                        echo date('y-m-d');?>" name="inputCalendarDate" >
                                     </div>
                                 </div>
                             </div>
