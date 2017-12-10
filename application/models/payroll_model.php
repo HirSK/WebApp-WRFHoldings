@@ -51,4 +51,17 @@ class payroll_model extends CI_Model{
 		$res = $query->result();
 		return $res;
 	}
+
+	function SetSalary($salary){
+
+		try {
+
+            $this->db->insert('salary_month', $salary);
+   			$insert_id = $this->db->insert_id();
+
+   			return  $insert_id;
+        } catch (Exception $err) {
+            return $err->getMessage();
+        }
+	}
 }
