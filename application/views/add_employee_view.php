@@ -245,7 +245,7 @@
 
 
 
-<?php include "includes/footer.php";?>
+
 <!-- <script >window.onload = function () { alert("It's loaded!") }</script> -->
 <!-- REQUIRED JS SCRIPTS -->
 
