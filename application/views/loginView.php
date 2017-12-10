@@ -34,33 +34,8 @@
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign In</p>
-        <?php $this->load->helper('form'); ?>
-        <div class="row">
-            <div class="col-md-12">
-                <?php echo validation_errors('<div class="alert alert-danger alert-dismissable">', ' <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>'); ?>
-            </div>
-        </div>
-        <?php
-        $this->load->helper('form');
-        $error = $this->session->flashdata('error');
-        if($error)
-        {
-            ?>
-            <div class="alert alert-danger alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <?php echo $error; ?>                    
-            </div>
-        <?php }
-        $success = $this->session->flashdata('success');
-        if($success)
-        {
-            ?>
-            <div class="alert alert-success alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <?php echo $success; ?>                    
-            </div>
-        <?php } ?>
         
+        <?php require APPPATH . '/views/includes/flashDisplay.php';   ?>
          <form action="<?php echo base_url() ?>index.php/LoginTest/loginMe" method="post">
             <div class="form-group has-feedback">
               <input type="username" name="username" class="form-control" placeholder="UserName" required>
