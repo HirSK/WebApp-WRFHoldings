@@ -85,7 +85,14 @@
                                     <td><?php echo $row->DateOfDay;?></td>  
                                     <td><?php echo $row->idEmployee;?></td> 
                                     <td><?php echo $row->EmployeeFullName;?></td>  
-                                    <td><?php echo $row->FullDayHalfDay;?></td> 
+                                    <td><?php $FullDayHalfDay=$row->FullDayHalfDay;
+                                              if ($FullDayHalfDay==1){
+                                                echo "Full Day";
+
+
+                                              }else{
+                                                echo "Half Day";
+                                              }  ;?></td> 
                                     </tr>
                                 <?php 
                                     $count = $count+1;  
