@@ -196,7 +196,7 @@ function confirmUser(){
                         {
                         ?>
                         <li><a href="<?php echo base_url()?>index.php/CalendarController/viewCalendar">View Calendar</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/CalendarController/viewEmployeeAttendance">View Attendance </a></li>
+                        <li><a href="<?php echo base_url()?>index.php/CalendarController/viewEmployeeAttendance">Manage Attendance </a></li>
                         <li><a href="#">Salary Reports</a></li>
 
                         <?php
@@ -282,6 +282,9 @@ function confirmUser(){
 
          
         <!..Master Information section..>
+
+
+
 
         <?php
                        if($loggerRole == ROLE_ADMIN)
