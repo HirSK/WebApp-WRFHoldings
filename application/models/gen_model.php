@@ -54,6 +54,11 @@ class gen_model extends CI_Model{
         }
     }    
 
+    function updateRowWhere($table, $where = array(), $data = array()) {
+    $this->db->where($where);
+    $this->db->update($table, $data);
+}
+
 
      //makes this to work with columns and without where,limit and offset
     function getData($tablename = '', $columns_arr = array(), $where_arr = array(), $limit = 0, $offset = 0, $orderby = array()) {

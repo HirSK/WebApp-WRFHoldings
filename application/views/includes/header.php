@@ -186,7 +186,7 @@ function confirmUser(){
                         ?>
                         <li><a href="<?php echo base_url()?>index.php/CalendarController">Add Calendar Entries</a></li>
                         <li><a href="<?php echo base_url()?>index.php/CalendarController/viewCalendar">Manage Calendar</a></li>
-                        <li><a href="<?php echo base_url()?>index.php/AddAttendanceController">Add Attendance </a></li>
+                        <li><a href="<?php echo base_url()?>index.php/CalendarController">Add Attendance </a></li>
                         
                         <li><a href="<?php echo base_url()?>index.php/RunPayrollController">Run Payroll</a></li>
 

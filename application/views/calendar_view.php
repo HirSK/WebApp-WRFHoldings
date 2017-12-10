@@ -98,7 +98,7 @@
          
 
             <form method="post" action="<?php echo base_url()?>index.php/CalendarController/deleteCalendarEntry">
-              <div class="col-lg-12 col-sm-12 col-xs-12"  style="padding-top:20px">
+              <!-- <div class="col-lg-12 col-sm-12 col-xs-12"  style="padding-top:20px">
                 <div class="col-xs-10">
                   <button type="button" id="update_calendar" class="btn  btn-info pull-right"  data-toggle="modal" >Update</button>
                 </div>
@@ -107,7 +107,7 @@
                   <input type="submit" name="delete" value="Delete" class="btn btn-warning pull-left" onclick="return delete_CalendarEntry()">
                 </div>
 
-              </div>
+              </div> -->
               
               <div class="col-xs-12 col-lg-12" style="padding-top: 10px">
 

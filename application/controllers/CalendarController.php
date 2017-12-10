@@ -7,6 +7,7 @@ class CalendarController extends BaseController{
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('gen_model');
+		$this->load->model('calendar_model');
 		$this->load->model('payroll_model');
 		$this->load->library("pagination");
 		$this->isLoggedIn();
@@ -77,6 +78,50 @@ class CalendarController extends BaseController{
 		}
     }
 	
+	public function addEmployeeAttendance(){
+		if($_POST['attendanceStatus']=='Check In'){
+			$calendar_array = array(
+
+					'Employee_idEmployee'	=>$_POST['employeeID'],
+					'DateOfDay'				=>$_POST['inputAttendanceDate'],
+					'CheckIn'				=>1,
+					'CheckOut'				=>0,
+					'FullDayHalfDay'		=>0,
+			);
+
+			$res=$this->gen_model->insertData($tablename="attendance", $calendar_array);
+
+			redirect('/CalendarController');
+			
+
+		}else{
+			// $data=array('CheckOut'=>0,'FullDayHalfDay'=>0);
+			// $where=array('Employee_idEmployee'=>$_POST['employeeID'], 'DateOfDay'=>$_POST['DateOfDay'] );
+			
+			// $this->db->where($where);
+			// $this->db->update('attendance',$data);
+			
+			// $employeeID=$_POST['employeeID']
+			// $DateOfDay=$_POST['DateOfDay']
+			// $query = $this->db->query('UPDATE attendance SET CheckOut=0,FullDayHalfDay=0 WHERE Employee_idEmployee=$employeeID AND DateOfDay=$DateOfDay');
+
+            // $result=$query->result();
+            // return $result;
+            $data_arr=array('CheckOut'=>1,'FullDayHalfDay'=>1);
+            $where_arr=array('Employee_idEmployee'=>$_POST['employeeID'], 'DateOfDay'=>$_POST['inputAttendanceDate'] );
+            $res=$this->calendar_model->updateData($tablename="attendance", $data_arr=$data_arr,$where_arr=$where_arr);
+			
+
+
+			redirect('/CalendarController');
+			
+		}
+
+		
+			
+		//}
+
+	}
 	
 
 	// 	---------------------------------------------------------------------------
