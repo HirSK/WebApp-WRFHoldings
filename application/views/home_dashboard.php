@@ -7,15 +7,15 @@
 
 
 
-	<section class="content-header">
+  <section class="content-header">
             <h1>
                 Welcome to WRF Holdings (pvt) Ltd
                 <br>
                 <small><b><?php echo $this->session->userData('loggerOutletName') ; 
-                			echo "<br>";
-                			 ?>
-                				
-                			</b></small>
+                      echo "<br>";
+                       ?>
+                        
+                      </b></small>
             </h1>
 
             <ol class="breadcrumb">                       
@@ -102,7 +102,7 @@
 
                             <div class="box box-info">
                               <div class="box-header with-border">
-                                <h3 class="box-title">Daily Sales Summary(OUTLET 1)</h3>
+                                <h3 class="box-title">Daily Sales Summary(Cargills product distributer)</h3>
 
                                 <div class="box-tools pull-right">
                                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -140,7 +140,7 @@
 
                             <div class="box box-info">
                               <div class="box-header with-border">
-                                <h3 class="box-title">Daily Sales Summary(OUTLET 2)</h3>
+                                <h3 class="box-title">Daily Sales Summary(Hayles product distributer)</h3>
 
                                 <div class="box-tools pull-right">
                                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -164,19 +164,6 @@
 
                       </div>
 
-<<<<<<< HEAD
-=======
-
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  
-<script type="text/javascript">
-      // Load the Visualization API and the line package.
-      google.charts.load('current', {'packages':['bar']});
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
-  
-    function drawChart() {
->>>>>>> d86d435cbe62ecaf445fc31293fb3450f3968458
 
                     </div>
 
@@ -199,7 +186,7 @@
 
                             <div class="box box-info">
                               <div class="box-header with-border">
-                                <h3 class="box-title">Daily Sales Summary(OUTLET 3)</h3>
+                                <h3 class="box-title">Daily Sales Summary(Dialog)</h3>
 
                                 <div class="box-tools pull-right">
                                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -235,7 +222,7 @@
 
                             <div class="box box-info">
                               <div class="box-header with-border">
-                                <h3 class="box-title">Daily Sales Summary(OUTLET 4)</h3>
+                                <h3 class="box-title">Daily Sales Summary(Nestle)</h3>
 
                                 <div class="box-tools pull-right">
                                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -446,7 +433,6 @@
                             No Recent Collections
                         </span>
 
-<<<<<<< HEAD
                     </div>
 
                     <div class="col-md-3">
@@ -940,14 +926,6 @@
 
 
 <?php if($loggerRole == ROLE_ADMIN){ ?>
-=======
-
-<!-- Morris.js charts -->
-
-
-
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
->>>>>>> d86d435cbe62ecaf445fc31293fb3450f3968458
   
 <script type="text/javascript">
       // Load the Visualization API and the line package.
@@ -1026,7 +1004,6 @@
           document.getElementById('empl').innerHTML = response.data.emp[0]['emp'];
 
 
-<<<<<<< HEAD
          
           
           
@@ -1072,8 +1049,6 @@
 
           }
 
-=======
->>>>>>> d86d435cbe62ecaf445fc31293fb3450f3968458
 
 
 
@@ -1141,10 +1116,7 @@
 
 
         var totalCash = parseInt(cash)+parseInt(returnCredit);
-<<<<<<< HEAD
 
-=======
->>>>>>> d86d435cbe62ecaf445fc31293fb3450f3968458
   
 
         var data = google.visualization.arrayToDataTable([
@@ -1171,7 +1143,6 @@
 
 
 
-<<<<<<< HEAD
 
 
 
@@ -1856,8 +1827,6 @@
     }
 
   ?>
-=======
->>>>>>> d86d435cbe62ecaf445fc31293fb3450f3968458
 <!-- Morris.js charts -->
 
 
