@@ -74,9 +74,9 @@
                                                     <th>Emp:ID</th>
                                                     <th>FullName</th>
                                                     <th>Role</th>
-                                                    <th>Full</th>
-                                                    <th>Half</th>
-                                                    <th>Leave</th>
+                                                    <th>Full Days</th>
+                                                    <th>Half Days</th>
+                                                    <!-- <th>Leave</th> -->
                                                     
                                                 </tr>
                                             </thead>
@@ -203,10 +203,10 @@ jQuery('#master').on('click', function(e) {
                              var role = obj[i].EmployeePosition;
                             var full = parseInt(obj[i].full);
                              var half = parseInt(obj[i].half);
-                             var leave = workingDays-(full+half);
+                             // var leave = workingDays-(full+half);
                              var check = '<input type="checkbox" id="master" class="chk" >';
 
-                            rows += "<tr><td>" + check + "</td><td>" + id + "</td><td>" + name + "</td><td>" + role + "</td><td>" + full + "</td><td>" + half + "</td><td>" + leave + "</td></tr>";
+                            rows += "<tr><td>" + check + "</td><td>" + id + "</td><td>" + name + "</td><td>" + role + "</td><td>" + full + "</td><td>" + half + "</td></tr>";
                             $(rows).appendTo("#list tbody");
                             
                         }
