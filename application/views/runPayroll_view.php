@@ -107,9 +107,9 @@
                                                     <th>Emp:ID</th>
                                                     <th>FullName</th>
                                                     <th>Role</th>
-                                                    <th>Full</th>
-                                                    <th>Half</th>
-                                                    <th>Leave</th>
+                                                    <th>Full Days</th>
+                                                    <th>Half Days</th>
+                                                    <!-- <th>Leave</th> -->
                                                     
                                                 </tr>
                                             </thead>
@@ -177,12 +177,29 @@
                                                     <th>Gross Salary</th>
                                                     <th>Food Allowance</th>
                                                     <th>HolidayAllowance</th>
-                                                    <th>Deductions</th>
+                                                    <th>Incentive</th>
                                                     
                                                                                                         
                                                 </tr>
                                             </thead>
                                             <tbody></tbody> <!-- preview content goes here-->
+<!-- changed -->
+<!-- 
+                                             <tr>
+                                                <td>
+                                                    <input type="text" data-name="txtName" />
+                                                </td>
+                                                <td>
+                                                    <input type="text"  data-name="txtAge" />
+                                                </td>
+                                                <td>
+                                                    <input type="text"  data-name="txtGender" />
+                                                </td>
+                                                
+                                            </tr> -->
+
+<!-- changed -->
+
                                         </table>
                                     </div>                            
                                 </div>
@@ -209,11 +226,12 @@
                                                     <th>Emp:ID</th>
                                                     <th>FullName</th>
                                                     <th>SalaryID</th>
+                                                    <th>Basic Salary</th>
                                                     <th>Gross Salary</th>
                                                     <th>Total Allowances</th>
-                                                    <th> Total Deductions</th>
+                                                    <th>Total Deductions</th>
                                                     <th>Net Salary</th>
-                                                    
+                                                   
                                                                                                         
                                                 </tr>
                                             </thead>
@@ -291,9 +309,9 @@
 <!-- bootstrap datepicker -->
 <script src="<?php echo base_url()?>template/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- InputMask -->
-<script src="<?php echo base_url() ?>template/bower_components/inputmask/dist/inputmask/jquery.inputmask.js"></script>
+<!-- <script src="<?php echo base_url() ?>template/bower_components/inputmask/dist/inputmask/jquery.inputmask.js"></script>
 <script src="<?php echo base_url() ?>template/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
-<script src="<?php echo base_url() ?>template/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<script src="<?php echo base_url() ?>template/plugins/input-mask/jquery.inputmask.extensions.js"></script> -->
 
 
 <script >
@@ -350,10 +368,10 @@
                              var role = obj[i].EmployeePosition;
                             var full = parseInt(obj[i].full);
                              var half = parseInt(obj[i].half);
-                             var leave = workingDays-(full+half);
+                             // var leave = workingDays-(full+half);
                              var check = '<input type="checkbox" id="select" class="chk" >';
 
-                            rows += "<tr><td>" + check + "</td><td>" + id + "</td><td>" + name + "</td><td>" + role + "</td><td>" + full + "</td><td>" + half + "</td><td>" + leave + "</td></tr>";
+                            rows += "<tr><td>" + check + "</td><td>" + id + "</td><td>" + name + "</td><td>" + role + "</td><td>" + full + "</td><td>" + half + "</td></tr>";
                             $(rows).appendTo("#list tbody");
                             
                         }
@@ -511,10 +529,10 @@
                             var emp_gross_salary = obj.emp_gross_salary; 
                             var food ='<input type="textbox" id="food" class="food">';
                             var holiday ='<input type="textbox" id="holiday" class="holiday">';
-                            var deduct ='<input type="textbox" id="deduct" class="deduct">';                          
+                            var incentive ='<input type="textbox" id="deduct" class="deduct">';                          
                             var check = '<input type="checkbox" id="select" class="chk" >';                            
 
-                            rows += "<tr><td>" + check + "</td><td>" + id + "</td><td>" + empName + "</td><td>" + emp_gross_salary + "</td><td>" + food + "</td><td>" + holiday + "</td><td>" + deduct + "</td></tr>";
+                            rows += "<tr><td>" + check + "</td><td>" + id + "</td><td>" + empName + "</td><td>" + emp_gross_salary + "</td><td>" + food + "</td><td>" + holiday + "</td><td>" + incentive + "</td></tr>";
                             $(rows).appendTo("#addition_tbl tbody");                            
                             
                         // }
@@ -535,6 +553,13 @@
     }
 });
 
+// $year_month = document.getElementById("month").value;
+// alert($year_month);
+
+// // localStorage.setItem('year_month',year_month);
+
+// // console.log(localStorage.getItem('year_month'));
+// console.log($year_month);
 
 
 $("#allowance_btn").click(function(event){
@@ -566,11 +591,8 @@ $("#allowance_btn").click(function(event){
             A[0]=attendance_array[0];
             A[1]=attendance_array[1];
             A[2]=attendance_array[2];
-
-            alert(A);
-
-          
-          
+            
+                   
           var allowance_array=[];
             $('.chk').each(function() {
                 if ($(this).is(':checked')) {// check the checked property with .is
@@ -580,28 +602,16 @@ $("#allowance_btn").click(function(event){
                         $(this).parents("tr").find(".food").val() + "," +
                         $(this).parents("tr").find(".holiday").val()+ "," +
                         $(this).parents("tr").find(".deduct").val();
-
-                       rowCount++;
+                        rowCount++;
+                      
                 }
                 
             });
 
-
-
-            var B=[];
-            alert(allowance_array[0]);
-            // alert(allowance_array[0]);
-            // alert(allowance_array[1]);
-            // alert(allowance_array[2]);
-            // B[3]= allowance_array[3];
-            // B[4]=allowance_array[4];
-            // B[5]=allowance_array[5];
-
-            // alert(B);
-
-            // var result_array = A.concat(B.slice(3));
-            // alert(result_array);
-            
+            var fields = allowance_array.split(',');
+            var food = fields[0];
+            var holiday = fields[1];
+            var incentive  =fields[2];
 
 
          if(rowCount >=1){   
@@ -609,54 +619,42 @@ $("#allowance_btn").click(function(event){
                 var data = {
                         empID: attendance_array[0],
                         empName:attendance_array[1],
-                        // gross: allowance_array[2],
-                        food: allowance_array[3],
-                        holiday: allowance_array[4],
-                        deduct: allowance_array[5]
-                        // working: $('#working_days').val()
-                                            
+                        gross: attendance_array[2],
+                        food: food,
+                        holiday: holiday,
+                        incentive: incentive
+                                                                    
                     };
-                
-     
-            // var table = document.getElementById('addition_tbl'),rIndex;
-            // console.log(table.rows.length);
 
-            // for(var i=0;i<table.rows.length;i++){
-            //     table.rows[i].onclick=function(){
-            //         rIndex=this.rowIndex;
-            //         console.log(rIndex);
-            //     }
-            // }
-
-
+        
             $.ajax({
                 type : "post",
                 url: "<?php echo base_url().'index.php/runPayrollController/SetSalary'?>",
                 cache: false,
                 data :data ,
                 success : function(json){
-                    // var obj=jQuery.parseJSON(json);
-                    var obj=json;
-                    // alert(obj);
+                    var obj=jQuery.parseJSON(json);
+                    // var obj=json;
+                    // alert(json);                    
+                    
                    
                     if(obj){
-                        
+                       
                         // for (var i=0;i<obj.length;i++) {
-                            // var rows = "";
-                            // var id = obj.id;                            
-                            // var empName = obj.empName;                           
-                           
-                            // var emp_gross_salary = obj.emp_gross_salary; 
-                            // var food ='<input type="textbox" id="food">';
-                            // var holiday ='<input type="textbox" id="holiday">';
-                            // var deduct ='<input type="textbox" id="holiday">';                          
-                            // var check = '<input type="checkbox" id="select" class="chk" >';                            
+                                var rows = "";
+                                var id = obj.id;                            
+                                var empName = obj.empName;
+                                var basic_salary = obj.basic_salary;                          
+                                var emp_gross_salary = obj.emp_gross_salary; 
+                                var salary_id = obj.salary_id;
+                                var total_allowance = obj.total_allowance;
+                                var total_deduct = obj.total_deduct;
+                                var net_salary=obj.netSalary;                          
 
-                            // rows += "<tr><td>" + check + "</td><td>" + id + "</td><td>" + empName + "</td><td>" + emp_gross_salary + "</td><td>" + food + "</td><td>" + holiday + "</td><td>" + deduct + "</td></tr>";
-                            // $(rows).appendTo("#addition_tbl tbody");                            
-                            
-                        // }
-
+                                rows += "<tr><td>" + id + "</td><td>" + empName + "</td><td>" + salary_id + "</td><td>" + basic_salary + "</td><td>" + emp_gross_salary + "</td><td>" + total_allowance + "</td><td>" + total_deduct + "</td><td>" + net_salary + "</td></tr>";
+                                $(rows).appendTo("#final_tbl tbody");                            
+                               
+                         // }
                     }else{
                         alert("something wrong");
                         
