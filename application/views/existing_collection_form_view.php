@@ -187,7 +187,7 @@
 				                        </div>
 				                    </div>
 				                    <div class="col-xs-12 col-lg-12 col-sm-12">
-				                		<div class="col-sm-5 col-xs-12">
+				                		<div class="col-sm-7 col-xs-12">
 						                    <div class="form-group">
 						                        <label for="ChequeNumber" class="col-sm-4 control-label">Cheque Number</label>
 						                        <div class="col-sm-8">
@@ -195,10 +195,10 @@
 						                        </div>
 						                    </div>
 						                </div>
-						                <div class="col-sm-7 col-xs-12">
+						                <div class="col-sm-5 col-xs-12">
 						                    <div class="form-group">
-						                        <label for="ChequeBankName" class="col-sm-5 control-label">Bank</label>
-						                        <div class="col-sm-7">
+						                        <label for="ChequeBankName" class="col-sm-4 control-label">Bank</label>
+						                        <div class="col-sm-8">
 						                            <input type="text" class="form-control" disabled="" id="ChequeBankName" name="ChequeBankName">
 						                        </div>
 						                    </div>
@@ -540,7 +540,9 @@ function getDetails()
 		        		collectionID : $('#collectionID').val()
 		    			},
 		        success : function(json){
+
 		            var obj=jQuery.parseJSON(json);
+		            // alert(json);
 
 		            if(obj[0]){
 
@@ -549,7 +551,7 @@ function getDetails()
 		                $('#CustomerName').val(obj[0].CustomerName);		                
 		            }else{
 
-		                alert("The invoice id has not been pre ordered,First add it to pre order invoice list");
+		                alert("The id has already added or not in the preorder list");
 		                clearTextBoxes();
 		            }
 
@@ -593,6 +595,8 @@ function getDetails()
 			credit=invoice_value-cheque;
 		}else if(cheque==0 && cash!=0){
 			credit=invoice_value-cash;
+		}else if(cheque!=0 && cash!=0){
+			credit=invoice_value-cash-cheque;
 		}
 
 		var vari= invoice_value-(cash+cheque+credit);
@@ -639,6 +643,8 @@ function getDetails()
 						credit=invoice_value-cheque;
 					}else if(cheque==0 && cash!=0){
 						credit=invoice_value-cash;
+					}else if(cheque!=0 && cash!=0){
+						credit=invoice_value-cash-cheque;
 					}
 	    			
 		    	var data = {
@@ -672,9 +678,11 @@ function getDetails()
            			},
         
 			        success : function(json){
+			        	alert(json);
 			            var obj=jQuery.parseJSON(json);
 
 			            if(obj){
+			            	
 			                alert('invoice updated successfully');
 
 			                var rows = "";
@@ -686,7 +694,10 @@ function getDetails()
 				            var CreditAmount = document.getElementById("CreditAmount").value;
 
 				            rows += "<tr><td>" + idInvoice + "</td><td>" + CustomerCode + "</td><td>" + InvoiceValue + "</td><td>" + CashAmount + "</td><td>" + ChequeAmount + "</td><td>" + CreditAmount + "</td></tr>";
-				            $(rows).appendTo("#list tbody");				          
+				            $(rows).appendTo("#list tbody");
+
+				            //  rows += "<tr><td>" + idInvoice + "</td><td>" + CustomerCode + "</td><td>" + InvoiceValue + "</td><td>" + CashAmount + "</td><td>" + ChequeAmount + "</td><td>" + CreditAmount + "</td><td><button class='delete' id=" +  idInvoice +" name=" + CustomerCode + "><span class="glyphicon glyphicon-remove"></span></button> </td></tr>";
+				            // $(rows).appendTo("#list tbody");				          
 
 					   		clearTextBoxes();
 		                               

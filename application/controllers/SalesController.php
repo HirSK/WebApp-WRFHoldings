@@ -40,14 +40,14 @@ class SalesController extends BaseController{
 	//method to add the main invoice details when the order is come
 	public function addInvoice(){
 
-		$this->form_validation->set_rules('inputInvoiceNumber','Invoice Number','trim|required|max_length[20]|is_unique[invoice.idInvoice]');
-		$this->form_validation->set_rules('inputCustomerCode','Customer Number','trim|required|max_length[20]|is_unique[customer.idCustomer]');
-		$this->form_validation->set_rules('inputInvoiceDate','Invoice Date','trim|required|max_length[15]');
-		$this->form_validation->set_rules('inputInvoiceValue','Invoice value','trim|required|max_length[20]');
+		$this->form_validation->set_rules('inputInvoiceNumber','Invoice Number','trim|required');
+		$this->form_validation->set_rules('inputCustomerCode','Customer Number','trim|required');
+		$this->form_validation->set_rules('inputInvoiceDate','Invoice Date');
+		$this->form_validation->set_rules('inputInvoiceValue','Invoice value','trim|required');
 
 		if($this->form_validation->run()==false){
 
-			 $this->session->set_flashdata('error', 'Check the invoice number or customer code is valid');
+			 $this->session->set_flashdata('error', 'Check the customer code is valid');
 			 $this->createInvoiceList();
 
 		}else{
@@ -70,10 +70,13 @@ class SalesController extends BaseController{
 											'outletID' => $this->loggerOutletID											
 										);
 
+			// print_r($invoice_order_array);
+			// die();
+
 
 			$result = $this->sales_model->setInvoiceOrder($invoice_order_array);
 
-			if($result > 0)
+			if($result>0)
                 {
                     $this->session->set_flashdata('success', 'New invoice order added');
                 }
@@ -81,7 +84,7 @@ class SalesController extends BaseController{
                 {
                     $this->session->set_flashdata('error', 'Failed to insert the invoice');
                 }
-            redirect('addInvoice');	
+            $this->createInvoiceList();	
 
 		}		
 
@@ -90,11 +93,32 @@ class SalesController extends BaseController{
 
 	public function getInvoiceDetails(){
 
+		// $id = $this->input->post('id');
+		// $outletID = $this->session->userData('loggerOutletID');
+
+	 //    $query = $this->sales_model->getInvoiceData($id,$outletID);
+	 //    echo json_encode($query);
+
+
+//changed here
+
 		$id = $this->input->post('id');
 		$outletID = $this->session->userData('loggerOutletID');
 
-	    $query = $this->sales_model->getInvoiceData($id,$outletID);
-	    echo json_encode($query);
+		$res = $this->sales_model->checkInvoiceAdded($id,$outletID);
+
+		$added = $res[0]->added;
+
+		if($added==0){
+			$query = $this->sales_model->getInvoiceData($id,$outletID);
+	    	echo json_encode($query);
+		}else{
+			$array = array(
+		        "message" => "The id has already added or not in the preorder list",
+		    );
+			$data['json'] = $array;
+			echo json_encode($data);
+		}  
 
 		
 	}
@@ -102,31 +126,40 @@ class SalesController extends BaseController{
 
 	public function getInvoiceDetails_update(){
 
-		$id = $this->input->post('id');
-		$id = $this->input->post('id');
+		// $id = $this->input->post('id');
+		// $collectionID = $this->input->post('collectionID');
+		// $outletID = $this->session->userData('loggerOutletID');
+
+		// $this->db->where('idInvoice',$id);
+		// $this->db->where('Collection_idCollection',$collectionID);
+		// $q = $this->db->get('invoice');
+
+		// if($q){
+
+	 //    	$query = $this->sales_model->getInvoiceOtherData($id,$outletID);
+	 //    	echo json_encode($query);
+
+		// }else{			
+
+	 //    	$query = $this->sales_model->getInvoiceData($id,$outletID);
+	 //    	echo json_encode($query); 
+
+		// }	
 		$outletID = $this->session->userData('loggerOutletID');
-
-		$this->db->where('idInvoice',$id);
-		$this->db->where('Collection_idCollection',$collectionID);
-		$q = $this->db->get('invoice');
-
-		if($q){
-
-	    	$query = $this->sales_model->getInvoiceOtherData($id,$outletID);
+		$id = $this->input->post('id');
+		$query = $this->sales_model->getInvoiceData($id,$outletID);
 	    	echo json_encode($query);
-
-		}else{			
-
-	    	$query = $this->sales_model->getInvoiceData($id,$outletID);
-	    	echo json_encode($query); 
-
-		}	
 
 		
 	}
 
 
+
+
 	public function updateInvoice(){
+
+			$outletID = $this->session->userData('loggerOutletID');
+
 
 			$idInvoice = $this->input->post('idInvoice');
 			$CustomerCode = $this->input->post('CustomerCode');
@@ -161,13 +194,19 @@ class SalesController extends BaseController{
 						'Discount'				=> $Discount,
 						'MKTrtn'				=> $MKTrtn,
 						'Remarks'				=> $Remarks,
-						'Collection_idCollection'=>$collectionID,
+						'Collection_idCollection'=>$collectionID,						
 						'invoice_complete_date' =>date('Y-m-d H:i:s')
 
 				);
+//changed here
+				// $res= $this->sales_model->updatePreOrder($idInvoice,$outletID);
 
+				//here is the problem.
 				$query = $this->sales_model->updateInvoiceData($invoice_array);
+				// $this->sales_model->updatePreOrder($idInvoice,$outletID);
 				echo json_encode($query);
+
+								
 
 			//if there are pending credits ,they are added to credits table
 			if($CreditAmount != ""){
@@ -180,6 +219,7 @@ class SalesController extends BaseController{
 					'total_credit' => $CreditAmount ,
 					'credit_start_date'=>date('Y-m-d H:i:s') ,
 					'credit_topay'=>$CreditAmount,
+					'outletID'=>$outletID,
 
 					);
 
@@ -188,7 +228,13 @@ class SalesController extends BaseController{
 
 			}
 			// if the payments are done by cheque,these details are sent to cheque table
+
 			if($ChequeAmount != ""){
+
+
+				$date=date_create_from_format("m/d/Y", $ChequeBKdate);
+
+				$ChequeBKdate=date_format($date,"Y-m-d");
 
 				$chequeArray = array(
 					'cheque_invoice_id'=>$idInvoice,
@@ -196,7 +242,8 @@ class SalesController extends BaseController{
 					'ChequeNumber' => $ChequeNumber , 
 					'ChequeBankName' => $ChequeBankName , 
 					'ChequeBankBranch' => $ChequeBankBranch ,
-					'ChequeBKdate' => $ChequeBKdate ,  
+					'ChequeBKdate' => $ChequeBKdate ,
+					'outletID'=>$outletID,  
 
 					);
 

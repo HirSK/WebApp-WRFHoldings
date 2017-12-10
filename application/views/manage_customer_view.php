@@ -78,7 +78,7 @@
                             <div class="form-group">
                               <label for="CustAddress" class="col-sm-6 control-label">Customer Address</label>
                               <div class="col-sm-7">
-                                <input type="text" class="form-control" id="CustAddress" name="CustomAddress" required>
+                                <input type="text" class="form-control" id="CustAddress" name="CustomAddress" >
                               </div>
                             </div>
 

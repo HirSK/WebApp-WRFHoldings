@@ -12,11 +12,7 @@ class CustomerController extends BaseController{
 	}
 
 	public function index(){
-		//$this->load->view('add_cutomer_view');
-
-    	//$this->data['records'] = $this->gen_model->getAllRecords();
-    	//$this->load->view("add_cutomer_view",$this->data);
-    	// $this->load->view("add_customer_view");
+		
     	$this->loadViews('add_customer_view',$this->global,NULL,NULL);
 
 	}
@@ -34,6 +30,11 @@ class CustomerController extends BaseController{
 
 	public function addCustomer(){
 
+			$CustomerRegDate = $_POST['inputCustomerRegDate'];
+
+			$date=date_create_from_format("m/d/Y", $CustomerRegDate);
+
+			$CustomerRegDate=date_format($date,"Y-m-d");
 
 			$customer_array = array(
 
@@ -41,7 +42,7 @@ class CustomerController extends BaseController{
 					'CustomerName'				    => $_POST['inputCustomerName'],
 					'CustomerAddress'				=> $_POST['inputCustomerAddress'],
 					'CustomerContact'				=> $_POST['inputCustomerContact'],
-					'CustomerRegDate'			    => $_POST['inputCustomerRegDate'],
+					'CustomerRegDate'			    => $CustomerRegDate
 							
 
 			);

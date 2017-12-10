@@ -22,6 +22,25 @@ class sales_model extends CI_Model{
 		$result = $query->result();
 		return $result;
 
+
+	}
+
+	function updatePreOrder($idInvoice,$outletID){
+
+		$query = $this->db->query("update preorder_invoice set added=1 where idInvoice=$idInvoice and outletID=$outletID");
+		$result = $query->result();
+		// return $result;
+		if($result){
+
+			return true;
+		}
+
+	}
+
+	function checkInvoiceAdded($id,$outletID){
+		$query = $this->db->query("select added from preorder_invoice where idInvoice=$id and outletID=$outletID");
+		$result = $query->result();
+		return $result;
 	}
 
 	function getCollectionDetails($collection_id){
