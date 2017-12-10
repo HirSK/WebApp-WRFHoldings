@@ -21,7 +21,7 @@
             		
             	<h3 class="box-title">
             		<i class="fa fa-th-list"></i>
-            		Daily Collection
+            		Add New Daily Collection
             	</h3>
             		
             	</div>

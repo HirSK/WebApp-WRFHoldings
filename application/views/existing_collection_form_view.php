@@ -390,7 +390,7 @@
 
 		if($('#collectionID').val()){
 
-			$("#collectionID").attr('disabled','disabled');
+			
 
 		    $.ajax({
 		        type : "post",
@@ -410,7 +410,7 @@
 		                $('#collectionDriver').val(obj[0].CollectionDriver);
 		                $('#collectionArea').val(obj[0].CollectionArea);
 
-
+		                $("#collectionID").attr('disabled','disabled');
 		                enableInvoiceTextBoxes();
 		                enableCollectionTextBoxes();		                
 		            }else{
