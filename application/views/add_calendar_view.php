@@ -94,13 +94,13 @@
                               
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
-                                    <label for="inputAttendanceDate">Date</label>
+                                    <label for="AttendanceDate">Date</label>
                                     <div class="input-group date">
                                         <div class="input-group-addon">
                                             <i class="fa fa-calendar"></i>
                                         </div>
                                         <input type="text" class="form-control pull-right" id="datepicker" value="20<?php 
-                                        echo date('y-m-d');?>" name="inputAttendanceDate" >
+                                        echo date('y-m-d');?>" name="AttendanceDate" >
                                     </div>
                                 </div>
                             </div>

@@ -58,10 +58,7 @@ class CalendarController extends BaseController{
 	}
 
 	public function viewCalendar(){
-        if($this->isAdmin() == True){
-            $this->loadThis();
-        }
-        else{
+        
             $this->load->model('calendar_model');
         
             $searchText = $this->input->post('searchText');
@@ -75,7 +72,7 @@ class CalendarController extends BaseController{
             $this->global['pageTitle'] = 'WRF Holdings(pvt) Ltd : Calendar Entry Listing';
             
             $this->loadViews("calendar_view", $this->global, $data, NULL);
-		}
+		
     }
 	
 	public function addEmployeeAttendance(){
@@ -83,7 +80,7 @@ class CalendarController extends BaseController{
 			$calendar_array = array(
 
 					'Employee_idEmployee'	=>$_POST['employeeID'],
-					'DateOfDay'				=>$_POST['inputAttendanceDate'],
+					'DateOfDay'				=>$_POST['AttendanceDate'],
 					'CheckIn'				=>1,
 					'CheckOut'				=>0,
 					'FullDayHalfDay'		=>0,
@@ -108,7 +105,7 @@ class CalendarController extends BaseController{
             // $result=$query->result();
             // return $result;
             $data_arr=array('CheckOut'=>1,'FullDayHalfDay'=>1);
-            $where_arr=array('Employee_idEmployee'=>$_POST['employeeID'], 'DateOfDay'=>$_POST['inputAttendanceDate'] );
+            $where_arr=array('Employee_idEmployee'=>$_POST['employeeID'], 'DateOfDay'=>$_POST['AttendanceDate'] );
             $res=$this->calendar_model->updateData($tablename="attendance", $data_arr=$data_arr,$where_arr=$where_arr);
 			
 
@@ -123,6 +120,24 @@ class CalendarController extends BaseController{
 
 	}
 	
+	public function viewEmployeeAttendance(){
+        
+            $this->load->model('calendar_model');
+        
+            $searchText = $this->input->post('searchText');
+            $data['searchText'] = $searchText;
+            
+			
+                      
+            $data['attendanceRecords'] = $this->calendar_model->attendanceListing($searchText);
+            
+            
+   
+            $this->global['pageTitle'] = 'WRF Holdings(pvt) Ltd : Attendance Entry Listing';
+            
+            $this->loadViews("attendance_view", $this->global, $data, NULL);
+		
+    }
 
 	// 	---------------------------------------------------------------------------
 
