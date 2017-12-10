@@ -22,10 +22,50 @@ class EmployeeController extends BaseController{
 
 		
 	}
-
 	public function manageEmployee(){
+        
+        // $this->load->model('calendar_model');
+    
+        $searchText = $this->input->post('searchText');
+        $data['searchText'] = $searchText;
+        
+		
+                  
+        $data['emp'] = $this->employeeListing($searchText);
+        
+        
 
-		$empDetail['emp'] = $this->gen_model->getData($tablename='Employee');
+        $this->global['pageTitle'] = 'WRF Holdings(pvt) Ltd : Employee Entry Listing';
+        
+        $this->loadViews("manage_employee_view", $this->global, $data, NULL);
+		
+    }
+	public function employeeListing(){
+        $loggerRole=$this->session->userData('loggerRole');
+
+        if($loggerRole !="Admin"){
+        $loggerOutletID=$this->session->userData('loggerOutletID');
+        $query = $this->db->query("select * from employee where Outlet_idOutlet=$loggerOutletID");
+        // $this->loggerOutletID"
+        $result=$query->result();
+        return $result;
+        }
+        else{
+            
+        $query = $this->db->query("select * from employee");
+        // $this->loggerOutletID"
+        $result=$query->result();
+        return $result;
+
+
+        }
+        
+        
+    }
+	public function manageEmployeee(){
+
+		
+		$empDetail['emp'] = $this->gen_model->getData($tablename='Employee',$where_arr=$where_arr);
 		// $this->load->view('manage_employee_view',$empDetail);
 		$this->loadViews('manage_employee_view',$this->global,$empDetail,NULL);
 	}
