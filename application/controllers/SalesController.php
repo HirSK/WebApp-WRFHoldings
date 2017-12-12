@@ -7,6 +7,7 @@ class SalesController extends BaseController{
 	function __construct(){
 		parent::__construct();
 		$this->load->model('gen_model');
+		$this->load->library('Pdf_report');
 
 		$this->load->model('sales_model');
 		$this->load->model('view_sales_model');
@@ -288,6 +289,18 @@ class SalesController extends BaseController{
 		// redirect('/SalesController');
 	}
 
+	// public function displayCollectionReport(){
+	// 	// $this->load->view('collection_report_view');3
+
+
+	// 	$data['outlet']=$this->gen_model->getData('outlet');
+		
+	// 	$data['collection'] = NULL;
+		
+	// 	$this->loadViews("collection_report_view",$this->global,$data,NULL);
+		
+	// }
+
 	public function displayCollectionReport(){
 		// $this->load->view('collection_report_view');3
 
@@ -295,6 +308,9 @@ class SalesController extends BaseController{
 		$data['outlet']=$this->gen_model->getData('outlet');
 		
 		$data['collection'] = NULL;
+
+		$data['from'] = NULL;
+		$data['to']  = NULL;
 		
 		$this->loadViews("collection_report_view",$this->global,$data,NULL);
 		
@@ -305,9 +321,18 @@ class SalesController extends BaseController{
 
 	public function createInvoiceList(){
 		// $this->load->view('add_invoice_view');
-		$this->loadViews('add_invoice_view',$this->global,NULL,NULL);
-	}
 
+
+		$data['maxid'] = 0;
+
+		$row = $this->db->query('SELECT MAX(idInvoice) AS `maxid` FROM `preorder_invoice`')->row();
+		if ($row) {
+		    $data['maxid'] = $row->maxid;
+
+		    $this->loadViews('add_invoice_view',$this->global,$data,NULL);
+		}
+		// $this->loadViews('add_invoice_view',$this->global,NULL,NULL);
+	}
 
 
 	public function viewCollection(){
@@ -317,7 +342,16 @@ class SalesController extends BaseController{
 		$outlet = $_POST['outletId'];
 		$position = $_POST['position'];
 
+		$button = $this->input->post('collect');
+
+		
+
+		
+
 	if($position=="Cheque Register"){
+
+
+		if($button =='go'){
 
 		if($collectiontoDate !=Null){
 
@@ -330,6 +364,9 @@ class SalesController extends BaseController{
 
 			$data1['collection1'] = $this->view_sales_model->viewCheque($from,$to,$outlet);
 			$data1['outlet']=$this->gen_model->getData('outlet');
+			$data1['from'] = $collectionfromDate;
+			$data1['to']  = $collectiontoDate ;
+			$data1['position'] = $position;
 			$this->loadViews("chequeView",$this->global,$data1,NULL);
 
 
@@ -341,10 +378,34 @@ class SalesController extends BaseController{
 
 			$data1['collection1'] =  $this->view_sales_model->viewCheque($from,date('Y-m-d'),$outlet);
 			$data1['outlet']=$this->gen_model->getData('outlet');
+			$data1['from'] = $collectionfromDate ;
+			$data1['to']  = date('m/d/Y');
+			$data1['position'] = $position;
 			$this->loadViews("chequeView",$this->global,$data1,NULL);
 		}
 
+
+	}elseif ($button =='print') {
+
+			$date=date_create_from_format("m/d/Y", $collectionfromDate);
+			$from=date_format($date,"Y-m-d");
+
+			$data1['collection1'] =  $this->view_sales_model->viewCheque($from,date('Y-m-d'),$outlet);
+			$data1['outlet']=$this->gen_model->getData('outlet');
+
+			
+
+			$this->load->view("cheque_report",$data1);
+
+
+	}
+
 	}elseif($position=="Credit Register"){
+
+
+
+
+		if($button =='go'){
 
 
 
@@ -357,6 +418,9 @@ class SalesController extends BaseController{
 			$to=date_format($date1,"Y-m-d");
 			$data1['collection1'] = $this->view_sales_model->viewCredit($from,$to,$outlet);
 			$data1['outlet']=$this->gen_model->getData('outlet');
+			$data1['from'] = $collectionfromDate;
+			$data1['to']  = $collectiontoDate ;
+			$data1['position'] = $position;
 			$this->loadViews("CreditView",$this->global,$data1,NULL);
 
 
@@ -367,8 +431,28 @@ class SalesController extends BaseController{
 			$from=date_format($date,"Y-m-d");
 			$data1['collection1'] =  $this->view_sales_model->viewCredit($from,date('Y-m-d'),$outlet);
 			$data1['outlet']=$this->gen_model->getData('outlet');
+			$data1['from'] = $collectionfromDate ;
+			$data1['to']  = date('m/d/Y');
+			$data1['position'] = $position;
+
 			$this->loadViews("CreditView",$this->global,$data1,NULL);
 		}
+
+
+	}elseif($button =='print') {
+
+			$date=date_create_from_format("m/d/Y", $collectionfromDate);
+			$from=date_format($date,"Y-m-d");
+
+			$data1['collection1'] =  $this->view_sales_model->viewCredit($from,date('Y-m-d'),$outlet);
+			$data1['outlet']=$this->gen_model->getData('outlet');
+
+			
+
+			$this->load->view("credit_report",$data1);
+
+
+	}
 
 
 
@@ -376,7 +460,7 @@ class SalesController extends BaseController{
 
 	}elseif ($position=="Cash Register") {
 
-
+		if($button =='go'){
 
 		if($collectiontoDate !=Null){
 
@@ -387,6 +471,10 @@ class SalesController extends BaseController{
 			$data1['collection1'] = $this->view_sales_model->viewCash($from,$to,$outlet);
 			$data1['collection2'] = $this->view_sales_model->returnCredit($from,$to,$outlet);
 			$data1['outlet']=$this->gen_model->getData('outlet');
+			$data1['from'] = $collectionfromDate;
+			$data1['to']  = $collectiontoDate ;
+			$data1['position'] = $position;
+ 
 			$this->loadViews("cashView",$this->global,$data1,NULL);
 
 
@@ -399,8 +487,35 @@ class SalesController extends BaseController{
 			$data1['collection1'] =  $this->view_sales_model->viewCash($from,date('Y-m-d'),$outlet);
 			$data1['collection2'] = $this->view_sales_model->returnCredit($from,date('Y-m-d'),$outlet);
 			$data1['outlet']=$this->gen_model->getData('outlet');
+
+			$data1['from'] = $collectionfromDate ;
+			$data1['to']  = date('m/d/Y');
+
+			$data1['position'] = $position;
 			$this->loadViews("cashView",$this->global,$data1,NULL);
 		}
+
+
+	}elseif ($button =='print') {
+
+
+
+			$date=date_create_from_format("m/d/Y", $collectionfromDate);
+			$from=date_format($date,"Y-m-d");
+
+			$data1['collection1'] =  $this->view_sales_model->viewCash($from,date('Y-m-d'),$outlet);
+			$data1['collection2'] = $this->view_sales_model->returnCredit($from,date('Y-m-d'),$outlet);
+			$data1['outlet']=$this->gen_model->getData('outlet');
+
+			
+
+			$this->load->view("cash_report",$data1);
+
+
+
+		
+
+	}
 		
 	}
 
@@ -415,6 +530,10 @@ class SalesController extends BaseController{
 			$to=date_format($date1,"Y-m-d");
 			$data['collection'] = $this->view_sales_model->viewCollection($from,$to,$outlet);
 			$data['outlet']=$this->gen_model->getData('outlet');
+
+			$data['from'] = $collectionfromDate;
+			$data['to']  = $collectiontoDate ;
+			$data['position'] = $position;
 			$this->loadViews("collection_report_view",$this->global,$data,NULL);
 
 
@@ -425,8 +544,19 @@ class SalesController extends BaseController{
 			$from=date_format($date,"Y-m-d");
 			$data['collection'] =  $this->view_sales_model->viewCollection($from,date('Y-m-d'),$outlet);
 			$data['outlet']=$this->gen_model->getData('outlet');
+
+
+			$data['from'] = $collectionfromDate ;
+			$data['to']  = date('m/d/Y');
+
+			$data['position'] = $position;
 			$this->loadViews("collection_report_view",$this->global,$data,NULL);
 		}
+
+
+
+
+
 
 
 	}
@@ -435,10 +565,172 @@ class SalesController extends BaseController{
 	}
 
 
+
+
+
+	// public function viewCollection(){
+
+	// 	$collectionfromDate = $_POST['getCollectionFrom'];
+	// 	$collectiontoDate = $_POST['getCollectionTo'];
+	// 	$outlet = $_POST['outletId'];
+	// 	$position = $_POST['position'];
+
+	// if($position=="Cheque Register"){
+
+	// 	if($collectiontoDate !=Null){
+
+	// 		$date=date_create_from_format("m/d/Y", $collectionfromDate);
+	// 		$from=date_format($date,"Y-m-d");
+	// 		$date1=date_create_from_format("m/d/Y", $collectiontoDate);
+	// 		$to=date_format($date1,"Y-m-d");
+
+			
+
+	// 		$data1['collection1'] = $this->view_sales_model->viewCheque($from,$to,$outlet);
+	// 		$data1['outlet']=$this->gen_model->getData('outlet');
+	// 		$this->loadViews("chequeView",$this->global,$data1,NULL);
+
+
+	// 	}else{
+
+
+	// 		$date=date_create_from_format("m/d/Y", $collectionfromDate);
+	// 		$from=date_format($date,"Y-m-d");
+
+	// 		$data1['collection1'] =  $this->view_sales_model->viewCheque($from,date('Y-m-d'),$outlet);
+	// 		$data1['outlet']=$this->gen_model->getData('outlet');
+	// 		$this->loadViews("chequeView",$this->global,$data1,NULL);
+	// 	}
+
+	// }elseif($position=="Credit Register"){
+
+
+
+
+	// 	if($collectiontoDate !=Null){
+
+	// 		$date=date_create_from_format("m/d/Y", $collectionfromDate);
+	// 		$from=date_format($date,"Y-m-d");
+	// 		$date1=date_create_from_format("m/d/Y", $collectiontoDate);
+	// 		$to=date_format($date1,"Y-m-d");
+	// 		$data1['collection1'] = $this->view_sales_model->viewCredit($from,$to,$outlet);
+	// 		$data1['outlet']=$this->gen_model->getData('outlet');
+	// 		$this->loadViews("CreditView",$this->global,$data1,NULL);
+
+
+	// 	}else{
+
+
+	// 		$date=date_create_from_format("m/d/Y", $collectionfromDate);
+	// 		$from=date_format($date,"Y-m-d");
+	// 		$data1['collection1'] =  $this->view_sales_model->viewCredit($from,date('Y-m-d'),$outlet);
+	// 		$data1['outlet']=$this->gen_model->getData('outlet');
+	// 		$this->loadViews("CreditView",$this->global,$data1,NULL);
+	// 	}
+
+
+
+
+
+	// }elseif ($position=="Cash Register") {
+
+
+
+	// 	if($collectiontoDate !=Null){
+
+	// 		$date=date_create_from_format("m/d/Y", $collectionfromDate);
+	// 		$from=date_format($date,"Y-m-d");
+	// 		$date1=date_create_from_format("m/d/Y", $collectiontoDate);
+	// 		$to=date_format($date1,"Y-m-d");
+	// 		$data1['collection1'] = $this->view_sales_model->viewCash($from,$to,$outlet);
+	// 		$data1['collection2'] = $this->view_sales_model->returnCredit($from,$to,$outlet);
+	// 		$data1['outlet']=$this->gen_model->getData('outlet');
+	// 		$this->loadViews("cashView",$this->global,$data1,NULL);
+
+
+	// 	}else{
+
+
+	// 		$date=date_create_from_format("m/d/Y", $collectionfromDate);
+	// 		$from=date_format($date,"Y-m-d");
+
+	// 		$data1['collection1'] =  $this->view_sales_model->viewCash($from,date('Y-m-d'),$outlet);
+	// 		$data1['collection2'] = $this->view_sales_model->returnCredit($from,date('Y-m-d'),$outlet);
+	// 		$data1['outlet']=$this->gen_model->getData('outlet');
+	// 		$this->loadViews("cashView",$this->global,$data1,NULL);
+	// 	}
+		
+	// }
+
+
+	// elseif($position=="Daily collection summary"){
+
+
+	// 	if($collectiontoDate !=Null){
+	// 		$date=date_create_from_format("m/d/Y", $collectionfromDate);
+	// 		$from=date_format($date,"Y-m-d");
+	// 		$date1=date_create_from_format("m/d/Y", $collectiontoDate);
+	// 		$to=date_format($date1,"Y-m-d");
+	// 		$data['collection'] = $this->view_sales_model->viewCollection($from,$to,$outlet);
+	// 		$data['outlet']=$this->gen_model->getData('outlet');
+	// 		$this->loadViews("collection_report_view",$this->global,$data,NULL);
+
+
+	// 	}else{
+
+
+	// 		$date=date_create_from_format("m/d/Y", $collectionfromDate);
+	// 		$from=date_format($date,"Y-m-d");
+	// 		$data['collection'] =  $this->view_sales_model->viewCollection($from,date('Y-m-d'),$outlet);
+	// 		$data['outlet']=$this->gen_model->getData('outlet');
+	// 		$this->loadViews("collection_report_view",$this->global,$data,NULL);
+	// 	}
+
+
+	// }
+		
+
+	// }
+
+
+	// public function viewInoviceDetail(){
+
+
+
+
+	// 	$user = $_GET['strUser'];
+
+	// 	$position = $_GET['position'];
+
+
+	// 	if($position == "Daily collection summary"){
+
+
+
+	// 	    $data['UserDetailsone']=$this->view_sales_model->viewInvoices($user);
+
+	// 		echo json_encode(array("data"=>$data));
+
+	// 	}elseif($position == "Cash Register"){
+
+
+
+	// 	    $data['UserDetailsone']=$this->view_sales_model->viewInvoices($user);
+
+	// 		echo json_encode(array("data"=>$data));
+
+	// 	}
+
+
+
+
+
+	// }
+
 	public function viewInoviceDetail(){
 
 
-
+		$outlet = $_GET['outlet'];
 
 		$user = $_GET['strUser'];
 
@@ -449,7 +741,10 @@ class SalesController extends BaseController{
 
 
 
-		    $data['UserDetailsone']=$this->view_sales_model->viewInvoices($user);
+		    $data['UserDetailsone']=$this->view_sales_model->viewInvoices($user,$outlet);
+
+
+
 
 			echo json_encode(array("data"=>$data));
 
@@ -457,7 +752,9 @@ class SalesController extends BaseController{
 
 
 
-		    $data['UserDetailsone']=$this->view_sales_model->viewInvoices($user);
+		    $data['UserDetailsone']=$this->view_sales_model->viewInvoices($user,$outlet);
+
+		    
 
 			echo json_encode(array("data"=>$data));
 
@@ -470,12 +767,28 @@ class SalesController extends BaseController{
 	}
 
 
+	// public function new1(){
+
+
+	// 	$this->loadViews("collectionSummary_view",$this->global,NULL,NULL);
+
+
+	// }
 	public function new1(){
 
 
-		$this->loadViews("collectionSummary_view",$this->global,NULL,NULL);
+		$this->loadViews("DailySales",$this->global,NULL,NULL);
 
 
+	}
+
+	public function colSum(){
+
+
+		$data['col'] = $this->gen_model->getData('collection');
+		$this->load->view('v_report_collect', $data);
+
+		
 	}
 
 
@@ -570,6 +883,25 @@ class SalesController extends BaseController{
 		
 		$query = $this->sales_model->updateCollectionData($idCollection,$collectionArray);
 		echo json_encode($query);
+	}
+
+
+	public function printcash(){
+
+
+		$from = $_POST['getCollectionFrom'];
+		$to = $_POST['getCollectionTo'];
+		$outlet = $_POST['outletId'];
+
+
+
+		
+			
+		$data['collection'] = $this->view_sales_model->viewCollection($from,$to,$outlet);
+		//$data['outlet']=$this->gen_model->getData('outlet');
+		$this->load->view("cash_report",$data);
+
+
 	}
 
 

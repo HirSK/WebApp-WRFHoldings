@@ -6,9 +6,6 @@ class customer_model extends CI_Model{
 	public function updateData($tablename, $data_arr, $where_arr) {
         try {
 
-
-
-
             $this->db->update($tablename, $data_arr, $where_arr);
             $report = array();
             $report['error'] = $this->db->_error_number();

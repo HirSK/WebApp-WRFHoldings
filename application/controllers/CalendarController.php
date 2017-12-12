@@ -7,6 +7,7 @@ class CalendarController extends BaseController{
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('gen_model');
+		$this->load->model('calendar_model');
 		$this->load->model('payroll_model');
 		$this->load->library("pagination");
 		$this->isLoggedIn();
@@ -23,27 +24,29 @@ class CalendarController extends BaseController{
 	
 	public function addCalendarEntry(){
 
-		//validate form input
-		/*$this->form_validation->set_rules('fullName','Full name','required|alpha');
-		$this->form_validation->set_rules('nameWithInitials','Name with initials', 'required|alpha');
-		$this->form_validation->set_rules('nicNumber','National Identity Number', 'required|alpha_numeric');
-		$this->form_validation->set_rules('dateOfBirth','Birth date','required');
-		$this->form_validation->set_rules('OutletId','Outlet Id','required');
-		$this->form_validation->set_rules('position', 'Job position','required|alpha');
-		$this->form_validation->set_rules('joinedDate', 'Joined date','required');
-		$this->form_validation->set_rules('contactNumber','Telephone number', 'required');
-		$this->form_validation->set_rules('address', 'Home address','required');
-		$this->form_validation->set_rules('email','Email address','trim|valid_email');*/
+		  // $Working_Holiday = $_POST['calendarStatus'];
+
+		  // if($Working_Holiday=="Working Day"){
+		  // 		$Working_Holiday=1;
+		  // }
+
+		
+			// $calendar_array = array(
+
+					
+			// 		'CalendarDate'			=> $_POST['inputCalendarDate'],
+			// 		'Working_Holiday'		=> $_POST['calendarStatus'],
+			// 		'outletID'				=> $this->session->userData('loggerOutletID'),
+						
+
+			// );
 
 
-		//if the entered data are valid
-		//if($this->form_validation->run()){
-
-			$calendar_array = array(
+		    $calendar_array = array(
 
 					
 					'CalendarDate'			=> $_POST['inputCalendarDate'],
-					'Working_Holiday'		=> $_POST['calendarStatus'],
+					'Working_Holiday'		=> 1,
 					'outletID'				=> $this->session->userData('loggerOutletID'),
 						
 
@@ -57,10 +60,7 @@ class CalendarController extends BaseController{
 	}
 
 	public function viewCalendar(){
-        if($this->isAdmin() == True){
-            $this->loadThis();
-        }
-        else{
+        
             $this->load->model('calendar_model');
         
             $searchText = $this->input->post('searchText');
@@ -74,10 +74,72 @@ class CalendarController extends BaseController{
             $this->global['pageTitle'] = 'WRF Holdings(pvt) Ltd : Calendar Entry Listing';
             
             $this->loadViews("calendar_view", $this->global, $data, NULL);
-		}
+		
     }
 	
+	public function addEmployeeAttendance(){
+		if($_POST['attendanceStatus']=='Check In'){
+			$calendar_array = array(
+
+					'Employee_idEmployee'	=>$_POST['employeeID'],
+					'DateOfDay'				=>$_POST['AttendanceDate'],
+					'CheckIn'				=>1,
+					'CheckOut'				=>0,
+					'FullDayHalfDay'		=>0,
+			);
+
+			$res=$this->gen_model->insertData($tablename="attendance", $calendar_array);
+
+			redirect('/CalendarController');
+			
+
+		}else{
+			// $data=array('CheckOut'=>0,'FullDayHalfDay'=>0);
+			// $where=array('Employee_idEmployee'=>$_POST['employeeID'], 'DateOfDay'=>$_POST['DateOfDay'] );
+			
+			// $this->db->where($where);
+			// $this->db->update('attendance',$data);
+			
+			// $employeeID=$_POST['employeeID']
+			// $DateOfDay=$_POST['DateOfDay']
+			// $query = $this->db->query('UPDATE attendance SET CheckOut=0,FullDayHalfDay=0 WHERE Employee_idEmployee=$employeeID AND DateOfDay=$DateOfDay');
+
+            // $result=$query->result();
+            // return $result;
+            $data_arr=array('CheckOut'=>1,'FullDayHalfDay'=>1);
+            $where_arr=array('Employee_idEmployee'=>$_POST['employeeID'], 'DateOfDay'=>$_POST['AttendanceDate'] );
+            $res=$this->calendar_model->updateData($tablename="attendance", $data_arr=$data_arr,$where_arr=$where_arr);
+			
+
+
+			redirect('/CalendarController');
+			
+		}
+
+		
+			
+		//}
+
+	}
 	
+	public function viewEmployeeAttendance(){
+        
+            $this->load->model('calendar_model');
+        
+            $searchText = $this->input->post('searchText');
+            $data['searchText'] = $searchText;
+            
+			
+                      
+            $data['attendanceRecords'] = $this->calendar_model->attendanceListing($searchText);
+            
+            
+   
+            $this->global['pageTitle'] = 'WRF Holdings(pvt) Ltd : Attendance Entry Listing';
+            
+            $this->loadViews("employee_attendance_view", $this->global, $data, NULL);
+		
+    }
 
 	// 	---------------------------------------------------------------------------
 

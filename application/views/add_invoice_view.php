@@ -26,9 +26,9 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">Add New Invoice</h3>
                     </div>
-                    <!-- /.box-header -->
-                    <!-- form start -->
 
+                    <?php require APPPATH . '/views/includes/flashDisplay.php';   ?>
+                    
                     
                     <form role="form" action="<?php echo base_url()?>index.php/SalesController/addInvoice" method="POST">
                         <div class="box-body">
@@ -40,7 +40,8 @@
                                  <div class="form-group">
                                         <label for="inputInvoiceNumber" >Invoice No.</label>
 
-                                        <input type="text" class="form-control" name="inputInvoiceNumber" placeholder="Invoice Number " required>
+                                        <input type="text" class="form-control" name="inputInvoiceNumber" placeholder="Invoice Number " required value="<?php 
+                                        echo $maxid+1;?>">
 
                                     </div>
                             </div>
@@ -66,7 +67,8 @@
                                       <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                       </div>
-                                      <input type="text" class="form-control " id="datepicker" name="inputInvoiceDate" placeholder="mm/dd/yyyy">
+                                      <input type="text" class="form-control " id="datepicker1" value="20<?php 
+                                        echo date('y-m-d');?>" name="inputInvoiceDate" >
                                     </div>
                                     <!-- /.input group -->
                                 </div>

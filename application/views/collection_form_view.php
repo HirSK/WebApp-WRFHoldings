@@ -55,7 +55,8 @@
 	                                                <i class="fa fa-calendar"></i>
 	                                            </div>
 	                                           
-	                                            <input type="text" class="form-control pull-right" id="datepicker" name="dateFrom" required>
+	                                            <input type="text" class="form-control pull-right" id="datepicker1" name="dateFrom" value="20<?php 
+                                        echo date('y-m-d');?>" required>
 	                                </div>
 	                    			
 	                    		</div>
@@ -76,11 +77,14 @@
 	                    			</select>
 	                    		</div>
 
-	                    		<div class="col-xs-12 col-sm-4 col-lg-3 form-group">
-	                    			<label class="control-label" for><b>The Collection ID : </b></label>
-	                    			<input type="text" name="collectionID" id="collectionID" readonly="">
-	                    			
-	                    		</div>
+	                    		<div class="col-xs-12 col-sm-4 col-lg-2 form-group" >
+		                    		<label class="control-label" for>Area</label>
+		                    		<span style="color:red;">*</span>
+		                    		<input type="text" name="collectionArea" id="collectionArea" placeholder="Enter the area covered" required>
+
+		                    	</div> 
+
+
 
 
 	                    	</div>
@@ -113,27 +117,42 @@
 		                    			</select>
 		                    	</div>
 		                    	
-		                    	<div class="col-xs-12 col-sm-4 col-lg-3 form-group" style="padding-top: 20px">
+		                    	<!-- <div class="col-xs-12 col-sm-4 col-lg-3 form-group" style="padding-top: 20px">
 		                    		<label class="control-label" for>Area</label>
 		                    		<span style="color:red;">*</span>
 		                    		<input type="text" name="collectionArea" id="collectionArea" placeholder="Enter the area covered" required>
 
 		                    	</div> 
+ -->
+		                    	
+		                    </div> 
 
+		                    <div class="row">
 		                    	<div class="col-xs-2">
-                                	<!-- <button type="submit" class="btn btn-block btn-success" name="register">OK</button> -->
+                                	
                                 	<button type="button" class="btn btn-success collection-button" onclick="setCollection()">
-						                <span class="glyphicon glyphicon-ok"></span>Proceed
+						                Open Collection
 						             </button>
                             	</div>
-		                    </div> 
+                            </div>
+                            <br>
+                            <div class="row">
+                            	<div class="col-xs-4">
+	                    			<label class="control-label" for><b>The Collection ID : </b></label>
+	                    			<input type="text" name="collectionID" id="collectionID" readonly="">
+	                    			
+	                    		</div>
+	                    	</div>
+
+
+		                    </div>
 		                <!-- </form>   -->
 
 		                <!-- panel preview -->
 		        <div class="row">
 		            <div class="col-sm-12">
 				        <div class="col-sm-6">
-				            <h5>Add collection:</h5>
+				            <!-- <h5>Insert collected invoices</h5> -->
 				            <div class="panel panel-default">
 				            
 				                <div class="panel-body form-horizontal invoice-form">
@@ -280,7 +299,7 @@
 				                   	  <div class="col-sm-7 col-xs-12">
 				                      		<div class="form-group">
 						                        <div class="col-sm-6 text-right">
-						                            <button type="button" class="btn btn-default preview-apply-button" onclick="applyFunction()">
+						                            <button type="button" class="btn btn-primary preview-apply-button" onclick="applyFunction()">
 						                                <span class="glyphicon glyphicon-ok"></span>Apply
 						                            </button>
 						                        </div>
@@ -289,7 +308,7 @@
 					                   <div class="col-sm-5 col-xs-12">
 						                    <div class="form-group">
 						                        <div class="col-sm-6 text-right">
-						                            <button type="button" class="btn btn-default preview-add-button" id="addBtn">
+						                            <button type="button" class="btn btn-primary preview-add-button" id="addBtn">
 						                                <span class="glyphicon glyphicon-plus"></span> Add
 						                            </button>
 						                        </div>
@@ -324,19 +343,7 @@
 				                    </div>                            
 				                </div>
 				            </div>
-				            <!-- <div class="row text-right">
-				                <div class="col-xs-12">
-				                    <h5>Total Cash: <strong><span class="preview-cash"></span></strong></h5>
-				                    <h5>Total Cheque: <strong><span class="preview-total"></span></strong></h5>
-				                    <h5>Total Credit: <strong><span class="preview-total"></span></strong></h5>
-				                </div>
-				            </div>
-				            <div class="row">
-				                <div class="col-xs-12">
-				                    <hr style="border:1px dashed #dddddd;">
-				                    <button type="button" class="btn btn-primary btn-block">Submit all and finish</button>
-				                </div>                
-				            </div> -->
+				            
 				        </div>
 
 
@@ -387,10 +394,10 @@
 
 <script type="text/javascript">
 
-	
+	//open a new collection
 	function setCollection(){
 
-		var datepicker = document.getElementById("datepicker").value;
+		var datepicker = document.getElementById("datepicker1").value;
 		var vehicleNo = document.getElementById("vehicleNo").value; 
 		var collectionOfficer = document.getElementById("collectionOfficer").value;
 		var collectionDriver = document.getElementById("collectionDriver").value;
@@ -398,24 +405,36 @@
 
 		if(datepicker.length<1 && vehicleNo.length<1 && collectionOfficer.length<1 && collectionDriver.length<1 && collectionArea.length<1 ){
 
-			alert("Please enter values to proceed");
+			document.getElementById("datepicker").style.borderColor="red";
+			document.getElementById("vehicleNo").style.borderColor="red";
+			document.getElementById("collectionOfficer").style.borderColor="red";
+			document.getElementById("collectionDriver").style.borderColor="red";
+			document.getElementById("collectionArea").style.borderColor="red";
+			// alert("Please enter values to proceed");
 			return;
 		}else if(datepicker.length<1){
-			alert("Please select the date");
-			return;
-		}else if(vehicleNo.length<1){
-			alert("Please select the vehicle no");
+			document.getElementById("datepicker").style.borderColor="red";
+			// alert("Please select the date");
 			return;
 		}else if(collectionOfficer.length<1){
-			alert("Please select the collection officer");
-			return;
-		}else if(collectionDriver.length<1){
-			alert("Please select the collection driver");
+			document.getElementById("collectionOfficer").style.borderColor="red";
+			// alert("Please select the collection officer");
 			return;
 		}else if(collectionArea.length<1){
-			alert("Please enter the relevant collection area");
+			document.getElementById("collectionArea").style.borderColor="red";
+			// alert("Please enter the relevant collection area");
+			return;
+		}else if(collectionDriver.length<1){
+			document.getElementById("collectionDriver").style.borderColor="red";
+			// alert("Please select the collection driver");
+			return;
+		}else if(vehicleNo.length<1){
+			document.getElementById("vehicleNo").style.borderColor="red";
+
+			// alert("Please select the vehicle no");
 			return;
 		}
+
 
 		
 		var data = {

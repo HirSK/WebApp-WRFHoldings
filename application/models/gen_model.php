@@ -54,6 +54,11 @@ class gen_model extends CI_Model{
         }
     }    
 
+    function updateRowWhere($table, $where = array(), $data = array()) {
+    $this->db->where($where);
+    $this->db->update($table, $data);
+}
+
 
      //makes this to work with columns and without where,limit and offset
     function getData($tablename = '', $columns_arr = array(), $where_arr = array(), $limit = 0, $offset = 0, $orderby = array()) {
@@ -139,40 +144,40 @@ class gen_model extends CI_Model{
     }
 
 
-    public function petty($userInfo){
+    // public function petty($userInfo){
 
 
-        $this->db->select("idPetty_Cash as petty");
-        $this->db->from("petty_cash");
+    //     $this->db->select("idPetty_Cash as petty");
+    //     $this->db->from("petty_cash");
 
-        $this->db->where_in("Petty_CashType",$userInfo);
+    //     $this->db->where_in("Petty_CashType",$userInfo);
 
        
 
-        $res = $this->db->get();
+    //     $res = $this->db->get();
 
-        return $res->row()->petty;
+    //     return $res->row()->petty;
 
 
-    }
+    // }
 
-    function pettyCashExpenses($invoice_array){
-        try {
+    // function pettyCashExpenses($invoice_array){
+    //     try {
             
-            // $invoice_array['Collection_idCollection'] = $this->getMaxCollectionID();        
+    //         // $invoice_array['Collection_idCollection'] = $this->getMaxCollectionID();        
 
 
-            $ret = $this->db->insert('outlet_expends_petty_cash', $pettycashexpences_array);
+    //         $ret = $this->db->insert('outlet_expends_petty_cash', $pettycashexpences_array);
 
-            // $ret = $this->db->insert_id() + 0;
-            return $ret;
+    //         // $ret = $this->db->insert_id() + 0;
+    //         return $ret;
 
-        } catch (Exception $err) {
-            return $err->getMessage();
-        }
+    //     } catch (Exception $err) {
+    //         return $err->getMessage();
+    //     }
 
         
-    }
+    // }
 
     public function updateData($tablename, $data_arr, $where_arr) {
         try {
@@ -197,4 +202,33 @@ class gen_model extends CI_Model{
 
     return $this->db->delete('Customer',['idCustomer'=>$id]);
 }
+
+
+
+    public function petty($userInfo){
+
+
+        $this->db->select("idPetty_Cash as petty");
+        $this->db->from("petty_cash");
+
+        $this->db->where_in("Petty_CashType",$userInfo);
+
+       
+
+        $res = $this->db->get();
+
+        return $res->row()->petty;
+
+
+    }
+
+
+
+     public function temp_petty($id,$from,$to){
+
+        $res = $this->db->query("select * from outlet_expends_petty_cash where Outlet_idOutlet = $id and Company_Work_Period_Company_Work_Period_fromDate = '$from' and Company_Work_Period_Company_Work_Period_toDate = '$to'");
+
+
+        return $res->result_array();
+    }
 }

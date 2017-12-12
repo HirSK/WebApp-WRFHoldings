@@ -42,10 +42,10 @@ class view_sales_model extends CI_Model{
 
 
 
-	public function viewInvoices($collectID){
+	public function viewInvoices($collectID,$outlet){
 
 
-		$query = $this->db->query("SELECT * FROM `invoice` WHERE Collection_idCollection='$collectID'");
+		$query = $this->db->query("SELECT * from collection INNER JOIN invoice ON collection.idCollection = invoice.Collection_idCollection left JOIN credit ON invoice.idInvoice = credit.invoice_credit_id LEFT JOIN cheque ON invoice.idInvoice = cheque.cheque_invoice_id WHERE (collection.idCollection = $collectID and collection.Outlet_idOutlet = $outlet) ");
 
 		$result = $query->result_array();
 

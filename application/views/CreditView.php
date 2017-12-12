@@ -48,7 +48,7 @@
                                                       <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                       </div>
-                                                      <input type="text" class="form-control pull-right"  name="getCollectionFrom" id="datepicker" required>
+                                                      <input type="text" class="form-control pull-right"  name="getCollectionFrom"  value="<?php echo $from?>" id="datepicker" required>
                                                     </div>
                                     <!-- /.input group -->
                                             </div>
@@ -66,7 +66,7 @@
                                                       <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                       </div>
-                                                      <input type="text" class="form-control pull-right"  name="getCollectionTo" id="datepicker1" >
+                                                      <input type="text" class="form-control pull-right"  name="getCollectionTo" id="datepicker1" value="<?php echo $to?>">
                                                     </div>
                                     <!-- /.input group -->
                                                     </div>
@@ -133,7 +133,7 @@
                                                 <div class="row" style="padding-top: 22px;">
                                                 <div class="col-md-2">
 
-                                                <button type="submit" class="btn btn-default preview-add-button"> GO</button>
+                                                <button name="collect" value="go" type="submit" class="btn btn-default preview-add-button"> GO</button>
                                                 
                                                 </div>
 
@@ -141,14 +141,29 @@
                                         </div> 
 
 
-                 </form> 
+                  
 
 
 
          </div> 
 
 
-         <div class="wizard" style="margin-right: 40px;">     
+
+         <div class="wizard" style="margin-right: 40px;">  
+
+
+          <div class="col-lg-4 col-sm-4 col-xs-12" no-padding style="padding-top:20px">
+                    <div class="col-xs-4 left-padding">
+                        <button name="collect" value="print" type="submit" class="btn btn-default preview-add-button">PRINT</button>
+                    </div>
+
+                </div>  
+
+
+         </form>  
+
+
+             
                 
                     
          <div class="col-xs-12 col-lg-12" style="padding-top: 10px">
@@ -175,6 +190,7 @@
                                 <th>Credit topay</th>
                                 <th>Credit Start Date</th>
                                 <th>Last Credit Taken Date</th>
+                                <th>Outlet ID</th>
                                
                                 
                                 
@@ -209,6 +225,7 @@
                             <td><?php echo $row['credit_topay'];?></td>
                             <td><?php echo $row['credit_start_date'];?></td>
                             <td><?php echo $row['credit_lasttaken_date'];?></td>
+                            <td><?php echo $row['outletID'];?></td>
 
                               
                             </tr>
@@ -278,6 +295,11 @@
 
 <!-- AdminLTE App -->
 <!-- InputMask -->
+
+<script type="text/javascript">
+  document.getElementById('position').value = "<?php echo $position;?>";
+
+</script>
 
 <script >
     $(function() {

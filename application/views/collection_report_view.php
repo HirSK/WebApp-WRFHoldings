@@ -48,7 +48,7 @@
                                                       <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                       </div>
-                                                      <input type="text" class="form-control pull-right"  name="getCollectionFrom" id="datepicker" required>
+                                                      <input type="text" class="form-control pull-right"  name="getCollectionFrom" id="datepicker"  value="<?php echo $from?>" required>
                                                     </div>
                                     <!-- /.input group -->
                                             </div>
@@ -66,7 +66,7 @@
                                                       <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                       </div>
-                                                      <input type="text" class="form-control pull-right"  name="getCollectionTo" id="datepicker1" >
+                                                      <input type="text" class="form-control pull-right"  name="getCollectionTo" id="datepicker1"  value="<?php echo $to?>" >
                                                     </div>
                                     <!-- /.input group -->
                                                     </div>
@@ -97,7 +97,7 @@
                                                        if($loggerRole == ROLE_ADMIN)
                                                         {
                                                         ?>
-                                                        <select class="form-control" name="outletId" required>
+                                                        <select class="form-control" name="outletId" id="outlet" required>
                                                           <?php foreach ($outlet as $id) {
                                                                 # code...
                                                                 ?>
@@ -120,7 +120,7 @@
 
                                                             ?>
 
-                                                            <input class="form-control" name="outletId" value="<?php echo (int)($this->session->userdata('loggerOutletID')); ?>"  readonly required>
+                                                            <input class="form-control" name="outletId" id="outlet" value="<?php echo (int)($this->session->userdata('loggerOutletID')); ?>"  readonly required>
 
 
 
@@ -136,7 +136,7 @@
                                                 <div class="row" style="padding-top: 22px;">
                                                 <div class="col-md-2">
 
-                                                <button type="submit" class="btn btn-default preview-add-button"> GO</button>
+                                                <button name="collect" value="go" type="submit" class="btn btn-default preview-add-button"> GO</button>
                                                 
                                                 </div>
 
@@ -175,6 +175,7 @@
                                 <th>Collection ID</th>
                                 
                                 <th>Collection Date</th>
+                                <th>Outlet ID</th>
                                
                                 
                                 
@@ -199,7 +200,8 @@
 
                             ?><tr data-id=<?php echo $row->idCollection;?>>
                             <td><?php echo $row->idCollection;?></td>
-                            <td><?php echo $row->CollectionDate;?></td>  
+                            <td><?php echo $row->CollectionDate;?></td>
+                            <td><?php echo $row->Outlet_idOutlet;?></td>  
                               
                             </tr>
 
@@ -269,6 +271,15 @@
 <!-- AdminLTE App -->
 <!-- InputMask -->
 
+<script type="text/javascript">
+
+    window.onload = function()
+            {
+             window.localStorage.clear();
+            }
+  document.getElementById('position').value = "<?php echo $position;?>";
+</script>
+
 <script >
     $(function() {
         //Date picker
@@ -311,7 +322,48 @@
        // var value_of_dropdown  = $(this).find('select[name="position"]').val();
 
         var e = document.getElementById("position");
+         var e1 = document.getElementById("outlet");
         var str = e.options[e.selectedIndex].text;
+
+        <?php if( $loggerRole == ROLE_SUPERVISOR){
+
+
+            ?>
+
+
+            var str1 =document.getElementById("outlet").value;
+
+            
+
+
+
+        <?php 
+
+            }elseif( $loggerRole == ROLE_ADMIN){
+
+
+                ?>
+
+
+                    var str1 = e1.options[e1.selectedIndex].text;
+                
+
+
+
+            <?php
+
+
+        }
+
+
+        ?>
+
+
+
+        
+
+
+        
 
         var getIdFromRow = $(event.target).closest('tr').data('id');
 
@@ -326,16 +378,17 @@
             }); 
         })
 
-        var date = data[getIdFromRow]['1'];
+        //console.log(data[5]);
+        //var date = data[getIdFromRow]['1']['CollectionDate'];
 
-        console.log(str);
+        
 
 
 
         $.ajax({
         type: "GET",
         url: "http://localhost/WebApp-WRFHoldings/index.php/SalesController/viewInoviceDetail" ,
-        data: {"strUser": getIdFromRow,"position":str}, 
+        data: {"strUser": getIdFromRow,"position":str,"outlet":str1}, 
         dataType:'JSON', 
         success: function(response){
 
@@ -347,8 +400,10 @@
 
         for (i = 0, len =response.data.UserDetailsone.length, text = ""; i < len; i++) { 
             
-
+            //console.log(response.data.UserDetailsone[i]);
             var d1 =response.data.UserDetailsone[i];
+
+
             
 
             dic[i]=d1;
@@ -359,7 +414,7 @@
         console.log(dic);
         
         localStorage.setItem('data1', JSON.stringify(dic));
-        localStorage.setItem('data2', JSON.stringify(date));
+        //localStorage.setItem('data2', JSON.stringify(date));
         
 
         window.location.href = "http://localhost/WebApp-WRFHoldings/index.php/SalesController/new1";
@@ -374,6 +429,7 @@
 });
 
 </script>
+
 
 
 

@@ -27,6 +27,7 @@ class sales_model extends CI_Model{
 
 	function updatePreOrder($idInvoice,$outletID){
 
+		
 		$query = $this->db->query("update preorder_invoice set added=1 where idInvoice=$idInvoice and outletID=$outletID");
 		$result = $query->result();
 		// return $result;

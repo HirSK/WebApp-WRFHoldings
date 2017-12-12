@@ -102,7 +102,7 @@
 
                             <div class="box box-info">
                               <div class="box-header with-border">
-                                <h3 class="box-title">Daily Sales Summary(Cargills product distributer)</h3>
+                                <h3 class="box-title">Daily Sales Summary(OUTLET 1)</h3>
 
                                 <div class="box-tools pull-right">
                                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -140,7 +140,7 @@
 
                             <div class="box box-info">
                               <div class="box-header with-border">
-                                <h3 class="box-title">Daily Sales Summary(Hayles product distributer)</h3>
+                                <h3 class="box-title">Daily Sales Summary(OUTLET 2)</h3>
 
                                 <div class="box-tools pull-right">
                                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -186,7 +186,7 @@
 
                             <div class="box box-info">
                               <div class="box-header with-border">
-                                <h3 class="box-title">Daily Sales Summary(Dialog)</h3>
+                                <h3 class="box-title">Daily Sales Summary(OUTLET 3)</h3>
 
                                 <div class="box-tools pull-right">
                                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -222,7 +222,7 @@
 
                             <div class="box box-info">
                               <div class="box-header with-border">
-                                <h3 class="box-title">Daily Sales Summary(Nestle)</h3>
+                                <h3 class="box-title">Daily Sales Summary(OUTLET 4)</h3>
 
                                 <div class="box-tools pull-right">
                                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -255,38 +255,7 @@
             <div class="col-md-6">
               <!-- LINE CHART -->
             
-        <div class="box box-solid bg-green-gradient">
-            <div class="box-header">
-              <i class="fa fa-calendar"></i>
-
-              <h3 class="box-title">Calendar</h3>
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <!-- button with a dropdown -->
-                <div class="btn-group">
-                  <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-bars"></i></button>
-                  <ul class="dropdown-menu pull-right" role="menu">
-                    <li><a href="#">Add new event</a></li>
-                    <li><a href="#">Clear events</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">View calendar</a></li>
-                  </ul>
-                </div>
-                <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                
-              </div>
-              <!-- /. tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <!--The calendar -->
-              <div id="calendar" style="width: 100px"></div>
-            </div>
-            <!-- /.box-body -->
-           
-          </div>
+        <iframe src="https://calendar.google.com/calendar/embed?src=en.lk%23holiday%40group.v.calendar.google.com&ctz=Asia%2FColombo" style="border: 0" width="584.44" height="310" frameborder="0" scrolling="no"></iframe>
           
 
           </div>
@@ -624,38 +593,7 @@
                       <div class="col-md-6">
               <!-- LINE CHART -->
             
-        <div class="box box-solid bg-green-gradient">
-            <div class="box-header">
-              <i class="fa fa-calendar"></i>
-
-              <h3 class="box-title">Calendar</h3>
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <!-- button with a dropdown -->
-                <div class="btn-group">
-                  <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
-                    <i class="fa fa-bars"></i></button>
-                  <ul class="dropdown-menu pull-right" role="menu">
-                    <li><a href="#">Add new event</a></li>
-                    <li><a href="#">Clear events</a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">View calendar</a></li>
-                  </ul>
-                </div>
-                <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                
-              </div>
-              <!-- /. tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <!--The calendar -->
-              <div id="calendar" style="width: 100px"></div>
-            </div>
-            <!-- /.box-body -->
-           
-          </div>
+        <iframe src="https://calendar.google.com/calendar/embed?src=en.lk%23holiday%40group.v.calendar.google.com&ctz=Asia%2FColombo" style="border: 0" width="584.44" height="350" frameborder="0" scrolling="no"></iframe>
           
 
           </div>
@@ -903,13 +841,13 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo base_url()?>template/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
-<script src="<?php echo base_url()?>template/bower_components/newCSS/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+<script src="<?php echo base_url()?>template/bower_components/newCSS/bower_components/moment/moment.js"></script>
 
 
-<script src="<?php echo base_url()?>template/bower_components/newCSS/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="<?php echo base_url()?>template/bower_components/newCSS/dist/js/demo.js"></script>
 
-<script src="<?php echo base_url()?>template/bower_components/newCSS/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-
+<script src="<?php echo base_url()?>template/calendarTemp/src/clndr.js"></script>
+<script src="<?php echo base_url()?>template/calendarTemp/Underscore.js"></script>
 
 
 
@@ -1137,6 +1075,31 @@
          }
      });
       }
+  </script>
+
+
+  <script type="text/javascript">
+    
+
+    var clndr = {};
+
+$( function() {
+
+  var currentMonth = moment().format('YYYY-MM');
+  var nextMonth    = moment().add('month', 1).format('YYYY-MM');
+
+  var events = [
+    { <a href="https://www.jqueryscript.net/time-clock/">date</a>: currentMonth + '-' + '10', title: 'Persian Kitten Auction', location: 'Center for Beautiful Cats' },
+    { date: currentMonth + '-' + '19', title: 'Cat Frisbee', location: 'Jefferson Park' },
+    { date: currentMonth + '-' + '23', title: 'Kitten Demonstration', location: 'Center for Beautiful Cats' },
+    { date: nextMonth + '-' + '07',    title: 'Small Cat Photo Session', location: 'Center for Cat Photography' }
+  ];
+
+  clndr = $('#full-clndr').clndr({
+    template: $('#full-clndr-template').html(),
+    events: events
+  });
+});
   </script>
 
 
@@ -1827,6 +1790,10 @@
     }
 
   ?>
+
+
+
+
 <!-- Morris.js charts -->
 
 

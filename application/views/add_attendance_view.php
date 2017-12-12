@@ -38,7 +38,8 @@
                                                 <div class="col-md-4">
                                                     <label>Enter year and month</label>
 
-                                                    <input type="text" class="form-control" id="month" placeholder="EX: 2017-12" onkeypress="Javascript: if (event.keyCode==13) getDetails();">
+                                                    <input type="text" class="form-control" id="month" placeholder="EX: 2017-12" value="20<?php 
+                                                    echo date('y-m');?>" onkeypress="Javascript: if (event.keyCode==13) getDetails();">
                                                     <br>
                                                 </div>
 

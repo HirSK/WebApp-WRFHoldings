@@ -56,14 +56,14 @@
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     <label for="fullName">Full name</label>
-                                    <input type="text" class="form-control"  name="fullName" placeholder="Full name" required>
+                                    <input type="text" class="form-control" pattern="^[.A-z ]{1,}$" name="fullName" placeholder="Full name" required>
                                 </div>
                             </div>
 
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     <label for="nameWithInitials">Name with initials</label>
-                                    <input type="text" class="form-control"  name="nameWithInitials" placeholder="Name with initials" required>
+                                    <input type="text" class="form-control" pattern="^[.A-z ]{1,}$" name="nameWithInitials" placeholder="Name with initials" required>
                                 </div>
                             </div>
 
@@ -96,6 +96,7 @@
                                         <option>2</option>
                                         <option>3</option>
                                         <option>4</option>
+                                        <option>5</option>
                                         
                                     </select>
                                 </div>
@@ -148,7 +149,7 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-phone"></i>
                                         </div>
-                                        <input type="text" class="form-control" required="required" name="contactNumber" data-inputmask='"mask": "(94) 99 9 999999"' data-mask>
+                                        <input type="text" class="form-control" pattern="^[0]+[0-9]{9}" required="required" name="contactNumber" data-inputmask='"mask": "(94) 99 9 999999"' data-mask>
                                     </div>
                                     <!-- /.input group -->
                                 </div>
@@ -157,7 +158,7 @@
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     <label for="nic">NIC No</label>
-                                    <input type="text" class="form-control"  name ="nicNumber" placeholder="NIC No" required>
+                                    <input type="text" class="form-control" pattern="^[0-9-V]{10}$" title="xxxxxxxxxV" name ="nicNumber" placeholder="NIC No" required>
                                 </div>
                             </div>
 
@@ -178,7 +179,7 @@
 
                                 <div class="form-group">
                                     <label for="email">Email(If any)</label>
-                                    <input type="email" class="form-control"   name="email" placeholder="Email">
+                                    <input type="email" class="form-control" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" title="abc@something.com"  name="email" placeholder="Email">
                                 </div>
                             </div>
 

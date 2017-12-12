@@ -132,7 +132,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="registrationDate" class="form-control" name="registrationDate" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                                <input type="registrationDate" class="form-control" id="registrationDate" name="registrationDate" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                                             </div>
                                             <!-- /.input group -->
                                         </div>
@@ -152,7 +152,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="exampleOwnerName">Owner Name</label>
-                                            <input type="ownerName" class="form-control" name="exampleOwnerName" placeholder="Owner Name">
+                                            <input type="ownerName" class="form-control" pattern="^[.A-z ]{1,}$" name="exampleOwnerName" placeholder="Owner Name">
                                         </div>
                                     </div>
                                 </div>
@@ -170,7 +170,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="exampleOwnerTelephoneNo">Owner Telephone No</label>
-                                            <input type="ownerTelephoneNo" class="form-control" name="exampleOwnerTelephoneNo" placeholder="Owner Telephone No">
+                                            <input type="ownerTelephoneNo" pattern="^[0]+[0-9]{9}" class="form-control" name="exampleOwnerTelephoneNo" placeholder="Owner Telephone No">
                                         </div>
                                     </div>
                                 </div>
@@ -201,7 +201,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="startingDate" class="form-control" name="licenStartingDate" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                                <input type="startingDate" class="form-control" id="licenStartingDate" name="licenStartingDate" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                                             </div>
                                             <!-- /.input group -->
                                         </div>
@@ -214,9 +214,9 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="endingDate" class="form-control" name="licenEndingDate" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required>
+                                                <input type="endingDate" class="form-control" id="licenEndingDate" name="licenEndingDate" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required>
                                             </div>
-                                            <!-- /.input group -->
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -248,7 +248,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="insuranceStartingDate" class="form-control" name="insuranceStartingDate" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                                                <input type="insuranceStartingDate" class="form-control" id="insuranceStartingDate" name="insuranceStartingDate" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
                                             </div>
                                             <!-- /.input group -->
                                         </div>
@@ -261,7 +261,7 @@
                                                 <div class="input-group-addon">
                                                     <i class="fa fa-calendar"></i>
                                                 </div>
-                                                <input type="insuranceEndingDate" class="form-control" name="insuranceEndingDate" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required>
+                                                <input type="insuranceEndingDate" class="form-control" id="insuranceEndingDate" name="insuranceEndingDate" placeholder="dd/mm/yyyy" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask required>
                                             </div>
                                             <!-- /.input group -->
                                         </div>
@@ -292,7 +292,6 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-<?php include_once('includes/footer.php') ?>
 
 <!-- Add the sidebar's background. This div must be placed
 immediately after the control sidebar -->
@@ -358,7 +357,31 @@ immediately after the control sidebar -->
 <script >
     $(function() {
         //Date picker
-        $('#datepicker').datepicker({
+        $('#registrationDate').datepicker({
+          autoclose: true
+        })
+    })
+    $(function() {
+        //Date picker
+        $('#licenStartingDate').datepicker({
+          autoclose: true
+        })
+    })
+    $(function() {
+        //Date picker
+        $('#licenEndingDate').datepicker({
+          autoclose: true
+        })
+    })
+    $(function() {
+        //Date picker
+        $('#insuranceStartingDate').datepicker({
+          autoclose: true
+        })
+    })
+    $(function() {
+        //Date picker
+        $('#insuranceEndingDate').datepicker({
           autoclose: true
         })
     })

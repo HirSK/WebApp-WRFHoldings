@@ -2,12 +2,42 @@
 
 class calendar_model extends CI_Model{
 
-    function calendarEntryListing($searchText = '',$id='')
-    {
-        
-        $query = $this->db->query("select outletID, CalendarDate, Working_Holiday from calendar");
+    function calendarEntryListing($searchText = '',$id=''){
+        $loggerRole=$this->session->userData('loggerRole');
+        if($loggerRole !="Admin"){
+        $loggerOutletID=$this->session->userData('loggerOutletID');
+        $query = $this->db->query("select * from calendar where outletID=$loggerOutletID");
         $result=$query->result();
         return $result;
+        }
+        else{
+            $query = $this->db->query("select * from calendar");
+            $result=$query->result();
+            return $result;
+
+
+        }
+    }
+
+    function attendanceListing($searchText = '',$id=''){
+        $loggerRole=$this->session->userData('loggerRole');
+
+        if($loggerRole !="Admin"){
+        $loggerOutletID=$this->session->userData('loggerOutletID');
+        $query = $this->db->query("select * from attendance,employee where attendance.Employee_idEmployee=employee.idEmployee AND Outlet_idOutlet=$loggerOutletID");
+        // $this->loggerOutletID"
+        $result=$query->result();
+        return $result;
+        }
+        else{
+            
+        $query = $this->db->query("select * from attendance,employee where attendance.Employee_idEmployee=employee.idEmployee ");
+        // $this->loggerOutletID"
+        $result=$query->result();
+        return $result;
+
+
+        }
         
         
     }

@@ -27,7 +27,7 @@
 
 
             <div class="col-md-12 ">
-                        <a class="btn btn-primary pull-right " target="_blank" href="<?php echo base_url()?>index.php/C_report/colSum"> PRINT</a>
+                        <a class="btn btn-primary pull-right " target="_blank" href="<?php echo base_url()?>index.php/SalesController/colSum"> PRINT</a>
             </div>
             
 

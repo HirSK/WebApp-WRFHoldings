@@ -1,7 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
 require APPPATH . '/libraries/BaseController.php';
-
 class VehicleController extends BaseController{
 
     function __construct(){
@@ -42,9 +40,12 @@ class VehicleController extends BaseController{
 
             );
 
+           
+
             $res=$this->gen_model->insertData($tablename="delivery_vehicle",$vehicle_array);
+
             redirect('/VehicleController');
-        
+        //}
 
     }
 
@@ -97,40 +98,41 @@ class VehicleController extends BaseController{
     public function maintainVehicle(){
         
         $data['vehicleID'] = $this->gen_model->getData($tablename='delivery_vehicle');
+        //$data['plateno'] = $this->gen_model->getData($tablename='delivery_vehicle_renewal_dates',NULL,$res);
         $this->loadViews('maintain_vehicle_view',$this->global,$data,NULL);
     }
     
-    public function addLicenRenewalDates(){
+    // public function addLicenRenewalDates(){
         
 
-        $licen_array = array(
-            'PlateNo'           => $_POST['plateNo'],
-            'LicenLastRenewalDate'           => date('Y-m-d',strtotime($_POST['dateLastLic'])),
-            'LicenNewRenewalDate'           => date('Y-m-d',strtotime($_POST['dateNewLic'])),
-            'LicenRemarks'           => $_POST['remarkLic']
-        );
+    //     $licen_array = array(
+    //         'PlateNo'           => $_POST['plateNo'],
+    //         'LicenLastRenewalDate'           => date('Y-m-d',strtotime($_POST['dateLastLic'])),
+    //         'LicenNewRenewalDate'           => date('Y-m-d',strtotime($_POST['dateNewLic'])),
+    //         'LicenRemarks'           => $_POST['remarkLic']
+    //     );
 
 
-        $this->gen_model->insertData("delivery_vehicle_renewal_dates",$licen_array);
+    //     $this->gen_model->insertData("delivery_vehicle_renewal_dates",$licen_array);
 
-        redirect('/VehicleController/maintainVehicle');
-    }
+    //     redirect('/VehicleController/maintainVehicle');
+    // }
 
-    public function addInsuranceRenewalDates(){
+    // public function addInsuranceRenewalDates(){
         
 
-        $insurance_array = array(
-            'PlateNo'           => $_POST['plateNo'],
-            'InsuranceLastRenewalDate'           => date('Y-m-d',strtotime($_POST['dateLastIns'])),
-            'InsuranceNewRenewalDate'           => date('Y-m-d',strtotime($_POST['dateNewIns'])),
-            'InsuranceRemarks'           => $_POST['remarkIns']
-        );
+    //     $insurance_array = array(
+    //         'PlateNo'           => $_POST['plateNo'],
+    //         'InsuranceLastRenewalDate'           => date('Y-m-d',strtotime($_POST['dateLastIns'])),
+    //         'InsuranceNewRenewalDate'           => date('Y-m-d',strtotime($_POST['dateNewIns'])),
+    //         'InsuranceRemarks'           => $_POST['remarkIns']
+    //     );
 
 
-        $res=$this->gen_model->insertData("delivery_vehicle_insurance_dates",$insurance_array);
+    //     $res=$this->gen_model->insertData("delivery_vehicle_insurance_dates",$insurance_array);
 
-        redirect('/VehicleController/maintainVehicle');
-    }
+    //     redirect('/VehicleController/maintainVehicle');
+    // }
 
     public function addPlateNo(){
         $plate_No = array(
@@ -140,5 +142,68 @@ class VehicleController extends BaseController{
 
         redirect('/VehicleController/maintainVehicle');
     }
+
+    public function getLicen(){
+
+        if ($this->input->post('selectLic')) {
+            $licen = array(
+                'Plateno' => $_POST['plateNo']
+            );
+
+            $data['plateno'] = $this->gen_model->getData($tablename='delivery_vehicle_renewal_dates',NULL,$licen);
+            
+            $this->loadViews('maintain_vehicle_view',$this->global,$data,NULL);
+            //redirect ('/VehicleController/maintainVehicle');
+        }
+
+         elseif ($this->input->post('selectIns')){
+            $licen = array(
+                'Plateno' => $_POST['plateNo']
+            );
+
+            $data['plateno'] = $this->gen_model->getData($tablename='delivery_vehicle_renewal_dates',NULL,$licen);
+            
+            $this->loadViews('maintain_vehicle_view',$this->global,$data,NULL);
+            //redirect ('/VehicleController/maintainVehicle');
+         }
+    }
+
+    public function postLic(){
+
+        if ($this->input->post('submitLic')){
+
+            $where_arr = array('Plateno'=>$this->input->post('platenolic'));
+            //$where_arr = array('LicenLastRenewalDate'=>date('Y-m-d',strtotime($this->input->post('lastDateLic'))));
+
+                $data = array(
+                
+                'LicenLastRenewalDate' => date('Y-m-d',strtotime($this->input->post('newDateLic'))),
+                
+                );
+                $this->gen_model->updateData('delivery_vehicle_renewal_dates',$data, $where_arr);
+
+                $data['plateno'] = $this->gen_model->getData($tablename='delivery_vehicle_renewal_dates');
+                $this->loadViews('maintain_vehicle_view',$this->global,$data,NULL);
+                redirect ('/VehicleController/maintainVehicle');
+
+        }
+        elseif ($this->input->post('submitIns')) {
+            
+            $where_arr = array('Plateno'=>$this->input->post('platenoInc'));
+            //$where_arr = array('LicenLastRenewalDate'=>date('Y-m-d',strtotime($this->input->post('lastDateLic'))));
+
+                $data = array(
+                
+                'InsuranceLastRenewalDate' => date('Y-m-d',strtotime($this->input->post('newDateInc'))),
+                
+                );
+                $this->gen_model->updateData('delivery_vehicle_renewal_dates',$data, $where_arr);
+
+                $data['plateno'] = $this->gen_model->getData($tablename='delivery_vehicle_renewal_dates');
+                $this->loadViews('maintain_vehicle_view',$this->global,$data,NULL);
+                redirect ('/VehicleController/maintainVehicle');
+        }
+    }
 }
+
 

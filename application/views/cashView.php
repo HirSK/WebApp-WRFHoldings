@@ -48,7 +48,7 @@
                                                       <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                       </div>
-                                                      <input type="text" class="form-control pull-right"  name="getCollectionFrom" id="datepicker" required>
+                                                      <input type="text" class="form-control pull-right"  name="getCollectionFrom" id="datepicker" value="<?php echo $from?>" required>
                                                     </div>
                                     <!-- /.input group -->
                                             </div>
@@ -66,7 +66,7 @@
                                                       <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                       </div>
-                                                      <input type="text" class="form-control pull-right"  name="getCollectionTo" id="datepicker1" >
+                                                      <input type="text" class="form-control pull-right"  name="getCollectionTo" value="<?php echo $to?>" id="datepicker1" >
                                                     </div>
                                     <!-- /.input group -->
                                                     </div>
@@ -133,7 +133,7 @@
                                                 <div class="row" style="padding-top: 22px;">
                                                 <div class="col-md-2">
 
-                                                <button type="submit" class="btn btn-default preview-add-button"> GO</button>
+                                                <button name="collect" value="go" type="submit" class="btn btn-default preview-add-button"> GO</button>
                                                 
                                                 </div>
 
@@ -141,7 +141,7 @@
                                         </div> 
 
 
-                 </form> 
+                
 
 
 
@@ -153,10 +153,13 @@
 
           <div class="col-lg-4 col-sm-4 col-xs-12" no-padding style="padding-top:20px">
                     <div class="col-xs-4 left-padding">
-                        <a class="btn btn-block btn-success" href="<?php echo base_url()?>index.php/CustomerController"> PRINT</a>
+                        <button name="collect" value="print" type="submit" class="btn btn-default preview-add-button">PRINT</button>
                     </div>
 
-                </div>   
+                </div>  
+
+
+         </form>  
                 
                     
          <div class="col-xs-12 col-lg-12" style="padding-top: 10px">
@@ -189,6 +192,7 @@
                                 <th>Invoice Number</th>
                                
                                 <th>Cash</th>
+                                <th>Outlet ID</th>
                                 
                                
                                 
@@ -222,7 +226,9 @@
                             <td><?php echo $row['Customer_idCustomer'];?></td>
                             <td><?php echo $row['idInvoice'];?></td>
                             
-                            <td><?php echo $row['cash'];?></td>  
+                            <td><?php echo $row['cash'];?></td>
+                            <td><?php echo $row['Outlet_idOutlet'];?></td>
+
                             </tr>
 
                             
@@ -272,6 +278,7 @@
                                 <th>Invoice Number</th>
                                
                                 <th>Return Credit</th>
+                                <th>Outlet ID</th>
                                 
                                
                                 
@@ -305,7 +312,8 @@
                             <td><?php echo $row['invoice_credit_id'];?></td>
                             <td><?php echo $row['customer_id'];?></td>
                             
-                            <td><?php echo ((int)$row['total_credit']-(int)$row['credit_topay']);?></td>  
+                            <td><?php echo ((int)$row['total_credit']-(int)$row['credit_topay']);?></td> 
+                            <td><?php echo $row['Outlet_idOutlet'];?></td> 
                             </tr>
 
                             
@@ -375,6 +383,11 @@
 
 <!-- AdminLTE App -->
 <!-- InputMask -->
+
+
+<script type="text/javascript">
+  document.getElementById('position').value = "<?php echo $position;?>";
+</script>
 
 <script >
     $(function() {

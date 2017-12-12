@@ -98,7 +98,7 @@
          
 
             <form method="post" action="<?php echo base_url()?>index.php/CalendarController/deleteCalendarEntry">
-              <div class="col-lg-12 col-sm-12 col-xs-12"  style="padding-top:20px">
+              <!-- <div class="col-lg-12 col-sm-12 col-xs-12"  style="padding-top:20px">
                 <div class="col-xs-10">
                   <button type="button" id="update_calendar" class="btn  btn-info pull-right"  data-toggle="modal" >Update</button>
                 </div>
@@ -107,7 +107,7 @@
                   <input type="submit" name="delete" value="Delete" class="btn btn-warning pull-left" onclick="return delete_CalendarEntry()">
                 </div>
 
-              </div>
+              </div> -->
               
               <div class="col-xs-12 col-lg-12" style="padding-top: 10px">
 
@@ -128,16 +128,19 @@
                             
                             <tr>
                                 <th><input name="checkbox[]" id="master" type="checkbox" ></th>
-
+                                <td id="Id_Outlet"><b><a href="#" data-sort="OutletID">Outlet ID</a></b></td>
                                
-                                <th><a href="#" data-sort="CalendarDate">Calendar Date</a></th>
-                                <th><a href="#" data-sort="CalendarStatus">Calendar Status</a></th>
+                                <td><b><a href="#" data-sort="CalendarDate">Calendar Date</a></b></td>
+                                <td><b><a href="#" data-sort="CalendarStatus">Calendar Status</a></b></td>
                                
                                 
                             </tr>
 
                             <tr id="w1-filters" class="filters">
                                 <td></td> 
+                                <td>
+                                    <input id ="target" type="text" class="form-control" name="AttendanceSearch[OutletID]">
+                                </td> 
                                 <td>
                                     <input id ="target" type="text" class="form-control" name="CalendarSearch[CalendarDate]">
                                 </td>
@@ -157,7 +160,7 @@
                             ?><tr>
                             <td><input name="checkbox[]" class="case" type="checkbox" value=<?php echo $row->CalendarDate;?>></td> 
                               
-                            
+                            <td><?php echo $row->outletID;?></td>
                             <td><?php echo $row->CalendarDate;?></td>  
                             <td><?php echo $row->Working_Holiday;?></td> 
                              

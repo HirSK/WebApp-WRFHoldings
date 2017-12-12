@@ -38,71 +38,188 @@
                     <!-- /.box-header -->
                     <!-- form start -->
 
-                        
-                   <form role="form" action="<?php echo base_url()?>index.php/VehicleController/addInsuranceRenewalDates" method="POST">
+
+
+                    
+
+
+                    <form role="form" action="<?php echo base_url()?>index.php/VehicleController/getLicen" method="POST">
                         <div class="box-body">
+
+                            <!-- <div class="col-xs-12 col-lg-12 col-sm-12">                            
+
+                                <div class="col-xs-2 col-xs-3">
+                                    <div class="form-group">
+                                        <label><h3>Select Vehicle : </h3></label>
+
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3 col-xs-12" style="height: 100px">
+                                    <div class="form-group">
+                                        
+                                          <h3><b>
+                                            <select class="form-control" id="plateNo" name="plateNo" required>
+                                             <?php foreach ($vehicleID as $vid) {
+                                       
+                                             ?>
+                                            <option><?php echo $vid->Delivery_VehiclePlateNumber ?></option>
+
+                                         <?php
+
+                                         } ?>
+                                           
+                                    
+                                         </select>
+                                     </b>
+                                            
+                                          </h3>
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-4">
+                                    <div class="form-group">
+                                        <div class="col-sm-4">
+                                            <h3>
+                                                <button type="submit" class="btn btn-block btn-success" id="selectIns" name="selectIns" value="select">Select</button>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <div class="col-xs-6 col-lg-12 col-sm-12">
+
+
+                                <div class="col-xs-2 col-xs-2">
+                                    <div class="form-group">
+                                        <label><h4>Vehicle Plate No :</h4></label>
+
+                                    </div>
+                                </div>
+                                
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                        <input type="text" class="form-control pull-right" id="platenoInc" name="platenoInc" type="text" value="<?php
+                                        $count = 1;
+                                        if(isset($plateno)){
+                                            foreach ($plateno as $plateNO){
+                                        
+                                          echo $plateNO->Plateno;
+                                        
+                                        //$b = echo $plateNO->Outlet_expends_Petty_Cash_Amount;
+                                        
+
+                                        $count = $count+1;
+                                        
+                                    }
+                                        }
+
+                                    // }
+                                    ?>" readonly>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-xs-6 col-lg-12 col-sm-12">
+
+
+
+                                <div class="col-xs-2 col-xs-2">
+                                    <div class="form-group">
+                                        <label><h4>Last Renewal :</h4></label>
+
+                                    </div>
+                                </div>
+                                
+
+                                <div class="col-xs-8 col-xs-8">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                          <input type="text" class="form-control pull-right" id="lastDate" name="lastDate" type="text" value="<?php
+                                        $count = 1;
+                
+                                        if(isset($plateno)){
+                                            foreach ($plateno as $plateNO){
+                                        
+                                         echo $plateNO->InsuranceLastRenewalDate;
+                                        
+                                        
+
+                                        $count = $count+1;
+                                        
+                                    }
+                                        }
+
+                                    // }
+                                    ?>" readonly>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
 
                             <div class="col-xs-12 col-lg-12 col-sm-12">                            
 
-                            <div class="col-xs-2 col-xs-3">
-                                <div class="form-group">
-                                    <label><h3>Select Vehicle : </h3></label>
+                                <div class="col-xs-2 col-xs-2">
+                                    <div class="form-group">
+                                        <label><h4>Expire Date :</h4></label>
 
-                                    
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-12" style="height: 100px">
-                                <div class="form-group">
-                                    
-                                      <h3><b>
-                                        <select class="form-control" id="plateNo" name="plateNo" required>
-                                         <?php foreach ($vehicleID as $vid) {
-                                   
-                                         ?>
-                                        <option><?php echo $vid->Delivery_VehiclePlateNumber ?></option>
-
-                                     <?php
-
-                                     } ?>
-                                       
-                                
-                                     </select>
-                                 </b>
-                                        
-                                      </h3>
-                                    
-                                </div>
-                            </div>
-                            
-                        </div>
-
-                        <div class="col-xs-6 col-lg-12 col-sm-12">
-
-
-
-                            <div class="col-xs-2 col-xs-2">
-                                <div class="form-group">
-                                    <label><h4>Last Renewal :</h4></label>
-
-                                </div>
-                            </div>
-                            
-
-                            <div class="col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                      <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                      </div>
-                                      <input type="text" class="form-control pull-right" id="datepicker1" name="dateLastIns" type="calendar" placeholder="mm/dd/yyyy" required>
-                                      
                                     </div>
                                 </div>
+                                
+
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                          <input type="text" class="form-control pull-right" id="expireDate" name="expireDate" type="text" value="<?php
+                                        $count = 1;
+                                        $ab ;
+                                        if(isset($plateno)){
+                                            foreach ($plateno as $plateNO){
+                                        
+                                         
+                                        
+                                        $ab = $plateNO->InsuranceLastRenewalDate;
+                                        
+
+                                        
+                                        $ab = date('Y-m-d', strtotime("+12 months", strtotime($ab)));
+
+                                        echo $ab;
+                                        
+
+                                        $count = $count+1;
+                                        
+                                    }
+                                        }
+
+                                    // }
+                                    ?>" readonly>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
+
                         </div>
+                    </form>
+                
+                        
+                   <form role="form" action="<?php echo base_url()?>index.php/VehicleController/postLic" method="POST">
+                        <div class="box-body">
 
-
+                        
                         <div class="col-xs-12 col-lg-12 col-sm-12">                            
 
                             <div class="col-xs-2 col-xs-2">
@@ -119,30 +236,12 @@
                                       <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                       </div>
-                                      <input type="text" class="form-control pull-right" id="datepicker2" name="dateNewIns" type="calendar" placeholder="mm/dd/yyyy" required>
+                                      <input type="text" class="form-control pull-right" id="datepicker1" name="newDateInc" type="calendar" placeholder="mm/dd/yyyy" required>
                                       
                                     </div>
                                 </div>
                             </div>
 
-                        </div>
-
-                        <div class="col-xs-12 col-lg-12 col-sm-12">                            
-
-                            <div class="col-xs-2 col-xs-2">
-                                <div class="form-group">
-                                    <label><h4>Remarks:</h4></label>
-
-                                </div>
-                            </div>
-
-                            <div class="col-sm-8 col-xs-12">
-                                <div class="form-group">
-                                    
-                                    <textarea type="textarea" class="form-control" id="remark" name="remarkIns" placeholder="Enter ..."></textarea>
-                                </div>
-                             </div>
-                            
                         </div>
 
 
@@ -171,6 +270,8 @@
 
 
 
+
+
                         </div>
 
                     </form>
@@ -189,47 +290,93 @@
                     <!-- /.box-header -->
                     <!-- form start -->
 
-                        
-                   <form role="form" action="<?php echo base_url()?>index.php/VehicleController/addLicenRenewalDates" method="POST">
+
+
+                   
+
+
+                    <form role="form" action="<?php echo base_url()?>index.php/VehicleController/getLicen" method="POST">
                         <div class="box-body">
 
+                            <div class="col-xs-6 col-lg-12 col-sm-12">                            
 
-                            <div class="col-xs-12 col-lg-12 col-sm-12">                            
+                                <div class="col-xs-2 col-xs-3">
+                                    <div class="form-group">
+                                        <label><h4>Select Vehicle : </h4></label>
 
-                            <div class="col-xs-2 col-xs-3">
-                                <div class="form-group">
-                                    <label><h3>Select Vehicle : </h3></label>
-
-                                    
-                                </div>
-                            </div>
-                            <div class="col-sm-3 col-xs-12" style="height: 100px">
-                                <div class="form-group">
-                                    
-                                      <h3><b>
-                                        <select class="form-control" id="plateNo" name="plateNo" required>
-                                         <?php foreach ($vehicleID as $vid) {
-                                   
-                                         ?>
-                                        <option><?php echo $vid->Delivery_VehiclePlateNumber ?></option>
-
-                                     <?php
-
-                                     } ?>
-                                       
-                                
-                                     </select>
-                                 </b>
                                         
-                                      </h3>
-                                    
+                                    </div>
                                 </div>
-                            </div>
-                            
-                        </div>
+
+                                <div class="col-sm-3 col-xs-12" style="height: 100px">
+                                    <div class="form-group">
+                                        
+                                          <h3><b>
+                                            <select class="form-control" id="plateNo" name="plateNo" required>
+                                             <?php foreach ($vehicleID as $vid) {
+                                       
+                                             ?>
+                                            <option><?php echo $vid->Delivery_VehiclePlateNumber ?></option>
+
+                                         <?php
+
+                                         } ?>
+                                           
+                                    
+                                         </select>
+                                     </b>
+                                            
+                                          </h3>
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 col-xs-4">
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <h3>
+                                                <button type="submit" class="btn btn-block btn-success" id="selectLic" name="selectLic" value="select">Select</button>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                </div>
 
                         <div class="col-xs-6 col-lg-12 col-sm-12">
 
+
+                            <div class="col-xs-2 col-xs-2">
+                                <div class="form-group">
+                                    <label><h4>Vehicle Plate No :</h4></label>
+
+                                </div>
+                            </div>
+                            
+
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                      <input type="text" class="form-control pull-right" id="platenolic" name="platenolic" type="text" value="<?php
+                            $count = 1;
+                            if(isset($plateno)){
+                                foreach ($plateno as $plateNO){
+                            
+                              echo $plateNO->Plateno;
+                            
+                            $count = $count+1;
+                            
+                        }
+                            }
+
+                        // }
+                        ?>" readonly>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-xs-6 col-lg-12 col-sm-12">
 
 
                             <div class="col-xs-2 col-xs-2">
@@ -243,10 +390,23 @@
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     <div class="input-group">
-                                      <div class="input-group-addon">
-                                        <i class="fa fa-calendar"></i>
-                                      </div>
-                                      <input type="text" class="form-control pull-right" id="datepicker3" name="dateLastLic" type="calendar" placeholder="mm/dd/yyyy" required>
+                                      <input type="text" class="form-control pull-right" id="lastDateLic" name="lastDateLic" type="text" value="<?php
+                                        $count = 1;
+                                        if(isset($plateno)){
+                                            foreach ($plateno as $plateNO){
+                                        
+                                         echo $plateNO->LicenLastRenewalDate;
+                                        
+                                        //$b = echo $plateNO->Outlet_expends_Petty_Cash_Amount;
+                                        
+
+                                        $count = $count+1;
+                                        
+                                    }
+                                        }
+
+                                    // }
+                                    ?>" readonly>
                                       
                                     </div>
                                 </div>
@@ -254,6 +414,67 @@
 
                         </div>
 
+
+                        <div class="col-xs-12 col-lg-12 col-sm-12">                            
+
+                            <div class="col-xs-2 col-xs-2">
+                                <div class="form-group">
+                                    <label><h4>Expire Date :</h4></label>
+
+                                </div>
+                            </div>
+                            
+
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                      <input type="text" class="form-control pull-right" id="expireDateLic" name="expireDateLic" type="text" value="<?php
+                                        $count = 1;
+                                        $ab ;
+                                        if(isset($plateno)){
+                                            foreach ($plateno as $plateNO){
+                                        
+                                         
+                                        
+                                        $ab = $plateNO->LicenLastRenewalDate;
+                                        
+
+                                        
+                                        $ab = date('Y-m-d', strtotime("+12 months", strtotime($ab)));
+
+                                        echo $ab;
+                                        
+
+                                        $count = $count+1;
+                                        
+                                    }
+                                        }
+
+                                    // }
+                                    ?>" readonly>
+                                      
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        </div>
+                    </div>
+                </form>
+
+
+                <form role="form" action="<?php echo base_url()?>index.php/VehicleController/postLic" method="POST">
+                        <div class="box-body">
+
+                            <div class="col-xs-12 col-lg-12 col-sm-12">                            
+
+                                
+
+                                
+
+                        
 
                         <div class="col-xs-12 col-lg-12 col-sm-12">                            
 
@@ -271,30 +492,12 @@
                                       <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                       </div>
-                                      <input type="text" class="form-control pull-right" id="datepicker4" name="dateNewLic" type="calendar" placeholder="mm/dd/yyyy" required>
+                                      <input type="text" class="form-control pull-right" id="datepicker2" name="newDateLic" type="calendar" placeholder="mm/dd/yyyy" required>
                                       
                                     </div>
                                 </div>
                             </div>
 
-                        </div>
-
-                        <div class="col-xs-12 col-lg-12 col-sm-12">                            
-
-                            <div class="col-xs-2 col-xs-2">
-                                <div class="form-group">
-                                    <label><h4>Remarks:</h4></label>
-
-                                </div>
-                            </div>
-
-                            <div class="col-sm-8 col-xs-12">
-                                <div class="form-group">
-                                    
-                                    <textarea type="textarea" class="form-control" id="remark" name="remarkLic" placeholder="Enter ..."></textarea>
-                                </div>
-                             </div>
-                            
                         </div>
 
 
@@ -325,6 +528,13 @@
 
                         </div>
                     </div>
+                </form>
+
+
+
+
+
+
                 </div>
 
             
@@ -384,20 +594,6 @@ function openRenewal(evt, vehicleName) {
     $(function() {
         //Date picker
         $('#datepicker2').datepicker({
-          autoclose: true
-        })
-    })
-
-    $(function() {
-        //Date picker
-        $('#datepicker3').datepicker({
-          autoclose: true
-        })
-    })
-
-    $(function() {
-        //Date picker
-        $('#datepicker4').datepicker({
           autoclose: true
         })
     })

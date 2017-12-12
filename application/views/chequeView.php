@@ -48,7 +48,7 @@
                                                       <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                       </div>
-                                                      <input type="text" class="form-control pull-right"  name="getCollectionFrom" id="datepicker" required>
+                                                      <input type="text" class="form-control pull-right"  name="getCollectionFrom"  value="<?php echo $from?>" id="datepicker" required>
                                                     </div>
                                     <!-- /.input group -->
                                             </div>
@@ -66,7 +66,7 @@
                                                       <div class="input-group-addon">
                                                         <i class="fa fa-calendar"></i>
                                                       </div>
-                                                      <input type="text" class="form-control pull-right"  name="getCollectionTo" id="datepicker1" >
+                                                      <input type="text" class="form-control pull-right"  name="getCollectionTo" value="<?php echo $to?>" id="datepicker1" >
                                                     </div>
                                     <!-- /.input group -->
                                                     </div>
@@ -133,7 +133,7 @@
                                                 <div class="row" style="padding-top: 22px;">
                                                 <div class="col-md-2">
 
-                                                <button type="submit" class="btn btn-default preview-add-button"> GO</button>
+                                                <button type="submit" name="collect" value="go" class="btn btn-default preview-add-button"> GO</button>
                                                 
                                                 </div>
 
@@ -141,7 +141,7 @@
                                         </div> 
 
 
-                 </form> 
+                 
 
 
 
@@ -150,13 +150,15 @@
 
          <div class="wizard" style="margin-right: 40px;">  
 
+         <div class="col-lg-4 col-sm-4 col-xs-12" no-padding style="padding-top:20px">
+                            <div class="col-xs-4 left-padding">
+                                <button name="collect" value="print" type="submit" class="btn btn-default preview-add-button">PRINT</button>
+                            </div>
 
-          <div class="col-lg-4 col-sm-4 col-xs-12" no-padding style="padding-top:20px">
-                    <div class="col-xs-4 left-padding">
-                        <a class="btn btn-block btn-success" target="_blank" href="<?php echo base_url()?>index.php/C_report/chqReg"> PRINT</a>
-                    </div>
+                        </div>  
 
-                </div>   
+
+                 </form>  
                 
                     
          <div class="col-xs-12 col-lg-12" style="padding-top: 10px">
@@ -190,6 +192,7 @@
                                 <th>Bank Branch</th>
                                 <th>BK Date</th>
                                 <th>Cheque Amount</th>
+                                <th>Outlet ID</th>
                                
                                 
                                 
@@ -224,6 +227,7 @@
                             <td><?php echo $row['ChequeBankBranch'];?></td>
                             <td><?php echo $row['ChequeBKdate'];?></td>
                             <td><?php echo $row['ChequeAmount'];?></td>
+                            <td><?php echo $row['outletID'];?></td>
 
                               
                             </tr>
@@ -293,6 +297,13 @@
 
 <!-- AdminLTE App -->
 <!-- InputMask -->
+
+
+
+<script type="text/javascript">
+  document.getElementById('position').value = "<?php echo $position;?>";
+  
+</script>
 
 <script >
     $(function() {
